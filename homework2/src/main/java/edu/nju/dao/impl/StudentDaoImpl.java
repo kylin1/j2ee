@@ -1,7 +1,13 @@
 package edu.nju.dao.impl;
 
 import edu.nju.dao.StudentDao;
+import edu.nju.dao.util.MyConnection;
 import edu.nju.model.Student;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Created by kylin on 09/12/2016.
@@ -10,6 +16,31 @@ import edu.nju.model.Student;
 public class StudentDaoImpl implements StudentDao {
     @Override
     public Student getStudent(String name) {
-        return null;
+        Student student = null;
+        try {
+            //获取数据
+            Connection connection = MyConnection.getConnection();
+            String sql = "select * from `student` where `name` = ? ";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+
+            stmt.setString(1,name);
+            ResultSet result = stmt.executeQuery();
+
+            //遍历结果集
+            if (result.first()){
+                int id = result.getInt("id");
+                String password = result.getString("password");
+                student = new Student();
+                student.setId(id);
+                student.setName(name);
+                student.setPassword(password);
+            }
+            //关闭连接
+            MyConnection.close(result,stmt,connection);
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        //return result
+        return student;
     }
 }

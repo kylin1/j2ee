@@ -31,7 +31,6 @@ public class ShowMyStockServlet extends HttpServlet {
 	 */
 	public ShowMyStockServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public void init() {
@@ -46,7 +45,6 @@ public class ShowMyStockServlet extends HttpServlet {
 			System.out.println("got context");
 			System.out.println("About to get ds---ShowMyStock");
 		} catch (NamingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -58,7 +56,6 @@ public class ShowMyStockServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		processRequest(request, response);
 	}
 
@@ -68,7 +65,6 @@ public class ShowMyStockServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		processRequest(request, response);
 	}
 

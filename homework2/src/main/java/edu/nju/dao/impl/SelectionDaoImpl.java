@@ -18,18 +18,16 @@ public class SelectionDaoImpl implements SelectionDao {
     @Override
     public List<Selection> getSelectionOfStudent(int studentId) {
         List<Selection> selections = new ArrayList<>();
-        Connection connection = null;
-        PreparedStatement stmt = null;
-        ResultSet result = null;
-        ArrayList list = new ArrayList();
         try {
-            connection = MyConnection.getConnection();
+            //获取数据
+            Connection connection = MyConnection.getConnection();
             String sql = "select * from `selection` where `stu_id` = ? ";
-            stmt = connection.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(sql);
 
             stmt.setInt(1,studentId);
-            result = stmt.executeQuery();
+            ResultSet result = stmt.executeQuery();
 
+            //遍历结果集
             while (result.next()){
                 int id = result.getInt("id");
                 int stuId = result.getInt("stu_id");
@@ -43,19 +41,15 @@ public class SelectionDaoImpl implements SelectionDao {
                 selection.setCourseId(course);
                 selection.setExamTaken(isTaken);
                 selection.setScore(score);
-
+                //添加结果
                 selections.add(selection);
             }
-
-
-            result.close();
-            stmt.close();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+            //关闭连接
+            MyConnection.close(result,stmt,connection);
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        //返回数据
         return selections;
     }
 }

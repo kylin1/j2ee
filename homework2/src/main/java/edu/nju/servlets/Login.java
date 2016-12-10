@@ -50,6 +50,7 @@ public class Login extends HttpServlet {
             // cookie with the login info is there.
             for (int i = 0; i < cookies.length; i++) {
                 cookie = cookies[i];
+                // found user name
                 if (cookie.getName().equals("LoginCookie")) {
                     login = cookie.getValue();
                     break;
