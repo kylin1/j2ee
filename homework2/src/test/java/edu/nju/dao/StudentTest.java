@@ -1,8 +1,6 @@
 package edu.nju.dao;
 
-import edu.nju.dao.impl.StudentDaoImpl;
 import edu.nju.model.Student;
-import edu.nju.tools.CheckClass;
 import org.junit.Test;
 
 /**
@@ -11,12 +9,17 @@ import org.junit.Test;
  */
 public class StudentTest {
 
-    private StudentDao dao = new StudentDaoImpl();
+    private Student dao = new Student();
 
     @Test
     public void test(){
-        Student student = dao.getStudent("kylin");
-        CheckClass.checkObject("Student",student);
+        Student student = new Student();
+        student.setName("kylin");
+        student.setPassword("123123");
+
+        boolean studentExists = student.checkStudent();
+
+        System.out.println(studentExists);
     }
 
 }

@@ -1,9 +1,5 @@
 package edu.nju.servlets;
 
-import edu.nju.dao.SelectionDao;
-import edu.nju.dao.StudentDao;
-import edu.nju.dao.impl.SelectionDaoImpl;
-import edu.nju.dao.impl.StudentDaoImpl;
 import edu.nju.model.Selection;
 import edu.nju.model.Student;
 
@@ -12,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 /**
  * Created by zhouxiaofan on 2016/12/8.
@@ -20,9 +15,6 @@ import java.util.List;
 
 @WebServlet("/show")
 public class ShowServlet extends HttpServlet {
-
-    private StudentDao studentDao = new StudentDaoImpl();
-    private SelectionDao selectionDao = new SelectionDaoImpl();
 
     private static final long serialVersionUID = 1L;
 
@@ -162,20 +154,24 @@ public class ShowServlet extends HttpServlet {
         System.out.println("in display login=" + login + ", pass=" + password);
 
         //登录并获取学生信息
-        Student student = studentDao.getStudent(login);
+        Student student = new Student();
+        student.setName(login);
+        student.setPassword(password);
+
+        boolean studentExists = student.checkStudent();
 
         PrintWriter writer = response.getWriter();
         writer.println("<html><body>");
 
         //未知的学生(账号不存在),错误界面
-        if (student == null) {
+        if (!studentExists) {
             writer.println("<p>no such student whose name is " + login + "</p>");
             return;
         }
 
         //验证密码,密码错误
-        String dbPassword = student.getPassword();
-        if (!password.equals(dbPassword)) {
+        boolean passwordCorrect = student.login();
+        if (!passwordCorrect) {
             writer.println("<p>wrong password of student " + login + " </p>");
             return;
         }
@@ -184,7 +180,10 @@ public class ShowServlet extends HttpServlet {
         int id = student.getId();
 
         //根据学生是否参加所有测验返回不同界面
-        boolean isNormal = this.isAllExamTaken(id);
+        Selection selection = new Selection();
+        selection.setStudentId(id);
+        boolean isNormal = selection.isAllExamTaken();
+
         //标准界面
         if (isNormal) {
             writer.println("<h1>welcome : "+ login+"</h1>");
@@ -195,23 +194,5 @@ public class ShowServlet extends HttpServlet {
         }
     }
 
-    /**
-     * 判断一个学生是否参加了所有的测验
-     *
-     * @param studentId 学生ID
-     * @return true(正常结果) false(有未参加的测验)
-     */
-    private boolean isAllExamTaken(int studentId) {
-        //得到学生的选课与测验情况
-        List<Selection> selections = selectionDao.getSelectionOfStudent(studentId);
 
-        for (Selection selection : selections) {
-            //如果有没有参加的,则返回false
-            if (selection.getExamTaken() == 0) {
-                return false;
-            }
-        }
-        //此学生参加了所有的测验
-        return true;
-    }
 }

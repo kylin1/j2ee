@@ -1,4 +1,4 @@
-package edu.nju.dao.util;
+package edu.nju.model.database;
 
 import java.sql.*;
 
