@@ -14,35 +14,21 @@ public class Login extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Login() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-    /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-/*		ServletContext Context= getServletContext();
-        int webCounter= Integer.parseInt((String) Context.getAttribute("webCounter"));
-		if (null == request.getParameter("Logout")) {
-			System.out.println("pageCounter++\n");
-			webCounter++;
-			Context.setAttribute("webCounter", Integer.toString(webCounter));
-		}*/
 
         String login = "";
         //如果当前Session没有就为null
         HttpSession session = request.getSession(false);
 
-        //临时变量
+        //长期记住用户信息,存储在用户的硬盘上,new一个cookie放到response中,浏览器退出时候,cookie被删除,不会进入硬盘
+        //如果存储cookie到硬盘需要setMaxAge
         Cookie cookie = null;
+        //客户端浏览器发送的cookie被包含在request中
         Cookie[] cookies = request.getCookies();
 
-        Integer ival = new Integer(1);
+        Integer ival = 1;
 
         //遍历cookie获取已有的登录信息
         if (null != cookies) {
@@ -59,6 +45,7 @@ public class Login extends HttpServlet {
         }
 
         // Logout action removes session, but the cookie remains
+        // 退出的时候消除session
         if (null != request.getParameter("Logout")) {
             if (null != session) {
                 session.invalidate();
@@ -76,11 +63,11 @@ public class Login extends HttpServlet {
                         + response.encodeURL(request.getContextPath() + "/show")
                         + "'>");
         out.println(
+                //login也就是用户名的预填充
                 "login: <input type='text' name='login' value='" + login + "'>");
         out.println(
                 "password: <input type='password' name='password' value=''>");
         out.println("<input type='submit' name='Submit' value='Submit'>");
-        out.println("<p>Servlet is version @version@</p>");
         out.println("</form></body></html>");
 
     }
