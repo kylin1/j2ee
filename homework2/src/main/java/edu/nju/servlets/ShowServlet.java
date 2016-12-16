@@ -3,6 +3,7 @@ package edu.nju.servlets;
 import edu.nju.model.Selection;
 import edu.nju.model.Student;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -123,24 +124,6 @@ public class ShowServlet extends HttpServlet {
     }
 
     /**
-     * 打印退出按钮
-     *
-     * @param req
-     * @param res
-     * @throws IOException
-     */
-    private void displayLogoutPage(HttpServletRequest req, HttpServletResponse res) throws IOException {
-        PrintWriter writer = res.getWriter();
-        // Logout
-        writer.println("<form method='GET' action='" + res.encodeURL(req.getContextPath() + "/Login") + "'>");
-        writer.println("</p>");
-        //退出的表单
-        writer.println("<input type='submit' name='Logout' value='Logout'>");
-        writer.println("</form>");
-        writer.println("</body></html>");
-    }
-
-    /**
      * 业务逻辑:根据学生选课与参加考试的情况显示不同的界面
      *
      * @param request
@@ -194,5 +177,29 @@ public class ShowServlet extends HttpServlet {
         }
     }
 
+
+
+    /**
+     * 打印退出按钮
+     *
+     * @param req
+     * @param res
+     * @throws IOException
+     */
+    private void displayLogoutPage(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        PrintWriter writer = res.getWriter();
+        // Logout
+        writer.println("<form method='GET' action='" + res.encodeURL(req.getContextPath() + "/Login") + "'>");
+        writer.println("</p>");
+        //退出的表单
+        writer.println("<input type='submit' name='Logout' value='Logout'>");
+        writer.println("</form>");
+
+        ServletContext context = getServletContext();
+        int pageCounter = Integer.parseInt((String) context.getAttribute("webCounter"));
+        writer.println("</p>You are visitor number " + pageCounter);
+
+        writer.println("</body></html>");
+    }
 
 }
