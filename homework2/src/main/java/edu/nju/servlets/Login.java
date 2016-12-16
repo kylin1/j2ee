@@ -1,5 +1,6 @@
 package edu.nju.servlets;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -17,6 +18,18 @@ public class Login extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 5 in login
+        System.out.println("in login servlet");
+
+        // ServletContext
+        ServletContext Context= getServletContext();
+        int webCounter= Integer.parseInt((String) Context.getAttribute("webCounter"));
+        // 不是退出,计数加1
+        if (null == request.getParameter("Logout")) {
+            System.out.println("pageCounter++\n");
+            webCounter++;
+            Context.setAttribute("webCounter", Integer.toString(webCounter));
+        }
 
         String login = "";
         //如果当前Session没有就为null
@@ -53,7 +66,6 @@ public class Login extends HttpServlet {
             }
         }
 
-        response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
 
@@ -64,10 +76,14 @@ public class Login extends HttpServlet {
                         + "'>");
         out.println(
                 //login也就是用户名的预填充
-                "login: <input type='text' name='login' value='" + login + "'>");
+                "用户名: <input type='text' name='login' value='" + login + "'>");
         out.println(
-                "password: <input type='password' name='password' value=''>");
+                "密码: <input type='password' name='password' value=''>");
         out.println("<input type='submit' name='Submit' value='Submit'>");
+
+        out.println("<p>Servlet is version @version@</p>");
+        out.println("</p>You are visitor number " + webCounter);
+
         out.println("</form></body></html>");
 
     }
