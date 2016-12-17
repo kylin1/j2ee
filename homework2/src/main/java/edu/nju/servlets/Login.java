@@ -22,14 +22,10 @@ public class Login extends HttpServlet {
         System.out.println("in login servlet");
 
         // ServletContext
-        ServletContext Context= getServletContext();
-        int webCounter= Integer.parseInt((String) Context.getAttribute("webCounter"));
-        // 不是退出,计数加1
-        if (null == request.getParameter("Logout")) {
-            System.out.println("pageCounter++\n");
-            webCounter++;
-            Context.setAttribute("webCounter", Integer.toString(webCounter));
-        }
+        ServletContext Context = getServletContext();
+        int total = (int) Context.getAttribute("total");
+        int logged = (int) Context.getAttribute("logged");
+        int guest = (int) Context.getAttribute("guest");
 
         String login = "";
         //如果当前Session没有就为null
@@ -76,15 +72,21 @@ public class Login extends HttpServlet {
                         + "'>");
         out.println(
                 //login也就是用户名的预填充
-                "用户名: <input type='text' name='login' value='" + login + "'>");
+                "用户名: <input type='text' name='login' value='" + login + "'/>");
         out.println(
-                "密码: <input type='password' name='password' value=''>");
-        out.println("<input type='submit' name='Submit' value='Submit'>");
+                "密码: <input type='password' name='password' value=''/>");
+        out.println("<input type='submit' value='登录'/>");
+
+
+
+        out.println("</form>");
 
         out.println("<p>Servlet is version @version@</p>");
-        out.println("</p>You are visitor number " + webCounter);
+        out.println("<p>游客人数 " + guest + "</p>");
+        out.println("<p>总人数 " + total + "</p>");
+        out.println("<p>登录人数 " + logged + "</p>");
 
-        out.println("</form></body></html>");
+        out.println("</body></html>");
 
     }
 
