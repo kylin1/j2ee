@@ -27,6 +27,18 @@ public class Login extends HttpServlet {
         int logged = (int) Context.getAttribute("logged");
         int guest = (int) Context.getAttribute("guest");
 
+        // 不是退出,游客人数加1
+        if (null == request.getParameter("Logout")) {
+            System.out.println("guest++\n");
+            Context.setAttribute("guest", ++guest);
+            Context.setAttribute("total", ++total);
+
+            //用户退出,减去登录人数
+        }else{
+            Context.setAttribute("logged", --logged);
+            Context.setAttribute("total", ++total);
+        }
+
         String login = "";
         //如果当前Session没有就为null
         HttpSession session = request.getSession(false);
@@ -63,38 +75,26 @@ public class Login extends HttpServlet {
         }
 
         PrintWriter out = response.getWriter();
+
         out.println("<html><body>");
 
         //登录之后界面跳转到show
         out.println(
                 "<form method='POST' action='"
-                        + response.encodeURL(request.getContextPath() + "/show")
+                        + response.encodeURL(request.getContextPath()+"/show")
                         + "'>");
         out.println(
-                //login也就是用户名的预填充
-                "用户名: <input type='text' name='login' value='" + login + "'/>");
+                "login: <input type='text' name='login' value='" + login + "'>");
         out.println(
-                "密码: <input type='password' name='password' value=''/>");
-        out.println("<input type='submit' value='登录'/>");
-
-
-
-        out.println("</form>");
+                "password: <input type='password' name='password' value=''>");
+        out.println("<input type='submit' name='Submit' value='Submit'>");
 
         out.println("<p>Servlet is version @version@</p>");
         out.println("<p>游客人数 " + guest + "</p>");
-        out.println("<p>总人数 " + total + "</p>");
         out.println("<p>登录人数 " + logged + "</p>");
+        out.println("<p>总人数 " + total + "</p>");
 
-        out.println("</body></html>");
-
-    }
-
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
+        out.println("</form></body></html>");
     }
 
 }

@@ -1,5 +1,6 @@
 package edu.nju.servlets;
 
+import edu.nju.model.Course;
 import edu.nju.model.Selection;
 import edu.nju.model.Student;
 
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 /**
  * Created by zhouxiaofan on 2016/12/8.
@@ -89,7 +91,7 @@ public class ShowServlet extends HttpServlet {
                 request.setAttribute("login", loginValue);
 
                 //展示信息
-                this.displayPage(request,response);
+                this.displayPageAndIncrease(request, response);
 
                 //请求里面没有login这个参数,说明访问的直接是show,转到登录状态
             } else {
@@ -98,7 +100,7 @@ public class ShowServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/Login");
             }
 
-            // session is not null, 用户已经登录
+            // session is not null, 用户已经登录, 刷新show界面
         } else {
             String loginValue = (String) session.getAttribute("login");
             System.out.println("loginValue = " + loginValue + " session is not null");
@@ -107,7 +109,7 @@ public class ShowServlet extends HttpServlet {
             request.setAttribute("login", loginValue);
 
             //展示信息
-            this.displayPage(request,response);
+            this.displayPage(request, response);
         }
     }
 
@@ -118,6 +120,16 @@ public class ShowServlet extends HttpServlet {
      * @param response
      * @throws IOException
      */
+    private void displayPageAndIncrease(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        boolean hasLoggedIn = this.displayStudentInfo(request, response);
+        //只有用户名密码正确登录才增加计数器
+        if(hasLoggedIn){
+            this.increaseCounter();
+        }
+        this.displayLogoutPage(request, response);
+    }
+
+
     private void displayPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
         this.displayStudentInfo(request, response);
         this.displayLogoutPage(request, response);
@@ -130,7 +142,7 @@ public class ShowServlet extends HttpServlet {
      * @param response
      * @throws IOException
      */
-    private void displayStudentInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private boolean displayStudentInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //获取参数
         String login = request.getParameter("login");
         String password = request.getParameter("password");
@@ -149,34 +161,62 @@ public class ShowServlet extends HttpServlet {
         //未知的学生(账号不存在),错误界面
         if (!studentExists) {
             writer.println("<p>no such student whose name is " + login + "</p>");
-            return;
+            return false;
         }
 
         //验证密码,密码错误
         boolean passwordCorrect = student.login();
         if (!passwordCorrect) {
             writer.println("<p>wrong password of student " + login + " </p>");
-            return;
+            return false;
         }
 
         //学生存在且密码正确
-        int id = student.getId();
+        int studentId = student.getId();
 
         //根据学生是否参加所有测验返回不同界面
         Selection selection = new Selection();
-        selection.setStudentId(id);
+        selection.setStudentId(studentId);
         boolean isNormal = selection.isAllExamTaken();
+
 
         //标准界面
         if (isNormal) {
-            writer.println("<h1>welcome : "+ login+"</h1>");
-            writer.println("<p>standard information</p>");
+            writer.println("<h1>welcome student: " + login + "</h1>");
+            writer.println("<h1>student id: " + studentId + "</h1>");
+            writer.println("<p>standard information page</p>");
+
+            writer.println("<table border='1'>");
+            writer.println("<tr>" +
+                    "<th>课程ID</th>" +
+                    "<th>课程名称</th>" +
+                    "<th>考试分数</th>" +
+                    "</tr>");
+
+
+            List<Selection> selections = selection.getSelectionOfStudent(studentId);
+            for (Selection one : selections) {
+                int courseId = one.getCourseId();
+                Course course = new Course();
+                //获取一个课程信息
+                Course targetCourse = course.getCourse(courseId);
+                String courseName = targetCourse.getName();
+                int score = one.getScore();
+
+                writer.println("<tr>");
+                writer.println("<td>" + courseId + "</td>");
+                writer.println("<td>" + courseName + "</td>");
+                writer.println("<td>" + score + "</td>");
+                writer.println("</tr>");
+            }
+            writer.println("</table>");
+
             //警告界面
         } else {
             writer.println("<p>warning : student does not take all exams!</p>");
         }
+        return true;
     }
-
 
 
     /**
@@ -195,11 +235,28 @@ public class ShowServlet extends HttpServlet {
         writer.println("<input type='submit' name='Logout' value='Logout'>");
         writer.println("</form>");
 
-        ServletContext context = getServletContext();
-        int pageCounter = Integer.parseInt((String) context.getAttribute("webCounter"));
-        writer.println("</p>You are visitor number " + pageCounter);
+        // ServletContext
+        ServletContext Context = getServletContext();
+        int total = (int) Context.getAttribute("total");
+        int logged = (int) Context.getAttribute("logged");
+        int guest = (int) Context.getAttribute("guest");
+        writer.println("<p>游客人数 " + guest + "</p>");
+        writer.println("<p>登录人数 " + logged + "</p>");
+        writer.println("<p>总人数 " + total + "</p>");
 
         writer.println("</body></html>");
+    }
+
+    /**
+     *  增加已经登录的人数和总人数
+     */
+    private void increaseCounter(){
+        ServletContext Context = getServletContext();
+        int total = (int) Context.getAttribute("total");
+        int logged = (int) Context.getAttribute("logged");
+        System.out.println("show servlet total = " + total);
+        Context.setAttribute("logged", ++logged);
+        Context.setAttribute("total", ++total);
     }
 
 }

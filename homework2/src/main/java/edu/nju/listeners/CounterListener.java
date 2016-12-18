@@ -43,11 +43,12 @@ public class CounterListener implements ServletContextListener, ServletContextAt
             assert input.size() == 2 : "存储人数的文件格式错误, 应该是两行数字";
             String strLogged = input.get(0);
             String strGuest = input.get(1);
+            String strTotal = input.get(2);
 
             //获取人数
             this.logged = Integer.parseInt(strLogged);
             this.guest = Integer.parseInt(strGuest);
-            this.total = this.logged + this.guest;
+            this.total = Integer.parseInt(strTotal);
         } catch (Exception e) {
             System.out.println(e.toString());
         }
@@ -115,6 +116,8 @@ public class CounterListener implements ServletContextListener, ServletContextAt
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(counterFilePath));
             writer.write(Integer.toString(this.logged));
+            writer.write("\n");
+            writer.write(Integer.toString(this.guest));
             writer.write("\n");
             writer.write(Integer.toString(this.total));
             writer.close();

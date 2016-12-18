@@ -44,7 +44,7 @@ public class Selection {
         return true;
     }
 
-    private List<Selection> getSelectionOfStudent(int studentId) {
+    public List<Selection> getSelectionOfStudent(int studentId) {
         List<Selection> selections = new ArrayList<>();
         try {
             //获取数据
