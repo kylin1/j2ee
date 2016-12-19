@@ -2,7 +2,9 @@ package edu.nju.servlets;
 
 import edu.nju.model.Course;
 import edu.nju.model.Selection;
-import edu.nju.model.Student;
+import edu.nju.service.ICourseService;
+import edu.nju.service.ISelectionService;
+import edu.nju.service.IStudentService;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -18,6 +20,12 @@ import java.util.List;
 
 @WebServlet("/show")
 public class ShowServlet extends HttpServlet {
+
+    private IStudentService studentService;
+
+    private ISelectionService selectionService;
+
+    private ICourseService courseService;
 
     private static final long serialVersionUID = 1L;
 
@@ -149,11 +157,7 @@ public class ShowServlet extends HttpServlet {
         System.out.println("in display login=" + login + ", pass=" + password);
 
         //登录并获取学生信息
-        Student student = new Student();
-        student.setName(login);
-        student.setPassword(password);
-
-        boolean studentExists = student.checkStudent();
+        boolean studentExists = studentService.checkStudent(login);
 
         PrintWriter writer = response.getWriter();
         writer.println("<html><body>");
@@ -165,25 +169,19 @@ public class ShowServlet extends HttpServlet {
         }
 
         //验证密码,密码错误
-        boolean passwordCorrect = student.login();
+        boolean passwordCorrect = studentService.login(login,password);
         if (!passwordCorrect) {
             writer.println("<p>wrong password of student " + login + " </p>");
             return false;
         }
 
-        //学生存在且密码正确
-        int studentId = student.getId();
-
         //根据学生是否参加所有测验返回不同界面
-        Selection selection = new Selection();
-        selection.setStudentId(studentId);
-        boolean isNormal = selection.isAllExamTaken();
+        boolean isNormal = selectionService.isAllExamTaken(login);
 
 
         //标准界面
         if (isNormal) {
             writer.println("<h1>welcome student: " + login + "</h1>");
-            writer.println("<h1>student id: " + studentId + "</h1>");
             writer.println("<p>standard information page</p>");
 
             writer.println("<table border='1'>");
@@ -194,12 +192,11 @@ public class ShowServlet extends HttpServlet {
                     "</tr>");
 
 
-            List<Selection> selections = selection.getSelectionOfStudent(studentId);
+            List<Selection> selections = selectionService.getSelectionOfStudent(login);
             for (Selection one : selections) {
                 int courseId = one.getCourseId();
-                Course course = new Course();
                 //获取一个课程信息
-                Course targetCourse = course.getCourse(courseId);
+                Course targetCourse = courseService.getCourse(courseId);
                 String courseName = targetCourse.getName();
                 int score = one.getScore();
 

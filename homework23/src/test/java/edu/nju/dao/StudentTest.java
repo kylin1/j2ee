@@ -1,6 +1,6 @@
 package edu.nju.dao;
 
-import edu.nju.model.Student;
+import edu.nju.service.impl.StudentService;
 import org.junit.Test;
 
 /**
@@ -9,15 +9,11 @@ import org.junit.Test;
  */
 public class StudentTest {
 
-    private Student dao = new Student();
+    private StudentService dao = new StudentService();
 
     @Test
     public void test(){
-        Student student = new Student();
-        student.setName("kylin");
-        student.setPassword("123123");
-
-        boolean studentExists = student.checkStudent();
+        boolean studentExists = dao.checkStudent("kylin");
 
         System.out.println(studentExists);
     }

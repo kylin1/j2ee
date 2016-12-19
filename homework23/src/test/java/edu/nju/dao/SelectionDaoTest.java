@@ -1,6 +1,7 @@
 package edu.nju.dao;
 
 import edu.nju.model.Selection;
+import edu.nju.service.impl.SelectionService;
 import edu.nju.tools.CheckClass;
 import org.junit.Test;
 
@@ -12,20 +13,17 @@ import java.util.List;
  */
 public class SelectionDaoTest {
 
-    private Selection dao = new Selection();
+    private SelectionService dao = new SelectionService();
 
     @Test
     public void test() {
-        Selection selection = new Selection();
-        selection.setStudentId(2);
-        boolean isNormal = selection.isAllExamTaken();
+        boolean isNormal = dao.isAllExamTaken("kylin2");
         System.out.println(isNormal);
     }
 
     @Test
     public void test2() {
-        Selection selection = new Selection();
-        List<Selection> selections = selection.getSelectionOfStudent(2);
+        List<Selection> selections = dao.getSelectionOfStudent("kylin2");
         for (Selection selection2:selections){
             CheckClass.checkObject("Selection",selection2);
         }
