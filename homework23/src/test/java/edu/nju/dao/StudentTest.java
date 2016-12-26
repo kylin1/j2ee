@@ -16,7 +16,7 @@ public class StudentTest {
 
     @Test
     public void test() throws IOException {
-//        boolean studentExists = dao.checkStudent("kylin");
+//        boolean studentExists = dao.studentExists("kylin");
 //
 //        System.out.println(studentExists);
 

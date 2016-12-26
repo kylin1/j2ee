@@ -5,7 +5,6 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * Servlet implementation class Login
@@ -20,6 +19,10 @@ public class Login extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 5 in login
         System.out.println("in login servlet");
+
+        String login = "";
+        //如果当前Session没有就为null
+        HttpSession session = request.getSession(false);
 
         // ServletContext
         ServletContext Context = getServletContext();
@@ -37,11 +40,12 @@ public class Login extends HttpServlet {
         } else {
             Context.setAttribute("logged", --logged);
             Context.setAttribute("total", ++total);
+            //remove session
+            if (null != session) {
+                session.invalidate();
+                session = null;
+            }
         }
-
-        String login = "";
-        //如果当前Session没有就为null
-        HttpSession session = request.getSession(false);
 
         //长期记住用户信息,存储在用户的硬盘上,new一个cookie放到response中,浏览器退出时候,cookie被删除,不会进入硬盘
         //如果存储cookie到硬盘需要setMaxAge
@@ -73,28 +77,8 @@ public class Login extends HttpServlet {
                 session = null;
             }
         }
+        request.getRequestDispatcher("/course/login.jsp").forward(request,response);
 
-        PrintWriter out = response.getWriter();
-
-        out.println("<html><body>");
-
-        //登录之后界面跳转到show
-        out.println(
-                "<form method='POST' action='"
-                        + response.encodeURL(request.getContextPath() + "/show")
-                        + "'>");
-        out.println(
-                "login: <input type='text' name='login' value='" + login + "'>");
-        out.println(
-                "password: <input type='password' name='password' value=''>");
-        out.println("<input type='submit' name='Submit' value='Submit'>");
-
-        out.println("<p>Servlet is version @version@</p>");
-        out.println("<p>游客人数 " + guest + "</p>");
-        out.println("<p>登录人数 " + logged + "</p>");
-        out.println("<p>总人数 " + total + "</p>");
-
-        out.println("</form></body></html>");
     }
 
 }

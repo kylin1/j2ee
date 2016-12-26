@@ -1,5 +1,7 @@
 package edu.nju.servlets;
 
+import edu.nju.action.business.ClassInfoBean;
+import edu.nju.action.business.ClassListBean;
 import edu.nju.factory.ServiceFactory;
 import edu.nju.model.Course;
 import edu.nju.model.Selection;
@@ -12,7 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,7 +32,7 @@ public class ShowServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    public void init() throws ServletException{
+    public void init() throws ServletException {
         this.studentService = ServiceFactory.getStudentService();
         this.selectionService = ServiceFactory.getSelectionService();
         this.courseService = ServiceFactory.getCourseService();
@@ -47,12 +49,6 @@ public class ShowServlet extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        //没有session不会创建
-        HttpSession session = request.getSession(false);
-        System.out.println("in request login = " + request.getParameter("login") +
-                " ,pass = " + request.getParameter("password"));
-
         //使用cookie记录用户ID进行预填充
         Cookie cookie = null;
         boolean cookieFound = false;
@@ -69,6 +65,11 @@ public class ShowServlet extends HttpServlet {
             }
         }
 
+        //没有session不会创建
+        HttpSession session = request.getSession(false);
+        System.out.println("in request login = " + request.getParameter("login") +
+                " ,pass = " + request.getParameter("password"));
+
         // 根据session跟踪登录的状态,强迫用户登录
         if (session == null) {
 
@@ -77,6 +78,7 @@ public class ShowServlet extends HttpServlet {
             boolean isLoginAction = null != loginValue;
 
             System.out.println("loginValue = " + loginValue + " session null");
+            // User is logging in
             if (isLoginAction) {
                 System.out.println("isLoginAction");
                 // 已经存在cookie,update the value only,
@@ -106,9 +108,9 @@ public class ShowServlet extends HttpServlet {
                 request.setAttribute("login", loginValue);
 
                 //展示信息
-                this.displayPageAndIncrease(request, response);
+                this.displayPage(request, response,true);
 
-                //请求里面没有login这个参数,说明访问的直接是show,转到登录状态
+                //请求里面没有login这个参数,说明访问的直接是show,强迫用户转到登录状态
             } else {
                 System.out.println("loginValue = " + loginValue + " session null, redirect to login page");
                 // Display the login page. If the cookie exists, set login
@@ -124,7 +126,7 @@ public class ShowServlet extends HttpServlet {
             request.setAttribute("login", loginValue);
 
             //展示信息
-            this.displayPage(request, response);
+            this.displayPage(request, response,false);
         }
     }
 
@@ -135,20 +137,43 @@ public class ShowServlet extends HttpServlet {
      * @param response
      * @throws IOException
      */
-    private void displayPageAndIncrease(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        boolean hasLoggedIn = this.displayStudentInfo(request, response);
-        //只有用户名密码正确登录才增加计数器
-        if(hasLoggedIn){
-            this.increaseCounter();
+    private void displayPage(HttpServletRequest request, HttpServletResponse response, boolean increase) throws IOException {
+        //获取参数
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
+        System.out.println("in display login=" + login + ", pass=" + password);
+
+        HttpSession session = request.getSession(true);
+        ServletContext context = getServletContext();
+
+        try {
+
+            //未知的学生(账号不存在),错误界面
+            if (!studentService.studentExists(login)) {
+                System.out.println("账号不存在");
+                session.setAttribute("message", "账号不存在");
+                context.getRequestDispatcher("/course/warning.jsp").forward(request, response);
+            }
+
+            //只有用户名密码正确登录才增加计数器
+            if (studentService.login(login, password)) {
+                System.out.println("log in correct");
+                if(increase){
+                    this.increaseCounter();
+                }
+
+                this.displayStudentInfo(request, response);
+            }else{
+                System.out.println("密码错误");
+                session.setAttribute("message", "密码错误");
+                context.getRequestDispatcher("/course/warning.jsp").forward(request, response);
+            }
+
+        } catch (ServletException e) {
+            e.printStackTrace();
         }
-        this.displayLogoutPage(request, response);
     }
 
-
-    private void displayPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        this.displayStudentInfo(request, response);
-        this.displayLogoutPage(request, response);
-    }
 
     /**
      * 业务逻辑:根据学生选课与参加考试的情况显示不同的界面
@@ -158,103 +183,56 @@ public class ShowServlet extends HttpServlet {
      * @throws IOException
      */
     private boolean displayStudentInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        //获取参数
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        System.out.println("in display login=" + login + ", pass=" + password);
-
-        //登录并获取学生信息
-        boolean studentExists = studentService.checkStudent(login);
-
-        PrintWriter writer = response.getWriter();
-        writer.println("<html><body>");
-
-        //未知的学生(账号不存在),错误界面
-        if (!studentExists) {
-            writer.println("<p>no such student whose name is " + login + "</p>");
-            return false;
-        }
-
-        //验证密码,密码错误
-        boolean passwordCorrect = studentService.login(login,password);
-        if (!passwordCorrect) {
-            writer.println("<p>wrong password of student " + login + " </p>");
-            return false;
-        }
+        HttpSession session = request.getSession(true);
+        ServletContext context = getServletContext();
 
         //根据学生是否参加所有测验返回不同界面
+        String login = request.getParameter("login");
         boolean isNormal = selectionService.isAllExamTaken(login);
 
+        try {
+            //标准界面
+            if (isNormal) {
+                List<ClassInfoBean> result = new ArrayList<>();
+                List<Selection> selections = selectionService.getSelectionOfStudent(login);
+                for (Selection one : selections) {
+                    int courseId = one.getCourseId();
 
-        //标准界面
-        if (isNormal) {
-            writer.println("<h1>welcome student: " + login + "</h1>");
-            writer.println("<p>standard information page</p>");
+                    //获取一个课程信息
+                    Course targetCourse = courseService.getCourse(courseId);
+                    String courseName = targetCourse.getName();
+                    int score = one.getScore();
 
-            writer.println("<table border='1'>");
-            writer.println("<tr>" +
-                    "<th>课程ID</th>" +
-                    "<th>课程名称</th>" +
-                    "<th>考试分数</th>" +
-                    "</tr>");
+                    //加入list
+                    ClassInfoBean classInfoBean = new ClassInfoBean(courseId, courseName, score);
+                    result.add(classInfoBean);
+                }
 
+                //放入session以便界面获取
+                ClassListBean classList = new ClassListBean();
+                classList.setClassList(result);
+                session.setAttribute("classList", classList);
 
-            List<Selection> selections = selectionService.getSelectionOfStudent(login);
-            for (Selection one : selections) {
-                int courseId = one.getCourseId();
-                //获取一个课程信息
-                Course targetCourse = courseService.getCourse(courseId);
-                String courseName = targetCourse.getName();
-                int score = one.getScore();
+                //界面跳转
+                context.getRequestDispatcher("/course/normal.jsp").forward(request, response);
 
-                writer.println("<tr>");
-                writer.println("<td>" + courseId + "</td>");
-                writer.println("<td>" + courseName + "</td>");
-                writer.println("<td>" + score + "</td>");
-                writer.println("</tr>");
+                //警告界面
+            } else {
+                session.setAttribute("message", "警告:还有没有参加的考试");
+                context.getRequestDispatcher("/course/warning.jsp").forward(request, response);
             }
-            writer.println("</table>");
-
-            //警告界面
-        } else {
-            writer.println("<p>warning : student does not take all exams!</p>");
+        } catch (ServletException e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                    "This is a ServletException in show servelt.");
         }
         return true;
     }
 
-
     /**
-     * 打印退出按钮
-     *
-     * @param req
-     * @param res
-     * @throws IOException
+     * 增加已经登录的人数和总人数
      */
-    private void displayLogoutPage(HttpServletRequest req, HttpServletResponse res) throws IOException {
-        PrintWriter writer = res.getWriter();
-        // Logout
-        writer.println("<form method='GET' action='" + res.encodeURL(req.getContextPath() + "/Login") + "'>");
-        writer.println("</p>");
-        //退出的表单
-        writer.println("<input type='submit' name='Logout' value='Logout'>");
-        writer.println("</form>");
-
-        // ServletContext
-        ServletContext Context = getServletContext();
-        int total = (int) Context.getAttribute("total");
-        int logged = (int) Context.getAttribute("logged");
-        int guest = (int) Context.getAttribute("guest");
-        writer.println("<p>游客人数 " + guest + "</p>");
-        writer.println("<p>登录人数 " + logged + "</p>");
-        writer.println("<p>总人数 " + total + "</p>");
-
-        writer.println("</body></html>");
-    }
-
-    /**
-     *  增加已经登录的人数和总人数
-     */
-    private void increaseCounter(){
+    private void increaseCounter() {
         ServletContext Context = getServletContext();
         int total = (int) Context.getAttribute("total");
         int logged = (int) Context.getAttribute("logged");

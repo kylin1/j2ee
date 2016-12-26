@@ -21,9 +21,11 @@ public class Reset extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         if (null != session) {
-            System.out.println("session is not null, reseting");
+            System.out.println("session is not null, resetting");
             session.invalidate();
             session = null;
+        }else {
+            System.out.println("has already destroyed session");
         }
     }
 }

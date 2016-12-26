@@ -23,7 +23,7 @@ public class StudentService implements IStudentService{
         return service;
     }
 
-    public boolean checkStudent(String name) {
+    public boolean studentExists(String name) {
         Student dbStudent = dao.getStudent(name);
         if (dbStudent == null) {
             return false;

@@ -2,6 +2,7 @@ package edu.nju.tag;
 
 
 import edu.nju.action.business.StockListBean;
+import edu.nju.model.Stock;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
@@ -19,16 +20,14 @@ public class StockInfoHandler extends SimpleTagSupport {
             JspWriter out = getJspContext().getOut();
             // 遍历这个list,输出到界面上
             for (int i = 0; i < listStock.getStockList().size(); i++) {
-                out.println("<tr><TD align='left'>"
-                        + listStock.getStockList(i).getId() + "</TD>");
-                out.println("<TD align='center'>"
-                        + listStock.getStockList(i).getCompanyName() + "</TD>");
-                out.println("<TD align='left'>"
-                        + listStock.getStockList(i).getType() + "</TD>");
-                out.println("<TD align='center'>"
-                        + listStock.getStockList(i).getPrice() + "</TD>");
-                out.println("<TD align='center'>"
-                        + listStock.getStockList(i).getDate() + "</TD></tr>");
+                Stock oneStock = listStock.getStockList(i);
+                out.println("<tr>");
+                out.println("<TD align='left'>" + oneStock.getId() + "</TD>");
+                out.println("<TD align='center'>" + oneStock.getCompanyName() + "</TD>");
+                out.println("<TD align='left'>" + oneStock.getType() + "</TD>");
+                out.println("<TD align='center'>" + oneStock.getPrice() + "</TD>");
+                out.println("<TD align='center'>" + oneStock.getDate() + "</TD>");
+                out.println("</tr>");
             }
         } catch (Exception e) {
             e.printStackTrace();

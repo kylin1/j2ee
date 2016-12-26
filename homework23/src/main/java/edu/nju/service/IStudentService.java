@@ -6,7 +6,7 @@ package edu.nju.service;
  */
 public interface IStudentService {
 
-    boolean checkStudent(String name);
+    boolean studentExists(String name);
 
     boolean login(String name,String password);
 }

@@ -13,7 +13,6 @@ public class StockListBean implements Serializable {
 
     private List stockList;
 
-
     public List getStockList() {
         return stockList;
     }

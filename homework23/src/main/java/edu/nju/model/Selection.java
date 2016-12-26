@@ -16,7 +16,6 @@ public class Selection {
 
     private int score;
 
-
     public int getId() {
         return id;
     }
