@@ -39,7 +39,7 @@ public class StudentDao implements IStudentDao{
             }
             //关闭连接
             MyConnection.close(result, stmt, connection);
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         //return result

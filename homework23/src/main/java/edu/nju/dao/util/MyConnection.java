@@ -19,20 +19,34 @@ public class MyConnection {
 
     private final static String DRIVER = "com.mysql.cj.jdbc.Driver";
 
-    public static Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName(DRIVER);
-        return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+    public static Connection getConnection(){
+        try {
+            Class.forName(DRIVER);
+            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);;
+            return connection;
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
-    public static void close(ResultSet rs, PreparedStatement ps, Connection conn) throws SQLException {
-        rs.close();
-        ps.close();
-        conn.close();
+    public static void close(ResultSet rs, PreparedStatement ps, Connection conn) {
+        try {
+            ps.close();
+            rs.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void close(ResultSet rs, PreparedStatement ps) throws SQLException {
-        rs.close();
-        ps.close();
+    public static void close(ResultSet rs, PreparedStatement ps) {
+        try {
+            ps.close();
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

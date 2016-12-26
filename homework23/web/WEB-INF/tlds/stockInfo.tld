@@ -7,11 +7,11 @@
     <short-name>stock</short-name>
     <tag>
         <name>stockInfo</name>
-        <tag-class>edu.nju.onlinestock.tag.StockInfoHandler</tag-class>
+        <tag-class>edu.nju.tag.StockInfoHandler</tag-class>
         <body-content>empty</body-content>
     </tag>
     <tag>
         <name>checkLogin</name>
-        <tag-class>edu.nju.onlinestock.tag.CheckLoginHandler</tag-class>
+        <tag-class>edu.nju.tag.CheckLoginHandler</tag-class>
     </tag>
 </taglib>

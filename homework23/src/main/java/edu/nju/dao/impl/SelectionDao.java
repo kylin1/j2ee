@@ -49,7 +49,7 @@ public class SelectionDao implements ISelectionDao {
             }
             //关闭连接
             MyConnection.close(result, stmt, connection);
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         //返回数据

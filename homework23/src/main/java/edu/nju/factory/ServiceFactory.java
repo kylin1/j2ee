@@ -3,8 +3,10 @@ package edu.nju.factory;
 import edu.nju.service.ICourseService;
 import edu.nju.service.ISelectionService;
 import edu.nju.service.IStudentService;
+import edu.nju.service.StockManageService;
 import edu.nju.service.impl.CourseService;
 import edu.nju.service.impl.SelectionService;
+import edu.nju.service.impl.StockManageServiceImpl;
 import edu.nju.service.impl.StudentService;
 
 /**
@@ -25,4 +27,7 @@ public class ServiceFactory {
         return SelectionService.getInstance();
     }
 
+    public static StockManageService getStockManageService() {
+        return StockManageServiceImpl.getInstance();
+    }
 }
