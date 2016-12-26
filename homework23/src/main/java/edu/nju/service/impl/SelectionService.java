@@ -2,6 +2,7 @@ package edu.nju.service.impl;
 
 import edu.nju.dao.ISelectionDao;
 import edu.nju.dao.IStudentDao;
+import edu.nju.factory.DaoFactory;
 import edu.nju.model.Selection;
 import edu.nju.model.Student;
 import edu.nju.service.ISelectionService;
@@ -17,6 +18,17 @@ public class SelectionService implements ISelectionService {
     private ISelectionDao dao;
 
     private IStudentDao studentDao;
+
+    private static ISelectionService service = new SelectionService();
+
+    public SelectionService() {
+        this.dao = DaoFactory.getSelectionDao();
+        this.studentDao = DaoFactory.getStudentDao();
+    }
+
+    public static ISelectionService getInstance(){
+        return service;
+    }
 
     /**
      * 判断一个学生是否参加了所有的测验

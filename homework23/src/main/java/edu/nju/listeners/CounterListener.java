@@ -4,6 +4,8 @@ import edu.nju.tools.FileIOHelper;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebListener;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.List;
@@ -17,7 +19,7 @@ import java.util.List;
  * 而javax.servlet.ServletContext接口就提供了访问这个背景对象的途径。
  */
 @WebListener
-public class CounterListener implements ServletContextListener, ServletContextAttributeListener {
+public class CounterListener implements ServletContextListener, ServletContextAttributeListener, HttpSessionListener{
 
     //总人数
     int total;
@@ -37,6 +39,7 @@ public class CounterListener implements ServletContextListener, ServletContextAt
      */
     public void contextInitialized(ServletContextEvent cse) {
         try {
+
             //读取本地文件信息
             System.out.println("Reading Start");
             List<String> input = FileIOHelper.readTxtFileLines(counterFilePath);
@@ -125,5 +128,15 @@ public class CounterListener implements ServletContextListener, ServletContextAt
         } catch (Exception e) {
             System.out.println(e.toString());
         }
+    }
+
+    @Override
+    public void sessionCreated(HttpSessionEvent se) {
+        System.out.println("create session");
+    }
+
+    @Override
+    public void sessionDestroyed(HttpSessionEvent se) {
+        System.out.println("sessionDestroyed");
     }
 }

@@ -15,6 +15,8 @@ import java.sql.SQLException;
  */
 public class CourseDao implements ICourseDao{
 
+    private static CourseDao courseDao=new CourseDao();
+
     public Course getCourse(int id){
         Course course = null;
         try {
@@ -43,4 +45,7 @@ public class CourseDao implements ICourseDao{
         return course;
     }
 
+    public static ICourseDao getInstance() {
+        return courseDao;
+    }
 }

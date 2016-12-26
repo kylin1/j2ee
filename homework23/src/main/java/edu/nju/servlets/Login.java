@@ -34,7 +34,7 @@ public class Login extends HttpServlet {
             Context.setAttribute("total", ++total);
 
             //用户退出,减去登录人数
-        }else{
+        } else {
             Context.setAttribute("logged", --logged);
             Context.setAttribute("total", ++total);
         }
@@ -81,7 +81,7 @@ public class Login extends HttpServlet {
         //登录之后界面跳转到show
         out.println(
                 "<form method='POST' action='"
-                        + response.encodeURL(request.getContextPath()+"/show")
+                        + response.encodeURL(request.getContextPath() + "/show")
                         + "'>");
         out.println(
                 "login: <input type='text' name='login' value='" + login + "'>");

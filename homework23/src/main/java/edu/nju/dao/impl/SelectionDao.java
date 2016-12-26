@@ -15,9 +15,9 @@ import java.util.List;
  * Created by kylin on 19/12/2016.
  * All rights reserved.
  */
-public class SelectionDao implements ISelectionDao{
+public class SelectionDao implements ISelectionDao {
 
-
+    private static SelectionDao dao = new SelectionDao();
 
     public List<Selection> getSelectionOfStudent(int studentId) {
         List<Selection> selections = new ArrayList<>();
@@ -56,5 +56,8 @@ public class SelectionDao implements ISelectionDao{
         return selections;
     }
 
+    public static SelectionDao getInstance() {
+        return dao;
+    }
 
 }

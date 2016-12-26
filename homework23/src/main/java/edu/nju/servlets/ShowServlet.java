@@ -1,5 +1,6 @@
 package edu.nju.servlets;
 
+import edu.nju.factory.ServiceFactory;
 import edu.nju.model.Course;
 import edu.nju.model.Selection;
 import edu.nju.service.ICourseService;
@@ -28,6 +29,12 @@ public class ShowServlet extends HttpServlet {
     private ICourseService courseService;
 
     private static final long serialVersionUID = 1L;
+
+    public void init() throws ServletException{
+        this.studentService = ServiceFactory.getStudentService();
+        this.selectionService = ServiceFactory.getSelectionService();
+        this.courseService = ServiceFactory.getCourseService();
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

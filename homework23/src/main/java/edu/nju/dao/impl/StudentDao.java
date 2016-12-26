@@ -15,6 +15,7 @@ import java.sql.SQLException;
  */
 public class StudentDao implements IStudentDao{
 
+    private static StudentDao dao = new StudentDao();
 
     public Student getStudent(String name) {
         Student student = null;
@@ -45,5 +46,8 @@ public class StudentDao implements IStudentDao{
         return student;
     }
 
+    public static StudentDao getInstance() {
+        return dao;
+    }
 
 }

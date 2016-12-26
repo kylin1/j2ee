@@ -1,6 +1,7 @@
 package edu.nju.service.impl;
 
-import edu.nju.dao.impl.StudentDao;
+import edu.nju.dao.IStudentDao;
+import edu.nju.factory.DaoFactory;
 import edu.nju.model.Student;
 import edu.nju.service.IStudentService;
 
@@ -10,7 +11,17 @@ import edu.nju.service.IStudentService;
  */
 public class StudentService implements IStudentService{
 
-    private StudentDao dao;
+    private IStudentDao dao;
+
+    private static IStudentService service = new StudentService();
+
+    public StudentService() {
+        this.dao = DaoFactory.getStudentDao();
+    }
+
+    public static IStudentService getInstance(){
+        return service;
+    }
 
     public boolean checkStudent(String name) {
         Student dbStudent = dao.getStudent(name);
