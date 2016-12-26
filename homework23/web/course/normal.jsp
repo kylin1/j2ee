@@ -32,9 +32,7 @@
     <input type='submit' name='Logout' value='Logout'>
 </form>
 
-<p>游客人数 1</p>
-<p>登录人数 0</p>
-<p>总人数 1</p>
+<kylin:countNumber/>
 
 </body>
 </html>

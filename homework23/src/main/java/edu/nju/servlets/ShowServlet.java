@@ -143,7 +143,6 @@ public class ShowServlet extends HttpServlet {
         String password = request.getParameter("password");
         System.out.println("in display login=" + login + ", pass=" + password);
 
-        HttpSession session = request.getSession(true);
         ServletContext context = getServletContext();
 
         try {
@@ -151,7 +150,7 @@ public class ShowServlet extends HttpServlet {
             //未知的学生(账号不存在),错误界面
             if (!studentService.studentExists(login)) {
                 System.out.println("账号不存在");
-                session.setAttribute("message", "账号不存在");
+                request.setAttribute("message", "账号不存在");
                 context.getRequestDispatcher("/course/warning.jsp").forward(request, response);
             }
 
@@ -165,7 +164,7 @@ public class ShowServlet extends HttpServlet {
                 this.displayStudentInfo(request, response);
             }else{
                 System.out.println("密码错误");
-                session.setAttribute("message", "密码错误");
+                request.setAttribute("message", "密码错误");
                 context.getRequestDispatcher("/course/warning.jsp").forward(request, response);
             }
 
@@ -183,7 +182,6 @@ public class ShowServlet extends HttpServlet {
      * @throws IOException
      */
     private boolean displayStudentInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession(true);
         ServletContext context = getServletContext();
 
         //根据学生是否参加所有测验返回不同界面
@@ -211,14 +209,14 @@ public class ShowServlet extends HttpServlet {
                 //放入session以便界面获取
                 ClassListBean classList = new ClassListBean();
                 classList.setClassList(result);
-                session.setAttribute("classList", classList);
+                request.setAttribute("classList", classList);
 
                 //界面跳转
                 context.getRequestDispatcher("/course/normal.jsp").forward(request, response);
 
                 //警告界面
             } else {
-                session.setAttribute("message", "警告:还有没有参加的考试");
+                request.setAttribute("message", "警告:还有没有参加的考试");
                 context.getRequestDispatcher("/course/warning.jsp").forward(request, response);
             }
         } catch (ServletException e) {

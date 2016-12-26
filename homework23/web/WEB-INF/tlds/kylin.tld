@@ -21,4 +21,10 @@
         <body-content>empty</body-content>
     </tag>
 
+    <tag>
+        <name>countNumber</name>
+        <tag-class>edu.nju.tag.CountNumberHandler</tag-class>
+        <body-content>empty</body-content>
+    </tag>
+
 </taglib>

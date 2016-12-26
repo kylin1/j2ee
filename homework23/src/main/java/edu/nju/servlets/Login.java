@@ -39,7 +39,7 @@ public class Login extends HttpServlet {
             //用户退出,减去登录人数
         } else {
             Context.setAttribute("logged", --logged);
-            Context.setAttribute("total", ++total);
+            Context.setAttribute("total", --total);
             //remove session
             if (null != session) {
                 session.invalidate();

@@ -17,12 +17,10 @@
 <kylin:warning/>
 
 <form method='GET' action='/Login'>
-    <input type='submit' name='Logout' value='Logout'>
+    <input type='submit' name='return' value='return'>
 </form>
 
-<p>游客人数 1</p>
-<p>登录人数 -1</p>
-<p>总人数 2</p>
+<kylin:countNumber/>
 
 </body>
 </html>

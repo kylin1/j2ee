@@ -30,7 +30,7 @@ public class CounterListener implements ServletContextListener, ServletContextAt
     //游客人数
     int guest;
 
-    String counterFilePath = "/Users/kylin/Desktop/Study/第二学期作业/j2ee/homework2/web/data/counter.txt";
+    String counterFilePath = "/Users/kylin/Desktop/Study/第二学期作业/j2ee/homework23/web/data/counter.txt";
 
     /**
      * 服务器启动
@@ -44,6 +44,7 @@ public class CounterListener implements ServletContextListener, ServletContextAt
             System.out.println("Reading Start");
             List<String> input = FileIOHelper.readTxtFileLines(counterFilePath);
             assert input.size() == 2 : "存储人数的文件格式错误, 应该是两行数字";
+            //登录-游客-总
             String strLogged = input.get(0);
             String strGuest = input.get(1);
             String strTotal = input.get(2);
@@ -53,7 +54,7 @@ public class CounterListener implements ServletContextListener, ServletContextAt
             this.guest = Integer.parseInt(strGuest);
             this.total = Integer.parseInt(strTotal);
         } catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         //设置属性
         ServletContext servletContext = cse.getServletContext();
