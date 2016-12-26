@@ -2,16 +2,64 @@
 <!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
         "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd" >
 <taglib>
+    <!--每个 TLD 文件对应一个标签库，一个标签库中可包含多个标签，
+    TLD 文件也称为标签库定义文件。-->
+
     <tlib-version>1.2</tlib-version>
     <jsp-version>2.0</jsp-version>
     <short-name>stock</short-name>
+
+    <!--每个 tag 子元素都定义一个标签-->
+    <tag>
+        <!--该标签库的名称，这个属性很重要，JSP 页面中就是根据该名称来使用此标签的。-->
+        <name>stockPrice</name>
+        <!--指定了标签由哪个 Java 类来处理-->
+        <tag-class>edu.nju.tag.StockPriceHandler</tag-class>
+        <!--指定该标签只能作用空标签使用-->
+        <body-content>empty</body-content>
+
+        <!--处理程序的属性，是作为参数发送给handler处理程序的值-->
+        <attribute>
+            <name>tickerSymbol</name>
+            <required>true</required>
+            <!--可以接受一个表达式作为值-->
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+    <!-- 定义第三个标签 -->
+    <tag>
+        <!-- 定义标签名 -->
+        <name>iterator</name>
+        <!-- 定义标签处理类 -->
+        <tag-class>edu.nju.tag.IteratorTag</tag-class>
+        <!-- 定义标签体支持JSP脚本 -->
+        <body-content>scriptless</body-content>
+
+        <!-- 配置标签属性:collection -->
+        <attribute>
+            <name>collection</name>
+            <required>true</required>
+        </attribute>
+
+        <!-- 配置标签属性:item -->
+        <attribute>
+            <name>item</name>
+            <required>true</required>
+        </attribute>
+    </tag>
+
     <tag>
         <name>stockInfo</name>
         <tag-class>edu.nju.tag.StockInfoHandler</tag-class>
+
         <body-content>empty</body-content>
     </tag>
+
     <tag>
         <name>checkLogin</name>
         <tag-class>edu.nju.tag.CheckLoginHandler</tag-class>
     </tag>
+
 </taglib>

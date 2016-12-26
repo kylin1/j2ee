@@ -14,7 +14,7 @@ import java.io.IOException;
  * Created by kylin on 10/12/2016.
  * All rights reserved.
  */
-@WebServlet("/reset-session")
+@WebServlet("/reset")
 public class Reset extends HttpServlet {
 
     @Override
