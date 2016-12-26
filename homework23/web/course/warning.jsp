@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="kylin" uri="/WEB-INF/tlds/kylin.tld" %>
+<%@ page session="false"%>
 
 <html>
 <head>

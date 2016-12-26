@@ -11,6 +11,7 @@ import java.io.IOException;
  */
 @WebServlet("/Login")
 public class Login extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -30,14 +31,18 @@ public class Login extends HttpServlet {
         int logged = (int) Context.getAttribute("logged");
         int guest = (int) Context.getAttribute("guest");
 
-        // 不是退出,游客人数加1
-        if (null == request.getParameter("Logout")) {
+        // 不是退出,而且不是返回过来的,游客人数加1
+        boolean isLogout = request.getParameter("Logout") != null;
+        boolean isReturn = request.getParameter("return") != null;
+
+        if (!isLogout && !isReturn) {
             System.out.println("guest++\n");
             Context.setAttribute("guest", ++guest);
             Context.setAttribute("total", ++total);
+        }
 
-            //用户退出,减去登录人数
-        } else {
+        //用户退出,才能减去登录人数(防止用户重复刷新登出界面)
+        if(isLogout){
             Context.setAttribute("logged", --logged);
             Context.setAttribute("total", --total);
             //remove session
@@ -69,14 +74,6 @@ public class Login extends HttpServlet {
             }
         }
 
-        // Logout action removes session, but the cookie remains
-        // 退出的时候消除session
-        if (null != request.getParameter("Logout")) {
-            if (null != session) {
-                session.invalidate();
-                session = null;
-            }
-        }
         request.getRequestDispatcher("/course/login.jsp").forward(request,response);
 
     }
