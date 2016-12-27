@@ -10,6 +10,12 @@
     <short-name>stock</short-name>
 
     <tag>
+        <name>checkLogin</name>
+        <tag-class>edu.nju.tag.CheckLoginHandler</tag-class>
+        <body-content>empty</body-content>
+    </tag>
+
+    <tag>
         <name>studentInfo</name>
         <tag-class>edu.nju.tag.StudentInfoHandler</tag-class>
         <body-content>empty</body-content>
@@ -25,6 +31,17 @@
         <name>countNumber</name>
         <tag-class>edu.nju.tag.CountNumberHandler</tag-class>
         <body-content>empty</body-content>
+    </tag>
+
+    <tag>
+        <name>loop</name>
+        <tag-class>edu.nju.tag.BodyTagExample</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>counts</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
 
 </taglib>

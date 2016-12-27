@@ -15,6 +15,11 @@
     <title>standard information</title>
 </head>
 
+<%--<kylin:checkLogin/>--%>
+
+<jsp:forward page="/Login" />
+
+
 <body>
 <h1>welcome student: kylin2</h1>
 <p>standard information page</p>

@@ -57,9 +57,5 @@
         <body-content>empty</body-content>
     </tag>
 
-    <tag>
-        <name>checkLogin</name>
-        <tag-class>edu.nju.tag.CheckLoginHandler</tag-class>
-    </tag>
 
 </taglib>
