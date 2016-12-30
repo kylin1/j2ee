@@ -6,9 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<%@ page contentType="text/html; charset=GBK" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ page session="false" %>
+
 <%@ taglib prefix="kylin" uri="/WEB-INF/tlds/kylin.tld" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
 <head>
@@ -21,13 +23,9 @@
 
 <h1> before kylin tag</h1>
 
-<kylin:loop counts="2">
-    <%--现在时间是：<%=new java.util.Date().toString()%><br>--%>
-
-    <%-- //SKIP_BODY:要求JSP容器忽略主体 可以控制界面的跳转情况 --%>
-    <jsp:forward page="/Login" />
-
-</kylin:loop>
+<kylin:checkLogin>
+    <c:redirect url="/Login"/>
+</kylin:checkLogin>
 
 <h1> after kylin tag</h1>
 

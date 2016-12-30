@@ -1,8 +1,11 @@
 package edu.nju.tag;
 
-import javax.servlet.jsp.tagext.BodyTagSupport;
-import javax.servlet.jsp.tagext.BodyContent;
+import com.mysql.cj.api.Session;
+
 import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.BodyContent;
+import javax.servlet.jsp.tagext.BodyTagSupport;
 
 public class BodyTagExample extends BodyTagSupport {
     private int counts;
@@ -17,6 +20,9 @@ public class BodyTagExample extends BodyTagSupport {
 
     //1
     public int doStartTag() throws JspTagException {
+
+
+
         System.out.println("doStartTag...");
         if (counts > 0) {
             //EVAL_BODY_BUFFERED:JSP容器会将标签主体的处理结果建立成一个BodyContent对象。这是默认返回值。
@@ -41,13 +47,17 @@ public class BodyTagExample extends BodyTagSupport {
     //4 如果标签有主体内容，容器在执行完标签主体后，会调用这个方法。
     public int doAfterBody() throws JspTagException {
         System.out.println("do After body..." + counts);
+        PageContext context = pageContext;
+        Session session = (Session) context.getSession();
+
         //EVAL_BODY_TAG，表示继续计算一次Body
-        if (counts > 1) {
-            counts--;
+        if (session == null) {
+            System.out.println("session is null in after body");
             return EVAL_BODY_AGAIN;
 
-            //直到返回SKIP_BODY才继续往下执行 要求JSP容器忽略主体，进入下一步的处理工作。
+        //直到返回SKIP_BODY才继续往下执行 要求JSP容器忽略主体，进入下一步的处理工作。
         } else {
+            System.out.println("session is not null in after body");
             return SKIP_BODY;
         }
     }
