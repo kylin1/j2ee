@@ -1,7 +1,5 @@
 package edu.nju.onlinestock.dao;
 
-import edu.nju.onlinestock.model.Selection;
-
 import javax.ejb.Remote;
 import java.util.List;
 
@@ -12,6 +10,6 @@ import java.util.List;
 @Remote
 public interface SelectionDao {
 
-    List<Selection> getSelectionOfStudent(int studentId);
+    List getSelectionOfStudent(int studentid);
 
 }

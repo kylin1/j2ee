@@ -1,21 +1,31 @@
 package edu.nju.onlinestock.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
+
 /**
  * Created by kylin on 09/12/2016.
  * All rights reserved.
  */
-public class Selection {
+@Entity
+@Table(name = "selection")
+public class Selection implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private int id;
 
-    private int studentId;
+    private int studentid;
 
-    private int courseId;
+    private int courseid;
 
-    private int examTaken;
+    private int examtaken;
 
-    private int score;
+    private Integer score;
 
+    @Id
     public int getId() {
         return id;
     }
@@ -24,37 +34,35 @@ public class Selection {
         this.id = id;
     }
 
-    public int getStudentId() {
-        return studentId;
+    public int getStudentid() {
+        return studentid;
     }
 
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
+    public void setStudentid(int studentid) {
+        this.studentid = studentid;
     }
 
-    public int getCourseId() {
-        return courseId;
+    public int getCourseid() {
+        return courseid;
     }
 
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
+    public void setCourseid(int courseid) {
+        this.courseid = courseid;
     }
 
-    public int getExamTaken() {
-        return examTaken;
+    public int getExamtaken() {
+        return examtaken;
     }
 
-    public void setExamTaken(int examTaken) {
-        this.examTaken = examTaken;
+    public void setExamtaken(int examtaken) {
+        this.examtaken = examtaken;
     }
 
-    public int getScore() {
+    public Integer getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
-
-
 }

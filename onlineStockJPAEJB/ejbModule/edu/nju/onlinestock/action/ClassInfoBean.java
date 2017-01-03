@@ -1,10 +1,14 @@
 package edu.nju.onlinestock.action;
 
+import java.io.Serializable;
+
 /**
  * Created by kylin on 26/12/2016.
  * All rights reserved.
  */
-public class ClassInfoBean {
+public class ClassInfoBean implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private int id;
     private String name;
     private int score;

@@ -39,7 +39,7 @@ public class SelectionServiceBean implements SelectionService {
 
         for (Selection selection : selections) {
             //如果有没有参加的,则返回false
-            if (selection.getExamTaken() == 0) {
+            if (selection.getExamtaken() == 0) {
                 return false;
             }
         }

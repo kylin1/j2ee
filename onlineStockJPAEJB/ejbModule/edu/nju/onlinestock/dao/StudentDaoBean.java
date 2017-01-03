@@ -4,6 +4,9 @@ import edu.nju.onlinestock.dao.util.MyConnection;
 import edu.nju.onlinestock.model.Student;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,33 +19,19 @@ import java.sql.SQLException;
 @Stateless
 public class StudentDaoBean implements StudentDao {
 
+    @PersistenceContext
+    protected EntityManager em;
+
     public Student getStudent(String name) {
-        Student student = null;
         try {
-            //获取数据
-            Connection connection = MyConnection.getConnection();
-            String sql = "select * from `student` where `name` = ? ";
-            PreparedStatement stmt = connection.prepareStatement(sql);
-
-            stmt.setString(1, name);
-            ResultSet result = stmt.executeQuery();
-
-            //遍历结果集
-            if (result.first()) {
-                int id = result.getInt("id");
-                String password = result.getString("password");
-                student = new Student();
-                student.setId(id);
-                student.setName(name);
-                student.setPassword(password);
-            }
-            //关闭连接
-            MyConnection.close(result, stmt, connection);
-        } catch (SQLException e) {
+            Query query = em.createQuery("from Student s where s.name=name");
+            Student student = (Student) query.getSingleResult();
+            em.clear();
+            return student;
+        } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        //return result
-        return student;
     }
 
 }

@@ -1,10 +1,19 @@
 package edu.nju.onlinestock.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
+
 /**
  * Created by kylin on 09/12/2016.
  * All rights reserved.
  */
-public class Student {
+@Entity
+@Table(name = "student")
+public class Student implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private int id;
 
@@ -13,7 +22,7 @@ public class Student {
     private String password;
 
 
-
+    @Id
     public int getId() {
         return id;
     }

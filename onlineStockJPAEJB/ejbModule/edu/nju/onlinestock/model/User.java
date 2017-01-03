@@ -1,20 +1,19 @@
 package edu.nju.onlinestock.model;
 
-import java.io.Serializable;
-import java.sql.Date;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="users")
-public class User implements Serializable
-{
+public class User implements Serializable{
+
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
