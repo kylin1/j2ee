@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.注意!:::::用到的css样式表在joinquant网站查看源文件里找!!!!!!!!!!!!!!!!!!!!!!很关键!!!!
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -143,6 +145,9 @@
         });
     </script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
+
+<c:redirect url="/inputPost.do"/>
+
 </body>
 </html>
 
