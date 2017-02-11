@@ -62,6 +62,10 @@
     display: none;
 }
 
+.card-text{
+    padding-top: 10px;
+}
+
 
 /*body { font-size: 100%; margin: 0; font-family: 'Helvetica Neue', Arial, sans-serif; }*/
 
