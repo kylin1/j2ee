@@ -1,26 +1,27 @@
 <!doctype html>
 <html lang="ch-ZN">
 <head>
-    <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png" />
-    <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png"/>
+    <link rel="icon" type="image/png" href="../../assets/img/favicon.png"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
     <title>住客登记</title>
 
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="viewport" content="width=device-width"/>
 
     <!-- Bootstrap core CSS     -->
-    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet"/>
     <!--  Material Dashboard CSS    -->
     <link href="../../assets/css/material-dashboard.css" rel="stylesheet"/>
     <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="../../assets/css/demo.css" rel="stylesheet" />
+    <link href="../../assets/css/demo.css" rel="stylesheet"/>
 
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet'
+          type='text/css'>
 
 </head>
 
@@ -39,7 +40,7 @@
         </div>
 
         <!--导航栏整体-->
-        <div class="sidebar-wrapper"    >
+        <div class="sidebar-wrapper">
             <ul class="nav">
                 <li>
                     <a href="customer-register.html">
@@ -128,9 +129,103 @@
         <!--2.内容-->
         <div class="content">
             <div class="container-fluid">
-
                 <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header" data-background-color="purple">
+                                <h4 class="title">登记入住人信息</h4>
+                                <p class="category"></p>
+                            </div>
+                            <div class="card-content">
+                                <form>
+                                    <!--名称行-->
+                                    <div class="row">
+                                        <label class="col-md-1 control-label">酒店</label>
+                                        <div class="col-md-6">
+                                            <h4>上海中环国际酒店</h4>
+                                        </div>
+                                    </div>
 
+                                    <!--房间号-->
+                                    <div class="row">
+                                        <div class="input-group">
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control" placeholder="房间号">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control" placeholder="房客1姓名">
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control" placeholder="房客2姓名">
+                                            </div>
+
+
+                                            <div class="col-md-1" style="padding-top: 40px;">
+                                                <a href="#" id="add-room-icon">
+                                                    <i class="material-icons">add_circle_outline</i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <!--是否会员-->
+                                    <div class="row">
+                                        <label class="col-sm-2 control-label">是否会员</label>
+
+                                        <div class="col-sm-2">
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios">
+                                                    是
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios">
+                                                    否
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--付款方式-->
+                                    <div class="row">
+                                        <label class="col-sm-2 control-label">付款方式</label>
+
+                                        <div class="col-sm-2">
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios">
+                                                    会员卡
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios">
+                                                    现金结账
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary pull-left">
+                                        确定
+                                    </button>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
