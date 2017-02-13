@@ -1,26 +1,27 @@
 <!doctype html>
 <html lang="ch-ZN">
 <head>
-    <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png" />
-    <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png"/>
+    <link rel="icon" type="image/png" href="../../assets/img/favicon.png"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
     <title>申请&审批</title>
 
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="viewport" content="width=device-width"/>
 
     <!-- Bootstrap core CSS     -->
-    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet"/>
     <!--  Material Dashboard CSS    -->
     <link href="../../assets/css/material-dashboard.css" rel="stylesheet"/>
     <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="../../assets/css/demo.css" rel="stylesheet" />
+    <link href="../../assets/css/demo.css" rel="stylesheet"/>
 
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet'
+          type='text/css'>
 
 </head>
 
@@ -39,7 +40,7 @@
         </div>
 
         <!--导航栏整体-->
-        <div class="sidebar-wrapper"    >
+        <div class="sidebar-wrapper">
             <ul class="nav">
                 <li>
                     <a href="customer-register.html">
@@ -128,10 +129,164 @@
         <!--2.内容-->
         <div class="content">
             <div class="container-fluid">
+                <!--新的申请-->
+                    <h2>新的申请</h2>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header" data-background-color="purple">
+                                    <h4 class="title">新的申请</h4>
+                                    <p class="category"></p>
+                                </div>
+                                <div class="card-content">
+                                    <form>
+                                        <!--主要内容-->
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">主要内容</label>
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
 
-                <div class="row">
+                                        <!--类别行-->
+                                        <div class="row">
+                                            <label class="col-sm-1 control-label">类别</label>
 
-                </div>
+                                            <div class="col-sm-3">
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="optionsRadios">
+                                                        开店申请
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="optionsRadios">
+                                                        修改信息
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="optionsRadios">
+                                                        其他
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">详细内容</label>
+                                                        <textarea class="form-control" rows="5"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary pull-left">
+                                            提交申请</button>
+                                        <div class="clearfix"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <!--正在审批-->
+                <section>
+                    <h2>正在审批</h2>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="card">
+                                <div class="card-header" data-background-color="purple">
+                                    <h4 class="title">正在审批的申请</h4>
+                                    <p class="category">开店申请/修改店信息需Hostel World经理审批</p>
+                                </div>
+
+                                <div class="card-content table-responsive">
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                        <th>类别</th>
+                                        <th>主要内容</th>
+                                        <th>提交时间</th>
+                                        <th>操作</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>修改客栈信息</td>
+                                            <td>新增空闲房间</td>
+                                            <td>2017年02月13日10:00:59</td>
+                                            <td><a href="#">详情</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>修改客栈信息</td>
+                                            <td>新增空闲房间</td>
+                                            <td>2017年02月13日10:00:59</td>
+                                            <td><a href="#">详情</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>修改客栈信息</td>
+                                            <td>新增空闲房间</td>
+                                            <td>2017年02月13日10:00:59</td>
+                                            <td><a href="#">详情</a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!--已经通过-->
+                <section>
+                    <h2>已经通过</h2>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="card">
+                                <div class="card-header" data-background-color="purple">
+                                    <h4 class="title">已经通过的申请</h4>
+                                    <p class="category">Hostel World经理审批过的申请，可以开始执行</p>
+                                </div>
+
+                                <div class="card-content table-responsive">
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                        <th>类别</th>
+                                        <th>主要内容</th>
+                                        <th>提交时间</th>
+                                        <th>操作</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>开店申请</td>
+                                            <td>申请加入Hostel World</td>
+                                            <td>2017年02月13日10:00:59</td>
+                                            <td><a href="#">详情</a></td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
             </div>
         </div>
 
