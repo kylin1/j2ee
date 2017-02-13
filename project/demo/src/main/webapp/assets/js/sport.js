@@ -63,13 +63,13 @@ sport = {
             labels: ['10-01', '10-02', '10-03', '10-04', '10-05',
                 '10-06', '10-07', '10-08', '10-09', '10-10', '10-11', '10-12'],
             series: [
-                [70, 80, 80, 90, 95, 70, 80, 60, 70, 80, 90, 80]
+                [70, 80, 80, 90, 95, 70, 80, 60, 70, 80, 90, 80],
+                [80, 60, 70, 80, 90, 80,70, 80, 80, 90, 95, 70]
             ]
         };
 
         var optionsHeartChart = {
-            low: 0,
-            showArea: true
+            low: 40
         };
 
         var heartRateChart = new Chartist.Line('#heartRateChart',dataHeartChart, optionsHeartChart);
