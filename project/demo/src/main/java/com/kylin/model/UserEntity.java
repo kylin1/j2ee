@@ -1,4 +1,4 @@
-package com.gaussic.model;
+package com.kylin.model;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -14,6 +14,8 @@ public class UserEntity {
     private String password;
     private String firstName;
     private String lastName;
+
+    // 一对多，多含1，user是1的一边，含有多个blog
     private Collection<BlogEntity> blogsById;
 
     @Id

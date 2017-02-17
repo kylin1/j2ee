@@ -1,7 +1,7 @@
-package com.gaussic.controller;
+package com.kylin.controller;
 
-import com.gaussic.model.UserEntity;
-import com.gaussic.repository.UserRepository;
+import com.kylin.model.UserEntity;
+import com.kylin.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

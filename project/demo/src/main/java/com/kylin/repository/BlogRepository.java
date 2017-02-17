@@ -1,6 +1,6 @@
-package com.gaussic.repository;
+package com.kylin.repository;
 
-import com.gaussic.model.BlogEntity;
+import com.kylin.model.BlogEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

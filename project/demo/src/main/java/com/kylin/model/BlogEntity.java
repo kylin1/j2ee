@@ -1,4 +1,4 @@
-package com.gaussic.model;
+package com.kylin.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,6 +16,8 @@ public class BlogEntity {
     private String content;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date pubDate;
+
+    //一对多，多含1，blog是多的一边，包含user id 的外键
     private UserEntity userByUserId;
 
     @Id
