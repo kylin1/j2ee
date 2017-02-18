@@ -7,7 +7,7 @@ import java.util.Collection;
  * Created by dzkan on 2016/3/8.
  */
 @Entity
-@Table(name = "user", schema = "springdemo", catalog = "")
+@Table(name = "user", schema = "springdemo")
 public class UserEntity {
     private int id;
     private String nickname;
@@ -94,6 +94,7 @@ public class UserEntity {
         return result;
     }
 
+    // this is the inverse, who does not have foreign key, but have a list
     @OneToMany(mappedBy = "userByUserId")
     public Collection<BlogEntity> getBlogsById() {
         return blogsById;

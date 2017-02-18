@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by dzkan on 2016/3/8.
  */
 @Entity
-@Table(name = "blog", schema = "springdemo", catalog = "")
+@Table(name = "blog", schema = "springdemo")
 public class BlogEntity {
     private int id;
     private String title;
@@ -85,6 +85,7 @@ public class BlogEntity {
     }
 
     @ManyToOne
+    // this is the owner who has the foreign key
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     public UserEntity getUserByUserId() {
         return userByUserId;

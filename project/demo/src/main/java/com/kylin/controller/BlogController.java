@@ -38,6 +38,9 @@ public class BlogController {
     @RequestMapping(value = "/admin/blogs/add", method = RequestMethod.GET)
     public String addBlog(ModelMap modelMap) {
         List<UserEntity> userList = userRepository.findAll();
+//        UserEntity userEntity = userList.get(0);
+//        System.out.println(userEntity.getId());
+//        System.out.println(userEntity.getBlogsById().size());
         // 向jsp注入用户列表
         modelMap.addAttribute("userList", userList);
         return "admin/addBlog";
