@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="onlineStockJPAEJB">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/onlineStockJPAEJB.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

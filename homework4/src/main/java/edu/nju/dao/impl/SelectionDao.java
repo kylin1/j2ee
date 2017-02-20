@@ -24,7 +24,7 @@ public class SelectionDao implements ISelectionDao {
         try {
             //获取数据
             Connection connection = MyConnection.getConnection();
-            String sql = "select * from `selection` where `stu_id` = ? ";
+            String sql = "select * from `selection` where `studentid` = ? ";
             PreparedStatement stmt = connection.prepareStatement(sql);
 
             stmt.setInt(1, studentId);
@@ -33,9 +33,9 @@ public class SelectionDao implements ISelectionDao {
             //遍历结果集
             while (result.next()) {
                 int id = result.getInt("id");
-                int stuId = result.getInt("stu_id");
-                int course = result.getInt("course_id");
-                int isTaken = result.getInt("exam_taken");
+                int stuId = result.getInt("studentid");
+                int course = result.getInt("courseid");
+                int isTaken = result.getInt("examtaken");
                 int score = result.getInt("score");
 
                 Selection selection = new Selection();
