@@ -30,7 +30,7 @@ public class CounterListener implements ServletContextListener, ServletContextAt
     //游客人数
     int guest;
 
-    String counterFilePath = "/Users/kylin/Downloads/homework23/web/data/counter.txt";
+    String counterFilePath = "/Users/kylin/Desktop/Code/微软/counter.txt";
 
     /**
      * 服务器启动
