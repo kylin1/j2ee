@@ -28,7 +28,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="NewPersistenceUnit" />
-          <factory-entry name="defaultPersistenceUnit" value="af6e110a-8d7c-4b3b-a9c2-01bc38e53e0e" />
+          <factory-entry name="defaultPersistenceUnit" value="19549b76-a443-40e1-ab54-7dcf4bc8c6f2" />
           <factory-entry name="noname-a.xml@0" value="87866f9b-90c5-4a5a-8d9b-1ac31c5993a2" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resource/META-INF/persistence.xml" />
