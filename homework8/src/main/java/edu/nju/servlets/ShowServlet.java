@@ -7,6 +7,8 @@ import edu.nju.model.Selection;
 import edu.nju.service.ICourseService;
 import edu.nju.service.ISelectionService;
 import edu.nju.service.IStudentService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -19,7 +21,6 @@ import java.util.List;
 /**
  * Created by zhouxiaofan on 2016/12/8.
  */
-
 @WebServlet("/show")
 public class ShowServlet extends HttpServlet {
 
@@ -32,10 +33,16 @@ public class ShowServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     public void init() throws ServletException {
-//        this.studentService = ServiceFactory.getStudentService();
-//        this.selectionService = ServiceFactory.getSelectionService();
-//        this.courseService = ServiceFactory.getCourseService();
+        super.init();
+        ApplicationContext appliationContext =
+                new ClassPathXmlApplicationContext("applicationContext.xml");
+
+        // get service bean
+        this.studentService = (IStudentService) appliationContext.getBean("IStudentService");
+        this.selectionService = (ISelectionService) appliationContext.getBean("ISelectionService");
+        this.courseService = (ICourseService) appliationContext.getBean("ICourseService");
     }
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -47,7 +54,8 @@ public class ShowServlet extends HttpServlet {
         processRequest(req, res);
     }
 
-    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
         //使用cookie记录用户ID进行预填充
         Cookie cookie = null;
         boolean cookieFound = false;
@@ -107,7 +115,7 @@ public class ShowServlet extends HttpServlet {
                 request.setAttribute("login", loginValue);
 
                 //展示信息
-                this.displayPage(request, response,true);
+                this.displayPage(request, response, true);
 
                 //请求里面没有login这个参数,说明访问的直接是show,强迫用户转到登录状态
             } else {
@@ -125,7 +133,7 @@ public class ShowServlet extends HttpServlet {
             request.setAttribute("login", loginValue);
 
             //展示信息
-            this.displayPage(request, response,false);
+            this.displayPage(request, response, false);
         }
     }
 
@@ -156,12 +164,12 @@ public class ShowServlet extends HttpServlet {
             //只有用户名密码正确登录才增加计数器
             if (studentService.login(login, password)) {
                 System.out.println("log in correct");
-                if(increase){
+                if (increase) {
                     this.increaseCounter();
                 }
 
                 this.displayStudentInfo(request, response);
-            }else{
+            } else {
                 System.out.println("密码错误");
                 request.setAttribute("message", "密码错误");
                 context.getRequestDispatcher("/course/warning.jsp").forward(request, response);
