@@ -1,15 +1,12 @@
 package edu.nju.dao.impl;
 
+import edu.nju.dao.BaseDao;
 import edu.nju.dao.IStudentDao;
-import edu.nju.model.Course;
-import edu.nju.model.Selection;
 import edu.nju.model.Student;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-import org.hibernate.service.ServiceRegistry;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -18,7 +15,11 @@ import java.util.List;
  * Created by kylin on 19/12/2016.
  * All rights reserved.
  */
+@Repository
 public class StudentDao implements IStudentDao {
+
+    @Autowired
+    private BaseDao baseDao;
 
     private static StudentDao dao = new StudentDao();
 
@@ -26,14 +27,7 @@ public class StudentDao implements IStudentDao {
         Student student = null;
 
         try {
-            Configuration config = new Configuration().configure();
-
-            // add entity class
-            config.addAnnotatedClass(Student.class);
-
-            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
-            SessionFactory sessionFactory = config.buildSessionFactory(serviceRegistry);
-            Session session = sessionFactory.openSession();
+            Session session = this.baseDao.getNewSession();
 
             String hql = "from edu.nju.model.Student as se where se.name=?";
             Query query = session.createQuery(hql);
@@ -47,16 +41,11 @@ public class StudentDao implements IStudentDao {
             }
 
             session.close();
-            sessionFactory.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return student;
-    }
-
-    public static StudentDao getInstance() {
-        return dao;
     }
 
 }

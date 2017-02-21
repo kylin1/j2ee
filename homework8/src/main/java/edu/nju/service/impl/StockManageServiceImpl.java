@@ -1,6 +1,5 @@
 package edu.nju.service.impl;
 
-import edu.nju.factory.DaoFactory;
 import edu.nju.service.StockManageService;
 
 import javax.servlet.RequestDispatcher;
@@ -31,7 +30,7 @@ public class StockManageServiceImpl implements StockManageService {
 
 	public List getStock()
 	{
-		return DaoFactory.getStockDao().find();
+		return null;
 				
 	}
 

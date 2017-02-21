@@ -10,4 +10,6 @@ public interface ICourseDao {
 
     Course getCourse(int id);
 
+    void save(Course course);
+
 }

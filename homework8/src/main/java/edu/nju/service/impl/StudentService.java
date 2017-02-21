@@ -1,27 +1,20 @@
 package edu.nju.service.impl;
 
 import edu.nju.dao.IStudentDao;
-import edu.nju.factory.DaoFactory;
 import edu.nju.model.Student;
 import edu.nju.service.IStudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by kylin on 19/12/2016.
  * All rights reserved.
  */
+@Service
 public class StudentService implements IStudentService{
 
+    @Autowired
     private IStudentDao dao;
-
-    private static IStudentService service = new StudentService();
-
-    public StudentService() {
-        this.dao = DaoFactory.getStudentDao();
-    }
-
-    public static IStudentService getInstance(){
-        return service;
-    }
 
     public boolean studentExists(String name) {
         Student dbStudent = dao.getStudent(name);
