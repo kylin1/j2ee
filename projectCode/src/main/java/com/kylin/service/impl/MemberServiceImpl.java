@@ -1,5 +1,6 @@
 package com.kylin.service.impl;
 
+import com.kylin.model.Member;
 import com.kylin.repository.MemberRepository;
 import com.kylin.service.MemberService;
 import com.kylin.vo.*;
@@ -20,7 +21,10 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberInfoVO getMemberInfo(int memberId) {
-        return null;
+        // get data from dao
+        Member member =this.repository.findOne(memberId);
+        // return vo to UI
+        return new MemberInfoVO(member.getId(),member.getAccount(),member.getPassword());
     }
 
     @Override
