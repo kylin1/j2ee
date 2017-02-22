@@ -34,20 +34,20 @@ public class HotelTest {
         hotel.setPassword("t4est");
         hotel.setName("tes4t");
         hotel.setLocation("test4");
-        hotel.setStatus(1);
+        hotel.setStatus(99);
 
         repository.save(hotel);
     }
 
     @Test
     public void testDelete(){
-        Hotel hotel = repository.findOne(1);
+        Hotel hotel = repository.findOne(6);
         repository.delete(hotel);
     }
 
     @Test
     public void testUpdate(){
-        Hotel hotel = repository.findOne(1);
+        Hotel hotel = repository.findOne(5);
 
         hotel.setName("new new new");
         repository.save(hotel);
