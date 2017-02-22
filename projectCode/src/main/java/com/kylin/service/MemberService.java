@@ -1,6 +1,7 @@
 package com.kylin.service;
 
 import com.kylin.vo.*;
+import com.kylin.vo.common.MyMessage;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public interface MemberService {
      * @param memberId
      * @return
      */
-    List<OrderVO> getOrderList(int memberId);
+    List<MemberOrderVO> getOrderList(int memberId);
 
     /**
      * 输入会员姓名/账号进行查询

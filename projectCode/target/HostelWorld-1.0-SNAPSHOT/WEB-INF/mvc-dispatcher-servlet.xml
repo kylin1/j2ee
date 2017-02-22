@@ -11,7 +11,7 @@
        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:property-placeholder location="classpath:META-INF/blog/db.blog.properties"/>
+    <context:property-placeholder location="classpath:META-INF/project/db.properties"/>
 
     <!--指明 com.kylin.controller 所在包，并扫描其中的注解-->
     <context:component-scan base-package="com.kylin.*"/>

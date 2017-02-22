@@ -25,10 +25,8 @@ public class TestController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public void test(){
-        Hotel hotel = repository.findOne(2);
+        Hotel hotel = repository.findOne(5);
         System.out.println(hotel.getName());
-
-        System.out.println(hotel.getApprovals().size());
     }
 
     @RequestMapping(value = "/test2", method = RequestMethod.GET)

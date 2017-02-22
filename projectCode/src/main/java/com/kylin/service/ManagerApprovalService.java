@@ -1,7 +1,7 @@
 package com.kylin.service;
 
 import com.kylin.vo.RequestVO;
-import com.kylin.vo.MyMessage;
+import com.kylin.vo.common.MyMessage;
 
 import java.util.List;
 

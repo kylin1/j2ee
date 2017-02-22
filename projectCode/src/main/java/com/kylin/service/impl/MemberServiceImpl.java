@@ -4,6 +4,7 @@ import com.kylin.model.Member;
 import com.kylin.repository.MemberRepository;
 import com.kylin.service.MemberService;
 import com.kylin.vo.*;
+import com.kylin.vo.common.MyMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<OrderVO> getOrderList(int memberId) {
+    public List<MemberOrderVO> getOrderList(int memberId) {
         return null;
     }
 
@@ -39,7 +40,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MyMessage topUp(int memberId, int amount, int score) {
-        return new MyMessage("win win win");
+        return new MyMessage(true,"win win win");
     }
 
     @Override

@@ -1,8 +1,7 @@
 package com.kylin.service;
 
-import com.kylin.vo.ReserveDetailVO;
-import com.kylin.vo.ReserveInputVO;
-import com.kylin.vo.ReserveItemVO;
+import com.kylin.vo.ReserveInputTableVO;
+import com.kylin.vo.SearchHotelItemVO;
 
 import java.util.List;
 
@@ -22,24 +21,13 @@ public interface ReserveService {
      * @param people
      * @return
      */
-    List<ReserveItemVO> search(String location, String fromDate, String endDate, int people);
-
-    /**
-     * 用户从酒店列表里面选取一个目标酒店
-     * 获取该酒店的详细信息
-     *
-     * @param hotelId
-     * @param fromDate
-     * @param endDate
-     * @return
-     */
-    ReserveDetailVO reserveDetail(int hotelId, String fromDate, String endDate);
+    List<SearchHotelItemVO> search(String location, String fromDate, String endDate, int people);
 
     /**
      * 用户输入预定信息表格完成预定
      *
-     * @param reserveInputVO
+     * @param reserveInputTableVO
      * @return
      */
-    boolean makeReservation(ReserveInputVO reserveInputVO);
+    boolean makeReservation(ReserveInputTableVO reserveInputTableVO);
 }

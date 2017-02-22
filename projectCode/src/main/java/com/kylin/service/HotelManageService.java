@@ -2,13 +2,13 @@ package com.kylin.service;
 
 import com.kylin.vo.CheckInVO;
 import com.kylin.vo.HotelPlanVO;
-import com.kylin.vo.MyMessage;
+import com.kylin.vo.common.MyMessage;
 
 /**
  * Created by kylin on 20/02/2017.
  * All rights reserved.
  */
-public interface HotelService {
+public interface HotelManageService {
 
     /**
      * 登记入住人信息

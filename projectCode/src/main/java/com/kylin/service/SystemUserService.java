@@ -1,6 +1,6 @@
 package com.kylin.service;
 
-import com.kylin.vo.MyMessage;
+import com.kylin.vo.common.MyMessage;
 
 /**
  * Created by kylin on 20/02/2017.
