@@ -1,7 +1,6 @@
 package com.kylin.service;
 
 import com.kylin.vo.MemberInfoVO;
-import com.kylin.vo.MyMessage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +12,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * All rights reserved.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/spring/j2ee-context.xml"})
-public class MemberTest {
+@ContextConfiguration(locations = {"classpath:META-INF/test/test-context.xml"})
+public class MemberServiceTest {
 
     @Autowired
     private MemberService memberService;
-
-    @Test
-    public void testOnlyService(){
-        MyMessage myMessage = memberService.topUp(1,1,1);
-        System.out.println(myMessage.getMessage());
-    }
 
     @Test
     public void testServiceToRepo(){

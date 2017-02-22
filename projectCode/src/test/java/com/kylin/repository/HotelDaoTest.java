@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * All rights reserved.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/spring/j2ee-context.xml"})
+@ContextConfiguration(locations = {"classpath:META-INF/test/test-context.xml"})
 public class HotelDaoTest {
 
     @Autowired

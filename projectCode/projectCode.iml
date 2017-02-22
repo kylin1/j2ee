@@ -30,10 +30,10 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="" />
         <datasource-mapping>
-          <factory-entry name="toThought" value="dataSource" />
+          <factory-entry name="defaultPersistenceUnit" />
           <factory-entry name="toThoughtTest" />
         </datasource-mapping>
-        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resource/META-INF/persistence.xml" />
+        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resource/META-INF/test/persistence.xml" />
       </configuration>
     </facet>
   </component>
