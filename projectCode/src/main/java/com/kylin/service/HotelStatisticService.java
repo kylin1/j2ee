@@ -1,7 +1,7 @@
 package com.kylin.service;
 
 import com.kylin.vo.HotelIncomeVO;
-import com.kylin.vo.HotelOrderVO;
+import com.kylin.vo.HotelOrderItemVO;
 import com.kylin.vo.HotelRoomStatusVO;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public interface HotelStatisticService {
      * @param hotelId
      * @return
      */
-    List<HotelOrderVO> getOrderList(int hotelId);
+    List<HotelOrderItemVO> getOrderList(int hotelId);
 
     /**
      * 每日每房间入住情况与房客信息

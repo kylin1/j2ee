@@ -130,6 +130,56 @@
         <!--2.内容-->
         <div class="content">
             <div class="container-fluid">
+                <!--当前已经发布的计划-->
+                <div class="card">
+                    <div class="card-header" data-background-color="purple">
+                        <h4 class="title">每个房间已经发布的计划</h4>
+                        <p class="category"></p>
+                    </div>
+
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                            <th>房间</th>
+                            <th>类型</th>
+                            <th>起点时间</th>
+                            <th>终点时间</th>
+                            <th>操作</th>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td>401</td>
+                                <td>标准间</td>
+                                <td>2017年02月22日</td>
+                                <td>2017年02月22日</td>
+                                <td><a href="#">取消</a>  <a href="#">延长</a></td>
+                            </tr>
+
+                            <tr>
+                                <td>402</td>
+                                <td>标准间</td>
+                                <td>2017年02月22日</td>
+                                <td>2017年02月22日</td>
+                                <td><a href="#">取消</a>  <a href="#">延长</a></td>
+                            </tr>
+
+                            <tr>
+                                <td>403</td>
+                                <td>标准间</td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td><a href="#">发布</a> </td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+                <!--发布计划-->
                 <div class="row">
                     <div class="col-md-8">
                         <div class="card">
@@ -168,39 +218,16 @@
                                                 <input type="text" id="dpd2" class="form-control">
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <!--房间类型-->
-                                    <div class="row">
-                                        <div class="col-md-1">
-                                            <label class="control-label">房间</label>
-                                        </div>
-                                        <div class="col-md-3 dropdown">
-                                            <a href="#" class="btn btn-simple dropdown-toggle" data-toggle="dropdown">
-                                                类型
-                                                <b class="caret"></b>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="#">标准间</a></li>
-                                                <li><a href="#">单人间</a></li>
-                                                <li><a href="#">套房</a></li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="col-md-1">
-                                            <label class="control-label">数目</label>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <input type="text" class="form-control" >
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
                                         <label class="col-md-2 control-label">单价(每间每晚)</label>
                                         <div class="col-md-2">
                                             <input type="text" class="form-control" >
                                         </div>
+                                    </div>
+
+
+                                    <div class="row">
+
                                     </div>
 
                                     <button type="submit" class="btn btn-primary pull-left">
