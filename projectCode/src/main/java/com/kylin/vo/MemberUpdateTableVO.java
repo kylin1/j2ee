@@ -3,8 +3,10 @@ package com.kylin.vo;
 /**
  * Created by kylin on 20/02/2017.
  * All rights reserved.
+ *
+ * 会员个人信息修改提交表格
  */
-public class MemberUpdateVO {
+public class MemberUpdateTableVO {
 
     private int id;
 
@@ -16,7 +18,7 @@ public class MemberUpdateVO {
 
     private String bankCard;
 
-    public MemberUpdateVO(int id, String name, String phone, String email, String bankCard) {
+    public MemberUpdateTableVO(int id, String name, String phone, String email, String bankCard) {
         this.id = id;
         this.name = name;
         this.phone = phone;

@@ -44,7 +44,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MyMessage updateInfo(MemberUpdateVO updateVO) {
+    public MyMessage updateInfo(MemberUpdateTableVO updateVO) {
         return null;
     }
 }

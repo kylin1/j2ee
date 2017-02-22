@@ -50,6 +50,6 @@ public interface MemberService {
      *
      * @return
      */
-    MyMessage updateInfo(MemberUpdateVO updateVO);
+    MyMessage updateInfo(MemberUpdateTableVO updateVO);
 
 }

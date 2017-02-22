@@ -11,8 +11,23 @@ import java.util.List;
  */
 public interface PaymentService {
 
-    List<PaymentVO> getAllPayment();
+    /**
+     * 没有处理的会员卡付款
+     * @return
+     */
+    List<PaymentVO> getWaitingPayment();
 
+    /**
+     * 已经结算
+     */
+    List<PaymentVO> getDonePayment();
+
+    /**
+     * 将会员卡支付结算给各店
+     *
+     * @param paymentId
+     * @return
+     */
     MyMessage settlePayment(int paymentId);
 
 }

@@ -6,6 +6,8 @@ import com.kylin.vo.myenum.RoomType;
 /**
  * Created by kylin on 22/02/2017.
  * All rights reserved.
+ *
+ * 酒店管理人员搜索空闲房间，给客户分配
  */
 public class HotelRemainRoom {
 

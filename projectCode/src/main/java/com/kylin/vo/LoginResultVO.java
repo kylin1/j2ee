@@ -5,6 +5,8 @@ import com.kylin.vo.myenum.UserType;
 /**
  * Created by kylin on 22/02/2017.
  * All rights reserved.
+ *
+ * 登录结果
  */
 public class LoginResultVO {
 

@@ -1,8 +1,8 @@
 package com.kylin.service;
 
-import com.kylin.vo.HotelStatusVO;
-import com.kylin.vo.IncomeOutcomeVO;
-import com.kylin.vo.ProfitVO;
+import com.kylin.vo.ManagerHotelStatusVO;
+import com.kylin.vo.chart.InOutcomeChartVO;
+import com.kylin.vo.chart.ProfitChartVO;
 
 import java.util.List;
 
@@ -17,20 +17,20 @@ public interface ManagerStatisticService {
      *
      * @return
      */
-    List<HotelStatusVO> getHotelRoomStatus();
+    List<ManagerHotelStatusVO> getHotelRoomStatus();
 
     /**
      * 收入/支出折线图
      *
      * @return
      */
-    IncomeOutcomeVO getIncomeOutcomeVO();
+    InOutcomeChartVO getIncomeOutcomeVO();
 
     /**
      * 利润柱状图
      *
      * @return
      */
-    ProfitVO getProfitVO();
+    ProfitChartVO getProfitVO();
 
 }

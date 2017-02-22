@@ -3,6 +3,8 @@ package com.kylin.vo;
 /**
  * Created by kylin on 22/02/2017.
  * All rights reserved.
+ *
+ * 酒店入住人员的个人信息
  */
 public class HotelGuest {
 

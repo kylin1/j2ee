@@ -7,6 +7,8 @@ import java.util.Date;
 /**
  * Created by kylin on 20/02/2017.
  * All rights reserved.
+ *
+ * 会员预定酒店登记表格
  */
 public class ReserveInputTableVO {
 

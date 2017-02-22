@@ -7,6 +7,8 @@ import java.util.List;
 /**
  * Created by kylin on 20/02/2017.
  * All rights reserved.
+ *
+ * 酒店入住登记表格
  */
 public class HotelCheckInTableVO {
 

@@ -8,6 +8,9 @@ import java.util.Date;
 /**
  * Created by kylin on 20/02/2017.
  * All rights reserved.
+ *
+ * 会员界面查看的会员卡信息
+ *
  */
 public class MemberInfoVO {
 
