@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  * All rights reserved.
  */
 @Repository
+@Transactional
 public class SelectionDao implements ISelectionDao {
 
     @Autowired
@@ -33,7 +35,7 @@ public class SelectionDao implements ISelectionDao {
             Query query = session.createQuery(hql);
             selections = query.list();
 
-            session.close();
+//            session.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

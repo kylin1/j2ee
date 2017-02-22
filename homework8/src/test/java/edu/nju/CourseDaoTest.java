@@ -21,15 +21,17 @@ public class CourseDaoTest {
 
     @Test
     public void test() {
-        Course course = courseDao.getCourse(1);
+        Course course = courseDao.getCourse(2);
         System.out.println(course.getId());
         System.out.println(course.getName());
+    }
 
-//        Course course = new Course();
-//        course.setId(102);
-//        course.setName("test");
-//
-//        courseDao.save(course);
+    @Test
+    public void save(){
+        Course course = new Course();
+        course.setId(222);
+        course.setName("test2-22");
 
+        courseDao.save(course);
     }
 }

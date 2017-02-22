@@ -4,15 +4,16 @@ import edu.nju.dao.BaseDao;
 import edu.nju.dao.ICourseDao;
 import edu.nju.model.Course;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by kylin on 19/12/2016.
  * All rights reserved.
  */
 @Repository
+@Transactional
 public class CourseDao implements ICourseDao {
 
     @Autowired
@@ -33,16 +34,12 @@ public class CourseDao implements ICourseDao {
 
         try {
             Session session = this.baseDao.getNewSession();
-
-            Transaction tx = session.beginTransaction();
             course = session.find(Course.class, id);
-            tx.commit();
-
-            session.close();
+//            session.close();
             return course;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return course;
+        return null;
     }
 }

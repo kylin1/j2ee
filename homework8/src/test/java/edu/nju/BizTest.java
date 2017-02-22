@@ -39,6 +39,14 @@ public class BizTest {
     }
 
     @Test
+    public void testSave(){
+        Course course = new Course();
+        course.setId(222);
+        course.setName("test2-22");
+
+    }
+
+    @Test
     public void testSelection() {
         List<Selection> selections = this.selectionService.getSelectionOfStudent("kylin2");
         for (Selection selection2:selections){
