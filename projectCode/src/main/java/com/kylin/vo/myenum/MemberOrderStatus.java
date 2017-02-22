@@ -19,4 +19,13 @@ public enum MemberOrderStatus {
     public String getStringStatus() {
         return stringStatus;
     }
+
+    public static MemberOrderStatus getEnum(String input) {
+        for (MemberOrderStatus type : MemberOrderStatus.values()) {
+            if (type.getStringStatus().equals(input))
+                return type;
+        }
+        return null;
+    }
+
 }

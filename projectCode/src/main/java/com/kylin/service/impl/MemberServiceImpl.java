@@ -3,8 +3,13 @@ package com.kylin.service.impl;
 import com.kylin.model.Member;
 import com.kylin.repository.MemberRepository;
 import com.kylin.service.MemberService;
-import com.kylin.vo.*;
+import com.kylin.vo.MemberInfoVO;
+import com.kylin.vo.MemberOrderVO;
+import com.kylin.vo.MemberUpdateTableVO;
+import com.kylin.vo.SearchMemberVO;
 import com.kylin.vo.common.MyMessage;
+import com.kylin.vo.myenum.MemberLevel;
+import com.kylin.vo.myenum.MemberStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +27,17 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberInfoVO getMemberInfo(int memberId) {
-        // get data from dao
-        Member member =this.repository.findOne(memberId);
-        // return vo to UI
-        return new MemberInfoVO(member.getId(),member.getAccount(),member.getPassword());
+        Member entity = this.repository.findOne(memberId);
+
+        // get enums
+        MemberStatus memberStatus = MemberStatus.getEnum(entity.getStatus());
+        MemberLevel memberLevel = MemberLevel.getEnum(entity.getLevel());
+
+        MemberInfoVO memberInfoVO = new MemberInfoVO(memberId,entity.getAccount(),
+                memberStatus,entity.getActivatedTime(),entity.getExpireTIme(),
+                entity.getConsume(),entity.getBalance(),memberLevel,entity.getScore());
+
+        return memberInfoVO;
     }
 
     @Override

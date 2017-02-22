@@ -19,4 +19,12 @@ public enum PaymentType {
     public String getStringType() {
         return stringType;
     }
+
+    public static PaymentType getEnum(String input) {
+        for (PaymentType type : PaymentType.values()) {
+            if (type.getStringType().equals(input))
+                return type;
+        }
+        return null;
+    }
 }

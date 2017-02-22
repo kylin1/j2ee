@@ -22,4 +22,12 @@ public enum HotelType {
     public String getType() {
         return type;
     }
+
+    public static HotelType getEnum(String input) {
+        for (HotelType type : HotelType.values()) {
+            if (type.getType().equals(input))
+                return type;
+        }
+        return null;
+    }
 }

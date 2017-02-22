@@ -19,4 +19,12 @@ public enum RequestType {
     public String getStringType() {
         return stringType;
     }
+
+    public static RequestType getEnum(String input) {
+        for (RequestType type : RequestType.values()) {
+            if (type.getStringType().equals(input))
+                return type;
+        }
+        return null;
+    }
 }

@@ -23,7 +23,7 @@ public class MemberServiceTest {
         MemberInfoVO vo = this.memberService.getMemberInfo(1);
         System.out.println(vo.getId());
         System.out.println(vo.getAccount());
-        System.out.println(vo.getPassword());
+        System.out.println(vo.getActivatedTime());
     }
 
 }

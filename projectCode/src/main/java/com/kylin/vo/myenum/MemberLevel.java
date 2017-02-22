@@ -20,4 +20,26 @@ public enum MemberLevel {
     public String getStringLevel() {
         return stringLevel;
     }
+
+    public static MemberLevel getEnum(String input) {
+        for (MemberLevel type : MemberLevel.values()) {
+            if (type.getStringLevel().equals(input))
+                return type;
+        }
+        return null;
+    }
+
+    public static MemberLevel getEnum(int input) {
+        switch(input) {
+            case 0:
+                return None;
+            case 1:
+                return Low;
+            case 2:
+                return Middle;
+            case 3:
+                return High;
+        }
+        return null;
+    }
 }

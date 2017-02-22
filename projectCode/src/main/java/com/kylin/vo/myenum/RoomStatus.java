@@ -21,4 +21,12 @@ public enum RoomStatus {
         return stringStatus;
     }
 
+    public static RoomStatus getEnum(String input) {
+        for (RoomStatus type : RoomStatus.values()) {
+            if (type.getType().equals(input))
+                return type;
+        }
+        return null;
+    }
+
 }

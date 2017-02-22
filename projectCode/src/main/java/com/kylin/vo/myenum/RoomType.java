@@ -18,4 +18,12 @@ public enum RoomType {
     public String getType() {
         return type;
     }
+
+    public static RoomType getEnum(String input) {
+        for (RoomType type : RoomType.values()) {
+            if (type.getType().equals(input))
+                return type;
+        }
+        return null;
+    }
 }

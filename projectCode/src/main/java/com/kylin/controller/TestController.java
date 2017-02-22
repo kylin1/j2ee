@@ -34,6 +34,5 @@ public class TestController {
         MemberInfoVO vo = this.service.getMemberInfo(1);
         System.out.println(vo.getId());
         System.out.println(vo.getAccount());
-        System.out.println(vo.getPassword());
     }
 }

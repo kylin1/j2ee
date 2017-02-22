@@ -4,7 +4,7 @@ package com.kylin.vo.myenum;
  * Created by kylin on 22/02/2017.
  * All rights reserved.
  */
-public enum  MemberStatus {
+public enum MemberStatus {
 
     NeverActivated(0),
 
@@ -20,5 +20,13 @@ public enum  MemberStatus {
 
     public Integer getStatus() {
         return status;
+    }
+
+    public static MemberStatus getEnum(int input) {
+        for (MemberStatus type : MemberStatus.values()) {
+            if (type.getStatus() == input)
+                return type;
+        }
+        return null;
     }
 }
