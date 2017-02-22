@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.1.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:property-placeholder location="classpath:META-INF/test/db.properties"/>
+    <context:property-placeholder location="classpath:META-INF/test/db.test.properties"/>
 
     <!-- 事务管理 -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
@@ -29,10 +29,11 @@
         </property>
         <property name="jpaProperties">
             <props>
-                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
-                <prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/j2eeProject</prop>
-                <prop key="hibernate.connection.username">root</prop>
-                <prop key="hibernate.connection.password">861910</prop>
+                <prop key="hibernate.connection.driver_class">${test.jdbc.driverClassName}</prop>
+                <prop key="hibernate.connection.url">${test.jdbc.url}</prop>
+                <prop key="hibernate.connection.username">${test.jdbc.username}</prop>
+                <prop key="hibernate.connection.password">${test.jdbc.password}</prop>
+
                 <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.connection.useUnicode">true</prop>
                 <prop key="hibernate.connection.characterEncoding">UTF-8</prop>
@@ -44,8 +45,7 @@
                 <prop key="connection.autoReconnectForPools">true</prop>
                 <prop key="connection.is-connection-validation-required">true</prop>
 
-                <prop key="hibernate.enable_lazy_load_no_trans">true</prop>
-
+                <!--<prop key="hibernate.enable_lazy_load_no_trans">true</prop>-->
                 <prop key="hibernate.c3p0.validate">true</prop>
                 <prop key="hibernate.connection.provider_class">org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider</prop>
                 <prop key="hibernate.c3p0.min_size">5</prop>
