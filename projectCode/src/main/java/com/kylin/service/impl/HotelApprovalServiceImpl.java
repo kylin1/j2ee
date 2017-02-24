@@ -14,8 +14,6 @@ import java.util.List;
 @Service
 public class HotelApprovalServiceImpl implements HotelApprovalService {
 
-
-
     @Override
     public MyMessage postRequest(RequestVO requestVO) {
         return null;
