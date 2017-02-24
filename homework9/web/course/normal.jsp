@@ -17,8 +17,6 @@
     <title>standard information</title>
 </head>
 
-<%--<kylin:checkLogin/>--%>
-
 <%--<kylin:checkLogin>--%>
     <%--<c:redirect url="/Login"/>--%>
 <%--</kylin:checkLogin>--%>

@@ -164,8 +164,9 @@ public class ShowServlet extends HttpServlet {
 
             //只有用户名密码正确登录才增加计数器
             if (studentService.login(login, password)) {
+                System.out.println("login correct increase = "+increase);
+
                 if (increase) {
-                    System.out.println("increase = "+increase);
                     this.increaseCounter();
                 }
 
@@ -196,6 +197,8 @@ public class ShowServlet extends HttpServlet {
         String login = request.getParameter("login");
         boolean isNormal = selectionService.isAllExamTaken(login);
 
+        System.out.println("in displayStudentInfo");
+
         try {
             //标准界面
             if (isNormal) {
@@ -220,10 +223,12 @@ public class ShowServlet extends HttpServlet {
                 request.setAttribute("classList", classList);
 
                 //界面跳转
+                System.out.println("to normal jsp");
                 context.getRequestDispatcher("/course/normal.jsp").forward(request, response);
 
                 //警告界面
             } else {
+                System.out.println("to warning jsp");
                 request.setAttribute("message", "警告:还有没有参加的考试");
                 context.getRequestDispatcher("/course/warning.jsp").forward(request, response);
             }
