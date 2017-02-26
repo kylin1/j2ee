@@ -1,5 +1,6 @@
 package com.kylin.service;
 
+import com.kylin.service.myexception.DataIntegrityException;
 import com.kylin.vo.HotelCheckInTableVO;
 import com.kylin.vo.HotelPlanInputVO;
 import com.kylin.vo.HotelPlanVO;
@@ -23,7 +24,7 @@ public interface HotelManageService {
      * @param roomType
      * @return
      */
-    List<HotelRemainRoom> hotelRoomSearch(String fromDate, String endDate, RoomType roomType);
+    List<HotelRemainRoom> hotelRoomSearch(int hotelId, String fromDate, String endDate, RoomType roomType);
 
     /**
      * 从列表中选择一个房间登记入住人信息
@@ -48,5 +49,5 @@ public interface HotelManageService {
      * @param hotelPlanInputVO
      * @return
      */
-    MyMessage makePlan(HotelPlanInputVO hotelPlanInputVO);
+    MyMessage makePlan(HotelPlanInputVO hotelPlanInputVO) throws DataIntegrityException;
 }

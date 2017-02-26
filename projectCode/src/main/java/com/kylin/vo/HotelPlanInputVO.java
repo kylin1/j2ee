@@ -13,7 +13,7 @@ public class HotelPlanInputVO {
     private int hotelId;
 
     // 房间ID
-    private int roomId;
+    private int hotelRoomId;
 
     // date info
     private Date checkInDate;
@@ -27,8 +27,8 @@ public class HotelPlanInputVO {
         return hotelId;
     }
 
-    public int getRoomId() {
-        return roomId;
+    public int getHotelRoomId() {
+        return hotelRoomId;
     }
 
     public Date getCheckInDate() {
@@ -43,9 +43,9 @@ public class HotelPlanInputVO {
         return price;
     }
 
-    public HotelPlanInputVO(int hotelId, int roomId, Date checkInDate, Date checkOutDate, int price) {
+    public HotelPlanInputVO(int hotelId, int hotelRoomId, Date checkInDate, Date checkOutDate, int price) {
         this.hotelId = hotelId;
-        this.roomId = roomId;
+        this.hotelRoomId = hotelRoomId;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.price = price;

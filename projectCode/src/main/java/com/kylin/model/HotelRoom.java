@@ -1,7 +1,6 @@
 package com.kylin.model;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * Created by kylin on 17/02/2017.
@@ -18,12 +17,6 @@ public class HotelRoom {
     private Hotel hotelByHotelId;
 
     private int type;
-
-    private Date date;
-
-    private int status;
-
-    private int price;
 
     @Id
     @Column(name = "id")
@@ -63,30 +56,4 @@ public class HotelRoom {
         this.type = type;
     }
 
-    @Column(name = "date")
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    @Column(name = "status")
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    @Column(name = "price")
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
 }

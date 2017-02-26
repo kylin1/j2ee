@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+
 /**
  * Created by kylin on 17/02/2017.
  * All rights reserved.
@@ -51,6 +53,15 @@ public class HotelDaoTest {
 
         hotel.setName("new new new");
         repository.save(hotel);
+    }
+
+    @Test
+    public void testLoc(){
+        List<Hotel> hotels = repository.findByLocation("上海");
+        System.out.println(hotels.size());
+        for (Hotel hotel:hotels){
+            System.out.println(hotel.getName());
+        }
     }
 
 }

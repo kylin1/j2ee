@@ -26,4 +26,12 @@ public enum RoomType {
         }
         return null;
     }
+
+    public static void main(String[] args) {
+        RoomType roomType = RoomType.values()[0];
+        System.out.println(roomType.getType());
+
+        RoomType roomType2 = RoomType.values()[1];
+        System.out.println(roomType2.getType());
+    }
 }
