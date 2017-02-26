@@ -1,12 +1,14 @@
 package com.kylin.repository;
 
 import com.kylin.model.HotelRoomStatus;
+import com.kylin.tools.DateHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,6 +27,18 @@ public class HotelRoomStatusTest {
         List<HotelRoomStatus> list = roomStatusRepository.findByHotelRoomIdOrderByDateDesc(1);
         for (HotelRoomStatus status: list) {
             System.out.println(status.getDate());
+        }
+    }
+
+
+    @Test
+    public void test2(){
+        Date start = DateHelper.getDate(2017,4,1);
+        Date end = DateHelper.getDate(2017,4,3);
+        List<HotelRoomStatus> list = roomStatusRepository.findByRoomAndDateAndStatus(1,start,end,0);
+        for (HotelRoomStatus status: list) {
+            System.out.println(status.getDate());
+            System.out.println(status.getStatus());
         }
     }
 }

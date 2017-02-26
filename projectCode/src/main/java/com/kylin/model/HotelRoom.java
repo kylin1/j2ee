@@ -12,11 +12,13 @@ public class HotelRoom {
 
     private int id;
 
-    private String room;
+    private String roomNumber;
 
-    private Hotel hotelByHotelId;
+    private int hotelId;
 
     private int type;
+
+    private String information;
 
     @Id
     @Column(name = "id")
@@ -28,25 +30,6 @@ public class HotelRoom {
         this.id = id;
     }
 
-    @Column(name = "room")
-    public String getRoom() {
-        return room;
-    }
-
-    public void setRoom(String room) {
-        this.room = room;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "hotelid", referencedColumnName = "id", nullable = false)
-    public Hotel getHotelByHotelId() {
-        return hotelByHotelId;
-    }
-
-    public void setHotelByHotelId(Hotel hotelByHotelId) {
-        this.hotelByHotelId = hotelByHotelId;
-    }
-
     @Column(name = "type")
     public int getType() {
         return type;
@@ -56,4 +39,30 @@ public class HotelRoom {
         this.type = type;
     }
 
+    @Column(name = "hotelId")
+    public int getHotelId() {
+        return hotelId;
+    }
+
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
+    }
+
+    @Column(name = "roomNumber")
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    @Column(name = "information")
+    public String getInformation() {
+        return information;
+    }
+
+    public void setInformation(String information) {
+        this.information = information;
+    }
 }

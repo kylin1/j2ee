@@ -1,6 +1,7 @@
 package com.kylin.tools;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,18 +14,22 @@ import java.util.List;
  */
 public class DateHelper {
 
-    public static String getDateString(Date date){
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+    public static String getDateString(Date date) {
         return dateFormat.format(date);
     }
 
-    public static Date getDate(int year, int month, int day){
+    public static Date getDate(int year, int month, int day) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(year,month-1,day);
+        calendar.set(year, month - 1, day);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
         return calendar.getTime();
     }
 
-    public static List<Date> getBetweenDates(Date startDate, Date endDate){
+    public static List<Date> getBetweenDates(Date startDate, Date endDate) {
         List<Date> result = new ArrayList<Date>();
         Calendar tempStart = Calendar.getInstance();
         tempStart.setTime(startDate);
@@ -41,14 +46,28 @@ public class DateHelper {
     public static void main(String[] args) {
         Date start = DateHelper.getDate(2017, 4, 4);
         Date end = DateHelper.getDate(2017, 4, 6);
-        List<Date> dates = DateHelper.getBetweenDates(start,end);
+        int days = DateHelper.getDaysNumber(start, end);
+        System.out.println(days);
 
-        for (Date date : dates) {
+        try {
+            Date date = DateHelper.getDate("2017-04-2");
             System.out.println(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-//        Date start = DateHelper.getDate(2017, 3, 1);
-//        Date end = DateHelper.getDate(2017, 3, 4);
-//        System.out.println(DateHelper.getDateString(start));
-//        System.out.println(DateHelper.getDateString(end));
+    }
+
+    public static Date getDate(String endDate) throws ParseException {
+        return dateFormat.parse(endDate);
+    }
+
+    //包含起点终点的天数
+    public static int getDaysNumber(Date from, Date end) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(from);
+        long time1 = cal.getTimeInMillis();
+        cal.setTime(end);
+        long time2 = cal.getTimeInMillis();
+        return (int) ((time2 - time1) / (1000 * 3600 * 24)) + 1;
     }
 }
