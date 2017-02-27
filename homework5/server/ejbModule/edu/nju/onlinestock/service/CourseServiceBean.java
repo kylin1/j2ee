@@ -1,6 +1,7 @@
 package edu.nju.onlinestock.service;
 
 import edu.nju.onlinestock.dao.CourseDao;
+import edu.nju.onlinestock.factory.EJBFactory;
 import edu.nju.onlinestock.model.Course;
 
 import javax.ejb.EJB;
@@ -13,13 +14,13 @@ import javax.ejb.Stateless;
 @Stateless
 public class CourseServiceBean implements CourseService {
 
-    @EJB
+//    @EJB
     private CourseDao dao;
 
-//    public CourseServiceBean() {
-//        this.dao = (CourseDao) EJBFactory
-//                .getEJB("ejb:/onlineStockJPAEJB/CourseDaoBean!edu.nju.onlinestock.dao.CourseDao");
-//    }
+    public CourseServiceBean() {
+        this.dao = (CourseDao) EJBFactory
+                .getEJB("ejb:/onlineStockJPAEJB/CourseDaoBean!edu.nju.onlinestock.dao.CourseDao");
+    }
 
     @Override
     public Course getCourse(int id) {

@@ -2,6 +2,7 @@ package edu.nju.onlinestock.servlets;
 
 import edu.nju.onlinestock.action.ClassInfoBean;
 import edu.nju.onlinestock.action.ClassListBean;
+import edu.nju.onlinestock.factory.EJBFactory;
 import edu.nju.onlinestock.model.Course;
 import edu.nju.onlinestock.model.Selection;
 import edu.nju.onlinestock.service.CourseService;
@@ -24,28 +25,28 @@ import java.util.List;
 @WebServlet("/show")
 public class ShowServlet extends HttpServlet {
 
-    @EJB
+//    @EJB
     private StudentService studentService;
 
-    @EJB
+//    @EJB
     private SelectionService selectionService;
 
-    @EJB
+//    @EJB
     private CourseService courseService;
 
     private static final long serialVersionUID = 1L;
 
-//    public void init() throws ServletException {
-//    	System.out.println("sadofihsadihfjoash hello init");
-//    	 this.studentService = (StudentService) EJBFactory
-//     			.getEJB("ejb:/onlineStockJPAEJB/StudentServiceBean!edu.nju.onlinestock.service.StudentService");
-//
-//         this.selectionService = (SelectionService) EJBFactory
-//     			.getEJB("ejb:/onlineStockJPAEJB/SelectionServiceBean!edu.nju.onlinestock.service.SelectionService");
-//
-//         this.courseService = (CourseService) EJBFactory
-//     			.getEJB("ejb:/onlineStockJPAEJB/CourseServiceBean!edu.nju.onlinestock.service.CourseService");
-//    }
+    public void init() throws ServletException {
+    	System.out.println("sadofihsadihfjoash hello init");
+    	 this.studentService = (StudentService) EJBFactory
+     			.getEJB("ejb:/onlineStockJPAEJB/StudentServiceBean!edu.nju.onlinestock.service.StudentService");
+
+         this.selectionService = (SelectionService) EJBFactory
+     			.getEJB("ejb:/onlineStockJPAEJB/SelectionServiceBean!edu.nju.onlinestock.service.SelectionService");
+
+         this.courseService = (CourseService) EJBFactory
+     			.getEJB("ejb:/onlineStockJPAEJB/CourseServiceBean!edu.nju.onlinestock.service.CourseService");
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

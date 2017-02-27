@@ -22,6 +22,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="/usr/local/wildfly-10.1.0.Final/bin/client/jboss-client.jar"/>
-	<classpathentry kind="lib" path="lib/onlineStockJPAEJB.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

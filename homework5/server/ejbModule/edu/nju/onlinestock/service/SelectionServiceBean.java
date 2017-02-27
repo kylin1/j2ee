@@ -2,6 +2,7 @@ package edu.nju.onlinestock.service;
 
 import edu.nju.onlinestock.dao.SelectionDao;
 import edu.nju.onlinestock.dao.StudentDao;
+import edu.nju.onlinestock.factory.EJBFactory;
 import edu.nju.onlinestock.model.Selection;
 import edu.nju.onlinestock.model.Student;
 
@@ -16,18 +17,18 @@ import java.util.List;
 @Stateless
 public class SelectionServiceBean implements SelectionService {
 
-    @EJB
+//    @EJB
     private SelectionDao dao;
 
-    @EJB
+//    @EJB
     private StudentDao studentDao;
 //
-//    public SelectionServiceBean() {
-//        this.dao = (SelectionDao) EJBFactory
-//                .getEJB("ejb:/onlineStockJPAEJB/SelectionDaoBean!edu.nju.onlinestock.dao.SelectionDao");
-//        this.studentDao = (StudentDao) EJBFactory
-//                .getEJB("ejb:/onlineStockJPAEJB/StudentDaoBean!edu.nju.onlinestock.dao.StudentDao");
-//    }
+    public SelectionServiceBean() {
+        this.dao = (SelectionDao) EJBFactory
+                .getEJB("ejb:/onlineStockJPAEJB/SelectionDaoBean!edu.nju.onlinestock.dao.SelectionDao");
+        this.studentDao = (StudentDao) EJBFactory
+                .getEJB("ejb:/onlineStockJPAEJB/StudentDaoBean!edu.nju.onlinestock.dao.StudentDao");
+    }
 
     /**
      * 判断一个学生是否参加了所有的测验
