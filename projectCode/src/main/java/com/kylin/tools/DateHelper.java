@@ -29,6 +29,15 @@ public class DateHelper {
         return calendar.getTime();
     }
 
+    public static Date setTimeToZero(Date date){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        return calendar.getTime();
+    }
+
     public static List<Date> getBetweenDates(Date startDate, Date endDate) {
         List<Date> result = new ArrayList<Date>();
         Calendar tempStart = Calendar.getInstance();
@@ -61,7 +70,7 @@ public class DateHelper {
         return dateFormat.parse(endDate);
     }
 
-    //包含起点终点的天数
+    //包含起点终点的天数 4.4-4.6 含有三天
     public static int getDaysNumber(Date from, Date end) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(from);

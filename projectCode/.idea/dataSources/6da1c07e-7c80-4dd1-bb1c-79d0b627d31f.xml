@@ -194,7 +194,7 @@
     </column>
     <column id="62" parent="22" name="date">
       <Position>3</Position>
-      <DataType>datetime|0</DataType>
+      <DataType>date|0</DataType>
     </column>
     <column id="63" parent="22" name="status">
       <Position>4</Position>
@@ -259,11 +259,11 @@
     </column>
     <column id="76" parent="24" name="activatedTime">
       <Position>8</Position>
-      <DataType>date|0</DataType>
+      <DataType>datetime|0</DataType>
     </column>
     <column id="77" parent="24" name="expireTime">
       <Position>9</Position>
-      <DataType>date|0</DataType>
+      <DataType>datetime|0</DataType>
     </column>
     <column id="78" parent="24" name="consume">
       <Position>10</Position>
@@ -307,7 +307,7 @@
     </column>
     <column id="85" parent="25" name="time">
       <Position>4</Position>
-      <DataType>date|0</DataType>
+      <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="86" parent="25" name="price">
@@ -404,7 +404,7 @@
     </column>
     <column id="106" parent="28" name="orderTime">
       <Position>4</Position>
-      <DataType>date|0</DataType>
+      <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="107" parent="28" name="checkIn">

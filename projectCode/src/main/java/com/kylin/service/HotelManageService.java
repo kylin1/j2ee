@@ -1,5 +1,6 @@
 package com.kylin.service;
 
+import com.kylin.service.myexception.BadInputException;
 import com.kylin.service.myexception.DataIntegrityException;
 import com.kylin.vo.HotelCheckInTableVO;
 import com.kylin.vo.HotelPlanInputVO;
@@ -32,7 +33,7 @@ public interface HotelManageService {
      * @param hotelCheckInTableVO
      * @return
      */
-    MyMessage customCheckIn(HotelCheckInTableVO hotelCheckInTableVO);
+    MyMessage customCheckIn(HotelCheckInTableVO hotelCheckInTableVO) throws BadInputException;
 
     /**
      * 得到酒店已经发布的计划

@@ -32,10 +32,17 @@ public enum RoomType {
     }
 
     public static void main(String[] args) {
-        RoomType roomType = RoomType.values()[0];
-        System.out.println(roomType.getType());
+        RoomType roomType = RoomType.StandardRoom;
+        System.out.println(roomType.getPeople());
+    }
 
-        RoomType roomType2 = RoomType.values()[1];
-        System.out.println(roomType2.getType());
+    public int getPeople() {
+        if(this.getType().equals(RoomType.SingleRoom.getType()))
+            return 1;
+        else if(this.getType().equals(RoomType.StandardRoom.getType()))
+            return 2;
+        else if(this.getType().equals(RoomType.Suite.getType()))
+            return 2;
+        return 0;
     }
 }

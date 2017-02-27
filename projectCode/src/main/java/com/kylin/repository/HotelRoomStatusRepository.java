@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Date;
 
 /**
  * Created by kylin on 26/02/2017.
@@ -17,11 +17,12 @@ public interface HotelRoomStatusRepository extends JpaRepository<HotelRoomStatus
     @Query("select h from HotelRoomStatus h where h.hotelRoomId = :hotelRoomId order by h.date desc")
     List<HotelRoomStatus> findByHotelRoomIdOrderByDateDesc(@Param("hotelRoomId") int hotelRoomId);
 
+    //包含末尾哪一天的查询,4.1-4,3 返回 4.1 4.2 4.3 3天
     @Query("select h from HotelRoomStatus h where h.hotelRoomId = :hotelRoomId " +
-            "and h.date >= :startDate and h.date <= :endDate and h.status= :status ")
+            "and h.date between :startDate and :endDate and h.status= :status")
     List<HotelRoomStatus> findByRoomAndDateAndStatus(@Param("hotelRoomId") int hotelRoomId,
-                                                     @Param("startDate")Date startDate,
-                                                     @Param("endDate")Date endDate,
-                                                     @Param("status")int status);
+                                                     @Param("startDate") Date startDate,
+                                                     @Param("endDate") Date endDate,
+                                                     @Param("status") int status);
 
 }

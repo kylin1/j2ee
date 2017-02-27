@@ -27,8 +27,8 @@ public class UserOrder {
     private String contactPhone;
 
     private int status;
-    private int isMember;
-    private int isCash;
+    private Integer isMember;
+    private Integer isCash;
 
     @Id
     @Column(name = "id")
@@ -142,20 +142,20 @@ public class UserOrder {
     }
 
     @Column(name = "isMember")
-    public int getIsMember() {
+    public Integer getIsMember() {
         return isMember;
     }
 
-    public void setIsMember(int isMember) {
+    public void setIsMember(Integer isMember) {
         this.isMember = isMember;
     }
 
     @Column(name = "isCash")
-    public int getIsCash() {
+    public Integer getIsCash() {
         return isCash;
     }
 
-    public void setIsCash(int isCash) {
+    public void setIsCash(Integer isCash) {
         this.isCash = isCash;
     }
 }

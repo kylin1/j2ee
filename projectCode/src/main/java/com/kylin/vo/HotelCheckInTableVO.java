@@ -14,10 +14,10 @@ public class HotelCheckInTableVO {
 
     private int hotelId;
 
-    private int roomId;
+    private int orderId;
 
     // 房间入住人信息
-    private List<HotelGuest> hotelGuestList;
+    private List<HotelRoomCheckIn> hotelRoomCheckInList;
 
     // 是否会员
     private boolean isMember;
@@ -25,10 +25,10 @@ public class HotelCheckInTableVO {
     // 付款方式
     private PaymentType paymentType;
 
-    public HotelCheckInTableVO(int hotelId, int roomId, List<HotelGuest> hotelGuestList, boolean isMember, PaymentType paymentType) {
+    public HotelCheckInTableVO(int hotelId, int orderId, List<HotelRoomCheckIn> hotelRoomCheckInList, boolean isMember, PaymentType paymentType) {
         this.hotelId = hotelId;
-        this.roomId = roomId;
-        this.hotelGuestList = hotelGuestList;
+        this.orderId = orderId;
+        this.hotelRoomCheckInList = hotelRoomCheckInList;
         this.isMember = isMember;
         this.paymentType = paymentType;
     }
@@ -37,12 +37,12 @@ public class HotelCheckInTableVO {
         return hotelId;
     }
 
-    public int getRoomId() {
-        return roomId;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public List<HotelGuest> getHotelGuestList() {
-        return hotelGuestList;
+    public List<HotelRoomCheckIn> getHotelRoomCheckInList() {
+        return hotelRoomCheckInList;
     }
 
     public boolean isMember() {

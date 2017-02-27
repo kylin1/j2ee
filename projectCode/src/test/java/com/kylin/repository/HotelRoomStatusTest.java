@@ -1,6 +1,7 @@
 package com.kylin.repository;
 
 import com.kylin.model.HotelRoomStatus;
+import com.kylin.model.UserOrder;
 import com.kylin.tools.DateHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,9 @@ public class HotelRoomStatusTest {
     @Autowired
     private HotelRoomStatusRepository roomStatusRepository;
 
+    @Autowired
+    private OrderRepository orderRepository;
+
     @Test
     public void test(){
         List<HotelRoomStatus> list = roomStatusRepository.findByHotelRoomIdOrderByDateDesc(1);
@@ -34,8 +38,26 @@ public class HotelRoomStatusTest {
     @Test
     public void test2(){
         Date start = DateHelper.getDate(2017,4,1);
-        Date end = DateHelper.getDate(2017,4,3);
-        List<HotelRoomStatus> list = roomStatusRepository.findByRoomAndDateAndStatus(1,start,end,0);
+        Date end = DateHelper.getDate(2017,4,2);
+        System.out.println(start);
+        System.out.println(end);
+        List<HotelRoomStatus> list = roomStatusRepository.findByRoomAndDateAndStatus(
+                1,start,end,0);
+        for (HotelRoomStatus status: list) {
+            System.out.println(status.getDate());
+            System.out.println(status.getStatus());
+        }
+    }
+
+    @Test
+    public void test3(){
+        UserOrder order = this.orderRepository.findOne(1);
+        Date start = DateHelper.setTimeToZero(order.getCheckIn());
+        Date end = DateHelper.setTimeToZero(order.getCheckOut());
+        System.out.println(start);
+        System.out.println(end);
+        List<HotelRoomStatus> list = roomStatusRepository.findByRoomAndDateAndStatus(
+                1,start,end,0);
         for (HotelRoomStatus status: list) {
             System.out.println(status.getDate());
             System.out.println(status.getStatus());
