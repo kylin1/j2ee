@@ -14,6 +14,7 @@ public class RemainRoomInfo {
 
     private int remainNumber;
 
+    // 最低价格
     private int pricePerNight;
 
     public RemainRoomInfo(RoomType roomType, int remainNumber, int pricePerNight) {
@@ -32,6 +33,16 @@ public class RemainRoomInfo {
 
     public int getPricePerNight() {
         return pricePerNight;
+    }
+
+    public void increaseNumber() {
+        this.remainNumber++;
+    }
+
+    public void calculatePrice(int price) {
+        //如果新的价格比当前的低,则修改最低价格
+        if(price < this.pricePerNight)
+            this.pricePerNight = price;
     }
 }
 

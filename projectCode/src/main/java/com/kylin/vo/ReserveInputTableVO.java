@@ -12,6 +12,8 @@ import java.util.Date;
  */
 public class ReserveInputTableVO {
 
+    private int userId;
+
     private int hotelId;
 
     // date info
@@ -34,7 +36,8 @@ public class ReserveInputTableVO {
     // price
     private int totalPrice;
 
-    public ReserveInputTableVO(int hotelId, Date checkInDate, Date checkOutDate, RoomType roomType, int roomNumber, String contactPersonName, String contactPhone, String contactEmail, int totalPrice) {
+    public ReserveInputTableVO(int userId, int hotelId, Date checkInDate, Date checkOutDate, RoomType roomType, int roomNumber, String contactPersonName, String contactPhone, String contactEmail, int totalPrice) {
+        this.userId = userId;
         this.hotelId = hotelId;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
@@ -44,6 +47,10 @@ public class ReserveInputTableVO {
         this.contactPhone = contactPhone;
         this.contactEmail = contactEmail;
         this.totalPrice = totalPrice;
+    }
+
+    public int getUserId() {
+        return userId;
     }
 
     public int getHotelId() {

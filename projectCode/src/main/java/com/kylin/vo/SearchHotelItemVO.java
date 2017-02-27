@@ -29,7 +29,7 @@ public class SearchHotelItemVO {
 
     private int lowestPerNightPrice;
 
-    // remain room
+    // 一个符合条件的酒店 remain room
     private List<RemainRoomInfo> remainRoomNumber;
 
     public SearchHotelItemVO(Date checkInDate, Date checkOutDate, int hotelId, String hotelName, HotelType hotelType, String hotelAddress, int lowestPerNightPrice, List<RemainRoomInfo> remainRoomNumber) {

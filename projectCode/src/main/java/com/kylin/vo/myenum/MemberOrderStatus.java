@@ -6,9 +6,10 @@ package com.kylin.vo.myenum;
  */
 public enum MemberOrderStatus {
 
-    Compelete("已成交"),
-    Processing("正在处理"),
-    Cancled("已取消");
+    Canceled("已取消"),
+    Reserved("预定但未入住"),
+    CheckedIn("已入住");
+
 
     private String stringStatus;
 

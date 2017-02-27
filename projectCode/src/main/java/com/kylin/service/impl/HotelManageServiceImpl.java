@@ -1,29 +1,20 @@
 package com.kylin.service.impl;
 
-import com.kylin.model.HotelRoom;
-import com.kylin.model.HotelRoomStatus;
-import com.kylin.model.RoomGuest;
-import com.kylin.model.UserOrder;
-import com.kylin.repository.HotelRoomRepository;
-import com.kylin.repository.HotelRoomStatusRepository;
-import com.kylin.repository.OrderRepository;
-import com.kylin.repository.RoomGuestRepository;
+import com.kylin.model.*;
+import com.kylin.repository.*;
 import com.kylin.service.HotelManageService;
 import com.kylin.service.myexception.BadInputException;
 import com.kylin.service.myexception.DataIntegrityException;
 import com.kylin.tools.DateHelper;
 import com.kylin.vo.*;
 import com.kylin.vo.common.MyMessage;
-import com.kylin.vo.myenum.PaymentType;
-import com.kylin.vo.myenum.RoomStatus;
-import com.kylin.vo.myenum.RoomType;
+import com.kylin.vo.myenum.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by kylin on 22/02/2017.
@@ -33,22 +24,171 @@ import java.util.List;
 public class HotelManageServiceImpl implements HotelManageService {
 
     @Autowired
+    private HotelRepository hotelRepository;
+    @Autowired
     private HotelRoomRepository hotelRoomRepository;
-
     @Autowired
     private HotelRoomStatusRepository roomStatusRepository;
-
     @Autowired
     private OrderRepository orderRepository;
-
     @Autowired
     private HotelRoomRepository roomRepository;
-
     @Autowired
     private RoomGuestRepository guestRepository;
+    @Autowired
+    private MemberRepository memberRepository;
 
     @Override
-    public List<HotelRemainRoom> hotelRoomSearch(int hotelId, String fromDate, String endDate, RoomType roomType) {
+    public List<SearchHotelItemVO> search(String location, String fromDate, String endDate,
+                                          int roomTypeInt, int roomNumber) {
+        List<SearchHotelItemVO> result = new ArrayList<>();
+        try {
+            Date checkInDate = DateHelper.getDate(fromDate);
+            Date checkOutDate = DateHelper.getDate(endDate);
+
+            // find by location
+            List<Hotel> hotelList = this.hotelRepository.findByLocation(location);
+            RoomType roomType = RoomType.getEnum(roomTypeInt);
+
+            // find by date and people
+            for (Hotel hotel : hotelList) {
+                // 酒店剩余房间信息
+                List<HotelRemainRoom> remainRooms =
+                        this.emptyRoomSearch(hotel.getId(), fromDate, endDate, roomType);
+                // 还有足够的剩余房间
+                if (remainRooms.size() >= roomNumber) {
+                    // 一个酒店剩余房间的信息
+                    SearchHotelItemVO vo = this.getRemainInfo(hotel, checkInDate, checkOutDate, remainRooms);
+                    result.add(vo);
+                }
+                //否则这个酒店剩余的房间不够,继续检查下一个
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * 一个酒店剩余房间的信息
+     *
+     * @param hotel        酒店
+     * @param checkInDate  时间
+     * @param checkOutDate 时间
+     * @param remainRooms  剩余房间信息列表
+     * @return
+     */
+    private SearchHotelItemVO getRemainInfo(Hotel hotel, Date checkInDate, Date checkOutDate,
+                                            List<HotelRemainRoom> remainRooms) {
+        int lowestPerNightPrice = Integer.MAX_VALUE;
+        List<RemainRoomInfo> roomResult = new ArrayList<>();
+
+        // 初始化每一个类型
+        Map<RoomType, RemainRoomInfo> typeAndNumber = new HashMap<>();
+        for (RoomType oneType : RoomType.values()) {
+            RemainRoomInfo remainRoomInfo = new RemainRoomInfo(oneType, 0, Integer.MAX_VALUE);
+            typeAndNumber.put(oneType, remainRoomInfo);
+        }
+
+        // 对每一个空余的房间信息
+        for (HotelRemainRoom room : remainRooms) {
+            int roomId = room.getRoomId();
+            RoomType roomType = room.getType();
+            // 一个区域的房价以checkIn当天价格为准
+            int price = this.roomStatusRepository.getPriceByRoomIdAndDate(roomId, checkInDate);
+
+            //修改返回的搜索结果
+            RemainRoomInfo oldInfo = typeAndNumber.get(roomType);
+            oldInfo.increaseNumber();
+            oldInfo.calculatePrice(price);
+        }
+
+        //将每种房间的信息返回
+        roomResult.addAll(typeAndNumber.values());
+
+        return new SearchHotelItemVO(checkInDate, checkOutDate, hotel.getId(),
+                hotel.getName(), HotelType.getEnum(hotel.getType()), hotel.getLocation(),
+                lowestPerNightPrice, roomResult);
+    }
+
+    @Override
+    public boolean makeReservation(ReserveInputTableVO inputVO) {
+        // 保存用户订单信息
+        Hotel hotel = this.hotelRepository.findOne(inputVO.getHotelId());
+        this.saveOrder(inputVO, hotel);
+
+        // get input info
+        Date checkIn = inputVO.getCheckInDate();
+        Date checkOut = inputVO.getCheckOutDate();
+        RoomType roomType = inputVO.getRoomType();
+        int roomNumber = inputVO.getRoomNumber();
+
+        // TODO 缓存技术
+        // 找到当前酒店所有在指定日期/指定类型的,空闲的房间,例如有10个
+        List<HotelRemainRoom> remainRooms = this.emptyRoomSearch(hotel.getId(),
+                DateHelper.getDateString(checkIn), DateHelper.getDateString(checkOut), roomType);
+
+        // 取出用户要求数量的房间数目,例如用户只要两个
+        for (int i = 0; i < roomNumber; i++) {
+            HotelRemainRoom remainRoom = remainRooms.get(i);
+            int roomId = remainRoom.getRoomId();
+            int roomState = RoomStatus.Empty.ordinal();
+
+            // 得到这个房间的信息
+            List<HotelRoomStatus> roomStatusList = this.roomStatusRepository.findByRoomAndDateAndStatus
+                    (roomId, checkIn, checkOut, roomState);
+
+            // 更新每一天房间的状态为被预定,防止被别人重复预定
+            int targetState = RoomStatus.Reserved.ordinal();
+            for (HotelRoomStatus roomStatus : roomStatusList) {
+                roomStatus.setStatus(targetState);
+                this.roomStatusRepository.save(roomStatus);
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * 保存用户的输入订单信息
+     *
+     * @param inputVO
+     * @param hotel
+     */
+    private void saveOrder(ReserveInputTableVO inputVO, Hotel hotel) {
+        UserOrder userOrder = new UserOrder();
+        Member member = this.memberRepository.findOne(inputVO.getUserId());
+        userOrder.setUserByUserId(member);
+
+        userOrder.setHotelByHotelId(hotel);
+
+        //时间信息
+        Date checkIn = inputVO.getCheckInDate();
+        Date checkOut = inputVO.getCheckOutDate();
+        userOrder.setCheckIn(checkIn);
+        userOrder.setCheckOut(checkOut);
+        userOrder.setOrderTime(new Date());
+
+        //房间信息
+        RoomType roomType = inputVO.getRoomType();
+        userOrder.setRoomType(roomType.ordinal());
+        int roomNumber = inputVO.getRoomNumber();
+        userOrder.setRoomNumber(roomNumber);
+        userOrder.setPrice(inputVO.getTotalPrice());
+
+        //联系人信息
+        userOrder.setContactName(inputVO.getContactPersonName());
+        userOrder.setContactPhone(inputVO.getContactPhone());
+        userOrder.setContactEmail(inputVO.getContactEmail());
+
+        userOrder.setStatus(MemberOrderStatus.Reserved.ordinal());
+        //保存
+        this.orderRepository.save(userOrder);
+    }
+
+    @Override
+    // 此方法找到,一个酒店的,指定房间类型,在起点-终点日期内为空闲的所有空余信息
+    public List<HotelRemainRoom> emptyRoomSearch(int hotelId, String fromDate, String endDate, RoomType roomType) {
         // get all room of this hotel
         List<HotelRoom> hotelRoomIdList = this.hotelRoomRepository.findByHotelId(hotelId);
         List<HotelRemainRoom> result = new ArrayList<>();
@@ -62,9 +202,12 @@ public class HotelManageServiceImpl implements HotelManageService {
             for (HotelRoom room : hotelRoomIdList) {
                 // every target type room between these dates
                 if (room.getType() == roomType.ordinal()) {
+                    // 找的是空闲的房间
+                    int roomState = RoomStatus.Empty.ordinal();
                     List<HotelRoomStatus> roomStatusList = this.roomStatusRepository.findByRoomAndDateAndStatus
-                            (room.getId(), from, end, RoomStatus.Empty.ordinal());
-                    // 房间必须在所有这些天数里面都是空闲的
+                            (room.getId(), from, end, roomState);
+
+                    // 房间必须在所有这些天数里面,包含起点终点,都是空闲的
                     if (roomStatusList.size() == dayNumber) {
                         //发现一个符合要求的房间
                         HotelRemainRoom remainRoom = new HotelRemainRoom(room.getId(),
@@ -92,13 +235,24 @@ public class HotelManageServiceImpl implements HotelManageService {
         boolean isMember = hotelCheckInTableVO.isMember();
         PaymentType paymentType = hotelCheckInTableVO.getPaymentType();
 
-        // check if input is valid
+        // 检查输入的房间信息是否和订单信息匹配
+        UserOrder order = orderRepository.findOne(orderId);
+        int orderedRoomNum = order.getRoomNumber();
+        int inputRoomNum = hotelRoomCheckInList.size();
+        if (orderedRoomNum != inputRoomNum)
+            throw new BadInputException("订单预定了 " + orderedRoomNum + " 个房间, 但是输入了" + inputRoomNum + " 个房间,不匹配.");
+
+        // 检查订单状态
+        if (order.getStatus() != MemberOrderStatus.Reserved.ordinal())
+            throw new BadInputException("订单id=" + order.getStatus()+"状态不正确:");
+
+        // 检查输入的房间-客户信息是否与酒店的房间符合
         this.hotelRoomCheck(hotelId, hotelRoomCheckInList);
 
         // update the order
-        UserOrder order = orderRepository.findOne(orderId);
-        this.changeOrderState(order, isMember, paymentType);
+        this.updateOrder(order, isMember, paymentType);
 
+        // TODO bug 预定两个房间,先修改了第一个,第二个不符合条件则产生异常,但是第一个已经修改了
         for (HotelRoomCheckIn roomCheckIn : hotelRoomCheckInList) {
             // update remain room status
             this.updateRoomStatus(order, roomCheckIn);
@@ -122,26 +276,23 @@ public class HotelManageServiceImpl implements HotelManageService {
         // order date
         Date checkIn = order.getCheckIn();
         Date checkOut = order.getCheckOut();
+        int orderDayNumber = DateHelper.getDaysNumber(checkIn, checkOut);
         // target room
         int roomId = roomCheckIn.getRoomId();
 
-        // 得到这个目标房间在输入的日期里面的状态
+        // 得到这个目标房间在输入的日期,且状态是已预定但未入住的列表
+        int reservedState = RoomStatus.Reserved.ordinal();
         List<HotelRoomStatus> statusList = this.roomStatusRepository.findByRoomAndDateAndStatus(
-                roomId, checkIn, checkOut, RoomStatus.Empty.ordinal());
-        // 如果没有计划,则报错
-        if (statusList.isEmpty())
+                roomId, checkIn, checkOut, reservedState);
+
+        // 如果日期数目不匹配,则报错
+        if (statusList.size() != orderDayNumber)
             throw new BadInputException("房间 roomId=" + roomId +
                     " 在日期 " + DateHelper.getDateString(checkIn) +
-                    " 到日期 " + DateHelper.getDateString(checkOut) + " 没有空闲计划");
+                    " 到日期 " + DateHelper.getDateString(checkOut) + " 没有已预定但未入住的");
 
         for (HotelRoomStatus roomStatus : statusList) {
-            // if the room is not empty
-            if (roomStatus.getStatus() != RoomStatus.Empty.ordinal())
-                throw new BadInputException("房间 " + roomStatus.getHotelRoomId() + " 在日期 " +
-                        DateHelper.getDateString(roomStatus.getDate()) + " 不是空闲的");
-                // 原来是空闲的,现在改为已经入住
-            else
-                roomStatus.setStatus(RoomStatus.Occupied.ordinal());
+            roomStatus.setStatus(RoomStatus.CheckedIn.ordinal());
             // 更新数据
             this.roomStatusRepository.save(roomStatus);
         }
@@ -177,7 +328,8 @@ public class HotelManageServiceImpl implements HotelManageService {
      * @param isMember    是否会员
      * @param paymentType 付款方式
      */
-    private void changeOrderState(UserOrder order, boolean isMember, PaymentType paymentType) {
+    private void updateOrder(UserOrder order, boolean isMember, PaymentType paymentType) {
+
         // set order is from member
         if (isMember)
             order.setIsMember(1);
@@ -188,6 +340,9 @@ public class HotelManageServiceImpl implements HotelManageService {
             order.setIsCash(1);
         else
             order.setIsCash(0);
+        // 设置状态为已经入住
+        order.setStatus(MemberOrderStatus.CheckedIn.ordinal());
+
         this.orderRepository.save(order);
     }
 
@@ -273,7 +428,7 @@ public class HotelManageServiceImpl implements HotelManageService {
                 throw new DataIntegrityException("计划冲突！已有的计划结束日期:" + DateHelper.getDateString(latestDate) + "" +
                         "输入的计划开始日期:" + DateHelper.getDateString(checkInDate));
             }
-        }
+        } // 当前没有计划
 
         // set room is available between these days
         List<Date> dates = DateHelper.getBetweenDates(checkInDate, checkOutDate);

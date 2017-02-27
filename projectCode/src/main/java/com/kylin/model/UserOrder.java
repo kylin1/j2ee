@@ -25,6 +25,7 @@ public class UserOrder {
 
     private String contactName;
     private String contactPhone;
+    private String contactEmail;
 
     private int status;
     private Integer isMember;
@@ -157,5 +158,14 @@ public class UserOrder {
 
     public void setIsCash(Integer isCash) {
         this.isCash = isCash;
+    }
+
+    @Column(name = "contactEmail")
+    public String getContactEmail() {
+        return contactEmail;
+    }
+
+    public void setContactEmail(String contactEmail) {
+        this.contactEmail = contactEmail;
     }
 }

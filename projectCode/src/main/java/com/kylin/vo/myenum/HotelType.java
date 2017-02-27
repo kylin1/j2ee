@@ -6,12 +6,12 @@ package com.kylin.vo.myenum;
  */
 public enum HotelType {
 
-    FiveStar("五星级酒店"),
-    FourStar("四星级酒店"),
-    ThreeStar("三星级酒店"),
-    TwoStar("二星级酒店"),
+    ChainHotel("快捷连锁酒店"),
     OneStar("一星级酒店"),
-    ChainHotel("快捷连锁酒店");
+    TwoStar("二星级酒店"),
+    ThreeStar("三星级酒店"),
+    FourStar("四星级酒店"),
+    FiveStar("五星级酒店");
 
     private String type;
 
@@ -29,5 +29,9 @@ public enum HotelType {
                 return type;
         }
         return null;
+    }
+
+    public static HotelType getEnum(int input) {
+        return HotelType.values()[input];
     }
 }

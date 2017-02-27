@@ -7,9 +7,9 @@ package com.kylin.vo.myenum;
 public enum RoomStatus {
 
     Empty("空闲"),
-    Occupied("已入住"),
-    Cleaning("正在打扫"),
-    NotAvailable("装修/审批");
+    Reserved("预定但未入住"),
+    CheckedIn("已入住"),
+    NotAvailable("不可用:装修/审批");
 
     private String stringStatus;
 

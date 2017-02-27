@@ -63,4 +63,12 @@ public class HotelRoomStatusTest {
             System.out.println(status.getStatus());
         }
     }
+
+    @Test
+    public void testPrice(){
+        Date start = DateHelper.getDate(2017,4,1);
+        int roomId = 3;
+        int x = this.roomStatusRepository.getPriceByRoomIdAndDate(roomId,start);
+        System.out.println(x);
+    }
 }

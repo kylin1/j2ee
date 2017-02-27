@@ -25,4 +25,9 @@ public interface HotelRoomStatusRepository extends JpaRepository<HotelRoomStatus
                                                      @Param("endDate") Date endDate,
                                                      @Param("status") int status);
 
+    @Query("select h.price from HotelRoomStatus h where h.hotelRoomId = :hotelRoomId" +
+            " and h.date = :date ")
+    int getPriceByRoomIdAndDate(@Param("hotelRoomId") int hotelRoomId,
+                                @Param("date") Date date);
+
 }

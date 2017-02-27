@@ -49,25 +49,12 @@ public class DateHelper {
             result.add(tempStart.getTime());
             tempStart.add(Calendar.DAY_OF_YEAR, 1);
         }
+        result.add(endDate);
         return result;
     }
 
-    public static void main(String[] args) {
-        Date start = DateHelper.getDate(2017, 4, 4);
-        Date end = DateHelper.getDate(2017, 4, 6);
-        int days = DateHelper.getDaysNumber(start, end);
-        System.out.println(days);
-
-        try {
-            Date date = DateHelper.getDate("2017-04-2");
-            System.out.println(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static Date getDate(String endDate) throws ParseException {
-        return dateFormat.parse(endDate);
+    public static Date getDate(String stringDate) throws ParseException {
+        return dateFormat.parse(stringDate);
     }
 
     //包含起点终点的天数 4.4-4.6 含有三天

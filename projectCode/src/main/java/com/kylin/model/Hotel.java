@@ -23,6 +23,8 @@ public class Hotel {
 
     private int status;
 
+    private int type;
+
     //一个酒店可以发出多个申请
     private Collection<Approval> approvals;
 
@@ -88,5 +90,14 @@ public class Hotel {
 
     public void setApprovals(Collection<Approval> approvals) {
         this.approvals = approvals;
+    }
+
+    @Column(name = "type")
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }
