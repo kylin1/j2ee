@@ -26,7 +26,7 @@
     <table class="table table-bordered table-striped">
         <tr>
             <th>ID</th>
-            <td>${user.id}</td>
+            <td>${user.memberId}</td>
         </tr>
         <tr>
             <th>Nickname</th>

@@ -12,7 +12,7 @@ import java.util.Date;
 public class RoomGuest {
 
     private int id;
-    private MemberOrder orderByOrderId;
+    private int orderId;
     private Date date;
     private HotelRoom roomByRoomId;
 
@@ -29,14 +29,13 @@ public class RoomGuest {
         this.id = id;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "orderid", referencedColumnName = "id", nullable = false)
-    public MemberOrder getOrderByOrderId() {
-        return orderByOrderId;
+    @Column(name = "orderId")
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setOrderByOrderId(MemberOrder orderByOrderId) {
-        this.orderByOrderId = orderByOrderId;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     @Column(name = "date")

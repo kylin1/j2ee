@@ -157,9 +157,9 @@ public class HotelManageServiceImpl implements HotelManageService {
     private void saveOrder(ReserveInputTableVO inputVO, Hotel hotel) {
         MemberOrder memberOrder = new MemberOrder();
         Member member = this.memberRepository.findOne(inputVO.getUserId());
-        memberOrder.setUserByMemberId(member);
+        memberOrder.setMemberId(member.getId());
 
-        memberOrder.setHotelByHotelId(hotel);
+        memberOrder.setHotelId(hotel.getId());
 
         //时间信息
         Date checkIn = inputVO.getCheckInDate();
@@ -311,7 +311,7 @@ public class HotelManageServiceImpl implements HotelManageService {
         roomGuest.setName(guestCheckIn.getName());
         roomGuest.setIdNum(guestCheckIn.getIDNum());
         // order foreign key
-        roomGuest.setOrderByOrderId(order);
+        roomGuest.setOrderId(order.getId());
         // room foreign key
         HotelRoom room = roomRepository.findOne(roomCheckIn.getRoomId());
         roomGuest.setRoomByRoomId(room);

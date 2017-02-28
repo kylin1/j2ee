@@ -12,8 +12,8 @@ import java.util.Date;
 public class MemberOrder {
 
     private int id;
-    private Member userByMemberId;
-    private Hotel hotelByHotelId;
+    private int memberId;
+    private int hotelId;
 
     private Date orderTime;
     private Date checkIn;
@@ -41,24 +41,22 @@ public class MemberOrder {
         this.id = id;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "memberId", referencedColumnName = "id", nullable = false)
-    public Member getUserByMemberId() {
-        return userByMemberId;
+    @Column(name = "memberId")
+    public int getMemberId() {
+        return memberId;
     }
 
-    public void setUserByMemberId(Member userByUserId) {
-        this.userByMemberId = userByUserId;
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "hotelid", referencedColumnName = "id", nullable = false)
-    public Hotel getHotelByHotelId() {
-        return hotelByHotelId;
+    @Column(name = "hotelId")
+    public int getHotelId() {
+        return hotelId;
     }
 
-    public void setHotelByHotelId(Hotel hotelByHotelId) {
-        this.hotelByHotelId = hotelByHotelId;
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
     }
 
     @Column(name = "orderTime")

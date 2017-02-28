@@ -28,36 +28,36 @@
     <form:form action="/admin/blogs/updateP" method="post" commandName="blogP" role="form">
         <div class="form-group">
             <label for="title">Title:</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title:" value="${blog.title}"/>
+            <input type="text" class="form-control" memberId="title" name="title" placeholder="Enter Title:" value="${blog.title}"/>
         </div>
         <div class="form-group">
             <%--根据博客里面包含的用户信息，显示指定的作者被选择--%>
-            <label for="userByUserId.id">Author:</label>
-            <select class="form-control" id="userByUserId.id" name="userByUserId.id">
+            <label for="userByUserId.memberId">Author:</label>
+            <select class="form-control" memberId="userByUserId.memberId" name="userByUserId.memberId">
                 <c:forEach items="${userList}" var="user">
                     <%--如果这个BOLG作者发现--%>
-                    <c:if test="${user.id==blog.userByUserId.id}">
-                        <option value="${user.id}" selected="selected">${user.nickname}, ${user.firstName} ${user.lastName}</option>
+                    <c:if test="${user.memberId==blog.userByUserId.memberId}">
+                        <option value="${user.memberId}" selected="selected">${user.nickname}, ${user.firstName} ${user.lastName}</option>
                     </c:if>
                     <%--如果不是--%>
-                    <c:if test="${user.id!=blog.userByUserId.id}">
-                        <option value="${user.id}">${user.nickname}, ${user.firstName} ${user.lastName}</option>
+                    <c:if test="${user.memberId!=blog.userByUserId.memberId}">
+                        <option value="${user.memberId}">${user.nickname}, ${user.firstName} ${user.lastName}</option>
                     </c:if>
                 </c:forEach>
             </select>
         </div>
         <div class="form-group">
             <label for="content">Content:</label>
-            <textarea class="form-control" id="content" name="content" rows="3"
+            <textarea class="form-control" memberId="content" name="content" rows="3"
                       placeholder="Please Input Content">${blog.content}</textarea>
         </div>
         <div class="form-group">
             <label for="pubDate">Publish Date:</label>
-            <input type="date" class="form-control" id="pubDate" name="pubDate"
+            <input type="date" class="form-control" memberId="pubDate" name="pubDate"
                    value="<fmt:formatDate value="${blog.pubDate }" pattern="yyyy-MM-dd"/>"/>
         </div>
-        <!-- 把 id 一并写入 blogP 中 -->
-        <input type="hidden" id="id" name="id" value="${blog.id}"/>
+        <!-- 把 memberId 一并写入 blogP 中 -->
+        <input type="hidden" memberId="memberId" name="memberId" value="${blog.memberId}"/>
         <div class="form-group">
             <button type="submit" class="btn btn-sm btn-success">提交</button>
         </div>

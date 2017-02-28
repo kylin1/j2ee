@@ -19,4 +19,7 @@ public interface HotelRepository extends JpaRepository<Hotel, Integer> {
     List<Hotel> findByLocation(@Param("address") String address);
 
     Hotel findByUserId(int userId);
+
+    @Query("select h.name from Hotel h where h.id = :id")
+    String findNameById(@Param("id")int id);
 }

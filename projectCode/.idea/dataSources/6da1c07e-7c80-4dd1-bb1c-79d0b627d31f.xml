@@ -262,180 +262,189 @@
       <DataType>int(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="76" parent="22" name="userId">
+    <column id="76" parent="22" name="name">
+      <Position>15</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <index id="77" parent="22" name="userId">
       <ColNames>userId</ColNames>
     </index>
-    <column id="77" parent="23" name="id">
+    <column id="78" parent="23" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="78" parent="23" name="memberid">
+    <column id="79" parent="23" name="memberid">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="79" parent="23" name="hotelid">
+    <column id="80" parent="23" name="hotelid">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="80" parent="23" name="orderTime">
+    <column id="81" parent="23" name="orderTime">
       <Position>4</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="81" parent="23" name="checkIn">
+    <column id="82" parent="23" name="checkIn">
       <Position>5</Position>
       <DataType>date|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="82" parent="23" name="checkOut">
+    <column id="83" parent="23" name="checkOut">
       <Position>6</Position>
       <DataType>date|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="83" parent="23" name="roomType">
+    <column id="84" parent="23" name="roomType">
       <Position>7</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="84" parent="23" name="roomNumber">
+    <column id="85" parent="23" name="roomNumber">
       <Position>8</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="85" parent="23" name="price">
+    <column id="86" parent="23" name="price">
       <Position>9</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="86" parent="23" name="contactName">
+    <column id="87" parent="23" name="contactName">
       <Position>10</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="87" parent="23" name="contactPhone">
+    <column id="88" parent="23" name="contactPhone">
       <Position>11</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="88" parent="23" name="status">
+    <column id="89" parent="23" name="status">
       <Position>12</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="89" parent="23" name="isMember">
+    <column id="90" parent="23" name="isMember">
       <Position>13</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="90" parent="23" name="isCash">
+    <column id="91" parent="23" name="isCash">
       <Position>14</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="91" parent="23" name="contactEmail">
+    <column id="92" parent="23" name="contactEmail">
       <Position>15</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <index id="92" parent="23" name="fk_order">
+    <index id="93" parent="23" name="fk_order">
       <ColNames>memberid</ColNames>
     </index>
-    <index id="93" parent="23" name="fk_order_1">
+    <index id="94" parent="23" name="fk_order_1">
       <ColNames>hotelid</ColNames>
     </index>
-    <column id="94" parent="24" name="id">
+    <column id="95" parent="24" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="95" parent="24" name="hotelid">
+    <column id="96" parent="24" name="hotelid">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="96" parent="24" name="userid">
+    <column id="97" parent="24" name="userid">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="97" parent="24" name="time">
+    <column id="98" parent="24" name="time">
       <Position>4</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="98" parent="24" name="price">
+    <column id="99" parent="24" name="price">
       <Position>5</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="99" parent="24" name="status">
+    <column id="100" parent="24" name="status">
       <Position>6</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="100" parent="24" name="fk_payment">
+    <column id="101" parent="24" name="memberid">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="102" parent="24" name="fk_payment">
       <ColNames>hotelid</ColNames>
     </index>
-    <index id="101" parent="24" name="fk_payment_1">
-      <ColNames>userid</ColNames>
+    <index id="103" parent="24" name="fk_payment_1">
+      <ColNames>memberid</ColNames>
     </index>
-    <column id="102" parent="25" name="id">
+    <column id="104" parent="25" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="103" parent="25" name="orderid">
+    <column id="105" parent="25" name="orderid">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="104" parent="25" name="date">
+    <column id="106" parent="25" name="date">
       <Position>3</Position>
       <DataType>date|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="105" parent="25" name="roomid">
+    <column id="107" parent="25" name="roomid">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="106" parent="25" name="name">
+    <column id="108" parent="25" name="name">
       <Position>5</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="107" parent="25" name="idNum">
+    <column id="109" parent="25" name="idNum">
       <Position>6</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="108" parent="25" name="fk_room_guest">
+    <index id="110" parent="25" name="fk_room_guest">
       <ColNames>orderid</ColNames>
     </index>
-    <index id="109" parent="25" name="fk_room_guest_1">
+    <index id="111" parent="25" name="fk_room_guest_1">
       <ColNames>roomid</ColNames>
     </index>
-    <column id="110" parent="26" name="id">
+    <column id="112" parent="26" name="id">
       <Position>1</Position>
       <DataType>int(255)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="111" parent="26" name="account">
+    <column id="113" parent="26" name="account">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="112" parent="26" name="password">
+    <column id="114" parent="26" name="password">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="113" parent="26" name="type">
+    <column id="115" parent="26" name="type">
       <Position>4</Position>
       <DataType>int(255)|0</DataType>
       <NotNull>1</NotNull>

@@ -40,7 +40,7 @@ public class RoomGuestDaoTest {
 
         MemberOrder order = orderRepository.findOne(1);
         HotelRoom room = roomRepository.findOne(1);
-        roomGuest.setOrderByOrderId(order);
+        roomGuest.setOrderId(order.getId());
         roomGuest.setRoomByRoomId(room);
 
         this.repository.save(roomGuest);

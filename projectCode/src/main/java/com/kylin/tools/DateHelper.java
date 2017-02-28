@@ -66,4 +66,12 @@ public class DateHelper {
         long time2 = cal.getTimeInMillis();
         return (int) ((time2 - time1) / (1000 * 3600 * 24)) + 1;
     }
+
+    //在旧的日期上面增加/减去日期
+    public static Date addDate(Date date, int days) {
+        Calendar inputC = Calendar.getInstance();
+        inputC.setTime(date);
+        inputC.add(Calendar.DAY_OF_YEAR,days);
+        return inputC.getTime();
+    }
 }

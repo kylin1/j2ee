@@ -29,4 +29,7 @@ public enum MemberOrderStatus {
         return null;
     }
 
+    public static MemberOrderStatus getEnum(int status) {
+        return MemberOrderStatus.values()[status];
+    }
 }

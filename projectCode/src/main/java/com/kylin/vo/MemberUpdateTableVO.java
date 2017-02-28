@@ -8,7 +8,7 @@ package com.kylin.vo;
  */
 public class MemberUpdateTableVO {
 
-    private int id;
+    private int memberId;
 
     private String name;
 
@@ -18,16 +18,16 @@ public class MemberUpdateTableVO {
 
     private String bankCard;
 
-    public MemberUpdateTableVO(int id, String name, String phone, String email, String bankCard) {
-        this.id = id;
+    public MemberUpdateTableVO(int memberId, String name, String phone, String email, String bankCard) {
+        this.memberId = memberId;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.bankCard = bankCard;
     }
 
-    public int getId() {
-        return id;
+    public int getMemberId() {
+        return memberId;
     }
 
     public String getName() {

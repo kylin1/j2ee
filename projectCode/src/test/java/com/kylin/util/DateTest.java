@@ -30,7 +30,14 @@ public class DateTest {
         for(Date date:dates){
             System.out.println(date);
         }
+    }
 
+    @Test
+    public void testAdd(){
+        Date old = new Date();
+        Date newx = DateHelper.addDate(old,365);
+        System.out.println(old);
+        System.out.println(newx);
     }
 
 }

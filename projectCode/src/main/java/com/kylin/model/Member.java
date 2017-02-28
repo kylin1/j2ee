@@ -16,6 +16,7 @@ public class Member {
 
     private int id;
 
+    private String name;
     private String phone;
     private String email;
     private int status;
@@ -39,6 +40,15 @@ public class Member {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Column(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Column(name = "phone")
