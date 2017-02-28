@@ -1,8 +1,10 @@
 package com.kylin.service.impl;
 
+import com.kylin.repository.ApprovalRepository;
 import com.kylin.service.HotelApprovalService;
 import com.kylin.vo.RequestVO;
 import com.kylin.vo.common.MyMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +15,9 @@ import java.util.List;
  */
 @Service
 public class HotelApprovalServiceImpl implements HotelApprovalService {
+
+    @Autowired
+    private ApprovalRepository repository;
 
     @Override
     public MyMessage postRequest(RequestVO requestVO) {

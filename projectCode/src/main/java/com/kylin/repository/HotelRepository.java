@@ -2,6 +2,7 @@ package com.kylin.repository;
 
 
 import com.kylin.model.Hotel;
+import com.kylin.model.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,4 +18,5 @@ public interface HotelRepository extends JpaRepository<Hotel, Integer> {
     @Query("select h from Hotel h where h.location like %:address%")
     List<Hotel> findByLocation(@Param("address") String address);
 
+    Hotel findByUserId(int userId);
 }

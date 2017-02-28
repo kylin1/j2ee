@@ -13,10 +13,6 @@ public class Hotel {
 
     private int id;
 
-    private String account;
-
-    private String password;
-
     private String name;
 
     private String location;
@@ -27,6 +23,7 @@ public class Hotel {
 
     //一个酒店可以发出多个申请
     private Collection<Approval> approvals;
+    private int userId;
 
     @Id
     @Column(name = "ID")public int getId() {
@@ -35,24 +32,6 @@ public class Hotel {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    @Column(name = "account")
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    @Column(name = "password")
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getName() {
@@ -99,5 +78,14 @@ public class Hotel {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    @Column(name = "userId")
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

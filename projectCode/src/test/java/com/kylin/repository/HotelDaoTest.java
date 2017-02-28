@@ -35,8 +35,6 @@ public class HotelDaoTest {
     @Test
     public void testInsert(){
         Hotel hotel = new Hotel();
-        hotel.setAccount("te4st");
-        hotel.setPassword("t4est");
         hotel.setName("tes4t");
         hotel.setLocation("test4");
         hotel.setStatus(99);

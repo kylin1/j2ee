@@ -1,6 +1,6 @@
 package com.kylin.vo;
 
-import com.kylin.vo.myenum.UserType;
+import com.kylin.vo.myenum.SystemUserType;
 
 /**
  * Created by kylin on 22/02/2017.
@@ -10,30 +10,21 @@ import com.kylin.vo.myenum.UserType;
  */
 public class LoginResultVO {
 
+    private int userID;
+
     // user type
-    private UserType userType;
+    private SystemUserType userType;
 
-    // whether user log in success
-    private boolean isPass;
-
-    // user not exists / password not corrent etc.
-    private String message;
-
-    public LoginResultVO(UserType userType, boolean isPass, String message) {
+    public LoginResultVO(int userID, SystemUserType userType) {
+        this.userID = userID;
         this.userType = userType;
-        this.isPass = isPass;
-        this.message = message;
     }
 
-    public UserType getUserType() {
+    public int getUserID() {
+        return userID;
+    }
+
+    public SystemUserType getUserType() {
         return userType;
-    }
-
-    public boolean isPass() {
-        return isPass;
-    }
-
-    public String getMessage() {
-        return message;
     }
 }

@@ -33,7 +33,7 @@ public class MemberServiceImpl implements MemberService {
         MemberStatus memberStatus = MemberStatus.getEnum(entity.getStatus());
         MemberLevel memberLevel = MemberLevel.getEnum(entity.getLevel());
 
-        MemberInfoVO memberInfoVO = new MemberInfoVO(memberId,entity.getAccount(),
+        MemberInfoVO memberInfoVO = new MemberInfoVO(memberId,
                 memberStatus,entity.getActivatedTime(),entity.getExpireTIme(),
                 entity.getConsume(),entity.getBalance(),memberLevel,entity.getScore());
 

@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/test/test-context.xml"})
-public class ManagerApprovalServiceTest {
+public class SystemUserApprovalServiceTest {
 
     @Autowired
     private ManagerApprovalService service;

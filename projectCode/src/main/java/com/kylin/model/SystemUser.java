@@ -10,14 +10,16 @@ import javax.persistence.Table;
  * All rights reserved.
  */
 @Entity
-@Table(name = "manager")
-public class Manager {
+@Table(name = "system_user")
+public class SystemUser {
 
     private int id;
 
     private String account;
 
     private String password;
+
+    private int type;
 
     @Id
     @Column(name = "id")
@@ -45,5 +47,14 @@ public class Manager {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Column(name = "type")
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

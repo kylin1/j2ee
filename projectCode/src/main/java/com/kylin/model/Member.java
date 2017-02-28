@@ -15,8 +15,6 @@ import java.util.Date;
 public class Member {
 
     private int id;
-    private String account;
-    private String password;
 
     private String phone;
     private String email;
@@ -31,6 +29,8 @@ public class Member {
     private int level;
     private int score;
 
+    private int userId;
+
     @Id
     @Column(name = "id")
     public int getId() {
@@ -39,24 +39,6 @@ public class Member {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    @Column(name = "account")
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    @Column(name = "password")
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     @Column(name = "phone")
@@ -147,5 +129,14 @@ public class Member {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    @Column(name = "userId")
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }
