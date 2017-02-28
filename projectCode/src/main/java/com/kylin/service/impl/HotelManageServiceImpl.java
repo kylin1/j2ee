@@ -155,34 +155,34 @@ public class HotelManageServiceImpl implements HotelManageService {
      * @param hotel
      */
     private void saveOrder(ReserveInputTableVO inputVO, Hotel hotel) {
-        UserOrder userOrder = new UserOrder();
+        MemberOrder memberOrder = new MemberOrder();
         Member member = this.memberRepository.findOne(inputVO.getUserId());
-        userOrder.setUserByUserId(member);
+        memberOrder.setUserByMemberId(member);
 
-        userOrder.setHotelByHotelId(hotel);
+        memberOrder.setHotelByHotelId(hotel);
 
         //时间信息
         Date checkIn = inputVO.getCheckInDate();
         Date checkOut = inputVO.getCheckOutDate();
-        userOrder.setCheckIn(checkIn);
-        userOrder.setCheckOut(checkOut);
-        userOrder.setOrderTime(new Date());
+        memberOrder.setCheckIn(checkIn);
+        memberOrder.setCheckOut(checkOut);
+        memberOrder.setOrderTime(new Date());
 
         //房间信息
         RoomType roomType = inputVO.getRoomType();
-        userOrder.setRoomType(roomType.ordinal());
+        memberOrder.setRoomType(roomType.ordinal());
         int roomNumber = inputVO.getRoomNumber();
-        userOrder.setRoomNumber(roomNumber);
-        userOrder.setPrice(inputVO.getTotalPrice());
+        memberOrder.setRoomNumber(roomNumber);
+        memberOrder.setPrice(inputVO.getTotalPrice());
 
         //联系人信息
-        userOrder.setContactName(inputVO.getContactPersonName());
-        userOrder.setContactPhone(inputVO.getContactPhone());
-        userOrder.setContactEmail(inputVO.getContactEmail());
+        memberOrder.setContactName(inputVO.getContactPersonName());
+        memberOrder.setContactPhone(inputVO.getContactPhone());
+        memberOrder.setContactEmail(inputVO.getContactEmail());
 
-        userOrder.setStatus(MemberOrderStatus.Reserved.ordinal());
+        memberOrder.setStatus(MemberOrderStatus.Reserved.ordinal());
         //保存
-        this.orderRepository.save(userOrder);
+        this.orderRepository.save(memberOrder);
     }
 
     @Override
@@ -235,7 +235,7 @@ public class HotelManageServiceImpl implements HotelManageService {
         PaymentType paymentType = hotelCheckInTableVO.getPaymentType();
 
         // 检查输入的房间信息是否和订单信息匹配
-        UserOrder order = orderRepository.findOne(orderId);
+        MemberOrder order = orderRepository.findOne(orderId);
         int orderedRoomNum = order.getRoomNumber();
         int inputRoomNum = hotelRoomCheckInList.size();
         if (orderedRoomNum != inputRoomNum)
@@ -271,7 +271,7 @@ public class HotelManageServiceImpl implements HotelManageService {
      * @param roomCheckIn 房间入住信息
      * @throws BadInputException 如果入住的目标房间不是空闲的则报错误
      */
-    private void updateRoomStatus(UserOrder order, HotelRoomCheckIn roomCheckIn) throws BadInputException {
+    private void updateRoomStatus(MemberOrder order, HotelRoomCheckIn roomCheckIn) throws BadInputException {
         // order date
         Date checkIn = order.getCheckIn();
         Date checkOut = order.getCheckOut();
@@ -304,7 +304,7 @@ public class HotelManageServiceImpl implements HotelManageService {
      * @param order        房客属于的订单信息
      * @param roomCheckIn  一个房间
      */
-    private void registerGuest(HotelGuestCheckIn guestCheckIn, UserOrder order, HotelRoomCheckIn roomCheckIn) {
+    private void registerGuest(HotelGuestCheckIn guestCheckIn, MemberOrder order, HotelRoomCheckIn roomCheckIn) {
         RoomGuest roomGuest = new RoomGuest();
         // set guest info
         roomGuest.setDate(new Date());
@@ -327,7 +327,7 @@ public class HotelManageServiceImpl implements HotelManageService {
      * @param isMember    是否会员
      * @param paymentType 付款方式
      */
-    private void updateOrder(UserOrder order, boolean isMember, PaymentType paymentType) {
+    private void updateOrder(MemberOrder order, boolean isMember, PaymentType paymentType) {
 
         // set order is from member
         if (isMember)

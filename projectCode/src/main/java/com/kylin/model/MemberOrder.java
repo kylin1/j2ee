@@ -8,11 +8,11 @@ import java.util.Date;
  * All rights reserved.
  */
 @Entity
-@Table(name = "user_order")
-public class UserOrder {
+@Table(name = "member_order")
+public class MemberOrder {
 
     private int id;
-    private Member userByUserId;
+    private Member userByMemberId;
     private Hotel hotelByHotelId;
 
     private Date orderTime;
@@ -42,13 +42,13 @@ public class UserOrder {
     }
 
     @ManyToOne
-    @JoinColumn(name = "userid", referencedColumnName = "id", nullable = false)
-    public Member getUserByUserId() {
-        return userByUserId;
+    @JoinColumn(name = "memberId", referencedColumnName = "id", nullable = false)
+    public Member getUserByMemberId() {
+        return userByMemberId;
     }
 
-    public void setUserByUserId(Member userByUserId) {
-        this.userByUserId = userByUserId;
+    public void setUserByMemberId(Member userByUserId) {
+        this.userByMemberId = userByUserId;
     }
 
     @ManyToOne

@@ -2,7 +2,7 @@ package com.kylin.repository;
 
 import com.kylin.model.HotelRoom;
 import com.kylin.model.RoomGuest;
-import com.kylin.model.UserOrder;
+import com.kylin.model.MemberOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class RoomGuestDaoTest {
         roomGuest.setName("kylin");
         roomGuest.setIdNum("320322");
 
-        UserOrder order = orderRepository.findOne(1);
+        MemberOrder order = orderRepository.findOne(1);
         HotelRoom room = roomRepository.findOne(1);
         roomGuest.setOrderByOrderId(order);
         roomGuest.setRoomByRoomId(room);

@@ -1,7 +1,7 @@
 package com.kylin.repository;
 
 import com.kylin.model.HotelRoomStatus;
-import com.kylin.model.UserOrder;
+import com.kylin.model.MemberOrder;
 import com.kylin.tools.DateHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,7 +51,7 @@ public class HotelRoomStatusTest {
 
     @Test
     public void test3(){
-        UserOrder order = this.orderRepository.findOne(1);
+        MemberOrder order = this.orderRepository.findOne(1);
         Date start = DateHelper.setTimeToZero(order.getCheckIn());
         Date end = DateHelper.setTimeToZero(order.getCheckOut());
         System.out.println(start);
