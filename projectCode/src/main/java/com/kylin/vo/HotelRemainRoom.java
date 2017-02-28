@@ -1,7 +1,7 @@
 package com.kylin.vo;
 
-import com.kylin.vo.myenum.RoomStatus;
-import com.kylin.vo.myenum.RoomType;
+import com.kylin.tools.myenum.RoomStatus;
+import com.kylin.tools.myenum.RoomType;
 
 /**
  * Created by kylin on 22/02/2017.

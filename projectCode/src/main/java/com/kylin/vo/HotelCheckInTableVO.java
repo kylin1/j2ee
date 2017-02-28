@@ -1,6 +1,6 @@
 package com.kylin.vo;
 
-import com.kylin.vo.myenum.PaymentType;
+import com.kylin.tools.myenum.PaymentType;
 
 import java.util.List;
 

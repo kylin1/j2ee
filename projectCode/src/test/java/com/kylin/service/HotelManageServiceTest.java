@@ -1,11 +1,11 @@
 package com.kylin.service;
 
-import com.kylin.service.myexception.BadInputException;
-import com.kylin.service.myexception.DataIntegrityException;
+import com.kylin.tools.myexception.BadInputException;
+import com.kylin.tools.myexception.DataIntegrityException;
 import com.kylin.tools.DateHelper;
 import com.kylin.vo.*;
-import com.kylin.vo.myenum.PaymentType;
-import com.kylin.vo.myenum.RoomType;
+import com.kylin.tools.myenum.PaymentType;
+import com.kylin.tools.myenum.RoomType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

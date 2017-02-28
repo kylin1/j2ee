@@ -1,6 +1,6 @@
 package com.kylin.vo;
 
-import com.kylin.vo.myenum.RoomType;
+import com.kylin.tools.myenum.RoomType;
 
 import java.util.Date;
 

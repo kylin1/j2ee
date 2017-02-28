@@ -8,8 +8,8 @@ import com.kylin.vo.MemberOrderVO;
 import com.kylin.vo.MemberUpdateTableVO;
 import com.kylin.vo.SearchMemberVO;
 import com.kylin.vo.common.MyMessage;
-import com.kylin.vo.myenum.MemberLevel;
-import com.kylin.vo.myenum.MemberStatus;
+import com.kylin.tools.myenum.MemberLevel;
+import com.kylin.tools.myenum.MemberStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

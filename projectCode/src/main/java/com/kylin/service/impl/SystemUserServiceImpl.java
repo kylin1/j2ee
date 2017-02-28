@@ -3,11 +3,11 @@ package com.kylin.service.impl;
 import com.kylin.model.SystemUser;
 import com.kylin.repository.SystemUserRepository;
 import com.kylin.service.SystemUserService;
-import com.kylin.service.myexception.BadInputException;
-import com.kylin.service.myexception.NotFoundException;
+import com.kylin.tools.myexception.BadInputException;
+import com.kylin.tools.myexception.NotFoundException;
 import com.kylin.vo.LoginResultVO;
 import com.kylin.vo.common.MyMessage;
-import com.kylin.vo.myenum.SystemUserType;
+import com.kylin.tools.myenum.SystemUserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

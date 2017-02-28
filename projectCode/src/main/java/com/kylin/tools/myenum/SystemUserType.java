@@ -1,4 +1,4 @@
-package com.kylin.vo.myenum;
+package com.kylin.tools.myenum;
 
 /**
  * Created by kylin on 28/02/2017.

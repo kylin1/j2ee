@@ -1,6 +1,6 @@
 package com.kylin.vo;
 
-import com.kylin.vo.myenum.MemberOrderStatus;
+import com.kylin.tools.myenum.MemberOrderStatus;
 
 import java.util.Date;
 import java.util.List;

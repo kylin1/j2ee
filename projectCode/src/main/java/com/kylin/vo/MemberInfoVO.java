@@ -1,7 +1,7 @@
 package com.kylin.vo;
 
-import com.kylin.vo.myenum.MemberLevel;
-import com.kylin.vo.myenum.MemberStatus;
+import com.kylin.tools.myenum.MemberLevel;
+import com.kylin.tools.myenum.MemberStatus;
 
 import java.util.Date;
 

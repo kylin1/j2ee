@@ -1,6 +1,6 @@
 package com.kylin.vo;
 
-import com.kylin.vo.myenum.HotelType;
+import com.kylin.tools.myenum.HotelType;
 
 import java.util.Date;
 import java.util.List;

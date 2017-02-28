@@ -1,7 +1,7 @@
 package com.kylin.vo;
 
-import com.kylin.vo.myenum.RequestStatus;
-import com.kylin.vo.myenum.RequestType;
+import com.kylin.tools.myenum.RequestStatus;
+import com.kylin.tools.myenum.RequestType;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package com.kylin.service.myexception;
+package com.kylin.tools.myexception;
 
 /**
  * Created by kylin on 27/02/2017.

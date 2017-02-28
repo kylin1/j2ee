@@ -1,10 +1,10 @@
 package com.kylin.service;
 
-import com.kylin.service.myexception.BadInputException;
-import com.kylin.service.myexception.NotFoundException;
+import com.kylin.tools.myexception.BadInputException;
+import com.kylin.tools.myexception.NotFoundException;
 import com.kylin.vo.LoginResultVO;
 import com.kylin.vo.common.MyMessage;
-import com.kylin.vo.myenum.SystemUserType;
+import com.kylin.tools.myenum.SystemUserType;
 
 /**
  * Created by kylin on 20/02/2017.

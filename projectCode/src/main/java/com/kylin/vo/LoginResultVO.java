@@ -1,6 +1,6 @@
 package com.kylin.vo;
 
-import com.kylin.vo.myenum.SystemUserType;
+import com.kylin.tools.myenum.SystemUserType;
 
 /**
  * Created by kylin on 22/02/2017.

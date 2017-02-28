@@ -1,18 +1,18 @@
-package com.kylin.vo.myenum;
+package com.kylin.tools.myenum;
 
 /**
  * Created by kylin on 22/02/2017.
  * All rights reserved.
  */
-public enum PaymentType {
+public enum RequestType {
 
-    MemberBalance("会员卡"),
-    Cash("现金结账"),
+    OpenHotel("开店申请"),
+    Management("修改信息"),
     Other("其他");
 
     private String stringType;
 
-    PaymentType(String stringType) {
+    RequestType(String stringType) {
         this.stringType = stringType;
     }
 
@@ -20,8 +20,8 @@ public enum PaymentType {
         return stringType;
     }
 
-    public static PaymentType getEnum(String input) {
-        for (PaymentType type : PaymentType.values()) {
+    public static RequestType getEnum(String input) {
+        for (RequestType type : RequestType.values()) {
             if (type.getStringType().equals(input))
                 return type;
         }
