@@ -1,4 +1,4 @@
-package edu.nju.servlets;
+package edu.nju.action;
 
 import edu.nju.action.business.ClassInfoBean;
 import edu.nju.action.business.ClassListBean;
@@ -7,55 +7,36 @@ import edu.nju.model.Selection;
 import edu.nju.service.ICourseService;
 import edu.nju.service.ISelectionService;
 import edu.nju.service.IStudentService;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by zhouxiaofan on 2016/12/8.
- */
-@WebServlet("/show")
-public class ShowServlet extends HttpServlet {
+import static org.apache.struts2.ServletActionContext.getServletContext;
 
+/**
+ * Created by kylin on 28/02/2017.
+ * All rights reserved.
+ */
+public class ShowAction extends BaseAction {
+
+    @Autowired
     private IStudentService studentService;
 
+    @Autowired
     private ISelectionService selectionService;
 
+    @Autowired
     private ICourseService courseService;
 
-    private static final long serialVersionUID = 1L;
+    public String execute() throws IOException {
 
-    public void init() throws ServletException {
-        super.init();
-        ApplicationContext appliationContext =
-                new ClassPathXmlApplicationContext("applicationContext.xml");
-
-        // get service bean
-        this.studentService = (IStudentService) appliationContext.getBean("IStudentService");
-        this.selectionService = (ISelectionService) appliationContext.getBean("ISelectionService");
-        this.courseService = (ICourseService) appliationContext.getBean("ICourseService");
-    }
-
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    protected void doGet(HttpServletRequest req, HttpServletResponse res)
-            throws ServletException, IOException {
-        processRequest(req, res);
-    }
-
-    private void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
         //使用cookie记录用户ID进行预填充
         Cookie cookie = null;
         boolean cookieFound = false;
@@ -115,13 +96,13 @@ public class ShowServlet extends HttpServlet {
                 request.setAttribute("login", loginValue);
 
                 //展示信息
-                this.displayPage(request, response, true);
+                return this.displayPage(request, response, true);
 
                 //请求里面没有login这个参数,说明访问的直接是show,强迫用户转到登录状态
             } else {
                 System.out.println("loginValue = " + loginValue + " session null, redirect to login page");
                 // Display the login page. If the cookie exists, set login
-                response.sendRedirect(request.getContextPath() + "/Login");
+                return "login";
             }
 
             // session is not null, 用户已经登录, 刷新show界面
@@ -133,9 +114,11 @@ public class ShowServlet extends HttpServlet {
             request.setAttribute("login", loginValue);
 
             //展示信息
-            this.displayPage(request, response, false);
+            return this.displayPage(request, response, false);
         }
+
     }
+
 
     /**
      * 展示信息界面
@@ -144,41 +127,34 @@ public class ShowServlet extends HttpServlet {
      * @param response
      * @throws IOException
      */
-    private void displayPage(HttpServletRequest request, HttpServletResponse response, boolean increase) throws IOException {
-        System.out.println("displayPage increase"+increase);
+    private String displayPage(HttpServletRequest request, HttpServletResponse response,
+                               boolean increase) throws IOException {
+        System.out.println("displayPage increase" + increase);
         //获取参数
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         System.out.println("in display login=" + login + ", pass=" + password);
 
-        ServletContext context = getServletContext();
+        //未知的学生(账号不存在),错误界面
+        if (!studentService.studentExists(login)) {
+            System.out.println("账号不存在");
+            request.setAttribute("message", "账号不存在");
+            return "warning";
+        }
 
-        try {
+        //只有用户名密码正确登录才增加计数器
+        if (studentService.login(login, password)) {
+            System.out.println("login correct increase = " + increase);
 
-            //未知的学生(账号不存在),错误界面
-            if (!studentService.studentExists(login)) {
-                System.out.println("账号不存在");
-                request.setAttribute("message", "账号不存在");
-                context.getRequestDispatcher("/course/warning.jsp").forward(request, response);
+            if (increase) {
+                this.increaseCounter();
             }
 
-            //只有用户名密码正确登录才增加计数器
-            if (studentService.login(login, password)) {
-                System.out.println("login correct increase = "+increase);
-
-                if (increase) {
-                    this.increaseCounter();
-                }
-
-                this.displayStudentInfo(request, response);
-            } else {
-                System.out.println("密码错误");
-                request.setAttribute("message", "密码错误");
-                context.getRequestDispatcher("/course/warning.jsp").forward(request, response);
-            }
-
-        } catch (ServletException e) {
-            e.printStackTrace();
+            return this.displayStudentInfo(request, response);
+        } else {
+            System.out.println("密码错误");
+            request.setAttribute("message", "密码错误");
+            return "warning";
         }
     }
 
@@ -190,7 +166,7 @@ public class ShowServlet extends HttpServlet {
      * @param response
      * @throws IOException
      */
-    private boolean displayStudentInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private String displayStudentInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
         ServletContext context = getServletContext();
 
         //根据学生是否参加所有测验返回不同界面
@@ -199,50 +175,45 @@ public class ShowServlet extends HttpServlet {
 
         System.out.println("in displayStudentInfo");
 
-        try {
-            //标准界面
-            if (isNormal) {
-                List<ClassInfoBean> result = new ArrayList<>();
-                List<Selection> selections = selectionService.getSelectionOfStudent(login);
-                for (Selection one : selections) {
-                    int courseId = one.getCourseId();
+        //标准界面
+        if (isNormal) {
+            List<ClassInfoBean> result = new ArrayList<>();
+            List<Selection> selections = selectionService.getSelectionOfStudent(login);
+            for (Selection one : selections) {
+                int courseId = one.getCourseId();
 
-                    //获取一个课程信息
-                    Course targetCourse = courseService.getCourse(courseId);
-                    String courseName = targetCourse.getName();
-                    int score = one.getScore();
+                //获取一个课程信息
+                Course targetCourse = courseService.getCourse(courseId);
+                String courseName = targetCourse.getName();
+                int score = one.getScore();
 
-                    //加入list
-                    ClassInfoBean classInfoBean = new ClassInfoBean(courseId, courseName, score);
-                    result.add(classInfoBean);
-                }
-
-                //放入session以便界面获取
-                ClassListBean classList = new ClassListBean();
-                classList.setClassList(result);
-                request.setAttribute("classList", classList);
-
-                //界面跳转
-                System.out.println("to normal jsp");
-                context.getRequestDispatcher("/course/normal.jsp").forward(request, response);
-
-                //警告界面
-            } else {
-                System.out.println("to warning jsp");
-                request.setAttribute("message", "警告:还有没有参加的考试");
-                context.getRequestDispatcher("/course/warning.jsp").forward(request, response);
+                //加入list
+                ClassInfoBean classInfoBean = new ClassInfoBean(courseId, courseName, score);
+                result.add(classInfoBean);
             }
-        } catch (ServletException e) {
-            e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-                    "This is a ServletException in show servelt.");
+
+            //放入session以便界面获取
+            ClassListBean classList = new ClassListBean();
+            classList.setClassList(result);
+            request.setAttribute("classList", classList);
+
+            //界面跳转
+            System.out.println("to normal jsp");
+            return "normal";
+
+            //警告界面
+        } else {
+            System.out.println("to warning jsp");
+            request.setAttribute("message", "警告:还有没有参加的考试");
+            return "warning";
+
         }
-        return true;
     }
 
     /**
      * 增加已经登录的人数和总人数
      */
+
     private void increaseCounter() {
         System.out.println("show servlet increaseCounter");
         ServletContext Context = getServletContext();

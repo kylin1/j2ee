@@ -1,23 +1,18 @@
-package edu.nju.servlets;
+package edu.nju.action;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-import java.io.IOException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
+
+import static org.apache.struts2.ServletActionContext.getServletContext;
 
 /**
- * Servlet implementation class Login
+ * Created by kylin on 28/02/2017.
+ * All rights reserved.
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+public class LoginAction extends BaseAction{
 
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-     */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String execute(){
         // 5 in login
         System.out.println("in login servlet");
 
@@ -73,9 +68,7 @@ public class Login extends HttpServlet {
                 }
             }
         }
-
-        request.getRequestDispatcher("/course/login.jsp").forward(request,response);
-
+        return LOGIN;
     }
 
 }
