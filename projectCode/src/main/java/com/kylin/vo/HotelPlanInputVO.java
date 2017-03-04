@@ -23,5 +23,32 @@ public class HotelPlanInputVO {
     //每日每晚价格
     private int price;
 
-   
+
+    public HotelPlanInputVO(int hotelId, int hotelRoomId, Date checkInDate, Date checkOutDate, int price) {
+        this.hotelId = hotelId;
+        this.hotelRoomId = hotelRoomId;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.price = price;
+    }
+
+    public int getHotelId() {
+        return hotelId;
+    }
+
+    public int getHotelRoomId() {
+        return hotelRoomId;
+    }
+
+    public Date getCheckInDate() {
+        return checkInDate;
+    }
+
+    public Date getCheckOutDate() {
+        return checkOutDate;
+    }
+
+    public int getPrice() {
+        return price;
+    }
 }

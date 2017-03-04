@@ -30,9 +30,6 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!--实现BeanPostProcessor接口，对容器中的Bean操作进行扩展-->
-    <bean class="com.kylin.controller.BeanPostPrcessorImpl"/>
-
     <!-- 表示JPA Repository所在的包 -->
     <jpa:repositories base-package="com.kylin.repository"/>
 

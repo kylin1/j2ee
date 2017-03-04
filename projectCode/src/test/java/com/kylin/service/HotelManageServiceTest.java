@@ -53,10 +53,10 @@ public class HotelManageServiceTest {
                 startDate, endDate, 200);
         MyMessage myMessage = this.service.makePlan(vo);
         System.out.println(myMessage);
-
+    }
 
     @Test
-    public void testGetPlan() {
+    public void testGetPlan(){
         List<HotelPlanVO> planVOS = this.service.getHotelPlan(hotelId);
         for (HotelPlanVO v : planVOS) {
             System.out.println(v.getRoom());
@@ -64,7 +64,6 @@ public class HotelManageServiceTest {
             System.out.println(v.getEndDate());
         }
     }
-
 
     @Test
     public void testCheckIn() {
