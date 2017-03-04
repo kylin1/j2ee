@@ -1,10 +1,9 @@
 package com.kylin.service;
 
-import com.kylin.tools.myexception.BadInputException;
-import com.kylin.tools.myexception.DataIntegrityException;
-import com.kylin.vo.*;
+import com.kylin.vo.HotelCheckInTableVO;
+import com.kylin.vo.HotelPlanInputVO;
+import com.kylin.vo.HotelPlanVO;
 import com.kylin.vo.common.MyMessage;
-import com.kylin.tools.myenum.RoomType;
 
 import java.util.List;
 
@@ -14,45 +13,14 @@ import java.util.List;
  */
 public interface HotelManageService {
 
-    /**
-     * 搜索目标地点、日期、人数的酒店信息
-     * 返回符合条件的酒店列表
-     *
-     * @param location
-     * @param fromDate
-     * @param endDate
-     * @param roomTypeInt
-     * @param roomNumber
-     * @return
-     */
-    List<SearchHotelItemVO> search(String location, String fromDate, String endDate,
-                                   int roomTypeInt, int roomNumber);
 
     /**
-     * 用户输入预定信息表格完成预定
+     * 发布一个房间的入住计划
      *
-     * @param reserveInputTableVO
+     * @param hotelPlanInputVO
      * @return
      */
-    boolean makeReservation(ReserveInputTableVO reserveInputTableVO);
-
-    /**
-     * 酒店管理人员搜索空闲房间，给客户分配
-     *
-     * @param fromDate
-     * @param endDate
-     * @param roomType
-     * @return
-     */
-    List<HotelRemainRoom> emptyRoomSearch(int hotelId, String fromDate, String endDate, RoomType roomType);
-
-    /**
-     * 从列表中选择一个房间登记入住人信息
-     *
-     * @param hotelCheckInTableVO
-     * @return
-     */
-    MyMessage customCheckIn(HotelCheckInTableVO hotelCheckInTableVO) throws BadInputException;
+    MyMessage makePlan(HotelPlanInputVO hotelPlanInputVO);
 
     /**
      * 得到酒店已经发布的计划
@@ -63,11 +31,14 @@ public interface HotelManageService {
      */
     List<HotelPlanVO> getHotelPlan(int hotelId);
 
+
     /**
-     * 发布一个房间的入住计划
+     * 从列表中选择一个房间登记入住人信息
      *
-     * @param hotelPlanInputVO
+     * @param hotelCheckInTableVO
      * @return
      */
-    MyMessage makePlan(HotelPlanInputVO hotelPlanInputVO) throws DataIntegrityException;
+    MyMessage customCheckIn(HotelCheckInTableVO hotelCheckInTableVO) ;
+
+
 }

@@ -10,7 +10,7 @@
     <context:property-placeholder location="classpath:META-INF/blog/db.blog.properties"/>
 
     <!-- 事务管理 -->
-    <bean memberId="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
@@ -19,7 +19,7 @@
     <!-- 表示JPA Repository所在的包 -->
     <jpa:repositories base-package="com.kylin.repository"/>
 
-    <bean memberId="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceUnitName" value="defaultPersistenceUnit"/>
 
         <property name="packagesToScan" value="com.kylin.model" />

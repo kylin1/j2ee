@@ -24,16 +24,19 @@
 
     <!--ViewResolver 视图解析器-->
     <!--用于支持Servlet、JSP视图解析-->
-    <bean memberId="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <!--实现BeanPostProcessor接口，对容器中的Bean操作进行扩展-->
+    <bean class="com.kylin.controller.BeanPostPrcessorImpl"/>
+
     <!-- 表示JPA Repository所在的包 -->
     <jpa:repositories base-package="com.kylin.repository"/>
 
-    <bean memberId="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceUnitName" value="defaultPersistenceUnit"/>
 
         <property name="packagesToScan" value="com.kylin.model" />
@@ -75,7 +78,7 @@
     </bean>
 
     <!-- 事务管理 -->
-    <bean memberId="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 

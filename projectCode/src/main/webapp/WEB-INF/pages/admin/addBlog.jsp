@@ -27,12 +27,12 @@
     <form:form action="/admin/blogs/addP" method="post" commandName="blog" role="form">
         <div class="form-group">
             <label for="title">Title:</label>
-            <input type="text" class="form-control" memberId="title" name="title" placeholder="Enter Title:"/>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title:"/>
         </div>
         <div class="form-group">
             <%--像这个BLOG的USER中注入ID信息--%>
             <label for="userByUserId.memberId">Author:</label>
-            <select class="form-control" memberId="userByUserId.memberId" name="userByUserId.memberId">
+            <select class="form-control" id="userByUserId.memberId" name="userByUserId.memberId">
                 <%--读取jsp注入的用户列表--%>
                 <c:forEach items="${userList}" var="user">
                     <%--选择框的值是user.memberId--%>
@@ -42,11 +42,11 @@
         </div>
         <div class="form-group">
             <label for="content">Content:</label>
-            <textarea class="form-control" memberId="content" name="content" rows="3" placeholder="Please Input Content"></textarea>
+            <textarea class="form-control" id="content" name="content" rows="3" placeholder="Please Input Content"></textarea>
         </div>
         <div class="form-group">
             <label for="pubDate">Publish Date:</label>
-            <input type="date" class="form-control" memberId="pubDate" name="pubDate"/>
+            <input type="date" class="form-control" id="pubDate" name="pubDate"/>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-sm btn-success">提交</button>

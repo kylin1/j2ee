@@ -34,3 +34,4 @@ public class HotelApprovalServiceImpl implements HotelApprovalService {
         return null;
     }
 }
+

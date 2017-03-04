@@ -26,19 +26,19 @@
     <form:form action="/admin/users/addP" method="post" commandName="user" role="form">
         <div class="form-group">
             <label for="firstName">Nickname:</label>
-            <input type="text" class="form-control" memberId="nickname" name="nickname" placeholder="Enter Nickname:"/>
+            <input type="text" class="form-control" id="nickname" name="nickname" placeholder="Enter Nickname:"/>
         </div>
         <div class="form-group">
             <label for="firstName">First Name:</label>
-            <input type="text" class="form-control" memberId="firstName" name="firstName" placeholder="Enter FirstName:"/>
+            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter FirstName:"/>
         </div>
         <div class="form-group">
             <label for="lastName">Last Name:</label>
-            <input type="text" class="form-control" memberId="lastName" name="lastName" placeholder="Enter LastName:"/>
+            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter LastName:"/>
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="text" class="form-control" memberId="password" name="password" placeholder="Enter Password:"/>
+            <input type="text" class="form-control" id="password" name="password" placeholder="Enter Password:"/>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-sm btn-success">提交</button>

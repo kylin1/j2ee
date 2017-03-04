@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.HashMap;
+import java.util.Hashtable;
+
 /**
  * Created by kylin on 22/02/2017.
  * All rights reserved.
@@ -19,6 +22,7 @@ public class HotelApprovalServiceTest {
 
     @Test
     public void test(){
-
+        HashMap map = new HashMap<>();
+        Hashtable map2 = new Hashtable<>();
     }
 }

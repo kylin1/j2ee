@@ -1,11 +1,10 @@
 package com.kylin.service;
 
-import com.kylin.tools.myexception.BadInputException;
-import com.kylin.tools.myexception.DataIntegrityException;
 import com.kylin.tools.DateHelper;
-import com.kylin.vo.*;
 import com.kylin.tools.myenum.PaymentType;
 import com.kylin.tools.myenum.RoomType;
+import com.kylin.vo.*;
+import com.kylin.vo.common.MyMessage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,15 +48,12 @@ public class HotelManageServiceTest {
 
     @Test
     public void testNewPlan() {
-        int newHotelRoomId = 6;
+        int newHotelRoomId = 7;
         HotelPlanInputVO vo = new HotelPlanInputVO(hotelId, newHotelRoomId,
                 startDate, endDate, 200);
-        try {
-            this.service.makePlan(vo);
-        } catch (DataIntegrityException e) {
-            e.printStackTrace();
-        }
-    }
+        MyMessage myMessage = this.service.makePlan(vo);
+        System.out.println(myMessage);
+
 
     @Test
     public void testGetPlan() {
@@ -69,47 +65,6 @@ public class HotelManageServiceTest {
         }
     }
 
-    @Test
-    public void testHotelSearch() {
-        //搜索一个酒店内部剩余的房间
-        List<HotelRemainRoom> remainRooms = this.service.emptyRoomSearch(
-                hotelId, start, end, RoomType.StandardRoom);
-        for (HotelRemainRoom remainRoom : remainRooms) {
-            System.out.println(remainRoom.getRoom());
-            System.out.println(remainRoom.getInformation());
-        }
-    }
-
-    //用户测试
-    @Test
-    public void testSearch() {
-        List<SearchHotelItemVO> searchHotelItemVOS = this.service.search("上海",
-                start, end, RoomType.StandardRoom.ordinal(), 2);
-        for (SearchHotelItemVO vo : searchHotelItemVOS) {
-            System.out.println(vo.getHotelName());
-            List<RemainRoomInfo> remainRoomNumber = vo.getRemainRoomNumber();
-            for (RemainRoomInfo remainRoomInfo : remainRoomNumber) {
-                System.out.println(remainRoomInfo.getRoomType());
-                System.out.println(remainRoomInfo.getRemainNumber());
-                System.out.println(remainRoomInfo.getPricePerNight());
-            }
-        }
-    }
-
-    @Test
-    public void testMakeReservation() {
-        int roomNumber = 2;
-
-        String contactPersonName = "kylin test 222";
-        String contactPhone = "187";
-        String contactEmail = "email";
-
-        int totalPrice = 666;
-        ReserveInputTableVO inputVO = new ReserveInputTableVO(userId, hotelId, startDate, endDate,
-                roomType, roomNumber, contactPersonName, contactPhone, contactEmail, totalPrice);
-
-        this.service.makeReservation(inputVO);
-    }
 
     @Test
     public void testCheckIn() {
@@ -132,11 +87,10 @@ public class HotelManageServiceTest {
 
         //添加入住信息
         HotelCheckInTableVO vo = new HotelCheckInTableVO(hotelId, orderId, list, true, PaymentType.Cash);
-        try {
-            this.service.customCheckIn(vo);
-        } catch (BadInputException e) {
-            e.printStackTrace();
-        }
+        MyMessage myMessage = this.service.customCheckIn(vo);
+        System.out.println(myMessage.isSuccess());
+        System.out.println(myMessage.getDisplayMessage());
+
     }
 
 

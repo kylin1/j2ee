@@ -57,4 +57,9 @@ public class MyMessage {
     public void setErrorStack(String errorStack) {
         this.errorStack = errorStack;
     }
+
+    @Override
+    public String toString() {
+        return this.isSuccess+"\n"+this.displayMessage+"\n";
+    }
 }

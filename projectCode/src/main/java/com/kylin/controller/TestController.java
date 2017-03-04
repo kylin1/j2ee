@@ -24,13 +24,13 @@ public class TestController {
     MemberService service;
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public void test(){
+    public void test() {
         Hotel hotel = repository.findOne(5);
         System.out.println(hotel.getName());
     }
 
     @RequestMapping(value = "/test2", method = RequestMethod.GET)
-    public void test2(){
+    public void test2() {
         MemberInfoVO vo = this.service.getMemberInfo(1);
         System.out.println(vo.getId());
     }
