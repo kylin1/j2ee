@@ -18,4 +18,6 @@ public interface PaymentRepository extends JpaRepository<Payment,Integer> {
             " h.time between :start and :endDate")
     List<Payment> findByDate(@Param("start") Date start,
                              @Param("endDate") Date endDate);
+
+    List<Payment> findByHotelId(int hotelId);
 }

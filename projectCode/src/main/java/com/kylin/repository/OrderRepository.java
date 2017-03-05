@@ -12,4 +12,6 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<MemberOrder,Integer> {
 
     List<MemberOrder> findByMemberId(int memberId);
+
+    List<MemberOrder> findByHotelId(int hotelId);
 }
