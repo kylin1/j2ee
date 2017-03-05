@@ -67,22 +67,25 @@ public class HotelManageServiceTest {
 
     @Test
     public void testCheckIn() {
+        int orderId = 9;
+        int roomId = 1;
+        int roomId2 = 2;
+
         List<HotelRoomCheckIn> list = new ArrayList<>();
         //入住两个房间
         List<HotelGuestCheckIn> guestCheckIns = new ArrayList<>();
         guestCheckIns.add(new HotelGuestCheckIn("kylin1", "320311"));
         guestCheckIns.add(new HotelGuestCheckIn("kylin2", "320322"));
-        HotelRoomCheckIn hotelRoomCheckIn1 = new HotelRoomCheckIn(2, guestCheckIns);
+        HotelRoomCheckIn hotelRoomCheckIn1 = new HotelRoomCheckIn(roomId, guestCheckIns);
 
         List<HotelGuestCheckIn> guestCheckIns2 = new ArrayList<>();
         guestCheckIns2.add(new HotelGuestCheckIn("kylin3", "320333"));
         guestCheckIns2.add(new HotelGuestCheckIn("kylin4", "320344"));
-        HotelRoomCheckIn hotelRoomCheckIn2 = new HotelRoomCheckIn(5, guestCheckIns2);
+        HotelRoomCheckIn hotelRoomCheckIn2 = new HotelRoomCheckIn(roomId2, guestCheckIns2);
 
         list.add(hotelRoomCheckIn1);
         list.add(hotelRoomCheckIn2);
 
-        int orderId = 3;
 
         //添加入住信息
         HotelCheckInTableVO vo = new HotelCheckInTableVO(hotelId, orderId, list, true, PaymentType.Cash);

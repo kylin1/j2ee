@@ -13,8 +13,8 @@ public class PaymentVO {
 
     private String hotelName;
 
-    //会员账号
-    private String memberAccount;
+    //会员名字
+    private String memberName;
 
     //支付时间
     private Date payTime;
@@ -28,7 +28,7 @@ public class PaymentVO {
     public PaymentVO(int hotelId, String hotelName, String memberAccount, Date payTime, int price, boolean isSettled) {
         this.hotelId = hotelId;
         this.hotelName = hotelName;
-        this.memberAccount = memberAccount;
+        this.memberName = memberAccount;
         this.payTime = payTime;
         this.price = price;
         this.isSettled = isSettled;
@@ -42,8 +42,8 @@ public class PaymentVO {
         return hotelName;
     }
 
-    public String getMemberAccount() {
-        return memberAccount;
+    public String getMemberName() {
+        return memberName;
     }
 
     public Date getPayTime() {
