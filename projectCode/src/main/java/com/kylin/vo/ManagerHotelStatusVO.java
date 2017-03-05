@@ -1,5 +1,7 @@
 package com.kylin.vo;
 
+import com.kylin.tools.DateHelper;
+
 import java.util.Date;
 
 /**
@@ -41,5 +43,11 @@ public class ManagerHotelStatusVO {
 
     public int getBusyRoom() {
         return busyRoom;
+    }
+
+    @Override
+    public String toString() {
+        return "date:"+ DateHelper.getDateString(date)+" hotelName:"+hotelName+
+                " emptyRoom:"+emptyRoom+" busyRoom:"+busyRoom;
     }
 }

@@ -24,15 +24,16 @@ public class MyChartDataLine {
 
     public MyChartDataLine(List<MyChartXYItem> chartXYItemList) {
         this.chartXYItemList = chartXYItemList;
-        this.init();
     }
 
-    /**
-     * 初始化一条数据线的数据信息
-     */
-    private void init() {
-
+    public MyChartDataLine(List<MyChartXYItem> chartXYItemList, Date startDate, Date endDate, int lowBond, int upBond) {
+        this.chartXYItemList = chartXYItemList;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.lowBond = lowBond;
+        this.upBond = upBond;
     }
+
 
     public List<MyChartXYItem> getChartXYItemList() {
         return chartXYItemList;

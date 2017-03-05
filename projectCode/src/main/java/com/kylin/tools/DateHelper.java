@@ -14,7 +14,19 @@ import java.util.List;
  */
 public class DateHelper {
 
-    private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private static DateFormat dateFormat;
+    public static Date START;
+    public static Date END;
+
+    static {
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            START = DateHelper.getDate("2017-04-01");
+            END = DateHelper.getDate("2017-04-03");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static String getDateString(Date date) {
         return dateFormat.format(date);

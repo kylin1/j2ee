@@ -29,4 +29,8 @@ public enum RoomStatus {
         return null;
     }
 
+    public static RoomStatus getEnum(int input){
+        return RoomStatus.values()[input];
+    }
+
 }
