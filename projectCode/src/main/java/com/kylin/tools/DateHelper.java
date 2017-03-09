@@ -28,6 +28,7 @@ public class DateHelper {
             START = DateHelper.getDate("2017-04-01");
             END = DateHelper.getDate("2017-04-03");
             NOW = new Date();
+            NOW = DateHelper.setTimeToZero(NOW);
             WEEK_AGO = DateHelper.addDate(NOW,-7);
             MONTH_AGO = DateHelper.addDate(NOW,-30);
         } catch (ParseException e) {

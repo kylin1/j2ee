@@ -295,8 +295,7 @@ public class HotelManageServiceImpl implements HotelManageService {
         // order foreign key
         roomGuest.setOrderId(order.getId());
         // room foreign key
-        HotelRoom room = roomRepository.findOne(roomCheckIn.getRoomId());
-        roomGuest.setRoomByRoomId(room);
+        roomGuest.setRoomId(roomCheckIn.getRoomId());
 
         // save room guest
         this.guestRepository.save(roomGuest);

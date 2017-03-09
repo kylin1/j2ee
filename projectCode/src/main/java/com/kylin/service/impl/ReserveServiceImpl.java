@@ -190,6 +190,7 @@ public class ReserveServiceImpl implements ReserveService{
         //将每种房间的信息返回
         roomResult.addAll(typeAndNumber.values());
 
+        // TODO lowestPerNightPrice has bug
         return new SearchHotelItemVO(checkInDate, checkOutDate, hotel.getId(),
                 hotel.getName(), HotelType.getEnum(hotel.getType()), hotel.getLocation(),
                 lowestPerNightPrice, roomResult);
