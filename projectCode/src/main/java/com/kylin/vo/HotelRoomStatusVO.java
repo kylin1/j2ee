@@ -36,4 +36,9 @@ public class HotelRoomStatusVO {
     public int getCheckedInNumber() {
         return checkedInNumber;
     }
+
+    @Override
+    public String toString() {
+        return "date="+date+"roomNumber="+roomNumber+"checkedInNumber="+checkedInNumber;
+    }
 }

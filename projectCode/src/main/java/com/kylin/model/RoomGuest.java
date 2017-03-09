@@ -14,7 +14,7 @@ public class RoomGuest {
     private int id;
     private int orderId;
     private Date date;
-    private HotelRoom roomByRoomId;
+    private int roomId;
 
     private String name;
     private String idNum;
@@ -47,14 +47,13 @@ public class RoomGuest {
         this.date = date;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "roomid", referencedColumnName = "id", nullable = false)
-    public HotelRoom getRoomByRoomId() {
-        return roomByRoomId;
+    @Column(name = "roomId")
+    public int getRoomId() {
+        return roomId;
     }
 
-    public void setRoomByRoomId(HotelRoom roomByRoomId) {
-        this.roomByRoomId = roomByRoomId;
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
     }
 
     @Column(name = "name")

@@ -18,11 +18,19 @@ public class DateHelper {
     public static Date START;
     public static Date END;
 
+    public static Date NOW;
+    public static Date WEEK_AGO;
+    public static Date MONTH_AGO;
+
     static {
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             START = DateHelper.getDate("2017-04-01");
             END = DateHelper.getDate("2017-04-03");
+            NOW = new Date();
+            NOW = DateHelper.setTimeToZero(NOW);
+            WEEK_AGO = DateHelper.addDate(NOW,-7);
+            MONTH_AGO = DateHelper.addDate(NOW,-30);
         } catch (ParseException e) {
             e.printStackTrace();
         }
