@@ -4,7 +4,7 @@ package com.kylin.tools.myenum;
  * Created by kylin on 22/02/2017.
  * All rights reserved.
  */
-public enum HotelType {
+public enum HotelLevel {
 
     ChainHotel("快捷连锁酒店"),
     OneStar("一星级酒店"),
@@ -15,7 +15,7 @@ public enum HotelType {
 
     private String type;
 
-    HotelType(String type) {
+    HotelLevel(String type) {
         this.type = type;
     }
 
@@ -23,15 +23,15 @@ public enum HotelType {
         return type;
     }
 
-    public static HotelType getEnum(String input) {
-        for (HotelType type : HotelType.values()) {
+    public static HotelLevel getEnum(String input) {
+        for (HotelLevel type : HotelLevel.values()) {
             if (type.getType().equals(input))
                 return type;
         }
         return null;
     }
 
-    public static HotelType getEnum(int input) {
-        return HotelType.values()[input];
+    public static HotelLevel getEnum(int input) {
+        return HotelLevel.values()[input];
     }
 }

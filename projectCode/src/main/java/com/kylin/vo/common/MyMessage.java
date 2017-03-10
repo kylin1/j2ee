@@ -19,6 +19,9 @@ public class MyMessage {
     // message for developer
     private String errorStack;
 
+    // 数据
+    private Object data;
+
     public MyMessage(boolean isSuccess) {
         this.isSuccess = isSuccess;
     }
@@ -32,6 +35,11 @@ public class MyMessage {
         this.isSuccess = isSuccess;
         this.displayMessage = displayMessage;
         this.errorStack = errorStack;
+    }
+
+    public MyMessage(boolean isSuccess, int newId) {
+        this.isSuccess = isSuccess;
+        this.data = newId;
     }
 
     public boolean isSuccess() {
@@ -58,8 +66,20 @@ public class MyMessage {
         this.errorStack = errorStack;
     }
 
+    public void setData(Object data) {
+        this.data = data;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
     @Override
     public String toString() {
-        return this.isSuccess+"\n"+this.displayMessage+"\n";
+        if(this.isSuccess){
+            return "success";
+        }else {
+            return "failed: "+this.displayMessage+"\n";
+        }
     }
 }

@@ -1,6 +1,4 @@
-package com.kylin.vo.myenum;
-
-import com.kylin.tools.myenum.MemberOrderStatus;
+package com.kylin.tools.myenum;
 
 /**
  * Created by kylin on 28/02/2017.

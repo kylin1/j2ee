@@ -1,14 +1,16 @@
 package com.kylin.model;
 
+import com.kylin.tools.myenum.HotelLevel;
+
 import javax.persistence.*;
 
 /**
- * Created by kylin on 17/02/2017.
+ * Created by kylin on 09/03/2017.
  * All rights reserved.
  */
 @Entity
-@Table(name = "hotel")
-public class Hotel {
+@Table(name = "hotel_cache")
+public class HotelCache {
 
     private int id;
 
@@ -23,6 +25,12 @@ public class Hotel {
     private String phone;
 
     private String representative;
+
+    // 申请的种类，开店还是修改信息
+    private int type;
+
+    // 申请的状况，是否被通过
+    private int status;
 
     @Id
     @GeneratedValue
@@ -86,5 +94,33 @@ public class Hotel {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+
+    @Column(name = "type")
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    @Column(name = "status")
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String readDetail() {
+        return "修改后的酒店信息为：" + "名称：" + name + "地点：" + location + "类别:" + HotelLevel.getEnum(this.type).getType();
+    }
+
+    @Override
+    public String toString() {
+        return this.readDetail();
     }
 }

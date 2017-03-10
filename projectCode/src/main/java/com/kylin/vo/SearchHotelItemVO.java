@@ -1,6 +1,6 @@
 package com.kylin.vo;
 
-import com.kylin.tools.myenum.HotelType;
+import com.kylin.tools.myenum.HotelLevel;
 
 import java.util.Date;
 import java.util.List;
@@ -23,7 +23,7 @@ public class SearchHotelItemVO {
 
     private String hotelName;
 
-    private HotelType hotelType;
+    private HotelLevel hotelLevel;
 
     private String hotelAddress;
 
@@ -32,12 +32,12 @@ public class SearchHotelItemVO {
     // 一个符合条件的酒店 remain room
     private List<RemainRoomInfo> remainRoomNumber;
 
-    public SearchHotelItemVO(Date checkInDate, Date checkOutDate, int hotelId, String hotelName, HotelType hotelType, String hotelAddress, int lowestPerNightPrice, List<RemainRoomInfo> remainRoomNumber) {
+    public SearchHotelItemVO(Date checkInDate, Date checkOutDate, int hotelId, String hotelName, HotelLevel hotelLevel, String hotelAddress, int lowestPerNightPrice, List<RemainRoomInfo> remainRoomNumber) {
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.hotelId = hotelId;
         this.hotelName = hotelName;
-        this.hotelType = hotelType;
+        this.hotelLevel = hotelLevel;
         this.hotelAddress = hotelAddress;
         this.lowestPerNightPrice = lowestPerNightPrice;
         this.remainRoomNumber = remainRoomNumber;
@@ -59,8 +59,8 @@ public class SearchHotelItemVO {
         return hotelName;
     }
 
-    public HotelType getHotelType() {
-        return hotelType;
+    public HotelLevel getHotelLevel() {
+        return hotelLevel;
     }
 
     public String getHotelAddress() {

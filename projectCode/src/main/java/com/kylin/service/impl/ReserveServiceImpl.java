@@ -4,7 +4,7 @@ import com.kylin.model.*;
 import com.kylin.repository.*;
 import com.kylin.service.ReserveService;
 import com.kylin.tools.DateHelper;
-import com.kylin.tools.myenum.HotelType;
+import com.kylin.tools.myenum.HotelLevel;
 import com.kylin.tools.myenum.MemberOrderStatus;
 import com.kylin.tools.myenum.RoomStatus;
 import com.kylin.tools.myenum.RoomType;
@@ -192,7 +192,7 @@ public class ReserveServiceImpl implements ReserveService{
 
         // TODO lowestPerNightPrice has bug
         return new SearchHotelItemVO(checkInDate, checkOutDate, hotel.getId(),
-                hotel.getName(), HotelType.getEnum(hotel.getType()), hotel.getLocation(),
+                hotel.getName(), HotelLevel.getEnum(hotel.getLevel()), hotel.getLocation(),
                 lowestPerNightPrice, roomResult);
     }
     /**

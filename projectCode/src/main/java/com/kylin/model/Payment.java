@@ -20,6 +20,7 @@ public class Payment {
     private int status;
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public int getId() {
         return id;

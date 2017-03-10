@@ -32,6 +32,7 @@ public class MemberOrder {
     private Integer isCash;
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public int getId() {
         return id;

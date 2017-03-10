@@ -1,9 +1,6 @@
 package com.kylin.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by kylin on 17/02/2017.
@@ -22,6 +19,7 @@ public class SystemUser {
     private int type;
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public int getId() {
         return id;

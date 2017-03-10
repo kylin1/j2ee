@@ -1,6 +1,5 @@
 package com.kylin.repository;
 
-import com.kylin.model.Approval;
 import com.kylin.model.Hotel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -24,12 +22,8 @@ public class HotelDaoTest {
 
     @Test
     public void testGetOne(){
-        Hotel hotel = repository.findOne(1);
-//        System.out.println(hotel.getName());
-
-
-        Collection<Approval> approvals = hotel.getApprovals();
-        System.out.println(approvals.size());
+        int hotel = repository.findIdByUserId(500);
+        System.out.println(hotel);
     }
 
     @Test
@@ -37,7 +31,6 @@ public class HotelDaoTest {
         Hotel hotel = new Hotel();
         hotel.setName("tes4t");
         hotel.setLocation("test4");
-        hotel.setStatus(99);
 
         repository.save(hotel);
     }

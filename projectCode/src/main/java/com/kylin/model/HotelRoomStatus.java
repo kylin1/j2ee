@@ -22,6 +22,7 @@ public class HotelRoomStatus {
     private int price;
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public int getId() {
         return id;

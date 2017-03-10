@@ -21,6 +21,7 @@ public class Expenditure {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue
     public int getId() {
         return id;
     }

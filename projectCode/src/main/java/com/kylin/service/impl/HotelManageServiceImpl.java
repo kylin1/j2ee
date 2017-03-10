@@ -11,7 +11,7 @@ import com.kylin.tools.myenum.RoomType;
 import com.kylin.tools.myexception.BadInputException;
 import com.kylin.vo.*;
 import com.kylin.vo.common.MyMessage;
-import com.kylin.vo.myenum.PaymentStatus;
+import com.kylin.tools.myenum.PaymentStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

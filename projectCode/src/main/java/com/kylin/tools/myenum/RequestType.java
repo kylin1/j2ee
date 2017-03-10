@@ -27,4 +27,8 @@ public enum RequestType {
         }
         return null;
     }
+
+    public static RequestType getEnum(int input){
+        return RequestType.values()[input];
+    }
 }

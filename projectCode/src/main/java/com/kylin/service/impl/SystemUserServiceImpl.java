@@ -49,7 +49,12 @@ public class SystemUserServiceImpl implements SystemUserService {
             systemUser.setPassword(password);
             systemUser.setType(userType.getType());
             this.repository.save(systemUser);
-            return new MyMessage(true);
+
+            int id = systemUser.getId();
+            MyMessage myMessage = new MyMessage(true);
+            myMessage.setData(id);
+
+            return myMessage;
         } else
             return new MyMessage(false, "账户已经存在");
     }

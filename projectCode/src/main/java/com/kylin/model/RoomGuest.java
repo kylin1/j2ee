@@ -20,6 +20,7 @@ public class RoomGuest {
     private String idNum;
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public int getId() {
         return id;
