@@ -25,7 +25,6 @@ public class Hotel {
     private String representative;
 
     @Id
-    @GeneratedValue
     @Column(name = "id")public int getId() {
         return id;
     }

@@ -27,7 +27,7 @@
     <table class="table table-bordered table-striped">
         <tr>
             <th>ID</th>
-            <td>${blog.id}</td>
+            <td>${blog.memberId}</td>
         </tr>
         <tr>
             <th>Title</th>

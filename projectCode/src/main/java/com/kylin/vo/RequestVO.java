@@ -68,4 +68,9 @@ public class RequestVO {
     public RequestStatus getStatus() {
         return status;
     }
+
+    @Override
+    public String toString() {
+        return hotelName+mainContent;
+    }
 }

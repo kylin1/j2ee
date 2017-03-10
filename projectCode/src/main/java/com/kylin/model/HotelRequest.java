@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "hotel_cache")
-public class HotelCache {
+public class HotelRequest {
 
     private int id;
 

@@ -1,7 +1,7 @@
 package com.kylin.service.impl;
 
-import com.kylin.model.HotelCache;
-import com.kylin.repository.HotelCacheRepository;
+import com.kylin.model.HotelRequest;
+import com.kylin.repository.HotelRequestRepository;
 import com.kylin.repository.HotelRepository;
 import com.kylin.service.HotelModifyService;
 import com.kylin.tools.myenum.HotelLevel;
@@ -20,10 +20,10 @@ import java.util.List;
  * All rights reserved.
  */
 @Service
-public class HotelModifyServiceImpl extends ApprovalServiceImpl implements HotelModifyService {
+public class HotelModifyServiceImpl extends ApprovalService implements HotelModifyService {
 
     @Autowired
-    private HotelCacheRepository repository;
+    private HotelRequestRepository cacheRepository;
     @Autowired
     private HotelRepository hotelRepository;
 
@@ -36,17 +36,17 @@ public class HotelModifyServiceImpl extends ApprovalServiceImpl implements Hotel
         HotelLevel type = openVO.getType();
 
 
-        HotelCache hotelCache = new HotelCache();
-        hotelCache.setName(name);
-        hotelCache.setLocation(location);
-        hotelCache.setType(type.ordinal());
+        HotelRequest hotelRequest = new HotelRequest();
+        hotelRequest.setName(name);
+        hotelRequest.setLocation(location);
+        hotelRequest.setType(type.ordinal());
 
-        hotelCache.setUserId(userId);
-        hotelCache.setStatus(RequestStatus.Waiting.ordinal());
+        hotelRequest.setUserId(userId);
+        hotelRequest.setStatus(RequestStatus.Waiting.ordinal());
 
-        this.repository.save(hotelCache);
+        this.cacheRepository.save(hotelRequest);
 
-        int hotelId = hotelCache.getId();
+        int hotelId = hotelRequest.getId();
         return new MyMessage(true,hotelId);
     }
 
@@ -59,19 +59,19 @@ public class HotelModifyServiceImpl extends ApprovalServiceImpl implements Hotel
         String phone = modifyVO.getPhone();
         String represent = modifyVO.getLegalRepresentative();
 
-        HotelCache hotelCache = new HotelCache();
-        hotelCache.setName(name);
-        hotelCache.setLocation(location);
-        hotelCache.setType(type.ordinal());
-        hotelCache.setPhone(phone);
-        hotelCache.setRepresentative(represent);
+        HotelRequest hotelRequest = new HotelRequest();
+        hotelRequest.setName(name);
+        hotelRequest.setLocation(location);
+        hotelRequest.setType(type.ordinal());
+        hotelRequest.setPhone(phone);
+        hotelRequest.setRepresentative(represent);
 
-        hotelCache.setUserId(userId);
-        hotelCache.setStatus(RequestStatus.Waiting.ordinal());
+        hotelRequest.setUserId(userId);
+        hotelRequest.setStatus(RequestStatus.Waiting.ordinal());
 
-        this.repository.save(hotelCache);
+        this.cacheRepository.save(hotelRequest);
 
-        int hotelId = hotelCache.getId();
+        int hotelId = hotelRequest.getId();
         return new MyMessage(true,hotelId);
     }
 
@@ -94,8 +94,13 @@ public class HotelModifyServiceImpl extends ApprovalServiceImpl implements Hotel
     }
 
     private List<RequestVO> getRequestByHotelAndStatus(int hotelId, int status) {
-        int userId = this.hotelRepository.findIdByUserId(hotelId);
-        List<HotelCache> hotelCaches = this.repository.findByUserIdAndStatus(userId, status);
+        System.out.println(this.hotelRepository == null);
+        HotelRequest hotel = this.cacheRepository.findOne(hotelId);
+        int userId = hotel.getUserId();
+        System.out.println("userId="+userId);
+        List<HotelRequest> hotelCaches = this.cacheRepository.findByUserIdAndStatus(userId, status);
         return this.getRequestVOList(hotelCaches);
     }
+
+
 }

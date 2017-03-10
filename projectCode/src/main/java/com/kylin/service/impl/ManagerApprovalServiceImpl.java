@@ -1,8 +1,8 @@
 package com.kylin.service.impl;
 
 import com.kylin.model.Hotel;
-import com.kylin.model.HotelCache;
-import com.kylin.repository.HotelCacheRepository;
+import com.kylin.model.HotelRequest;
+import com.kylin.repository.HotelRequestRepository;
 import com.kylin.repository.HotelRepository;
 import com.kylin.service.ManagerApprovalService;
 import com.kylin.tools.myenum.RequestStatus;
@@ -19,17 +19,17 @@ import java.util.List;
  * All rights reserved.
  */
 @Service
-public class ManagerApprovalServiceImpl extends ApprovalServiceImpl implements ManagerApprovalService {
+public class ManagerApprovalServiceImpl extends ApprovalService implements ManagerApprovalService {
 
     @Autowired
     private HotelRepository hotelRepository;
     @Autowired
-    private HotelCacheRepository cacheRepository;
+    private HotelRequestRepository requestRepository;
 
     @Override
     public List<RequestVO> getWaitingRequest() {
         int waiting = RequestStatus.Waiting.ordinal();
-        List<HotelCache> cacheList = this.cacheRepository.findByStatus(waiting);
+        List<HotelRequest> cacheList = this.requestRepository.findByStatus(waiting);
         return this.getRequestVOList(cacheList);
     }
 
@@ -38,8 +38,8 @@ public class ManagerApprovalServiceImpl extends ApprovalServiceImpl implements M
     public List<RequestVO> getDoneRequest() {
         int passed = RequestStatus.Passed.ordinal();
         int denied = RequestStatus.Denied.ordinal();
-        List<HotelCache> passedList = this.cacheRepository.findByStatus(passed);
-        List<HotelCache> deniedList = this.cacheRepository.findByStatus(denied);
+        List<HotelRequest> passedList = this.requestRepository.findByStatus(passed);
+        List<HotelRequest> deniedList = this.requestRepository.findByStatus(denied);
 
         List<RequestVO> result = new ArrayList<>();
         result.addAll(this.getRequestVOList(passedList));
@@ -52,27 +52,45 @@ public class ManagerApprovalServiceImpl extends ApprovalServiceImpl implements M
     @Override
     public MyMessage passRequest(int requestId) {
         // 修改缓存表为通过
-        HotelCache cache = this.cacheRepository.findOne(requestId);
+        HotelRequest cache = this.requestRepository.findOne(requestId);
         cache.setStatus(RequestStatus.Passed.ordinal());
-        this.cacheRepository.save(cache);
+        this.requestRepository.save(cache);
 
         // 将数据写入真正的表
         int hotelId = cache.getId();
         Hotel oldHotel = this.hotelRepository.findOne(hotelId);
-        oldHotel.setName(cache.getName());
-        oldHotel.setLocation(cache.getLocation());
-        oldHotel.setLevel(cache.getLevel());
-        this.hotelRepository.save(oldHotel);
 
+        // 酒店已经存在，修改信息
+        if(oldHotel != null){
+            this.copyHotel(oldHotel,cache);
+            this.hotelRepository.save(oldHotel);
+        }else {
+            // 酒店不存在，新建酒店
+            Hotel newHotel = new Hotel();
+            this.copyHotel(newHotel,cache);
+            this.hotelRepository.save(newHotel);
+        }
         return new MyMessage(true);
     }
+
+    private void copyHotel(Hotel newHotel, HotelRequest cache) {
+        newHotel.setId(cache.getId());
+        newHotel.setName(cache.getName());
+        newHotel.setLocation(cache.getLocation());
+        newHotel.setLevel(cache.getLevel());
+        newHotel.setUserId(cache.getUserId());
+        newHotel.setPhone(cache.getPhone());
+        newHotel.setRepresentative(cache.getRepresentative());
+    }
+
 
     @Override
     public MyMessage denyRequest(int requestId) {
         // 修改缓存表为不通过
-        HotelCache cache = this.cacheRepository.findOne(requestId);
+        HotelRequest cache = this.requestRepository.findOne(requestId);
         cache.setStatus(RequestStatus.Denied.ordinal());
-        this.cacheRepository.save(cache);
+        this.requestRepository.save(cache);
         return new MyMessage(true);
     }
+
 }

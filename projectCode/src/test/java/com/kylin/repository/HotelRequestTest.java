@@ -1,6 +1,6 @@
 package com.kylin.repository;
 
-import com.kylin.model.HotelCache;
+import com.kylin.model.HotelRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,20 +15,20 @@ import java.util.List;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/test/test-context.xml"})
-public class HotelCacheTest {
+public class HotelRequestTest {
 
     @Autowired
-    private HotelCacheRepository repository;
+    private HotelRequestRepository repository;
 
     @Test
     public void testFindByIsPassed(){
-        List<HotelCache> list = repository.findByStatus(0);
+        List<HotelRequest> list = repository.findByStatus(0);
         list.forEach(System.out::println);
     }
 
     @Test
     public void testFindByUserIdAndStatus(){
-        List<HotelCache> list = repository.findByUserIdAndStatus(500,1);
+        List<HotelRequest> list = repository.findByUserIdAndStatus(500,1);
         list.forEach(System.out::println);
     }
 }

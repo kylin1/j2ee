@@ -31,12 +31,12 @@
         </div>
         <div class="form-group">
             <%--像这个BLOG的USER中注入ID信息--%>
-            <label for="userByUserId.id">Author:</label>
-            <select class="form-control" id="userByUserId.id" name="userByUserId.id">
+            <label for="userByUserId.memberId">Author:</label>
+            <select class="form-control" id="userByUserId.memberId" name="userByUserId.memberId">
                 <%--读取jsp注入的用户列表--%>
                 <c:forEach items="${userList}" var="user">
-                    <%--选择框的值是user.id--%>
-                    <option value="${user.id}">${user.nickname}, ${user.firstName} ${user.lastName}</option>
+                    <%--选择框的值是user.memberId--%>
+                    <option value="${user.memberId}">${user.nickname}, ${user.firstName} ${user.lastName}</option>
                 </c:forEach>
             </select>
         </div>

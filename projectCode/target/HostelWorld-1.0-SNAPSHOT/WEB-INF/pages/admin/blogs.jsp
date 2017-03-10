@@ -51,14 +51,14 @@
             第一个这样的匹配作为 EL 标识符的值被返回。--%>
             <c:forEach items="${blogList}" var="blog">
                 <tr>
-                    <td>${blog.id}</td>
+                    <td>${blog.memberId}</td>
                     <td>${blog.title}</td>
                     <td>${blog.userByUserId.nickname}, ${blog.userByUserId.firstName} ${blog.userByUserId.lastName}</td>
                     <td><fmt:formatDate value="${blog.pubDate }" pattern="yyyy-MM-dd"/></td>
                     <td>
-                        <a href="/admin/blogs/show/${blog.id}" type="button" class="btn btn-sm btn-success">详情</a>
-                        <a href="/admin/blogs/update/${blog.id}" type="button" class="btn btn-sm btn-warning">修改</a>
-                        <a href="/admin/blogs/delete/${blog.id}" type="button" class="btn btn-sm btn-danger">删除</a>
+                        <a href="/admin/blogs/show/${blog.memberId}" type="button" class="btn btn-sm btn-success">详情</a>
+                        <a href="/admin/blogs/update/${blog.memberId}" type="button" class="btn btn-sm btn-warning">修改</a>
+                        <a href="/admin/blogs/delete/${blog.memberId}" type="button" class="btn btn-sm btn-danger">删除</a>
                     </td>
                 </tr>
             </c:forEach>

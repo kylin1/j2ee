@@ -21,9 +21,14 @@ public class ManagerApprovalServiceTest {
     private ManagerApprovalService service;
 
     @Test
-    public void testApproveOpen(){
+    public void testGelAllApprove(){
         List<RequestVO> requestVOS = service.getWaitingRequest();
         requestVOS.forEach(System.out::println);
+    }
+
+    @Test
+    public void testPassRequest(){
+        this.service.passRequest(13);
     }
 
 }

@@ -45,8 +45,8 @@
             <input type="text" class="form-control" id="password" name="password" placeholder="Enter Password:"
                    value="${user.password}"/>
         </div>
-        <!-- 把 id 一并写入 userP 中 -->
-        <input type="hidden" id="id" name="id" value="${user.id}"/>
+        <!-- 把 memberId 一并写入 userP 中 -->
+        <input type="hidden" id="memberId" name="memberId" value="${user.memberId}"/>
 
         <div class="form-group">
             <button type="submit" class="btn btn-sm btn-success">提交</button>

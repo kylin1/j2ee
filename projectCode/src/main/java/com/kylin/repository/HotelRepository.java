@@ -25,4 +25,5 @@ public interface HotelRepository extends JpaRepository<Hotel, Integer> {
 
     @Query("select h.id from Hotel h where h.userId = :userId")
     Integer findIdByUserId(@Param("userId")int userId);
+
 }

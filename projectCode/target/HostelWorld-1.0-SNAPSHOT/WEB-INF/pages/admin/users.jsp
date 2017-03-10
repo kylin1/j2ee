@@ -46,14 +46,14 @@
 
             <c:forEach items="${userList}" var="user">
                 <tr>
-                    <td>${user.id}</td>
+                    <td>${user.memberId}</td>
                     <td>${user.nickname}</td>
                     <td>${user.firstName} ${user.lastName}</td>
                     <td>${user.password}</td>
                     <td>
-                        <a href="/admin/users/show/${user.id}" type="button" class="btn btn-sm btn-success">详情</a>
-                        <a href="/admin/users/update/${user.id}" type="button" class="btn btn-sm btn-warning">修改</a>
-                        <a href="/admin/users/delete/${user.id}" type="button" class="btn btn-sm btn-danger">删除</a>
+                        <a href="/admin/users/show/${user.memberId}" type="button" class="btn btn-sm btn-success">详情</a>
+                        <a href="/admin/users/update/${user.memberId}" type="button" class="btn btn-sm btn-warning">修改</a>
+                        <a href="/admin/users/delete/${user.memberId}" type="button" class="btn btn-sm btn-danger">删除</a>
                     </td>
                 </tr>
             </c:forEach>
