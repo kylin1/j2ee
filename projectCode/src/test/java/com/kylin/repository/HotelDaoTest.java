@@ -31,6 +31,7 @@ public class HotelDaoTest {
         Hotel hotel = new Hotel();
         hotel.setName("tes4t");
         hotel.setLocation("test4");
+        hotel.setUserId(12);
 
         repository.save(hotel);
     }
@@ -51,7 +52,7 @@ public class HotelDaoTest {
 
     @Test
     public void testLoc(){
-        List<Hotel> hotels = repository.findByLocation("上海");
+        List<Hotel> hotels = repository.findByLocationIgnoreCaseContaining("上海");
         System.out.println(hotels.size());
         for (Hotel hotel:hotels){
             System.out.println(hotel.getName());

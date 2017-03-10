@@ -87,7 +87,7 @@ public class ReserveServiceImpl implements ReserveService{
             Date checkOutDate = DateHelper.getDate(endDate);
 
             // find by location
-            List<Hotel> hotelList = this.hotelRepository.findByLocation(location);
+            List<Hotel> hotelList = this.hotelRepository.findByLocationIgnoreCaseContaining(location);
             RoomType roomType = RoomType.getEnum(roomTypeInt);
 
             // find by date and people
