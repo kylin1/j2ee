@@ -7,31 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <link rel="icon" type="image/png" href="../../assets/img/favicon.ico">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-  <title>Hostel World-Reservation</title>
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
-  <meta name="viewport" content="width=device-width"/>
 
-  <!-- Bootstrap core CSS     -->
-  <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
+<jsp:include page='../common/header-basic.jsp'>
+  <jsp:param name="pageTitle" value="membership"/>
+</jsp:include>
 
-  <!--  Material Dashboard CSS    -->
-  <link href="../../assets/css/material-dashboard.css" rel="stylesheet"/>
-
-  <!--  CSS for Demo Purpose, don't include it in your project     -->
-  <link href="../../assets/css/demo.css" rel="stylesheet" />
-
-  <!--     Fonts and icons     -->
-  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-
-  <!-- 日期选择 -->
-  <link rel="stylesheet" href="../../assets/datepicker/css/datepicker.css">
-
-</head>
 <body>
 
 <div class="wrapper">
@@ -50,7 +30,7 @@
         <a href="#">
           <div class="logo-container">
             <div class="logo">
-              <img src="../../assets/img/new_logo.png" alt="Creative Tim Logo">
+              <img src="<%=request.getContextPath() %>/assets/img/new_logo.png" alt="Creative Tim Logo">
             </div>
             <div class="brand">
               com.kylin sports
@@ -224,21 +204,21 @@
 </body>
 
 <!--   Core JS Files   -->
-<script src="../../assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
-<script src="../../assets/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="../../assets/js/material.min.js" type="text/javascript"></script>
+<script src="<%=request.getContextPath() %>/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
+<script src="<%=request.getContextPath() %>/assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="<%=request.getContextPath() %>/assets/js/material.min.js" type="text/javascript"></script>
 
 <!--  Charts Plugin -->
-<script src="../../assets/js/chartist.min.js"></script>
+<script src="<%=request.getContextPath() %>/assets/js/chartist.min.js"></script>
 
 <!--  Notifications Plugin    -->
-<script src="../../assets/js/bootstrap-notify.js"></script>
+<script src="<%=request.getContextPath() %>/assets/js/bootstrap-notify.js"></script>
 
 <!-- Material Dashboard javascript methods -->
-<script src="../../assets/js/material-dashboard.js"></script>
+<script src="<%=request.getContextPath() %>/assets/js/material-dashboard.js"></script>
 
 <!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
-<script src="../../assets/datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="<%=request.getContextPath() %>/assets/datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
 
 <script type="text/javascript">
     var nowTemp = new Date();

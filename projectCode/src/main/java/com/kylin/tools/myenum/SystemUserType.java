@@ -6,7 +6,7 @@ package com.kylin.tools.myenum;
  */
 public enum SystemUserType {
 
-    User(0),
+    Guest(0),
 
     Hotel(1),
 

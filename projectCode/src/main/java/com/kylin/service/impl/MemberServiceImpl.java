@@ -46,13 +46,23 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberInfoVO getMemberInfo(int memberId) {
         Member entity = this.repository.findOne(memberId);
-
         // get enums
         MemberStatus memberStatus = MemberStatus.getEnum(entity.getStatus());
         MemberLevel memberLevel = MemberLevel.getEnum(entity.getLevel());
 
+        Date expireTime = entity.getExpireTime();
+        Date now = new Date();
+
+        // 如果过时, 过期时间 < 现在时间
+        if (expireTime.before(now)) {
+            memberStatus = MemberStatus.Expired;
+            // 更新数据库状态
+            entity.setStatus(memberStatus.ordinal());
+            this.repository.save(entity);
+        }
+
         MemberInfoVO memberInfoVO = new MemberInfoVO(memberId,
-                memberStatus, entity.getActivatedTime(), entity.getExpireTIme(),
+                memberStatus, entity.getActivatedTime(), entity.getExpireTime(),
                 entity.getConsume(), entity.getBalance(), memberLevel, entity.getScore());
 
         return memberInfoVO;
@@ -124,7 +134,7 @@ public class MemberServiceImpl implements MemberService {
         final int oldScore = member.getScore();
         final int oldStatusInt = member.getStatus();
         final MemberStatus oldStatus = MemberStatus.getEnum(oldStatusInt);
-        final Date oldExpireTime = member.getExpireTIme();
+        final Date oldExpireTime = member.getExpireTime();
 
         MemberStatus newStatus;
         Date newExpireTime;
@@ -141,7 +151,7 @@ public class MemberServiceImpl implements MemberService {
 
             //更新状态
             member.setStatus(newStatus.getStatus());
-            member.setExpireTIme(newExpireTime);
+            member.setExpireTime(newExpireTime);
         } //否则状态本身就是激活,无需什么操作
 
         //实际扣款金额是 金额-积分/100

@@ -11,6 +11,7 @@ import java.util.List;
  */
 public interface MemberService {
 
+
     /**
      * 获取会员卡信息
      *

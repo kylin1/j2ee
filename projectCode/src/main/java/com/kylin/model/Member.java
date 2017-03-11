@@ -20,7 +20,7 @@ public class Member {
 
     private String bankCard;
     private Date activatedTime;
-    private Date expireTIme;
+    private Date expireTime;
 
     private int consume;
     private int balance;
@@ -95,12 +95,12 @@ public class Member {
     }
 
     @Column(name = "expireTIme")
-    public Date getExpireTIme() {
-        return expireTIme;
+    public Date getExpireTime() {
+        return expireTime;
     }
 
-    public void setExpireTIme(Date expireTIme) {
-        this.expireTIme = expireTIme;
+    public void setExpireTime(Date expireTIme) {
+        this.expireTime = expireTIme;
     }
 
     @Column(name = "consume")
