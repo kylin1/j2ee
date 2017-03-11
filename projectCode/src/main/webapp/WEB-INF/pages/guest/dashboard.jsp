@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="ch-ZN">
 <head>
@@ -6,7 +7,7 @@
     <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>Profile</title>
+    <title>Dashboard</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -45,7 +46,7 @@
             <ul class="nav">
 
                 <li>
-                    <a href="membership.html">
+                    <a href="membership.jsp">
                         <i class="material-icons">today</i>
                         <p>Membership</p>
                     </a>
@@ -53,7 +54,7 @@
 
                 <!--这是一个导航的图标-->
                 <li>
-                    <a href="order.html">
+                    <a href="order.jsp">
                         <!-- 导航图标的样式-->
                         <i class="material-icons">timeline</i>
                         <!--显示的文字-->
@@ -63,13 +64,13 @@
 
                 <!--下面是其他的item代表更多的导航-->
                 <li>
-                    <a href="pocket.html">
+                    <a href="pocket.jsp">
                         <i class="material-icons">stars</i>
                         <p>Pocket</p>
                     </a>
                 </li>
                 <li>
-                    <a href="profile.html">
+                    <a href="profile.jsp">
                         <i class="material-icons">group</i>
                         <p>Profile</p>
                     </a>
@@ -111,7 +112,7 @@
                         </li>
 
                         <li class="active">
-                            <a href="dashboard.html">
+                            <a href="dashboard.jsp">
                                 <i class="material-icons">account_circle</i>
                                 Dashboard
                             </a>
@@ -132,77 +133,10 @@
         <div class="content">
             <div class="container-fluid">
 
-                <!--第一部分:个人信息的修改-->
+                <!--recent order-->
                 <div class="row">
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-header" data-background-color="purple">
-                                <h4 class="title">个人资料</h4>
-                                <p class="category"></p>
-                            </div>
-                            <div class="card-content">
-                                <form>
-                                    <!--名称行-->
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">姓名</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">手机</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
 
-
-                                    <!--性别行-->
-                                    <div class="row">
-                                        <label class="col-sm-1 control-label">性别</label>
-
-                                        <div class="col-sm-1">
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios">
-                                                    男
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-1">
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios">
-                                                    女
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--名称行-->
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">银行卡</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <button type="submit" class="btn btn-primary pull-left">
-                                        保存</button>
-                                    <div class="clearfix"></div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-
-
-
             </div>
         </div>
 

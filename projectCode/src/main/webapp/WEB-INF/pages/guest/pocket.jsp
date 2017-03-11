@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="ch-ZN">
 <head>
@@ -6,7 +7,7 @@
     <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>Membership</title>
+    <title>Pocket</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -35,17 +36,17 @@
 
         <!--导航左上角的图标-->
         <div class="logo">
-            <a href="today.html" class="simple-text">
+            <a href="search.html" class="simple-text">
                 Hostel World
             </a>
         </div>
 
         <!--导航栏整体-->
-        <div class="sidebar-wrapper">
+        <div class="sidebar-wrapper"    >
             <ul class="nav">
 
                 <li>
-                    <a href="membership.html">
+                    <a href="membership.jsp">
                         <i class="material-icons">today</i>
                         <p>Membership</p>
                     </a>
@@ -53,7 +54,7 @@
 
                 <!--这是一个导航的图标-->
                 <li>
-                    <a href="order.html">
+                    <a href="order.jsp">
                         <!-- 导航图标的样式-->
                         <i class="material-icons">timeline</i>
                         <!--显示的文字-->
@@ -63,13 +64,13 @@
 
                 <!--下面是其他的item代表更多的导航-->
                 <li>
-                    <a href="pocket.html">
+                    <a href="pocket.jsp">
                         <i class="material-icons">stars</i>
                         <p>Pocket</p>
                     </a>
                 </li>
                 <li>
-                    <a href="profile.html">
+                    <a href="profile.jsp">
                         <i class="material-icons">group</i>
                         <p>Profile</p>
                     </a>
@@ -100,19 +101,18 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="material-icons">notifications</i>
-                                <span class="notification">3</span>
+                                <span class="notification">2</span>
                                 <p class="hidden-lg hidden-md">Notifications</p>
                                 Messages
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">一只麟请求加您为好友</a></li>
-                                <li><a href="#">您的今日目标还未达到,要加油啦~</a></li>
-                                <li><a href="#">竞赛:"7日100公里"即将结束,请抓紧时间上传数据</a></li>
+                                <li><a href="#">You membership will come to an end soon!</a></li>
+                                <li><a href="#">Invite your co-worker to join Hostel World and you’ll get ￥206 after their first trip.</a></li>
                             </ul>
                         </li>
 
                         <li class="active">
-                            <a href="user.html">
+                            <a href="dashboard.jsp">
                                 <i class="material-icons">account_circle</i>
                                 Dashboard
                             </a>
@@ -133,90 +133,58 @@
         <div class="content">
             <div class="container-fluid">
 
-                <!--第一部分:个人信息的修改-->
+                <!--recent order-->
                 <div class="row">
                     <div class="col-md-8">
                         <div class="card">
                             <div class="card-header" data-background-color="purple">
-                                <h4 class="title">会员卡信息</h4>
-                                <p class="category"></p>
+                                <h4 class="title">账户充值</h4>
                             </div>
+
                             <div class="card-content">
-                                <form>
+                                <form action="{{ url('competition') }}" method="POST">
+
                                     <div class="row">
-                                        <div class="col-md-2">
-                                            <label class="control-label">账号</label>
+                                        <div class="col-sm-3">
+                                            <label class="control-label">当前余额</label>
                                         </div>
 
-                                        <div class="col-md-4">
-                                            <p class="card-text">一只麟</p>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <label class="control-label">状态</label>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <p class="text-success card-text">已激活</p>
+                                        <div class="col-sm-3">
+                                            <p class="text-info">￥800</p>
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-2">
-                                            <label class="control-label">激活时间</label>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <p class="card-text">2017-10-10</p>
+
+                                        <div class="col-sm-3">
+                                            <label class="control-label">充值金额(￥)</label>
                                         </div>
 
-                                        <div class="col-md-2">
-                                            <label class="control-label">到期时间</label>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <p class="card-text">2018-10-10</p>
+                                        <div class="col-sm-3">
+                                            <input type="text" name="name">
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-2">
-                                            <label class="control-label">累计消费</label>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <p class="card-text">￥3780</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label class="control-label">会员卡余额</label>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <p class="card-text">￥900</p>
-                                        </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <label class="control-label">会员级别</label>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <p class="card-text">高级会员</p>
+                                        <div class="col-sm-3">
+                                            <label class="control-label">使用积分(100积分=￥1)</label>
                                         </div>
 
-                                        <div class="col-md-2">
-                                            <label class="control-label">积分</label>
+                                        <div class="col-sm-3">
+                                            <input type="text" name="name">
                                         </div>
-                                        <div class="col-md-4">
-                                            <p class="card-text">3000</p>
-                                        </div>
-
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-3">
                                             <button type="submit" class="btn btn-primary pull-left">
-                                                会员充值</button>
+                                                确定</button>
                                         </div>
 
                                         <div class="col-md-3">
                                             <button type="submit" class="btn btn-danger pull-left">
-                                                取消资格</button>
+                                                取消</button>
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
@@ -225,9 +193,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
 
@@ -275,7 +240,7 @@
 <script src="../../assets/js/bootstrap-notify.js"></script>
 
 <!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
 <!-- Material Dashboard javascript methods -->
 <script src="../../assets/js/material-dashboard.js"></script>

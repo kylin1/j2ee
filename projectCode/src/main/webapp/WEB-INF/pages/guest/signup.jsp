@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,7 +7,7 @@
     <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
-    <title>客栈注册-Hostel World</title>
+    <title>Sign up-Hostel World</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
 
@@ -33,7 +34,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="request.html">Land Page</a>
+            <a class="navbar-brand" href="search.html">Land Page</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navigation-example">
@@ -86,19 +87,27 @@
 										<span class="input-group-addon">
 											<i class="material-icons">email</i>
 										</span>
-                                    <input type="text" class="form-control" placeholder="客栈名称">
+                                    <input type="text" class="form-control" placeholder="Mail/Phone...">
                                 </div>
 
                                 <div class="input-group">
 										<span class="input-group-addon">
 											<i class="material-icons">lock_outline</i>
 										</span>
-                                    <input type="password" placeholder="位置信息" class="form-control"/>
+                                    <input type="password" placeholder="Password..." class="form-control"/>
                                 </div>
 
+                                <!-- If you want to add a checkbox to this form, uncomment this code
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="optionsCheckboxes" checked>
+                                        Subscribe to newsletter
+                                    </label>
+                                </div> -->
                             </div>
                             <div class="footer text-center">
-                                <a href="dashboard.html" class="btn btn-simple btn-primary btn-lg">Get Started</a>
+                                <a href="dashboard.jsp" class="btn btn-simple btn-primary btn-lg">Get Started</a>
                             </div>
                         </form>
                     </div>

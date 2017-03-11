@@ -1,75 +1,78 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="ch-ZN">
 <head>
-    <meta charset="utf-8"/>
-    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png"/>
-    <link rel="icon" type="image/png" href="../../assets/img/favicon.png"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>会员信息</title>
+    <title>Profile</title>
 
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
-    <meta name="viewport" content="width=device-width"/>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
 
-    <!--  Bootstrap core CSS     -->
-    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS     -->
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
+
     <!--  Material Dashboard CSS    -->
     <link href="../../assets/css/material-dashboard.css" rel="stylesheet"/>
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="../../assets/css/demo.css" rel="stylesheet"/>
 
-    <!--  Fonts and icons     -->
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="../../assets/css/demo.css" rel="stylesheet" />
+
+    <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet'
-          type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
 
 </head>
 
 <body>
 
 <div class="wrapper">
-
     <!--整个左侧导航栏-->
     <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg">
 
         <!--导航左上角的图标-->
         <div class="logo">
-            <a href="#" class="simple-text">
-                Hostel World-经理
+            <a href="search.html" class="simple-text">
+                Hostel World
             </a>
         </div>
 
         <!--导航栏整体-->
-        <div class="sidebar-wrapper">
+        <div class="sidebar-wrapper"    >
             <ul class="nav">
+
                 <li>
-                    <a href="approve.html">
+                    <a href="membership.jsp">
                         <i class="material-icons">today</i>
-                        <p>审批请求</p>
+                        <p>Membership</p>
                     </a>
                 </li>
 
                 <!--这是一个导航的图标-->
                 <li>
-                    <a href="settle.html">
+                    <a href="order.jsp">
                         <!-- 导航图标的样式-->
                         <i class="material-icons">timeline</i>
                         <!--显示的文字-->
-                        <p>结算管理</p>
+                        <p>Orders</p>
                     </a>
                 </li>
 
                 <!--下面是其他的item代表更多的导航-->
                 <li>
-                    <a href="statistic.html">
+                    <a href="pocket.jsp">
                         <i class="material-icons">stars</i>
-                        <p>统计信息</p>
+                        <p>Pocket</p>
                     </a>
                 </li>
                 <li>
-                    <a href="member.html">
+                    <a href="profile.jsp">
                         <i class="material-icons">group</i>
-                        <p>会员信息</p>
+                        <p>Profile</p>
                     </a>
                 </li>
 
@@ -89,7 +92,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Hi, 经理 :)</a>
+                    <a class="navbar-brand" href="#">Hi, com.kylin :)</a>
                 </div>
                 <!--右侧三个小按钮-->
                 <div class="collapse navbar-collapse" id="example-navbar-primary">
@@ -103,13 +106,13 @@
                                 Messages
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">您有3个新的申请需要进行审批！</a></li>
-                                <li><a href="#">Hostel World上月的统计信息已经发布，可以查看！</a></li>
+                                <li><a href="#">You membership will come to an end soon!</a></li>
+                                <li><a href="#">Invite your co-worker to join Hostel World and you’ll get ￥206 after their first trip.</a></li>
                             </ul>
                         </li>
 
                         <li class="active">
-                            <a href="dashboard.html">
+                            <a href="dashboard.jsp">
                                 <i class="material-icons">account_circle</i>
                                 Dashboard
                             </a>
@@ -129,84 +132,78 @@
         <!--2.内容-->
         <div class="content">
             <div class="container-fluid">
-                <!--查询会员信息-->
-                <section>
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="card card-signup">
-                                <form class="form" method="" action="">
-                                    <div class="row">
-                                        <div class="header header-primary text-center">
-                                            <h4>请输入会员姓名/账号进行查询</h4>
-                                        </div>
-                                    </div>
 
+                <!--第一部分:个人信息的修改-->
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header" data-background-color="purple">
+                                <h4 class="title">个人资料</h4>
+                                <p class="category"></p>
+                            </div>
+                            <div class="card-content">
+                                <form>
+                                    <!--名称行-->
                                     <div class="row">
-                                        <div class="col-md-9 col-md-offset-1">
-                                            <div class="content">
-                                                <div class="input-group">
-										<span class="input-group-addon">
-											<i class="material-icons">email</i>
-										</span>
-                                                    <input type="text" class="form-control" placeholder="会员姓名/账号...">
-                                                </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">姓名</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">手机</label>
+                                                <input type="text" class="form-control">
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="footer text-center">
-                                        <a href="#pablo" class="btn btn-simple btn-primary btn-lg">搜索</a>
+
+                                    <!--性别行-->
+                                    <div class="row">
+                                        <label class="col-sm-1 control-label">性别</label>
+
+                                        <div class="col-sm-1">
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios">
+                                                    男
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios">
+                                                    女
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
+
+                                    <!--名称行-->
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">银行卡</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary pull-left">
+                                        保存</button>
+                                    <div class="clearfix"></div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
 
-                <!--会员预订/消费情况-->
-                <section>
-                    <h2>搜索结果</h2>
-                    <div class="row">
-                        <div class="col-md-10">
-                            <div class="card">
-                                <div class="card-header" data-background-color="purple">
-                                    <h4 class="title">会员预订/消费情况</h4>
-                                </div>
 
-                                <div class="card-content table-responsive">
-                                    <table class="table">
-                                        <thead class="text-primary">
-                                        <th>日期</th>
-                                        <th>客栈</th>
-                                        <th>房间</th>
-                                        <th>金额</th>
-                                        <th>操作</th>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>2017年02月13日</td>
-                                            <td>上海半岛酒店</td>
-                                            <td>标准间*2</td>
-                                            <td>￥3360</td>
-                                            <td><a href="#">详情</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2017年02月13日</td>
-                                            <td>上海半岛酒店</td>
-                                            <td>标准间*2</td>
-                                            <td>￥3360</td>
-                                            <td><a href="#">详情</a></td>
-                                        </tr>
 
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </section>
             </div>
         </div>
 
@@ -252,6 +249,9 @@
 
 <!--  Notifications Plugin    -->
 <script src="../../assets/js/bootstrap-notify.js"></script>
+
+<!--  Google Maps Plugin    -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
 <!-- Material Dashboard javascript methods -->
 <script src="../../assets/js/material-dashboard.js"></script>

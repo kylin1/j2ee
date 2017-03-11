@@ -24,11 +24,6 @@ public class TestController {
     @Autowired
     MemberService service;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index() {
-        return "index";
-    }
-
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public void test() {
         Hotel hotel = repository.findOne(5);

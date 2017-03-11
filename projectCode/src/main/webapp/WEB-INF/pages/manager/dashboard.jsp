@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="ch-ZN">
 <head>
@@ -6,22 +7,19 @@
     <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>Pocket</title>
+    <title>Dashboard-manager</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
-
-    <!-- Bootstrap core CSS     -->
+    <!--  Bootstrap core CSS     -->
     <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
-
     <!--  Material Dashboard CSS    -->
     <link href="../../assets/css/material-dashboard.css" rel="stylesheet"/>
-
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="../../assets/css/demo.css" rel="stylesheet" />
 
-    <!--     Fonts and icons     -->
+    <!--  Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
 
@@ -30,48 +28,48 @@
 <body>
 
 <div class="wrapper">
+
     <!--整个左侧导航栏-->
     <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg">
 
         <!--导航左上角的图标-->
         <div class="logo">
-            <a href="search.html" class="simple-text">
-                Hostel World
+            <a href="#" class="simple-text">
+                Hostel World-经理
             </a>
         </div>
 
         <!--导航栏整体-->
         <div class="sidebar-wrapper"    >
             <ul class="nav">
-
                 <li>
-                    <a href="membership.html">
+                    <a href="approve.jsp">
                         <i class="material-icons">today</i>
-                        <p>Membership</p>
+                        <p>审批请求</p>
                     </a>
                 </li>
 
                 <!--这是一个导航的图标-->
                 <li>
-                    <a href="order.html">
+                    <a href="settle.jsp">
                         <!-- 导航图标的样式-->
                         <i class="material-icons">timeline</i>
                         <!--显示的文字-->
-                        <p>Orders</p>
+                        <p>结算管理</p>
                     </a>
                 </li>
 
                 <!--下面是其他的item代表更多的导航-->
                 <li>
-                    <a href="pocket.html">
+                    <a href="statistic.jsp">
                         <i class="material-icons">stars</i>
-                        <p>Pocket</p>
+                        <p>统计信息</p>
                     </a>
                 </li>
                 <li>
-                    <a href="profile.html">
+                    <a href="member.jsp">
                         <i class="material-icons">group</i>
-                        <p>Profile</p>
+                        <p>会员信息</p>
                     </a>
                 </li>
 
@@ -91,7 +89,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Hi, com.kylin :)</a>
+                    <a class="navbar-brand" href="#">Hi, 经理 :)</a>
                 </div>
                 <!--右侧三个小按钮-->
                 <div class="collapse navbar-collapse" id="example-navbar-primary">
@@ -105,13 +103,13 @@
                                 Messages
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">You membership will come to an end soon!</a></li>
-                                <li><a href="#">Invite your co-worker to join Hostel World and you’ll get ￥206 after their first trip.</a></li>
+                                <li><a href="#">您有3个新的申请需要进行审批！</a></li>
+                                <li><a href="#">Hostel World上月的统计信息已经发布，可以查看！</a></li>
                             </ul>
                         </li>
 
                         <li class="active">
-                            <a href="dashboard.html">
+                            <a href="dashboard.jsp">
                                 <i class="material-icons">account_circle</i>
                                 Dashboard
                             </a>
@@ -131,66 +129,8 @@
         <!--2.内容-->
         <div class="content">
             <div class="container-fluid">
-
-                <!--recent order-->
                 <div class="row">
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-header" data-background-color="purple">
-                                <h4 class="title">账户充值</h4>
-                            </div>
 
-                            <div class="card-content">
-                                <form action="{{ url('competition') }}" method="POST">
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <label class="control-label">当前余额</label>
-                                        </div>
-
-                                        <div class="col-sm-3">
-                                            <p class="text-info">￥800</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-
-                                        <div class="col-sm-3">
-                                            <label class="control-label">充值金额(￥)</label>
-                                        </div>
-
-                                        <div class="col-sm-3">
-                                            <input type="text" name="name">
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-
-                                        <div class="col-sm-3">
-                                            <label class="control-label">使用积分(100积分=￥1)</label>
-                                        </div>
-
-                                        <div class="col-sm-3">
-                                            <input type="text" name="name">
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <button type="submit" class="btn btn-primary pull-left">
-                                                确定</button>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <button type="submit" class="btn btn-danger pull-left">
-                                                取消</button>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -237,9 +177,6 @@
 
 <!--  Notifications Plugin    -->
 <script src="../../assets/js/bootstrap-notify.js"></script>
-
-<!--  Google Maps Plugin    -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
 <!-- Material Dashboard javascript methods -->
 <script src="../../assets/js/material-dashboard.js"></script>
