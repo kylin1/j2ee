@@ -19,10 +19,15 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("guest")
-public class NavigationController {
+public class GuestNavigationController {
 
     @Autowired
     private MemberService memberService;
+
+    @RequestMapping(value = "search", method = RequestMethod.GET)
+    public ModelAndView search() {
+        return new ModelAndView("guest/search");
+    }
 
     @RequestMapping(value = "membership",method = RequestMethod.GET)
     public ModelAndView membership(){

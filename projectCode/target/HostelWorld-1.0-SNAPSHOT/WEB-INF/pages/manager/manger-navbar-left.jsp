@@ -21,7 +21,7 @@
   <div class="sidebar-wrapper">
     <ul class="nav">
       <li>
-        <a href="approve.jsp">
+        <a href="${pageContext.request.contextPath}/my-manager/approve">
           <i class="material-icons">today</i>
           <p>审批请求</p>
         </a>
@@ -29,7 +29,7 @@
 
       <!--这是一个导航的图标-->
       <li>
-        <a href="settle.jsp">
+        <a href="${pageContext.request.contextPath}/my-manager/settle">
           <!-- 导航图标的样式-->
           <i class="material-icons">timeline</i>
           <!--显示的文字-->
@@ -39,13 +39,14 @@
 
       <!--下面是其他的item代表更多的导航-->
       <li>
-        <a href="statistic.jsp">
+        <a href="${pageContext.request.contextPath}/my-manager/statistic">
           <i class="material-icons">stars</i>
           <p>统计信息</p>
         </a>
       </li>
+
       <li>
-        <a href="member.jsp">
+        <a href="${pageContext.request.contextPath}/my-manager/member">
           <i class="material-icons">group</i>
           <p>会员信息</p>
         </a>

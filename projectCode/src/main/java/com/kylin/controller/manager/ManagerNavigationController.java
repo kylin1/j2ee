@@ -11,28 +11,28 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("my-manager")
-public class ManagerController {
+public class ManagerNavigationController {
 
     @RequestMapping(value = "approve", method = RequestMethod.GET)
-    public ModelAndView test5() {
+    public ModelAndView approve() {
         ModelAndView modelAndView = new ModelAndView("manager/approve");
         return modelAndView;
     }
 
     @RequestMapping(value = "member", method = RequestMethod.GET)
-    public ModelAndView test6() {
+    public ModelAndView member() {
         ModelAndView modelAndView = new ModelAndView("manager/member");
         return modelAndView;
     }
 
     @RequestMapping(value = "settle", method = RequestMethod.GET)
-    public ModelAndView test7() {
+    public ModelAndView settle() {
         ModelAndView modelAndView = new ModelAndView("manager/settle");
         return modelAndView;
     }
 
     @RequestMapping(value = "statistic", method = RequestMethod.GET)
-    public ModelAndView test8() {
+    public ModelAndView statistic() {
         ModelAndView modelAndView = new ModelAndView("manager/statistic");
         return modelAndView;
     }

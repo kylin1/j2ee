@@ -1,5 +1,6 @@
 package com.kylin.controller.main;
 
+import com.kylin.repository.HotelRepository;
 import com.kylin.service.MemberService;
 import com.kylin.service.SystemUserService;
 import com.kylin.tools.MyResponse;
@@ -29,6 +30,8 @@ public class SystemUserController {
     private SystemUserService systemUserService;
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private HotelRepository hotelRepository;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
@@ -41,41 +44,25 @@ public class SystemUserController {
         String password = request.getParameter("password");
 
         try {
+            // 用户登录
             LoginResultVO resultVO = this.systemUserService.login(account, password);
+            // 获取用户信息
             int userID = resultVO.getUserID();
             SystemUserType userType = resultVO.getUserType();
 
+            // 获取用户登录之后的主页
             String page = this.getLadingPageOfUser(userType);
 
-            this.setSession(request,userID,userType);
-
-            ModelAndView mv = new ModelAndView(page);
-            return mv;
+            // 设置用户信息到session之中
+            this.setSession(request, userID, userType);
+            // 返回结果
+            return new ModelAndView(page);
         } catch (NotFoundException e) {
             e.printStackTrace();
         } catch (BadInputException e) {
             e.printStackTrace();
         }
         return null;
-    }
-
-    /**
-     * 用户登录之后将用户信息写入session
-     *
-     * @param request
-     * @param userID
-     * @param userType
-     */
-    private void setSession(HttpServletRequest request,int userID, SystemUserType userType) {
-        HttpSession session = request.getSession();
-        session.setAttribute("userID",userID);
-        System.out.println("userID="+userID);
-
-        if (userType == SystemUserType.Guest) {
-            MemberInfoVO memberInfoVO = memberService.getMemberInfoByUserId(userID);
-            session.setAttribute("memberInfo",memberInfoVO);
-            System.out.println("set memberInfo = "+memberInfoVO.getName());
-        }
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
@@ -93,7 +80,40 @@ public class SystemUserController {
         }
     }
 
-    private String getLadingPageOfUser(SystemUserType userType){
+    /**
+     * 用户登录之后将用户信息写入session
+     *
+     * @param request
+     * @param userID
+     * @param userType
+     */
+    private void setSession(HttpServletRequest request, int userID, SystemUserType userType) {
+        HttpSession session = request.getSession();
+        session.setAttribute("userID", userID);
+        System.out.println("userID=" + userID);
+
+        if (userType == SystemUserType.Guest) {
+            MemberInfoVO memberInfoVO = memberService.getMemberInfoByUserId(userID);
+            session.setAttribute("memberInfo", memberInfoVO);
+            System.out.println("set memberInfo = " + memberInfoVO.getName());
+
+        } else if (userType == SystemUserType.Hotel) {
+            int hotelId = hotelRepository.findIdByUserId(userID);
+            session.setAttribute("hotelId", hotelId);
+            System.out.println("set hotelId = " + hotelId);
+
+        } else if (userType == SystemUserType.Manager) {
+            System.out.println("set manager ");
+        }
+    }
+
+    /**
+     * 根据用户类别获取登录之后的主页面
+     *
+     * @param userType
+     * @return
+     */
+    private String getLadingPageOfUser(SystemUserType userType) {
         if (userType == SystemUserType.Guest) {
             return "/guest/membership";
         } else if (userType == SystemUserType.Hotel) {

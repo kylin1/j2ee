@@ -11,28 +11,29 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("hotel")
-public class HotelController {
+public class HotelNavigationController {
+
 
     @RequestMapping(value = "customer-register", method = RequestMethod.GET)
-    public ModelAndView test5() {
+    public ModelAndView customerRegister() {
         ModelAndView modelAndView = new ModelAndView("hotel/customer-register");
         return modelAndView;
     }
 
     @RequestMapping(value = "post-plan", method = RequestMethod.GET)
-    public ModelAndView test6() {
+    public ModelAndView postPlan() {
         ModelAndView modelAndView = new ModelAndView("hotel/post-plan");
         return modelAndView;
     }
 
     @RequestMapping(value = "statistic", method = RequestMethod.GET)
-    public ModelAndView test7() {
+    public ModelAndView statistic() {
         ModelAndView modelAndView = new ModelAndView("hotel/statistic");
         return modelAndView;
     }
 
     @RequestMapping(value = "request", method = RequestMethod.GET)
-    public ModelAndView test8() {
+    public ModelAndView request() {
         ModelAndView modelAndView = new ModelAndView("hotel/request");
         return modelAndView;
     }

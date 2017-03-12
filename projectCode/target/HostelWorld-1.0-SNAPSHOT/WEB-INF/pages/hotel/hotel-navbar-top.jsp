@@ -16,7 +16,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Hi, 客栈 :)</a>
+      <a class="navbar-brand" href="#">Hi, 客栈工作人员 :)</a>
     </div>
     <!--右侧三个小按钮-->
     <div class="collapse navbar-collapse" id="example-navbar-primary">
@@ -36,14 +36,14 @@
         </li>
 
         <li class="active">
-          <a href="dashboard.jsp">
+          <a href="#">
             <i class="material-icons">account_circle</i>
             Dashboard
           </a>
         </li>
 
         <li>
-          <a href="#setting">
+          <a href="#">
             <i class="material-icons">settings</i>
             Settings
           </a>

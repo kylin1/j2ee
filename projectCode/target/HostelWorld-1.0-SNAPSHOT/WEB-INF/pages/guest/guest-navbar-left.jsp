@@ -21,6 +21,13 @@
     <ul class="nav">
 
       <li>
+        <a href="${pageContext.request.contextPath}/guest/search">
+          <i class="material-icons">today</i>
+          <p>Search</p>
+        </a>
+      </li>
+
+      <li>
         <a href="${pageContext.request.contextPath}/guest/membership">
           <i class="material-icons">today</i>
           <p>Membership</p>

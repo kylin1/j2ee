@@ -13,73 +13,85 @@
   <jsp:param name="pageTitle" value="搜索"/>
 </jsp:include>
 
+
 <body>
 
 <div class="wrapper">
+  <!--整个左侧导航栏-->
+  <%@include file="guest-navbar-left.jsp" %>
 
-  <%@include file="reserve-navbar-top.jsp" %>
+  <!--主体界面-->
+  <div class="main-panel">
+    <!--1.导航栏-->
+    <%@include file="guest-navbar-top.jsp" %>
 
-  <div class="container-fluid container-sharing" style="margin: 3em 0 5em 4em;">
+    <!--2.内容-->
+    <div class="content">
+      <div class="container-fluid container-sharing" style="margin: 3em 0 5em 4em;">
 
-    <!--业务介绍行-->
-    <div class="description" style="margin: 0 40em 5em 0;">
-      <h2>Make your choice</h2>
-    </div>
+        <!--业务介绍行-->
+        <div class="description" style="margin: 0 10em 5em 0;">
+          <h2>Make your choice</h2>
+        </div>
 
-    <!-- 搜索信息 -->
-    <div class="row">
-      <div class="col-md-10">
-        <div class="card">
-          <div class="card-header" data-background-color="purple">
-            <h4 class="title">198 家酒店</h4>
-            <p class="category"></p>
-          </div>
-
-          <div class="card-content table-responsive">
-
-            <%--搜索结果为空--%>
-            <c:if test="${empty searchResult}">
-              <div class="alert alert-warning" role="alert">
-                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                抱歉,没有找到符合条件的酒店信息
+        <!-- 搜索信息 -->
+        <div class="row">
+          <div class="col-md-10">
+            <div class="card">
+              <div class="card-header" data-background-color="purple">
+                <h4 class="title">198 家酒店</h4>
+                <p class="category"></p>
               </div>
-            </c:if>
 
-            <%--如果搜索结果不为空--%>
-            <c:if test="${!empty searchResult}">
-              <table class="table">
-                <thead class="text-primary">
-                <th>名称</th>
-                <th>类型</th>
-                <th>地址</th>
-                <th>起价</th>
-                <th>操作</th>
-                </thead>
+              <div class="card-content table-responsive">
 
-                <tbody>
-                  <%--遍历所有结果--%>
-                <c:forEach items="${searchResult}" var="hotel">
-                  <tr>
-                    <td>${hotel.hotelName}</td>
-                    <td>${hotel.strHotelLevel}</td>
-                    <td>${hotel.hotelAddress}</td>
-                    <td>¥${hotel.lowestPerNightPrice}</td>
-                    <td><a class="a_post">预定</a></td>
-                  </tr>
-                </c:forEach>
-                </tbody>
+                <%--搜索结果为空--%>
+                <c:if test="${empty searchResult}">
+                  <div class="alert alert-warning" role="alert">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                    抱歉,没有找到符合条件的酒店信息
+                  </div>
+                </c:if>
 
-              </table>
-            </c:if>
+                <%--如果搜索结果不为空--%>
+                <c:if test="${!empty searchResult}">
+                  <table class="table">
+                    <thead class="text-primary">
+                    <th>名称</th>
+                    <th>类型</th>
+                    <th>地址</th>
+                    <th>起价</th>
+                    <th>操作</th>
+                    </thead>
 
+                    <tbody>
+                      <%--遍历所有结果--%>
+                    <c:forEach items="${searchResult}" var="hotel">
+                      <tr>
+                        <td>${hotel.hotelName}</td>
+                        <td>${hotel.strHotelLevel}</td>
+                        <td>${hotel.hotelAddress}</td>
+                        <td>¥${hotel.lowestPerNightPrice}</td>
+                        <td><a class="a_post">预定</a></td>
+                      </tr>
+                    </c:forEach>
+                    </tbody>
+
+                  </table>
+                </c:if>
+
+              </div>
+            </div>
           </div>
         </div>
+
       </div>
+
     </div>
 
+    <!--3.页脚-->
+    <%@include file="../common/footer.jsp" %>
   </div>
-
-  <%@include file="../common/footer.jsp" %>
 </div>
 
 </body>

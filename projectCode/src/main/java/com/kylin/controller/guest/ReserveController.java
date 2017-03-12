@@ -25,11 +25,6 @@ public class ReserveController {
     @Autowired
     private ReserveService reserveService;
 
-    @RequestMapping(value = "search", method = RequestMethod.GET)
-    public ModelAndView search() {
-        return new ModelAndView("guest/search");
-    }
-
     @RequestMapping(value = "search", method = RequestMethod.POST)
     public ModelAndView searchResult(HttpServletRequest request) {
         String location = request.getParameter("location");

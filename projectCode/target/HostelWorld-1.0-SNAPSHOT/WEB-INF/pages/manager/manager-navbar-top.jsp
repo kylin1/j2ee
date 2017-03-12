@@ -37,14 +37,14 @@
         </li>
 
         <li class="active">
-          <a href="dashboard.jsp">
+          <a href="#">
             <i class="material-icons">account_circle</i>
             Dashboard
           </a>
         </li>
 
         <li>
-          <a href="#setting">
+          <a href="#">
             <i class="material-icons">settings</i>
             Settings
           </a>

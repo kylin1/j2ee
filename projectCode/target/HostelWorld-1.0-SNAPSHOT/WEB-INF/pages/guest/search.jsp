@@ -15,52 +15,59 @@
 <body>
 
 <div class="wrapper">
+  <!--整个左侧导航栏-->
+  <%@include file="guest-navbar-left.jsp" %>
 
-  <%@include file="reserve-navbar-top.jsp"%>
+  <!--主体界面-->
+  <div class="main-panel">
+    <!--1.导航栏-->
+    <%@include file="guest-navbar-top.jsp" %>
 
-  <div class="container-fluid container-sharing" style="margin: 3em 0 5em 4em;">
+    <!--2.内容-->
+    <div class="content">
+      <div class="container-fluid container-sharing" style="margin: 3em 0 5em 4em;">
 
-    <!--业务介绍行-->
-    <div class="row" style="margin: 0 40em 5em 0;">
-      <h2>Airbnb Find unique homes, experiences, and local guides for your trip.</h2>
-    </div>
+        <!--业务介绍行-->
+        <div class="row" style="margin: 0 10em 5em 0;">
+          <h2>Airbnb Find unique homes, experiences, and local guides for your trip.</h2>
+        </div>
 
-    <!-- 搜索信息 -->
-    <div class="row">
-      <form action="/guest/search" method="post">
+        <!-- 搜索信息 -->
         <div class="row">
+          <form action="${pageContext.request.contextPath}/guest/search" method="post">
 
-          <div class="col-md-2">
-            <div class="form-group label-floating">
-              <label class="control-label">where</label>
-              <input type="text" name="location" class="form-control">
-            </div>
-          </div>
-
-          <div class="col-md-4">
+            <%--地点时间--%>
             <div class="row">
-
-              <div class="col-sm-6">
+              <div class="col-md-3">
                 <div class="form-group label-floating">
-                  <label class="control-label">check in</label>
-                  <input type="text" name="fromDate" id="dpd1" data-date-format="yyyy-mm-dd" class="form-control">
+                  <label class="control-label">where</label>
+                  <input type="text" name="location" class="form-control">
                 </div>
               </div>
+              <div class="col-md-4">
+                <div class="row">
 
-              <div class="col-sm-6">
-                <div class="form-group label-floating">
-                  <label class="control-label">check out</label>
-                  <input type="text" name="endDate" id="dpd2"data-date-format="yyyy-mm-dd" class="form-control">
+                  <div class="col-sm-6">
+                    <div class="form-group label-floating">
+                      <label class="control-label">check in</label>
+                      <input type="text" name="fromDate" id="dpd1" data-date-format="yyyy-mm-dd" class="form-control">
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group label-floating">
+                      <label class="control-label">check out</label>
+                      <input type="text" name="endDate" id="dpd2" data-date-format="yyyy-mm-dd" class="form-control">
+                    </div>
+                  </div>
+
                 </div>
-              </div>
 
+              </div>
             </div>
 
-          </div>
-
-          <div class="col-md-4">
+            <%--房间信息--%>
             <div class="row">
-
               <div class="col-md-3">
                 <div class="form-group label-floating">
                   <label class="control-label">roomTypeInt</label>
@@ -75,24 +82,22 @@
                 </div>
               </div>
 
-              <div class="col-md-6">
+              <div class="col-md-offset-1 col-md-2">
                 <button type="submit" class="btn btn-primary pull-left" style="margin-top: 1.7em">
                   search
                 </button>
+
               </div>
             </div>
-
-          </div>
-
-
+          </form>
         </div>
 
-      </form>
+      </div>
     </div>
 
+    <!--3.页脚-->
+    <%@include file="../common/footer.jsp" %>
   </div>
-
-  <%@include file="../common/footer.jsp" %>
 </div>
 
 </body>

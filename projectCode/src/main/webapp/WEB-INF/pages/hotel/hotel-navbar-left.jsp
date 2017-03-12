@@ -20,7 +20,7 @@
   <div class="sidebar-wrapper">
     <ul class="nav">
       <li>
-        <a href="customer-register.jsp">
+        <a href="${pageContext.request.contextPath}/hotel/customer-register">
           <i class="material-icons">today</i>
           <p>住客登记</p>
         </a>
@@ -28,7 +28,7 @@
 
       <!--这是一个导航的图标-->
       <li>
-        <a href="post-plan.jsp">
+        <a href="${pageContext.request.contextPath}/hotel/post-plan">
           <!-- 导航图标的样式-->
           <i class="material-icons">timeline</i>
           <!--显示的文字-->
@@ -38,13 +38,14 @@
 
       <!--下面是其他的item代表更多的导航-->
       <li>
-        <a href="request.jsp">
+        <a href="${pageContext.request.contextPath}/hotel/request">
           <i class="material-icons">stars</i>
           <p>申请&审批</p>
         </a>
       </li>
+
       <li>
-        <a href="statistic.jsp">
+        <a href="${pageContext.request.contextPath}/hotel/statistic">
           <i class="material-icons">group</i>
           <p>统计信息</p>
         </a>
