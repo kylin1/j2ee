@@ -28,7 +28,7 @@
         <section>
           <h2>新的申请</h2>
           <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-12">
               <div class="card">
                 <div class="card-header" data-background-color="purple">
                   <h4 class="title">还未处理的申请</h4>
@@ -53,7 +53,8 @@
                           <td>${wait.detailContent}</td>
                           <td>${wait.strTime}</td>
                           <td>
-                            <a href="/my-manager/approve/pass/${wait.id}" type="button" class="btn btn-sm btn-success">通过</a><a href="/my-manager/approve/deny/${wait.id}" type="button" class="btn btn-sm btn-danger">否决</a>
+                            <a href="/my-manager/approve/pass/${wait.id}" type="button" class="btn btn-sm btn-success">通过</a>
+                            <a href="/my-manager/approve/deny/${wait.id}" type="button" class="btn btn-sm btn-danger">否决</a>
                           </td>
                         </tr>
                       </c:forEach>

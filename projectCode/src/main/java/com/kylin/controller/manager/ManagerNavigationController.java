@@ -1,6 +1,8 @@
 package com.kylin.controller.manager;
 
 import com.kylin.service.ManagerApprovalService;
+import com.kylin.service.PaymentService;
+import com.kylin.vo.PaymentVO;
 import com.kylin.vo.RequestVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,8 @@ public class ManagerNavigationController {
 
     @Autowired
     private ManagerApprovalService approvalService;
+    @Autowired
+    private PaymentService paymentService;
 
     @RequestMapping(value = "approve", method = RequestMethod.GET)
     public ModelAndView approve() {
@@ -40,6 +44,10 @@ public class ManagerNavigationController {
     @RequestMapping(value = "settle", method = RequestMethod.GET)
     public ModelAndView settle() {
         ModelAndView modelAndView = new ModelAndView("manager/settle");
+        List<PaymentVO> waitingList = this.paymentService.getWaitingPayment();
+        List<PaymentVO> doneList = this.paymentService.getDonePayment();
+        modelAndView.addObject("waitingList",waitingList);
+        modelAndView.addObject("doneList",doneList);
         return modelAndView;
     }
 

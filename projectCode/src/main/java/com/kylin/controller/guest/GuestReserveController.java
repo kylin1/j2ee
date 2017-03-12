@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("guest")
-public class ReserveController {
+public class GuestReserveController {
 
     @Autowired
     private ReserveService reserveService;

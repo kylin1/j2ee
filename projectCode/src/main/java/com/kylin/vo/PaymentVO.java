@@ -1,5 +1,8 @@
 package com.kylin.vo;
 
+import com.kylin.tools.DateHelper;
+
+import java.text.ParseException;
 import java.util.Date;
 
 /**
@@ -7,6 +10,8 @@ import java.util.Date;
  * All rights reserved.
  */
 public class PaymentVO {
+
+    private int id;
 
     // hotel
     private int hotelId;
@@ -18,6 +23,7 @@ public class PaymentVO {
 
     //支付时间
     private Date payTime;
+    private String strTime;
 
     //金额
     private int price;
@@ -25,13 +31,23 @@ public class PaymentVO {
     //是否已经结算
     private boolean isSettled;
 
-    public PaymentVO(int hotelId, String hotelName, String memberAccount, Date payTime, int price, boolean isSettled) {
+    public PaymentVO(int id, int hotelId, String hotelName, String memberAccount, Date payTime, int price, boolean isSettled) {
+        this.id = id;
         this.hotelId = hotelId;
         this.hotelName = hotelName;
         this.memberName = memberAccount;
         this.payTime = payTime;
         this.price = price;
         this.isSettled = isSettled;
+        try {
+            this.init();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void init() throws ParseException {
+        this.strTime = DateHelper.getDateTimeString(this.payTime);
     }
 
     public int getHotelId() {
@@ -56,5 +72,13 @@ public class PaymentVO {
 
     public boolean isSettled() {
         return isSettled;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getStrTime() {
+        return strTime;
     }
 }

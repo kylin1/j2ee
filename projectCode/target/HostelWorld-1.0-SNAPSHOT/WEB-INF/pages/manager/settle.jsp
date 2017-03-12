@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="ch-ZN">
@@ -33,40 +34,31 @@
                 </div>
 
                 <div class="card-content table-responsive">
-                  <table class="table">
-                    <thead class="text-primary">
-                    <th>客栈</th>
-                    <th>会员</th>
-                    <th>支付时间</th>
-                    <th>金额</th>
-                    <th>操作</th>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>上海和平饭店</td>
-                      <td>一只麟</td>
-                      <td>2017年02月13日10:00:59</td>
-                      <td>￥389</td>
-                      <td><a href="#">结算</a></td>
-                    </tr>
-                    <tr>
-                      <td>上海和平饭店</td>
-                      <td>一只麟</td>
-                      <td>2017年02月13日10:00:59</td>
-                      <td>￥389</td>
-                      <td><a href="#">结算</a></td>
-                    </tr>
-                    <tr>
-                      <td>上海和平饭店</td>
-                      <td>一只麟</td>
-                      <td>2017年02月13日10:00:59</td>
-                      <td>￥389</td>
-                      <td><a href="#">结算</a></td>
-                    </tr>
-
-                    </tbody>
-                  </table>
-
+                  <c:if test="${!empty waitingList}">
+                    <table class="table">
+                      <thead class="text-primary">
+                      <th>客栈</th>
+                      <th>会员</th>
+                      <th>支付时间</th>
+                      <th>金额</th>
+                      <th>操作</th>
+                      </thead>
+                      <tbody>
+                      <c:forEach items="${waitingList}" var="wait">
+                        <tr>
+                          <td>${wait.hotelName}</td>
+                          <td>${wait.memberName}</td>
+                          <td>${wait.strTime}</td>
+                          <td>￥${wait.price}</td>
+                          <td>
+                            <a href="/my-manager/payment/settle/${wait.id}" type="button"
+                               class="btn btn-sm btn-success">通过</a>
+                          </td>
+                        </tr>
+                      </c:forEach>
+                      </tbody>
+                    </table>
+                  </c:if>
                 </div>
               </div>
             </div>
@@ -84,34 +76,31 @@
                 </div>
 
                 <div class="card-content table-responsive">
-                  <table class="table">
-                    <thead class="text-primary">
-                    <th>客栈</th>
-                    <th>会员</th>
-                    <th>支付时间</th>
-                    <th>金额</th>
-                    <th>操作</th>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>上海和平饭店</td>
-                      <td>一只麟</td>
-                      <td>2017年02月13日10:00:59</td>
-                      <td>￥389</td>
-                      <td><a href="#">详情</a></td>
-                    </tr>
-                    <tr>
-                      <td>上海和平饭店</td>
-                      <td>一只麟</td>
-                      <td>2017年02月13日10:00:59</td>
-                      <td>￥389</td>
-                      <td><a href="#">详情</a></td>
-                    </tr>
-
-
-                    </tbody>
-                  </table>
-
+                  <c:if test="${!empty doneList}">
+                    <table class="table">
+                      <thead class="text-primary">
+                      <th>客栈</th>
+                      <th>会员</th>
+                      <th>支付时间</th>
+                      <th>金额</th>
+                      <th>操作</th>
+                      </thead>
+                      <tbody>
+                      <c:forEach items="${doneList}" var="done">
+                        <tr>
+                          <td>${done.hotelName}</td>
+                          <td>${done.memberName}</td>
+                          <td>${done.strTime}</td>
+                          <td>￥${done.price}</td>
+                          <td>
+                            <a href="/my-manager/payment/${done.id}" type="button"
+                               class="btn btn-sm btn-info">详情</a>
+                          </td>
+                        </tr>
+                      </c:forEach>
+                      </tbody>
+                    </table>
+                  </c:if>
                 </div>
               </div>
             </div>

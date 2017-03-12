@@ -59,7 +59,7 @@ public class PaymentServiceImpl implements PaymentService {
 
             // 付款状态是 输入的状态
             if (statusInt == isSettled) {
-                PaymentVO vo = new PaymentVO(hotelId, hotel.getName(), member.getName(),
+                PaymentVO vo = new PaymentVO(payment.getId(),hotelId, hotel.getName(), member.getName(),
                         payment.getTime(), payment.getPrice(), isSettled == this.settled);
                 result.add(vo);
             }

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping("guest")
-public class PocketController {
+public class GuestPocketController {
 
     @Autowired
     private MemberService memberService;

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("guest")
-public class InfoController {
+public class GuestInfoController {
 
     @Autowired
     private MemberService memberService;
