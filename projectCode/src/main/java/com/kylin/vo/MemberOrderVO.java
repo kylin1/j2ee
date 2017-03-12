@@ -1,5 +1,6 @@
 package com.kylin.vo;
 
+import com.kylin.tools.DateHelper;
 import com.kylin.tools.myenum.MemberOrderStatus;
 
 import java.util.Date;
@@ -18,26 +19,41 @@ public class MemberOrderVO {
 
     // 预定日期
     private Date orderDate;
+    private String stringOrderDate;
 
     // 出行人
+    private String stringCustomers;
     private List<String> customers;
 
     private Date checkInDate;
+    private String stringCheckInDate;
 
     private Date checkOutDate;
+    private String stringCheckOutDate;
 
     private int totalPrice;
 
+    private String stringStatus;
     private MemberOrderStatus orderStatus;
 
-    public MemberOrderVO(String hotelName, Date orderDate, List<String> customers, Date checkInDate, Date checkOutDate, int totalPrice, MemberOrderStatus orderStatus) {
+    public MemberOrderVO(String hotelName, Date orderDate, List<String> customers,
+                         Date checkInDate, Date checkOutDate, int totalPrice, MemberOrderStatus orderStatus) {
         this.hotelName = hotelName;
         this.orderDate = orderDate;
-        this.customers = customers;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.totalPrice = totalPrice;
+        this.customers = customers;
         this.orderStatus = orderStatus;
+        this.init();
+    }
+
+    private void init() {
+        this.stringCustomers = this.getAllCustomer();
+        this.stringStatus = this.orderStatus.getStringStatus();
+        this.stringOrderDate = DateHelper.getDateString(orderDate);
+        this.stringCheckInDate = DateHelper.getDateString(checkInDate);
+        this.stringCheckOutDate = DateHelper.getDateString(checkOutDate);
     }
 
     public String getHotelName() {
@@ -48,8 +64,25 @@ public class MemberOrderVO {
         return orderDate;
     }
 
-    public List<String> getCustomers() {
-        return customers;
+    public String getStringOrderDate() {
+        return stringOrderDate;
+    }
+
+    public String getStringCheckInDate() {
+        return stringCheckInDate;
+    }
+
+    public String getStringCheckOutDate() {
+        return stringCheckOutDate;
+    }
+
+    public String getAllCustomer() {
+        StringBuilder builder = new StringBuilder();
+        for(String name:this.customers){
+            builder.append(name);
+            builder.append(",");
+        }
+        return builder.toString();
     }
 
     public Date getCheckInDate() {
@@ -66,5 +99,30 @@ public class MemberOrderVO {
 
     public MemberOrderStatus getOrderStatus() {
         return orderStatus;
+    }
+
+    public String getStringCustomers() {
+        return stringCustomers;
+    }
+
+    public List<String> getCustomers() {
+        return customers;
+    }
+
+    public String getStringStatus() {
+        return stringStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "MemberOrderVO{" +
+                "hotelName='" + hotelName + '\'' +
+                ", orderDate=" + orderDate +
+                ", customers=" + customers +
+                ", checkInDate=" + checkInDate +
+                ", checkOutDate=" + checkOutDate +
+                ", totalPrice=" + totalPrice +
+                ", orderStatus=" + orderStatus +
+                '}';
     }
 }

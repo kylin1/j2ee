@@ -32,4 +32,5 @@ public enum MemberOrderStatus {
     public static MemberOrderStatus getEnum(int status) {
         return MemberOrderStatus.values()[status];
     }
+
 }

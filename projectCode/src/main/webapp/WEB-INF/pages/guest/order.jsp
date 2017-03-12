@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!doctype html>
@@ -30,61 +31,37 @@
                 <h4 class="title">全部订单</h4>
               </div>
               <div class="card-content table-responsive">
-                <table class="table">
-                  <thead class="text-primary">
-                  <tr>
-                    <th>酒店</th>
-                    <th>预定日期</th>
-                    <th>出行人</th>
-                    <th>出行日期</th>
-                    <th>总金额</th>
-                    <th>状态</th>
-                    <th>操作</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>海友良品酒店（上海罗山路地铁站店）</td>
-                    <td>2017-02-01</td>
-                    <td>一只麟</td>
-                    <td>2017-02-08至2017-02-10</td>
-                    <td class="text-primary">¥386</td>
-                    <td>已成交</td>
-                    <td><a href="#">点评酒店</a></td>
-                  </tr>
 
-                  <tr>
-                    <td>海友良品酒店（上海罗山路地铁站店）</td>
-                    <td>2017-02-01</td>
-                    <td>一只麟</td>
-                    <td>2017-02-08至2017-02-10</td>
-                    <td class="text-primary">¥386</td>
-                    <td>已成交</td>
-                    <td><a href="#">点评酒店</a></td>
-                  </tr>
+                <c:if test="${!empty orderVOList}">
+                  <table class="table">
+                    <thead class="text-primary">
+                    <tr>
+                      <th>酒店</th>
+                      <th>预定日期</th>
+                      <th>出行人</th>
+                      <th>出行日期</th>
+                      <th>总金额</th>
+                      <th>状态</th>
+                      <th>操作</th>
+                    </tr>
+                    </thead>
 
-                  <tr>
-                    <td>海友良品酒店（上海罗山路地铁站店）</td>
-                    <td>2017-02-01</td>
-                    <td>一只麟</td>
-                    <td>2017-02-08至2017-02-10</td>
-                    <td class="text-primary">¥386</td>
-                    <td>已成交</td>
-                    <td><a href="#">点评酒店</a></td>
-                  </tr>
+                    <tbody>
+                    <c:forEach items="${orderVOList}" var="order">
+                      <tr>
+                        <td>${order.hotelName}</td>
+                        <td>${order.stringOrderDate}</td>
+                        <td>${order.stringCustomers}</td>
+                        <td>${order.stringCheckInDate}至${order.stringCheckOutDate}</td>
+                        <td class="text-primary">¥${order.totalPrice}</td>
+                        <td>${order.orderStatus.stringStatus}</td>
+                        <td><a href="#">点评酒店</a></td>
+                      </tr>
+                    </c:forEach>
+                    </tbody>
 
-                  <tr>
-                    <td>海友良品酒店（上海罗山路地铁站店）</td>
-                    <td>2017-02-01</td>
-                    <td>一只麟</td>
-                    <td>2017-02-08至2017-02-10</td>
-                    <td class="text-primary">¥386</td>
-                    <td>已成交</td>
-                    <td><a href="#">点评酒店</a></td>
-                  </tr>
-
-                  </tbody>
-                </table>
+                  </table>
+                </c:if>
 
               </div>
             </div>

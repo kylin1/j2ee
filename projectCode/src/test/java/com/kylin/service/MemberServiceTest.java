@@ -33,10 +33,7 @@ public class MemberServiceTest {
     @Test
     public void testOrderList(){
         List<MemberOrderVO> memberOrderVOS = this.memberService.getOrderList(1);
-        for (MemberOrderVO memberOrderVO:memberOrderVOS){
-            System.out.println(memberOrderVO.getHotelName());
-            System.out.println(memberOrderVO.getCustomers().size());
-        }
+        memberOrderVOS.forEach(System.out::println);
     }
 
     @Test

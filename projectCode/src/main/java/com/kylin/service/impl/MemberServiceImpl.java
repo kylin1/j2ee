@@ -76,7 +76,7 @@ public class MemberServiceImpl implements MemberService {
         // every order
         for (MemberOrder order : memberOrders) {
             // basic info
-            int hotelId = order.getId();
+            int hotelId = order.getHotelId();
             String hotelName = hotelRepository.findNameById(hotelId);
             int totalPrice = order.getPrice();
             MemberOrderStatus orderStatus = MemberOrderStatus.getEnum(order.getStatus());

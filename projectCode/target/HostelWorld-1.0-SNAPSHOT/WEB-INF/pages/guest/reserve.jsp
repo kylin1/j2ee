@@ -158,24 +158,9 @@
 
 </body>
 
-<!--   Core JS Files   -->
-<script src="<%=request.getContextPath() %>/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath() %>/assets/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath() %>/assets/js/material.min.js" type="text/javascript"></script>
+<%@include file="../common/js-file.jsp"%>
 
-<!--  Charts Plugin -->
-<script src="<%=request.getContextPath() %>/assets/js/chartist.min.js"></script>
-
-<!--  Notifications Plugin    -->
-<script src="<%=request.getContextPath() %>/assets/js/bootstrap-notify.js"></script>
-
-<!-- Material Dashboard javascript methods -->
-<script src="<%=request.getContextPath() %>/assets/js/material-dashboard.js"></script>
-
-<!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
-<script src="<%=request.getContextPath() %>/assets/datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
-
-<script type="text/javascript">
+<script>
     var nowTemp = new Date();
     var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 

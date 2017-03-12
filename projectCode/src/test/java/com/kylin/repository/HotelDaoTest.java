@@ -21,6 +21,12 @@ public class HotelDaoTest {
     HotelRepository repository;
 
     @Test
+    public void testGetNameById(){
+        String name = this.repository.findNameById(1);
+        System.out.println(name);
+    }
+
+    @Test
     public void testGetOne(){
         int hotel = repository.findIdByUserId(500);
         System.out.println(hotel);
