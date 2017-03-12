@@ -61,11 +61,18 @@ public class MemberServiceImpl implements MemberService {
             this.repository.save(entity);
         }
 
-        MemberInfoVO memberInfoVO = new MemberInfoVO(memberId,
-                memberStatus, entity.getActivatedTime(), entity.getExpireTime(),
+        MemberInfoVO memberInfoVO = new MemberInfoVO(memberId, entity.getName(),
+                entity.getPhone(), entity.getBankCard(), memberStatus,
+                entity.getActivatedTime(), entity.getExpireTime(),
                 entity.getConsume(), entity.getBalance(), memberLevel, entity.getScore());
 
         return memberInfoVO;
+    }
+
+    @Override
+    public MemberInfoVO getMemberInfoByUserId(int userId) {
+        int memberId = this.repository.findMemberIdByUserId(userId);
+        return this.getMemberInfo(memberId);
     }
 
     @Override

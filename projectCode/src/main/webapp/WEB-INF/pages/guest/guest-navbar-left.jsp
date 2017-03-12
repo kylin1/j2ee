@@ -11,17 +11,17 @@
 
   <!--导航左上角的图标-->
   <div class="logo">
-    <a href="search.html" class="simple-text">
+    <a href="#" class="simple-text">
       Hostel World
     </a>
   </div>
 
   <!--导航栏整体-->
-  <div class="sidebar-wrapper"    >
+  <div class="sidebar-wrapper">
     <ul class="nav">
 
       <li>
-        <a href="membership.jsp">
+        <a href="${pageContext.request.contextPath}/guest/membership">
           <i class="material-icons">today</i>
           <p>Membership</p>
         </a>
@@ -29,7 +29,7 @@
 
       <!--这是一个导航的图标-->
       <li>
-        <a href="order.jsp">
+        <a href="${pageContext.request.contextPath}/guest/orders">
           <!-- 导航图标的样式-->
           <i class="material-icons">timeline</i>
           <!--显示的文字-->
@@ -39,13 +39,13 @@
 
       <!--下面是其他的item代表更多的导航-->
       <li>
-        <a href="pocket.jsp">
+        <a href="${pageContext.request.contextPath}/guest/pocket">
           <i class="material-icons">stars</i>
           <p>Pocket</p>
         </a>
       </li>
       <li>
-        <a href="profile.jsp">
+        <a href="${pageContext.request.contextPath}/guest/profile">
           <i class="material-icons">group</i>
           <p>Profile</p>
         </a>

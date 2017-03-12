@@ -20,6 +20,8 @@ public interface MemberService {
      */
     MemberInfoVO getMemberInfo(int memberId);
 
+    MemberInfoVO getMemberInfoByUserId(int userId);
+
     /**
      * 获取用户的订单历史
      *

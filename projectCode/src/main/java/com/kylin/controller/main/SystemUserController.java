@@ -1,11 +1,13 @@
 package com.kylin.controller.main;
 
+import com.kylin.service.MemberService;
 import com.kylin.service.SystemUserService;
 import com.kylin.tools.MyResponse;
 import com.kylin.tools.myenum.SystemUserType;
 import com.kylin.tools.myexception.BadInputException;
 import com.kylin.tools.myexception.NotFoundException;
 import com.kylin.vo.LoginResultVO;
+import com.kylin.vo.MemberInfoVO;
 import com.kylin.vo.common.MyMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,8 @@ public class SystemUserController {
 
     @Autowired
     private SystemUserService systemUserService;
+    @Autowired
+    private MemberService memberService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
@@ -41,11 +45,9 @@ public class SystemUserController {
             int userID = resultVO.getUserID();
             SystemUserType userType = resultVO.getUserType();
 
-            HttpSession session = request.getSession();
-            session.setAttribute("userID",userID);
-            System.out.println("userID="+userID);
-
             String page = this.getLadingPageOfUser(userType);
+
+            this.setSession(request,userID,userType);
 
             ModelAndView mv = new ModelAndView(page);
             return mv;
@@ -55,6 +57,25 @@ public class SystemUserController {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 用户登录之后将用户信息写入session
+     *
+     * @param request
+     * @param userID
+     * @param userType
+     */
+    private void setSession(HttpServletRequest request,int userID, SystemUserType userType) {
+        HttpSession session = request.getSession();
+        session.setAttribute("userID",userID);
+        System.out.println("userID="+userID);
+
+        if (userType == SystemUserType.Guest) {
+            MemberInfoVO memberInfoVO = memberService.getMemberInfoByUserId(userID);
+            session.setAttribute("memberInfo",memberInfoVO);
+            System.out.println("set memberInfo = "+memberInfoVO.getName());
+        }
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)

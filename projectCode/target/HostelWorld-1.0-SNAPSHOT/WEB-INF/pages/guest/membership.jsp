@@ -37,14 +37,14 @@
                     </div>
 
                     <div class="col-md-4">
-                      <p class="card-text">一只麟</p>
+                      <p class="card-text">${memberInfo.name}</p>
                     </div>
 
                     <div class="col-md-2">
                       <label class="control-label">状态</label>
                     </div>
                     <div class="col-md-4">
-                      <p class="text-success card-text">已激活</p>
+                      <p class="text-success card-text">${memberInfo.strStatus}</p>
                     </div>
                   </div>
 
@@ -53,14 +53,14 @@
                       <label class="control-label">激活时间</label>
                     </div>
                     <div class="col-md-4">
-                      <p class="card-text">2017-10-10</p>
+                      <p class="card-text">${memberInfo.strActivatedTime}</p>
                     </div>
 
                     <div class="col-md-2">
                       <label class="control-label">到期时间</label>
                     </div>
                     <div class="col-md-4">
-                      <p class="card-text">2018-10-10</p>
+                      <p class="card-text">${memberInfo.strExpireTime}</p>
                     </div>
                   </div>
 
@@ -69,13 +69,13 @@
                       <label class="control-label">累计消费</label>
                     </div>
                     <div class="col-md-4">
-                      <p class="card-text">￥3780</p>
+                      <p class="card-text">￥${memberInfo.totalConsume}</p>
                     </div>
                     <div class="col-md-2">
                       <label class="control-label">会员卡余额</label>
                     </div>
                     <div class="col-md-4">
-                      <p class="card-text">￥900</p>
+                      <p class="card-text">￥${memberInfo.memberCardRemain}</p>
                     </div>
                   </div>
 
@@ -84,29 +84,29 @@
                       <label class="control-label">会员级别</label>
                     </div>
                     <div class="col-md-4">
-                      <p class="card-text">高级会员</p>
+                      <p class="card-text">${memberInfo.strLevel}</p>
                     </div>
 
                     <div class="col-md-2">
                       <label class="control-label">积分</label>
                     </div>
                     <div class="col-md-4">
-                      <p class="card-text">3000</p>
+                      <p class="card-text">${memberInfo.memberScore}</p>
                     </div>
 
                   </div>
 
                   <div class="row">
                     <div class="col-md-3">
-                      <button type="submit" class="btn btn-primary pull-left">
+                      <a type="button" href="${pageContext.request.contextPath}/guest/top-up/${memberInfo.id}" class="btn btn-primary pull-left">
                         会员充值
-                      </button>
+                      </a>
                     </div>
 
                     <div class="col-md-3">
-                      <button type="submit" class="btn btn-danger pull-left">
+                      <a type="button" href="${pageContext.request.contextPath}/guest/cancel/${memberInfo.id}" class="btn btn-danger pull-left">
                         取消资格
-                      </button>
+                      </a>
                     </div>
                   </div>
                   <div class="clearfix"></div>

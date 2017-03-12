@@ -50,7 +50,7 @@
               <div class="col-sm-6">
                 <div class="form-group label-floating">
                   <label class="control-label">check out</label>
-                  <input type="text" name="endDate" id="dpd2" data-date-format="yyyy-mm-dd" class="form-control">
+                  <input type="text" name="endDate" id="dpd2"data-date-format="yyyy-mm-dd" class="form-control">
                 </div>
               </div>
 

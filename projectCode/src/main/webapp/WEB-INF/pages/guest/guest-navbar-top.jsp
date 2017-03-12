@@ -36,15 +36,15 @@
           </ul>
         </li>
 
-        <li class="active">
-          <a href="user.html">
+        <li>
+          <a href="#">
             <i class="material-icons">account_circle</i>
             Dashboard
           </a>
         </li>
 
         <li>
-          <a href="#setting">
+          <a href="#">
             <i class="material-icons">settings</i>
             Settings
           </a>

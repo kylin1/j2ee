@@ -17,6 +17,9 @@ public class MemberInfoVO {
 
     // id and account
     private int id;
+    private String name;
+    private String phone;
+    private String bankCard;
 
     // activate info
     private MemberStatus status;
@@ -42,8 +45,11 @@ public class MemberInfoVO {
     // 积分
     private int memberScore;
 
-    public MemberInfoVO(int id, MemberStatus status, Date activatedTime, Date expireTime, int totalConsume, int memberCardRemain, MemberLevel level, int memberScore) {
+    public MemberInfoVO(int id,String name,String phone,String bankCard, MemberStatus status, Date activatedTime, Date expireTime, int totalConsume, int memberCardRemain, MemberLevel level, int memberScore) {
         this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.bankCard = bankCard;
         this.status = status;
         this.activatedTime = activatedTime;
         this.expireTime = expireTime;
@@ -62,6 +68,10 @@ public class MemberInfoVO {
         this.strStatus = status.getStringStatus();
 
         this.strLevel = level.getStringLevel();
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getId() {
@@ -114,5 +124,13 @@ public class MemberInfoVO {
 
     public String getStrLevel() {
         return strLevel;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getBankCard() {
+        return bankCard;
     }
 }

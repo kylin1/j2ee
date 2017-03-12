@@ -18,7 +18,7 @@
         </li>
         <li>
           <a href="#">
-            About Us
+            userID=${userID}
           </a>
         </li>
         <li>

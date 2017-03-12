@@ -36,13 +36,13 @@
                     <div class="col-md-4">
                       <div class="form-group label-floating">
                         <label class="control-label">姓名</label>
-                        <input type="text" class="form-control">
+                        <input type="text" value="${memberInfo.name}" class="form-control">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group label-floating">
                         <label class="control-label">手机</label>
-                        <input type="text" class="form-control">
+                        <input type="text" value="${memberInfo.phone}" class="form-control">
                       </div>
                     </div>
                   </div>
@@ -76,7 +76,7 @@
                     <div class="col-md-4">
                       <div class="form-group label-floating">
                         <label class="control-label">银行卡</label>
-                        <input type="text" class="form-control">
+                        <input type="text" value="${memberInfo.bankCard}" class="form-control">
                       </div>
                     </div>
                   </div>
