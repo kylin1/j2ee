@@ -2,6 +2,7 @@ package com.kylin.service.impl;
 
 import com.kylin.model.HotelRequest;
 import com.kylin.repository.HotelRequestRepository;
+import com.kylin.tools.myenum.RequestStatus;
 import com.kylin.tools.myenum.RequestType;
 import com.kylin.vo.RequestVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,11 @@ public class ApprovalService {
             RequestType type = RequestType.getEnum(hotelTypeInt);
             String mainContent = hotelName + "正在申请" + type.getStringType();
             String detailedContent = hotelRequest.readDetail();
+            int status = hotelRequest.getStatus();
+            RequestStatus requestStatus = RequestStatus.getRequestStatus(status);
 
-            RequestVO vo = new RequestVO(hotelId, hotelName, mainContent, type, detailedContent);
+            RequestVO vo = new RequestVO(hotelRequest.getId(), hotelId, hotelName, mainContent,
+                    type, detailedContent, requestStatus);
             requestVOS.add(vo);
         }
 

@@ -15,6 +15,8 @@ import java.util.List;
 public class DateHelper {
 
     private static DateFormat dateFormat;
+    private static DateFormat dateTimeFormat;
+
     public static Date START;
     public static Date END;
 
@@ -24,6 +26,7 @@ public class DateHelper {
 
     static {
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateTimeFormat  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             START = DateHelper.getDate("2017-04-01");
             END = DateHelper.getDate("2017-04-03");
@@ -100,5 +103,9 @@ public class DateHelper {
         inputC.setTime(date);
         inputC.add(Calendar.DAY_OF_YEAR,days);
         return inputC.getTime();
+    }
+
+    public static String getDateTimeString(Date date) throws ParseException {
+        return dateTimeFormat.format(date);
     }
 }

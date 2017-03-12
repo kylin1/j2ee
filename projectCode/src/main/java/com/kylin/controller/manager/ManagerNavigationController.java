@@ -1,9 +1,14 @@
 package com.kylin.controller.manager;
 
+import com.kylin.service.ManagerApprovalService;
+import com.kylin.vo.RequestVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * Created by kylin on 12/03/2017.
@@ -13,9 +18,16 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("my-manager")
 public class ManagerNavigationController {
 
+    @Autowired
+    private ManagerApprovalService approvalService;
+
     @RequestMapping(value = "approve", method = RequestMethod.GET)
     public ModelAndView approve() {
         ModelAndView modelAndView = new ModelAndView("manager/approve");
+        List<RequestVO> waitingList = approvalService.getWaitingRequest();
+        List<RequestVO> doneList = approvalService.getDoneRequest();
+        modelAndView.addObject("waitingList",waitingList);
+        modelAndView.addObject("doneList",doneList);
         return modelAndView;
     }
 

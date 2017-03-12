@@ -42,6 +42,7 @@ public class MyMessage {
         this.data = newId;
     }
 
+
     public boolean isSuccess() {
         return isSuccess;
     }

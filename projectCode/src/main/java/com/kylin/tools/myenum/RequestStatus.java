@@ -21,5 +21,8 @@ public enum  RequestStatus {
         return stringStatus;
     }
 
+    public static RequestStatus getRequestStatus(int input) {
+        return RequestStatus.values()[input];
+    }
 
 }

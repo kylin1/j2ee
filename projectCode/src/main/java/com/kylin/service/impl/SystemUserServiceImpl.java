@@ -3,11 +3,9 @@ package com.kylin.service.impl;
 import com.kylin.model.SystemUser;
 import com.kylin.repository.SystemUserRepository;
 import com.kylin.service.SystemUserService;
-import com.kylin.tools.myexception.BadInputException;
-import com.kylin.tools.myexception.NotFoundException;
+import com.kylin.tools.myenum.SystemUserType;
 import com.kylin.vo.LoginResultVO;
 import com.kylin.vo.common.MyMessage;
-import com.kylin.tools.myenum.SystemUserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,20 +20,25 @@ public class SystemUserServiceImpl implements SystemUserService {
     protected SystemUserRepository repository;
 
     @Override
-    public LoginResultVO login(String account, String password) throws NotFoundException, BadInputException {
+    public LoginResultVO login(String account, String password)  {
         //根据邮箱信息查询用户
         SystemUser user = repository.findByAccount(account);
         //查询不到用户
-        if (user == null) {
-            throw new NotFoundException("用户不存在");
+        if(user == null){
+            return new LoginResultVO(false,"用户不存在");
         }
+
+        // 查询到了用户,下面检查类型
+        int intType = user.getType();
+        SystemUserType systemUserType = SystemUserType.getType(intType);
+
         //密码正确
         if (user.getPassword().equals(password)) {
-            int intType = user.getType();
-            SystemUserType systemUserType = SystemUserType.getType(intType);
-            return new LoginResultVO(user.getId(), systemUserType);
+            return new LoginResultVO(true, user.getId(), systemUserType);
+
+        //密码错误
         } else {
-            throw new BadInputException("密码错误");
+            return new LoginResultVO(false,"密码错误");
         }
     }
 

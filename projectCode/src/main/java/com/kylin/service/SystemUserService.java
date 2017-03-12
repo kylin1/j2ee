@@ -1,10 +1,8 @@
 package com.kylin.service;
 
-import com.kylin.tools.myexception.BadInputException;
-import com.kylin.tools.myexception.NotFoundException;
+import com.kylin.tools.myenum.SystemUserType;
 import com.kylin.vo.LoginResultVO;
 import com.kylin.vo.common.MyMessage;
-import com.kylin.tools.myenum.SystemUserType;
 
 /**
  * Created by kylin on 20/02/2017.
@@ -19,7 +17,7 @@ public interface SystemUserService {
      * @param password
      * @return
      */
-    LoginResultVO login(String account, String password) throws NotFoundException, BadInputException;
+    LoginResultVO login(String account, String password);
 
     /**
      * 注册

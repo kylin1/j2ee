@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!doctype html>
@@ -35,40 +36,30 @@
                 </div>
 
                 <div class="card-content table-responsive">
-                  <table class="table">
-                    <thead class="text-primary">
-                    <th>客栈</th>
-                    <th>类别</th>
-                    <th>主要内容</th>
-                    <th>提交时间</th>
-                    <th>操作</th>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>上海和平饭店</td>
-                      <td>修改客栈信息</td>
-                      <td>新增空闲房间</td>
-                      <td>2017年02月13日10:00:59</td>
-                      <td><a href="#">通过</a> <a href="#">否决</a></td>
-                    </tr>
-                    <tr>
-                      <td>上海和平饭店</td>
-                      <td>修改客栈信息</td>
-                      <td>新增空闲房间</td>
-                      <td>2017年02月13日10:00:59</td>
-                      <td><a href="#">通过</a> <a href="#">否决</a></td>
-                    </tr>
-                    <tr>
-                      <td>上海和平饭店</td>
-                      <td>修改客栈信息</td>
-                      <td>新增空闲房间</td>
-                      <td>2017年02月13日10:00:59</td>
-                      <td><a href="#">通过</a> <a href="#">否决</a></td>
-                    </tr>
-
-                    </tbody>
-                  </table>
-
+                  <c:if test="${!empty waitingList}">
+                    <table class="table">
+                      <thead class="text-primary">
+                      <th>客栈</th>
+                      <th>类别</th>
+                      <th>主要内容</th>
+                      <th>提交时间</th>
+                      <th>操作</th>
+                      </thead>
+                      <tbody>
+                      <c:forEach items="${waitingList}" var="wait">
+                        <tr>
+                          <td>${wait.hotelName}</td>
+                          <td>${wait.mainContent}</td>
+                          <td>${wait.detailContent}</td>
+                          <td>${wait.strTime}</td>
+                          <td>
+                            <a href="/my-manager/approve/pass/${wait.id}" type="button" class="btn btn-sm btn-success">通过</a><a href="/my-manager/approve/deny/${wait.id}" type="button" class="btn btn-sm btn-danger">否决</a>
+                          </td>
+                        </tr>
+                      </c:forEach>
+                      </tbody>
+                    </table>
+                  </c:if>
                 </div>
               </div>
             </div>
@@ -87,43 +78,32 @@
                 </div>
 
                 <div class="card-content table-responsive">
-                  <table class="table">
-                    <thead class="text-primary">
-                    <th>客栈</th>
-                    <th>类别</th>
-                    <th>主要内容</th>
-                    <th>提交时间</th>
-                    <th>处理结果</th>
-                    <th>操作</th>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>上海和平饭店</td>
-                      <td>开店申请</td>
-                      <td>申请加入Hostel World</td>
-                      <td>2017年02月13日10:00:59</td>
-                      <td>允许</td>
-                      <td><a href="#">详情</a></td>
-                    </tr>
-                    <tr>
-                      <td>上海和平饭店</td>
-                      <td>开店申请</td>
-                      <td>申请加入Hostel World</td>
-                      <td>2017年02月13日10:00:59</td>
-                      <td>允许</td>
-                      <td><a href="#">详情</a></td>
-                    </tr>
-                    <tr>
-                      <td>上海和平饭店</td>
-                      <td>开店申请</td>
-                      <td>申请加入Hostel World</td>
-                      <td>2017年02月13日10:00:59</td>
-                      <td>允许</td>
-                      <td><a href="#">详情</a></td>
-                    </tr>
-
-                    </tbody>
-                  </table>
+                  <c:if test="${!empty doneList}">
+                    <table class="table">
+                      <thead class="text-primary">
+                      <th>客栈</th>
+                      <th>类别</th>
+                      <th>主要内容</th>
+                      <th>提交时间</th>
+                      <th>处理结果</th>
+                      <th>操作</th>
+                      </thead>
+                      <tbody>
+                      <c:forEach items="${doneList}" var="done">
+                        <tr>
+                          <td>${done.hotelName}</td>
+                          <td>${done.strType}</td>
+                          <td>${done.mainContent}</td>
+                          <td>${done.strTime}</td>
+                          <td>${done.strStatus}</td>
+                          <td>
+                            <a href="/my-manager/approve/show/${done.id}" type="button" class="btn btn-sm btn-success">详情</a>
+                          </td>
+                        </tr>
+                      </c:forEach>
+                      </tbody>
+                    </table>
+                  </c:if>
 
                 </div>
               </div>

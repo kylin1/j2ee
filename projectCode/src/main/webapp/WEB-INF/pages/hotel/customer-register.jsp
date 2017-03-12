@@ -22,6 +22,7 @@
     <!--2.内容-->
     <div class="content">
       <div class="container-fluid">
+
         <!--酒店输入日期,房间类型:查找合适房间列表-->
         <div class="row">
           <div class="col-md-8">
@@ -78,6 +79,7 @@
         </div>
 
         <!--合适房间列表:在列表中点击一个房间进行预订-->
+
         <div class="row">
           <div class="col-md-10">
             <div class="card">
@@ -96,27 +98,12 @@
                   <th>操作</th>
                   </thead>
                   <tbody>
+
                   <tr>
                     <td>401</td>
                     <td>标准间</td>
                     <td>空闲</td>
                     <td>位于4楼楼梯附近</td>
-                    <td><a href="#">入住</a></td>
-                  </tr>
-
-                  <tr>
-                    <td>402</td>
-                    <td>标准间</td>
-                    <td>空闲</td>
-                    <td>无烟房</td>
-                    <td><a href="#">入住</a></td>
-                  </tr>
-
-                  <tr>
-                    <td>402</td>
-                    <td>标准间</td>
-                    <td>空闲</td>
-                    <td>配有阳台</td>
                     <td><a href="#">入住</a></td>
                   </tr>
 

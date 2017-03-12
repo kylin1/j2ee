@@ -1,12 +1,10 @@
-package com.kylin.controller.main;
+package com.kylin.controller;
 
 import com.kylin.repository.HotelRepository;
 import com.kylin.service.MemberService;
 import com.kylin.service.SystemUserService;
 import com.kylin.tools.MyResponse;
 import com.kylin.tools.myenum.SystemUserType;
-import com.kylin.tools.myexception.BadInputException;
-import com.kylin.tools.myexception.NotFoundException;
 import com.kylin.vo.LoginResultVO;
 import com.kylin.vo.MemberInfoVO;
 import com.kylin.vo.common.MyMessage;
@@ -43,26 +41,31 @@ public class SystemUserController {
         String account = request.getParameter("account");
         String password = request.getParameter("password");
 
-        try {
-            // 用户登录
-            LoginResultVO resultVO = this.systemUserService.login(account, password);
+        ModelAndView modelAndView = new ModelAndView();
+        // 用户登录
+        LoginResultVO resultVO = this.systemUserService.login(account, password);
+
+        // 登录成功
+        if (resultVO.isSuccess()) {
             // 获取用户信息
             int userID = resultVO.getUserID();
             SystemUserType userType = resultVO.getUserType();
 
             // 获取用户登录之后的主页
             String page = this.getLadingPageOfUser(userType);
+            modelAndView.setViewName(page);
 
             // 设置用户信息到session之中
             this.setSession(request, userID, userType);
-            // 返回结果
-            return new ModelAndView(page);
-        } catch (NotFoundException e) {
-            e.printStackTrace();
-        } catch (BadInputException e) {
-            e.printStackTrace();
+
+            // 返回错误提示信息
+        } else {
+            String message = resultVO.getDisplayMessage();
+            modelAndView.addObject("message", message);
         }
-        return null;
+
+        // 返回结果
+        return modelAndView;
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
@@ -81,6 +84,23 @@ public class SystemUserController {
     }
 
     /**
+     * 根据用户类别获取登录之后的主页面
+     *
+     * @param userType
+     * @return
+     */
+    private String getLadingPageOfUser(SystemUserType userType) {
+        if (userType == SystemUserType.Guest) {
+            return "redirect:/guest/membership";
+        } else if (userType == SystemUserType.Hotel) {
+            return "redirect:/hotel/customer-register";
+        } else if (userType == SystemUserType.Manager) {
+            return "redirect:/my-manager/approve";
+        }
+        return null;
+    }
+
+    /**
      * 用户登录之后将用户信息写入session
      *
      * @param request
@@ -90,37 +110,21 @@ public class SystemUserController {
     private void setSession(HttpServletRequest request, int userID, SystemUserType userType) {
         HttpSession session = request.getSession();
         session.setAttribute("userID", userID);
-        System.out.println("userID=" + userID);
+        System.out.println("session set userID = " + userID);
 
         if (userType == SystemUserType.Guest) {
             MemberInfoVO memberInfoVO = memberService.getMemberInfoByUserId(userID);
             session.setAttribute("memberInfo", memberInfoVO);
-            System.out.println("set memberInfo = " + memberInfoVO.getName());
+            System.out.println("session set memberInfo = " + memberInfoVO.getName());
 
         } else if (userType == SystemUserType.Hotel) {
             int hotelId = hotelRepository.findIdByUserId(userID);
             session.setAttribute("hotelId", hotelId);
-            System.out.println("set hotelId = " + hotelId);
+            System.out.println("session set hotelId = " + hotelId);
 
         } else if (userType == SystemUserType.Manager) {
-            System.out.println("set manager ");
+            System.out.println("session set manager ");
         }
     }
 
-    /**
-     * 根据用户类别获取登录之后的主页面
-     *
-     * @param userType
-     * @return
-     */
-    private String getLadingPageOfUser(SystemUserType userType) {
-        if (userType == SystemUserType.Guest) {
-            return "/guest/membership";
-        } else if (userType == SystemUserType.Hotel) {
-            return "/hotel/request";
-        } else if (userType == SystemUserType.Manager) {
-            return "/manager/approve";
-        }
-        return null;
-    }
 }

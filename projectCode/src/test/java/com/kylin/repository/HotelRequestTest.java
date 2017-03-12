@@ -22,7 +22,7 @@ public class HotelRequestTest {
 
     @Test
     public void testFindByIsPassed(){
-        List<HotelRequest> list = repository.findByStatus(0);
+        List<HotelRequest> list = repository.findByStatus(2);
         list.forEach(System.out::println);
     }
 
