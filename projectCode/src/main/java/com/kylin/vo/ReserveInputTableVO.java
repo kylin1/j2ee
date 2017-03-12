@@ -1,13 +1,15 @@
 package com.kylin.vo;
 
+import com.kylin.tools.DateHelper;
 import com.kylin.tools.myenum.RoomType;
 
+import java.text.ParseException;
 import java.util.Date;
 
 /**
  * Created by kylin on 20/02/2017.
  * All rights reserved.
- *
+ * <p>
  * 会员预定酒店登记表格
  */
 public class ReserveInputTableVO {
@@ -18,11 +20,14 @@ public class ReserveInputTableVO {
 
     // date info
     private Date checkInDate;
+    private String strDate1;
 
     private Date checkOutDate;
+    private String strDate2;
 
     // room info
     private RoomType roomType;
+    private int intRoomType;
 
     private int roomNumber;
 
@@ -35,6 +40,30 @@ public class ReserveInputTableVO {
 
     // price
     private int totalPrice;
+
+    public ReserveInputTableVO(int userId, int hotelId, String strDate1, String strDate2, int intRoomType, int roomNumber, String contactPersonName, String contactPhone, String contactEmail, int totalPrice) {
+        this.userId = userId;
+        this.hotelId = hotelId;
+        this.strDate1 = strDate1;
+        this.strDate2 = strDate2;
+        this.intRoomType = intRoomType;
+        this.roomNumber = roomNumber;
+        this.contactPersonName = contactPersonName;
+        this.contactPhone = contactPhone;
+        this.contactEmail = contactEmail;
+        this.totalPrice = totalPrice;
+        try {
+            this.init();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void init() throws ParseException {
+        this.checkInDate = DateHelper.getDate(this.strDate1);
+        this.checkOutDate = DateHelper.getDate(this.strDate2);
+        this.roomType = RoomType.getEnum(this.intRoomType);
+    }
 
     public ReserveInputTableVO(int userId, int hotelId, Date checkInDate, Date checkOutDate, RoomType roomType, int roomNumber, String contactPersonName, String contactPhone, String contactEmail, int totalPrice) {
         this.userId = userId;
@@ -88,4 +117,6 @@ public class ReserveInputTableVO {
     public int getTotalPrice() {
         return totalPrice;
     }
+
+
 }

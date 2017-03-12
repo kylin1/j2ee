@@ -20,10 +20,8 @@
 
   <!-- Bootstrap core CSS     -->
   <link href="<%=request.getContextPath() %>/assets/css/bootstrap.min.css" rel="stylesheet"/>
-
   <!--  Material Dashboard CSS    -->
   <link href="<%=request.getContextPath() %>/assets/css/material-dashboard.css" rel="stylesheet"/>
-
   <!--  CSS for Demo Purpose, don't include it in your project     -->
   <link href="<%=request.getContextPath() %>/assets/css/demo.css" rel="stylesheet"/>
 

@@ -19,13 +19,19 @@ public enum MemberStatus {
     Stopped(3);
 
     private Integer status;
+    private String[] strStatus;
 
     MemberStatus(int status) {
         this.status = status;
+        this.strStatus = new String[]{"未激活", "已经激活", "过期", "停止"};
     }
 
     public Integer getStatus() {
         return status;
+    }
+
+    public String getStringStatus() {
+        return strStatus[this.status];
     }
 
     public static MemberStatus getEnum(int input) {

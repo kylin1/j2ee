@@ -45,7 +45,7 @@ public class SystemUserController {
             session.setAttribute("userID",userID);
             System.out.println("userID="+userID);
 
-            String page = this.indexPageOfUser(userType);
+            String page = this.getLadingPageOfUser(userType);
 
             ModelAndView mv = new ModelAndView(page);
             return mv;
@@ -72,7 +72,7 @@ public class SystemUserController {
         }
     }
 
-    private String indexPageOfUser(SystemUserType userType){
+    private String getLadingPageOfUser(SystemUserType userType){
         if (userType == SystemUserType.Guest) {
             return "/guest/membership";
         } else if (userType == SystemUserType.Hotel) {

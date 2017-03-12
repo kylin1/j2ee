@@ -15,13 +15,13 @@ import java.util.List;
  * All rights reserved.
  */
 @Controller
-@RequestMapping("guest/order")
-public class MemberOrderController {
+@RequestMapping("guest")
+public class OrderController {
 
     @Autowired
     private MemberService memberService;
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @RequestMapping(value = "/order", method = RequestMethod.GET)
     public ModelAndView orderList() {
         System.out.println("orderlist");
 

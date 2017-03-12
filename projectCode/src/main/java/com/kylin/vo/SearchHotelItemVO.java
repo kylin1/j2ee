@@ -1,5 +1,6 @@
 package com.kylin.vo;
 
+import com.kylin.tools.DateHelper;
 import com.kylin.tools.myenum.HotelLevel;
 
 import java.util.Date;
@@ -15,8 +16,10 @@ public class SearchHotelItemVO {
 
     // date info
     private Date checkInDate;
+    private String date1;
 
     private Date checkOutDate;
+    private String date2;
 
     // hotel info
     private int hotelId;
@@ -24,6 +27,7 @@ public class SearchHotelItemVO {
     private String hotelName;
 
     private HotelLevel hotelLevel;
+    private String strHotelLevel;
 
     private String hotelAddress;
 
@@ -41,6 +45,13 @@ public class SearchHotelItemVO {
         this.hotelAddress = hotelAddress;
         this.lowestPerNightPrice = lowestPerNightPrice;
         this.remainRoomNumber = remainRoomNumber;
+        this.init();
+    }
+
+    private void init() {
+        this.date1 = DateHelper.getDateString(checkInDate);
+        this.date2 = DateHelper.getDateString(checkOutDate);
+        this.strHotelLevel = hotelLevel.getType();
     }
 
     public Date getCheckInDate() {
@@ -73,5 +84,17 @@ public class SearchHotelItemVO {
 
     public List<RemainRoomInfo> getRemainRoomNumber() {
         return remainRoomNumber;
+    }
+
+    public String getDate1() {
+        return date1;
+    }
+
+    public String getDate2() {
+        return date2;
+    }
+
+    public String getStrHotelLevel() {
+        return strHotelLevel;
     }
 }

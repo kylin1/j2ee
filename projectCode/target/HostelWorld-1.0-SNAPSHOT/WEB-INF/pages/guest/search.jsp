@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="en">
+<html lang="ch-ZN">
 
 <jsp:include page='../common/header-with-date.jsp'>
   <jsp:param name="pageTitle" value="搜索"/>
@@ -27,13 +27,13 @@
 
     <!-- 搜索信息 -->
     <div class="row">
-      <form>
+      <form action="/guest/search" method="post">
         <div class="row">
 
           <div class="col-md-2">
             <div class="form-group label-floating">
               <label class="control-label">where</label>
-              <input type="text" class="form-control">
+              <input type="text" name="location" class="form-control">
             </div>
           </div>
 
@@ -43,14 +43,14 @@
               <div class="col-sm-6">
                 <div class="form-group label-floating">
                   <label class="control-label">check in</label>
-                  <input type="text" id="dpd1" class="form-control">
+                  <input type="text" name="fromDate" id="dpd1" data-date-format="yyyy-mm-dd" class="form-control">
                 </div>
               </div>
 
               <div class="col-sm-6">
                 <div class="form-group label-floating">
                   <label class="control-label">check out</label>
-                  <input type="text" id="dpd2" class="form-control">
+                  <input type="text" name="endDate" id="dpd2" data-date-format="yyyy-mm-dd" class="form-control">
                 </div>
               </div>
 
@@ -61,10 +61,17 @@
           <div class="col-md-4">
             <div class="row">
 
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <div class="form-group label-floating">
-                  <label class="control-label">guests</label>
-                  <input type="text" class="form-control">
+                  <label class="control-label">roomTypeInt</label>
+                  <input name="roomTypeInt" type="text" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group label-floating">
+                  <label class="control-label">roomNumber</label>
+                  <input name="roomNumber" type="text" class="form-control">
                 </div>
               </div>
 
@@ -92,7 +99,7 @@
 
 <%@include file="../common/js-file.jsp" %>
 
-<script type="text/javascript">
+<script>
     var nowTemp = new Date();
     var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 

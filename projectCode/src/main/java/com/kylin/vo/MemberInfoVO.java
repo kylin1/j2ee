@@ -1,5 +1,6 @@
 package com.kylin.vo;
 
+import com.kylin.tools.DateHelper;
 import com.kylin.tools.myenum.MemberLevel;
 import com.kylin.tools.myenum.MemberStatus;
 
@@ -19,10 +20,15 @@ public class MemberInfoVO {
 
     // activate info
     private MemberStatus status;
+    private String strStatus;
+    private int intStatus;
 
     private Date activatedTime;
+    private String strActivatedTime;
 
     private Date expireTime;
+    private String strExpireTime;
+
 
     // consume amount
     private int totalConsume;
@@ -31,6 +37,7 @@ public class MemberInfoVO {
     private int memberCardRemain;
 
     private MemberLevel level;
+    private String strLevel;
 
     // 积分
     private int memberScore;
@@ -44,6 +51,17 @@ public class MemberInfoVO {
         this.memberCardRemain = memberCardRemain;
         this.level = level;
         this.memberScore = memberScore;
+        this.init();
+    }
+
+    private void init() {
+        this.strActivatedTime = DateHelper.getDateString(this.activatedTime);
+        this.strExpireTime = DateHelper.getDateString(this.expireTime);
+
+        this.intStatus = status.getStatus();
+        this.strStatus = status.getStringStatus();
+
+        this.strLevel = level.getStringLevel();
     }
 
     public int getId() {
@@ -76,5 +94,25 @@ public class MemberInfoVO {
 
     public int getMemberScore() {
         return memberScore;
+    }
+
+    public String getStrStatus() {
+        return strStatus;
+    }
+
+    public int getIntStatus() {
+        return intStatus;
+    }
+
+    public String getStrActivatedTime() {
+        return strActivatedTime;
+    }
+
+    public String getStrExpireTime() {
+        return strExpireTime;
+    }
+
+    public String getStrLevel() {
+        return strLevel;
     }
 }

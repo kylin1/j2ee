@@ -33,7 +33,7 @@ public class ReserveTest {
     private Date endDate = DateHelper.getDate(end);
 
     private int hotelId = 1;
-    private int userId = 1;
+    private int userId = 100;
 
     private RoomType roomType = RoomType.StandardRoom;
 

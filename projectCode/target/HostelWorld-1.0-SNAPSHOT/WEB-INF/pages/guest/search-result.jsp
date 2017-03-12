@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: kylin
@@ -7,7 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<html lang="en">
+<html lang="ch-ZN">
 <jsp:include page='../common/header-with-date.jsp'>
   <jsp:param name="pageTitle" value="搜索"/>
 </jsp:include>
@@ -16,7 +17,7 @@
 
 <div class="wrapper">
 
-  <%@include file="reserve-navbar-top.jsp"%>
+  <%@include file="reserve-navbar-top.jsp" %>
 
   <div class="container-fluid container-sharing" style="margin: 3em 0 5em 4em;">
 
@@ -35,6 +36,14 @@
           </div>
 
           <div class="card-content table-responsive">
+
+            <%--搜索结果为空--%>
+            <c:if test="${empty searchResult}">
+
+            </c:if>
+
+            <%--如果搜索结果不为空--%>
+            <c:if test="${!empty searchResult}">
             <table class="table">
               <thead class="text-primary">
               <th>名称</th>
@@ -45,45 +54,20 @@
               </thead>
 
               <tbody>
-              <tr>
-                <td>上海中环国际酒店</td>
-                <td>五星级酒店</td>
-                <td>普陀区富平路800号，近真金路。</td>
-                <td>¥583</td>
-                <td><a href="#">详情</a> <a href="#">预定</a></td>
-              </tr>
-
-              <tr>
-                <td>上海中环国际酒店</td>
-                <td>五星级酒店</td>
-                <td>普陀区富平路800号，近真金路。</td>
-                <td>¥583</td>
-                <td><a href="#">详情</a> <a href="#">预定</a></td>
-              </tr>
-              <tr>
-                <td>上海中环国际酒店</td>
-                <td>五星级酒店</td>
-                <td>普陀区富平路800号，近真金路。</td>
-                <td>¥583</td>
-                <td><a href="#">详情</a> <a href="#">预定</a></td>
-              </tr>
-              <tr>
-                <td>上海中环国际酒店</td>
-                <td>五星级酒店</td>
-                <td>普陀区富平路800号，近真金路。</td>
-                <td>¥583</td>
-                <td><a href="#">详情</a> <a href="#">预定</a></td>
-              </tr>
-              <tr>
-                <td>上海中环国际酒店</td>
-                <td>五星级酒店</td>
-                <td>普陀区富平路800号，近真金路。</td>
-                <td>¥583</td>
-                <td><a href="#">详情</a> <a href="#">预定</a></td>
-              </tr>
-
+              <%--遍历所有结果--%>
+              <c:forEach items="${searchResult}" var="hotel">
+                <tr>
+                  <td>${hotel.hotelName}</td>
+                  <td>${hotel.strHotelLevel}</td>
+                  <td>${hotel.hotelAddress}</td>
+                  <td>¥${hotel.lowestPerNightPrice}</td>
+                  <td><a href="#">详情</a> <a href="#">预定</a></td>
+                </tr>
+              </c:forEach>
               </tbody>
+
             </table>
+            </c:if>
 
           </div>
         </div>
@@ -98,32 +82,5 @@
 </body>
 
 <%@include file="../common/js-file.jsp" %>
-
-<script type="text/javascript">
-    var nowTemp = new Date();
-    var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
-
-    var checkin = $('#dpd1').datepicker({
-        onRender: function (date) {
-            return date.valueOf() < now.valueOf() ? 'disabled' : '';
-        }
-    }).on('changeDate', function (ev) {
-        if (ev.date.valueOf() > checkout.date.valueOf()) {
-            var newDate = new Date(ev.date)
-            newDate.setDate(newDate.getDate() + 1);
-            checkout.setValue(newDate);
-        }
-        checkin.hide();
-        $('#dpd2')[0].focus();
-    }).data('datepicker');
-    var checkout = $('#dpd2').datepicker({
-        onRender: function (date) {
-            return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-        }
-    }).on('changeDate', function (ev) {
-        checkout.hide();
-    }).data('datepicker');
-</script>
-
 
 </html>

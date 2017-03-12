@@ -73,6 +73,13 @@ public class DateHelper {
         return result;
     }
 
+    /**
+     * yyyy-MM-dd
+     *
+     * @param stringDate
+     * @return
+     * @throws ParseException
+     */
     public static Date getDate(String stringDate) throws ParseException {
         return dateFormat.parse(stringDate);
     }

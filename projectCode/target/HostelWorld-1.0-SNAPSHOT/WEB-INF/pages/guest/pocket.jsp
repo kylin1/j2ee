@@ -31,7 +31,7 @@
               </div>
 
               <div class="card-content">
-                <form action="{{ url('competition') }}" method="POST">
+                <form action="guest/top-up" method="POST">
 
                   <div class="row">
                     <div class="col-sm-3">
@@ -39,7 +39,17 @@
                     </div>
 
                     <div class="col-sm-3">
-                      <p class="text-info">￥800</p>
+                      <p class="text-info">￥${memberInfo.memberCardRemain}</p>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <label class="control-label">当前积分</label>
+                    </div>
+
+                    <div class="col-sm-3">
+                      <p class="text-info">￥${memberInfo.memberScore}</p>
                     </div>
                   </div>
 
@@ -50,7 +60,7 @@
                     </div>
 
                     <div class="col-sm-3">
-                      <input type="text" name="name">
+                      <input type="text" name="money" pattern="[0-9]">
                     </div>
                   </div>
 
@@ -61,7 +71,7 @@
                     </div>
 
                     <div class="col-sm-3">
-                      <input type="text" name="name">
+                      <input type="text" name="score" pattern="[0-9]">
                     </div>
                   </div>
 

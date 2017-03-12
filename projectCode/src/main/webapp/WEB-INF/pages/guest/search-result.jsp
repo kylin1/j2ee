@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: kylin
@@ -16,7 +17,7 @@
 
 <div class="wrapper">
 
-  <%@include file="reserve-navbar-top.jsp"%>
+  <%@include file="reserve-navbar-top.jsp" %>
 
   <div class="container-fluid container-sharing" style="margin: 3em 0 5em 4em;">
 
@@ -35,55 +36,41 @@
           </div>
 
           <div class="card-content table-responsive">
-            <table class="table">
-              <thead class="text-primary">
-              <th>名称</th>
-              <th>类型</th>
-              <th>地址</th>
-              <th>起价</th>
-              <th>操作</th>
-              </thead>
 
-              <tbody>
-              <tr>
-                <td>上海中环国际酒店</td>
-                <td>五星级酒店</td>
-                <td>普陀区富平路800号，近真金路。</td>
-                <td>¥583</td>
-                <td><a href="#">详情</a> <a href="#">预定</a></td>
-              </tr>
+            <%--搜索结果为空--%>
+            <c:if test="${empty searchResult}">
+              <div class="alert alert-warning" role="alert">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                抱歉,没有找到符合条件的酒店信息
+              </div>
+            </c:if>
 
-              <tr>
-                <td>上海中环国际酒店</td>
-                <td>五星级酒店</td>
-                <td>普陀区富平路800号，近真金路。</td>
-                <td>¥583</td>
-                <td><a href="#">详情</a> <a href="#">预定</a></td>
-              </tr>
-              <tr>
-                <td>上海中环国际酒店</td>
-                <td>五星级酒店</td>
-                <td>普陀区富平路800号，近真金路。</td>
-                <td>¥583</td>
-                <td><a href="#">详情</a> <a href="#">预定</a></td>
-              </tr>
-              <tr>
-                <td>上海中环国际酒店</td>
-                <td>五星级酒店</td>
-                <td>普陀区富平路800号，近真金路。</td>
-                <td>¥583</td>
-                <td><a href="#">详情</a> <a href="#">预定</a></td>
-              </tr>
-              <tr>
-                <td>上海中环国际酒店</td>
-                <td>五星级酒店</td>
-                <td>普陀区富平路800号，近真金路。</td>
-                <td>¥583</td>
-                <td><a href="#">详情</a> <a href="#">预定</a></td>
-              </tr>
+            <%--如果搜索结果不为空--%>
+            <c:if test="${!empty searchResult}">
+              <table class="table">
+                <thead class="text-primary">
+                <th>名称</th>
+                <th>类型</th>
+                <th>地址</th>
+                <th>起价</th>
+                <th>操作</th>
+                </thead>
 
-              </tbody>
-            </table>
+                <tbody>
+                  <%--遍历所有结果--%>
+                <c:forEach items="${searchResult}" var="hotel">
+                  <tr>
+                    <td>${hotel.hotelName}</td>
+                    <td>${hotel.strHotelLevel}</td>
+                    <td>${hotel.hotelAddress}</td>
+                    <td>¥${hotel.lowestPerNightPrice}</td>
+                    <td><a class="a_post">预定</a></td>
+                  </tr>
+                </c:forEach>
+                </tbody>
+
+              </table>
+            </c:if>
 
           </div>
         </div>
@@ -99,31 +86,24 @@
 
 <%@include file="../common/js-file.jsp" %>
 
-<script type="text/javascript">
-    var nowTemp = new Date();
-    var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
-
-    var checkin = $('#dpd1').datepicker({
-        onRender: function (date) {
-            return date.valueOf() < now.valueOf() ? 'disabled' : '';
-        }
-    }).on('changeDate', function (ev) {
-        if (ev.date.valueOf() > checkout.date.valueOf()) {
-            var newDate = new Date(ev.date)
-            newDate.setDate(newDate.getDate() + 1);
-            checkout.setValue(newDate);
-        }
-        checkin.hide();
-        $('#dpd2')[0].focus();
-    }).data('datepicker');
-    var checkout = $('#dpd2').datepicker({
-        onRender: function (date) {
-            return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-        }
-    }).on('changeDate', function (ev) {
-        checkout.hide();
-    }).data('datepicker');
+<script>
+    $(".a_post").on("click", function (event) {
+        //使a自带的方法失效，即无法调整到href中的URL(http://www.baidu.com)
+        event.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "localhost/8686/guest/reserve",
+            contentType: "application/json",
+            data: JSON.stringify({param1: param1, param2: param2}),//参数列表
+            dataType: "json",
+            success: function (result) {
+                //请求正确之后的操作
+            },
+            error: function (result) {
+                //请求失败之后的操作
+            }
+        });
+    });
 </script>
-
 
 </html>
