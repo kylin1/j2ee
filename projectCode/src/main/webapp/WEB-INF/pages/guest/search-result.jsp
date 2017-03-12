@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<html lang="en">
+<html lang="ch-ZN">
 <jsp:include page='../common/header-with-date.jsp'>
   <jsp:param name="pageTitle" value="搜索"/>
 </jsp:include>
