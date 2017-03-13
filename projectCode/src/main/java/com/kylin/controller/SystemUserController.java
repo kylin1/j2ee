@@ -1,5 +1,6 @@
 package com.kylin.controller;
 
+import com.kylin.model.Hotel;
 import com.kylin.repository.HotelRepository;
 import com.kylin.service.MemberService;
 import com.kylin.service.SystemUserService;
@@ -119,8 +120,11 @@ public class SystemUserController {
 
         } else if (userType == SystemUserType.Hotel) {
             int hotelId = hotelRepository.findIdByUserId(userID);
+            Hotel hotel = hotelRepository.findOne(hotelId);
             session.setAttribute("hotelId", hotelId);
+            session.setAttribute("hotel", hotel);
             System.out.println("session set hotelId = " + hotelId);
+            System.out.println("session set hotel = " + hotel.getName());
 
         } else if (userType == SystemUserType.Manager) {
             System.out.println("session set manager ");

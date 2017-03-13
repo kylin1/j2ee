@@ -18,8 +18,10 @@ public class HotelRemainRoom {
 
     // 类型
     private RoomType type;
+    private String strType;
 
     private RoomStatus status;
+    private String strStatus;
 
     // 房间其他信息
     private String information;
@@ -30,6 +32,12 @@ public class HotelRemainRoom {
         this.type = type;
         this.status = status;
         this.information = information;
+        this.init();
+    }
+
+    private void init() {
+        this.strStatus = this.status.getType();
+        this.strType = this.type.getType();
     }
 
     public int getRoomId() {
@@ -50,5 +58,13 @@ public class HotelRemainRoom {
 
     public String getInformation() {
         return information;
+    }
+
+    public String getStrType() {
+        return strType;
+    }
+
+    public String getStrStatus() {
+        return strStatus;
     }
 }

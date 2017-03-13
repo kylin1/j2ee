@@ -14,9 +14,15 @@ import org.springframework.web.servlet.ModelAndView;
 public class HotelNavigationController {
 
 
+    @RequestMapping(value = "room-search", method = RequestMethod.GET)
+    public ModelAndView roomSearch() {
+        ModelAndView modelAndView = new ModelAndView("hotel/room-search");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "customer-register", method = RequestMethod.GET)
     public ModelAndView customerRegister() {
-        ModelAndView modelAndView = new ModelAndView("hotel/customer-register");
+        ModelAndView modelAndView = new ModelAndView("hotel/room-register");
         return modelAndView;
     }
 

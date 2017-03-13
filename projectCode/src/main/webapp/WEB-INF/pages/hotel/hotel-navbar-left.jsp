@@ -20,6 +20,13 @@
   <div class="sidebar-wrapper">
     <ul class="nav">
       <li>
+        <a href="${pageContext.request.contextPath}/hotel/room-search">
+          <i class="material-icons">search</i>
+          <p>房间搜索</p>
+        </a>
+      </li>
+
+      <li>
         <a href="${pageContext.request.contextPath}/hotel/customer-register">
           <i class="material-icons">today</i>
           <p>住客登记</p>

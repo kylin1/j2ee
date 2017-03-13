@@ -48,8 +48,7 @@
                 <%--搜索结果为空--%>
                 <c:if test="${empty searchResult}">
                   <div class="alert alert-warning" role="alert">
-                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                    抱歉,没有找到符合条件的酒店信息
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>抱歉,没有找到符合条件的酒店信息
                   </div>
                 </c:if>
 
