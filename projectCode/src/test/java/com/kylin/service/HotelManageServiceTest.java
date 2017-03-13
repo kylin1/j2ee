@@ -48,9 +48,10 @@ public class HotelManageServiceTest {
 
     @Test
     public void testNewPlan() {
-        int newHotelRoomId = 7;
-        HotelPlanInputVO vo = new HotelPlanInputVO(hotelId, newHotelRoomId,
-                startDate, endDate, 200);
+        int newHotelRoomId = 2;
+
+        HotelPlanInputVO vo = new HotelPlanInputVO(hotelId,"", newHotelRoomId,
+                "2017-04-13", "2017-4-15", 220);
         MyMessage myMessage = this.service.makePlan(vo);
         System.out.println(myMessage);
     }

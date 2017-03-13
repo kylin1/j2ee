@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="ch-ZN">
@@ -22,54 +23,6 @@
     <!--2.内容-->
     <div class="content">
       <div class="container-fluid">
-        <!--当前已经发布的计划-->
-        <div class="card">
-          <div class="card-header" data-background-color="purple">
-            <h4 class="title">每个房间已经发布的计划</h4>
-            <p class="category"></p>
-          </div>
-
-          <div class="card-content table-responsive">
-            <table class="table">
-              <thead class="text-primary">
-              <th>房间</th>
-              <th>类型</th>
-              <th>起点时间</th>
-              <th>终点时间</th>
-              <th>操作</th>
-              </thead>
-
-              <tbody>
-              <tr>
-                <td>401</td>
-                <td>标准间</td>
-                <td>2017年02月22日</td>
-                <td>2017年02月22日</td>
-                <td><a href="#">取消</a> <a href="#">延长</a></td>
-              </tr>
-
-              <tr>
-                <td>402</td>
-                <td>标准间</td>
-                <td>2017年02月22日</td>
-                <td>2017年02月22日</td>
-                <td><a href="#">取消</a> <a href="#">延长</a></td>
-              </tr>
-
-              <tr>
-                <td>403</td>
-                <td>标准间</td>
-                <td> -</td>
-                <td> -</td>
-                <td><a href="#">发布</a></td>
-              </tr>
-
-
-              </tbody>
-            </table>
-
-          </div>
-        </div>
 
         <!--发布计划-->
         <div class="row">
@@ -80,14 +33,35 @@
                 <p class="category"></p>
               </div>
               <div class="card-content">
-                <form>
+
+                <c:if test="${!empty error}">
+                  <div class="alert alert-warning" role="alert">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>${error}
+                  </div>
+                </c:if>
+
+                <form action="${pageContext.request.contextPath}/hotel/new-plan" method="post">
+
                   <!--名称行-->
                   <div class="row">
                     <label class="col-md-1 control-label">酒店</label>
                     <div class="col-md-6">
-                      <h4>上海中环国际酒店</h4>
+                      <h4>${hotel.name}</h4>
                     </div>
                   </div>
+
+                  <!--房间号码-->
+                  <div class="row">
+                    <label class="col-md-1 control-label">房间</label>
+                    <div class="col-md-6">
+                      <h4>${room}</h4>
+                    </div>
+                  </div>
+
+
+                  <input type="hidden" name="hotelId" value="${hotelId}">
+                  <input type="hidden" name="hotelRoomId" value="${hotelRoomId}">
+                  <input type="hidden" name="room" value="${room}">
 
                   <!--time-->
                   <div class="row">
@@ -97,7 +71,7 @@
 
                     <div class="col-sm-3">
                       <div class="form-group label-floating">
-                        <input type="text" id="dpd1" data-date-format="yyyy-mm-dd" class="form-control">
+                        <input name="startDate" value="${newPlanDate}" type="text" id="dpd1" data-date-format="yyyy-mm-dd" class="form-control">
                       </div>
                     </div>
 
@@ -107,20 +81,17 @@
 
                     <div class="col-sm-3">
                       <div class="form-group label-floating">
-                        <input type="text" id="dpd2" class="form-control">
+                        <input name="endDate" type="text" id="dpd2" data-date-format="yyyy-mm-dd" class="form-control">
                       </div>
                     </div>
 
                     <label class="col-md-2 control-label">单价(每间每晚)</label>
                     <div class="col-md-2">
-                      <input type="text" class="form-control">
+                      <input name="price" type="text" class="form-control">
                     </div>
                   </div>
 
 
-                  <div class="row">
-
-                  </div>
 
                   <button type="submit" class="btn btn-primary pull-left">
                     确定
@@ -131,6 +102,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
 

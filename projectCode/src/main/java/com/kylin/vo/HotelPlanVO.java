@@ -1,5 +1,6 @@
 package com.kylin.vo;
 
+import com.kylin.tools.DateHelper;
 import com.kylin.tools.myenum.RoomType;
 
 import java.util.Date;
@@ -17,9 +18,14 @@ public class HotelPlanVO {
     private String room;
 
     private RoomType roomType;
+    private String strType;
 
     private Date startDate;
     private Date endDate;
+
+    private String date1;
+    private String date2;
+
 
     public HotelPlanVO(int roomId, String room, RoomType roomType, Date startDate, Date endDate) {
         this.roomId = roomId;
@@ -27,6 +33,27 @@ public class HotelPlanVO {
         this.roomType = roomType;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.init();
+    }
+
+    public HotelPlanVO(int hotelRoomId, String roomNumber, RoomType anEnum, String s, String s1) {
+        this.roomId = hotelRoomId;
+        this.room = roomNumber;
+        this.roomType = anEnum;
+        this.date1 = s;
+        this.date2 = s1;
+        this.init2();
+    }
+
+    private void init2() {
+        this.startDate = DateHelper.NOW;
+        this.endDate = DateHelper.NOW;
+    }
+
+    private void init() {
+        this.strType = this.roomType.getType();
+        this.date1 = DateHelper.getDateString(this.startDate);
+        this.date2 = DateHelper.getDateString(this.endDate);
     }
 
     public int getRoomId() {
@@ -47,5 +74,17 @@ public class HotelPlanVO {
 
     public Date getEndDate() {
         return endDate;
+    }
+
+    public String getStrType() {
+        return strType;
+    }
+
+    public String getDate1() {
+        return date1;
+    }
+
+    public String getDate2() {
+        return date2;
     }
 }

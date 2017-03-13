@@ -35,7 +35,7 @@
 
       <!--这是一个导航的图标-->
       <li>
-        <a href="${pageContext.request.contextPath}/hotel/post-plan">
+        <a href="${pageContext.request.contextPath}/hotel/plan">
           <!-- 导航图标的样式-->
           <i class="material-icons">timeline</i>
           <!--显示的文字-->

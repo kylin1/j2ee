@@ -53,17 +53,26 @@ public class HotelManageServiceImpl implements HotelManageService {
             List<HotelRoomStatus> list = roomStatusRepository.
                     findByHotelRoomIdOrderByDateDesc(hotelRoomId);
 
-            // if this room has plan
+            int type = hotelRoom.getType();
+            RoomType roomType = RoomType.getEnum(type);
+
+            HotelPlanVO hotelPlanVO;
             int listSize = list.size();
+            // if this room has plan
             if (listSize > 0) {
                 Date end = list.get(0).getDate();
                 Date start = list.get(listSize - 1).getDate();
 
-                HotelPlanVO hotelPlanVO = new HotelPlanVO(hotelRoomId, hotelRoom.getRoomNumber(),
-                        RoomType.getEnum(hotelRoom.getType()), start, end);
-                // add this room to planned list
-                result.add(hotelPlanVO);
+                hotelPlanVO = new HotelPlanVO(hotelRoomId, hotelRoom.getRoomNumber(),
+                        roomType, start, end);
+                // this room has no plan yet
+            } else {
+                hotelPlanVO = new HotelPlanVO(hotelRoomId, hotelRoom.getRoomNumber(),
+                        roomType, "暂无计划", "暂无计划");
             }
+            // add this room to planned list
+            result.add(hotelPlanVO);
+
         }
 
         return result;
@@ -86,9 +95,10 @@ public class HotelManageServiceImpl implements HotelManageService {
         List<HotelRoomStatus> list = roomStatusRepository.
                 findByHotelRoomIdOrderByDateDesc(hotelRoomId);
         if (list.size() > 0) {
+            // 日期最大的一个计划
             HotelRoomStatus latestPlan = list.get(0);
             Date latestDate = latestPlan.getDate();
-            if (checkInDate.before(latestDate)) {
+            if (!checkInDate.after(latestDate)) {
                 return new MyMessage(false,"计划冲突！已有的计划结束日期:" + DateHelper.getDateString(latestDate) + "" +
                         "输入的计划开始日期:" + DateHelper.getDateString(checkInDate));
             }
