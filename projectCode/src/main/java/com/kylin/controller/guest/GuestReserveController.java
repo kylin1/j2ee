@@ -1,6 +1,7 @@
 package com.kylin.controller.guest;
 
 import com.kylin.service.ReserveService;
+import com.kylin.tools.DateHelper;
 import com.kylin.tools.myenum.RoomType;
 import com.kylin.vo.ReserveInputTableVO;
 import com.kylin.vo.SearchHotelItemVO;
@@ -52,18 +53,21 @@ public class GuestReserveController {
         int roomTypeInt = Integer.parseInt(request.getParameter("roomTypeInt"));
         String strType = RoomType.getEnum(roomTypeInt).getType();
         int roomNumber = Integer.parseInt(request.getParameter("roomNumber"));
+        int perPrice = Integer.parseInt(request.getParameter("perPrice"));
+        int daysNumber = DateHelper.getDaysNumber(fromDate,endDate);
 
         HttpSession session = request.getSession();
         int userId = (int) session.getAttribute("userID");
 
-        int price = 0;
+        // 计算总价格
+        int price = perPrice * roomNumber * daysNumber;
 
         ReserveInputTableVO reserveInput = new ReserveInputTableVO(userId, hotelId, fromDate, endDate,
                 roomTypeInt, roomNumber, "", "", "", price);
 
-        modelAndView.addObject("reserveInput",reserveInput);
-        modelAndView.addObject("hotelName",hotelName);
-        modelAndView.addObject("strType",strType);
+        modelAndView.addObject("reserveInput", reserveInput);
+        modelAndView.addObject("hotelName", hotelName);
+        modelAndView.addObject("strType", strType);
         return modelAndView;
     }
 
@@ -74,11 +78,11 @@ public class GuestReserveController {
         System.out.println(reserveInputTableVO);
 
         MyMessage myMessage = this.reserveService.makeReservation(reserveInputTableVO);
-        if(myMessage.isSuccess()){
-            return new ModelAndView("redirect:/guest/order");
-        }else {
+        if (myMessage.isSuccess()) {
+            return new ModelAndView("redirect:/guest/orders");
+        } else {
             ModelAndView result = new ModelAndView("guest/reserve");
-            result.addObject("error",myMessage.getDisplayMessage());
+            result.addObject("error", myMessage.getDisplayMessage());
             return result;
         }
     }

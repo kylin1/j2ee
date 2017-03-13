@@ -209,9 +209,10 @@ public class ReserveServiceImpl implements ReserveService{
      */
     private void saveOrder(ReserveInputTableVO inputVO, Hotel hotel) {
         MemberOrder memberOrder = new MemberOrder();
-        Member member = this.memberRepository.findOne(inputVO.getUserId());
-        memberOrder.setMemberId(member.getId());
+        int userId = inputVO.getUserId();
+        Member member = this.memberRepository.findByUserId(userId);
 
+        memberOrder.setMemberId(member.getId());
         memberOrder.setHotelId(hotel.getId());
 
         //时间信息

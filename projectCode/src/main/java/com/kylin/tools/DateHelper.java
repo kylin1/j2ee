@@ -26,14 +26,14 @@ public class DateHelper {
 
     static {
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateTimeFormat  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             START = DateHelper.getDate("2017-04-01");
             END = DateHelper.getDate("2017-04-03");
             NOW = new Date();
             NOW = DateHelper.setTimeToZero(NOW);
-            WEEK_AGO = DateHelper.addDate(NOW,-7);
-            MONTH_AGO = DateHelper.addDate(NOW,-30);
+            WEEK_AGO = DateHelper.addDate(NOW, -7);
+            MONTH_AGO = DateHelper.addDate(NOW, -30);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -52,7 +52,7 @@ public class DateHelper {
         return calendar.getTime();
     }
 
-    public static Date setTimeToZero(Date date){
+    public static Date setTimeToZero(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -101,11 +101,25 @@ public class DateHelper {
     public static Date addDate(Date date, int days) {
         Calendar inputC = Calendar.getInstance();
         inputC.setTime(date);
-        inputC.add(Calendar.DAY_OF_YEAR,days);
+        inputC.add(Calendar.DAY_OF_YEAR, days);
         return inputC.getTime();
     }
 
     public static String getDateTimeString(Date date) throws ParseException {
         return dateTimeFormat.format(date);
+    }
+
+    public static int getDaysNumber(String fromDate, String endDate) {
+        Date date1 = null;
+        Date date2 = null;
+
+        try {
+            date1 = DateHelper.getDate(fromDate);
+            date2 = DateHelper.getDate(endDate);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return DateHelper.getDaysNumber(date1, date2);
     }
 }

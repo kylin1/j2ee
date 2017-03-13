@@ -72,7 +72,7 @@
                         <td>${hotel.strHotelLevel}</td>
                         <td>${hotel.hotelAddress}</td>
                         <td>¥${hotel.lowestPerNightPrice}</td>
-                        <td><a href="${pageContext.request.contextPath}/guest/selectHotel?hotelName=${hotel.hotelName}&hotelId=${hotel.hotelId}&fromDate=${searchInputVO.fromDate}&endDate=${searchInputVO.endDate}&roomTypeInt=${searchInputVO.roomTypeInt}&roomNumber=${searchInputVO.roomNumber}">预定</a></td>
+                        <td><a href="${pageContext.request.contextPath}/guest/selectHotel?hotelName=${hotel.hotelName}&hotelId=${hotel.hotelId}&fromDate=${searchInputVO.fromDate}&endDate=${searchInputVO.endDate}&roomTypeInt=${searchInputVO.roomTypeInt}&roomNumber=${searchInputVO.roomNumber}&perPrice=${hotel.lowestPerNightPrice}">预定</a></td>
                       </tr>
                     </c:forEach>
                     </tbody>
