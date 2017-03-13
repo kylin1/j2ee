@@ -62,7 +62,7 @@ public class MemberServiceImpl implements MemberService {
         }
 
         MemberInfoVO memberInfoVO = new MemberInfoVO(memberId, entity.getName(),
-                entity.getPhone(), entity.getBankCard(), memberStatus,
+                entity.getPhone(), entity.getBankCard(), entity.getEmail(),memberStatus,
                 entity.getActivatedTime(), entity.getExpireTime(),
                 entity.getConsume(), entity.getBalance(), memberLevel, entity.getScore());
 

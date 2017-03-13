@@ -170,11 +170,12 @@ public class ReserveServiceImpl implements ReserveService{
         // 初始化每一个类型
         Map<RoomType, RemainRoomInfo> typeAndNumber = new HashMap<>();
         for (RoomType oneType : RoomType.values()) {
+            // 每一个类型的房间,初始化为没有剩余的数量,价格为最大
             RemainRoomInfo remainRoomInfo = new RemainRoomInfo(oneType, 0, Integer.MAX_VALUE);
             typeAndNumber.put(oneType, remainRoomInfo);
         }
 
-        // 对每一个空余的房间信息
+        // 对搜索到的本酒店每一个空余的房间信息
         for (HotelRemainRoom room : remainRooms) {
             int roomId = room.getRoomId();
             RoomType roomType = room.getType();
@@ -185,6 +186,11 @@ public class ReserveServiceImpl implements ReserveService{
             RemainRoomInfo oldInfo = typeAndNumber.get(roomType);
             oldInfo.increaseNumber();
             oldInfo.calculatePrice(price);
+
+            //修改房间最低单价
+            if(price < lowestPerNightPrice){
+                lowestPerNightPrice = price;
+            }
         }
 
         //将每种房间的信息返回

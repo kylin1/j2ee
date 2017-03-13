@@ -41,7 +41,12 @@ public class ReserveInputTableVO {
     // price
     private int totalPrice;
 
-    public ReserveInputTableVO(int userId, int hotelId, String strDate1, String strDate2, int intRoomType, int roomNumber, String contactPersonName, String contactPhone, String contactEmail, int totalPrice) {
+    public ReserveInputTableVO() {
+    }
+
+    public ReserveInputTableVO(int userId, int hotelId, String strDate1, String strDate2,
+                               int intRoomType, int roomNumber,
+                               String contactPersonName, String contactPhone, String contactEmail, int totalPrice) {
         this.userId = userId;
         this.hotelId = hotelId;
         this.strDate1 = strDate1;
@@ -52,30 +57,17 @@ public class ReserveInputTableVO {
         this.contactPhone = contactPhone;
         this.contactEmail = contactEmail;
         this.totalPrice = totalPrice;
+        this.init();
+    }
+
+    public void init() {
         try {
-            this.init();
+            this.checkInDate = DateHelper.getDate(this.strDate1);
+            this.checkOutDate = DateHelper.getDate(this.strDate2);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-    }
-
-    private void init() throws ParseException {
-        this.checkInDate = DateHelper.getDate(this.strDate1);
-        this.checkOutDate = DateHelper.getDate(this.strDate2);
         this.roomType = RoomType.getEnum(this.intRoomType);
-    }
-
-    public ReserveInputTableVO(int userId, int hotelId, Date checkInDate, Date checkOutDate, RoomType roomType, int roomNumber, String contactPersonName, String contactPhone, String contactEmail, int totalPrice) {
-        this.userId = userId;
-        this.hotelId = hotelId;
-        this.checkInDate = checkInDate;
-        this.checkOutDate = checkOutDate;
-        this.roomType = roomType;
-        this.roomNumber = roomNumber;
-        this.contactPersonName = contactPersonName;
-        this.contactPhone = contactPhone;
-        this.contactEmail = contactEmail;
-        this.totalPrice = totalPrice;
     }
 
     public int getUserId() {
@@ -118,5 +110,86 @@ public class ReserveInputTableVO {
         return totalPrice;
     }
 
+    public String getStrDate1() {
+        return strDate1;
+    }
 
+    public String getStrDate2() {
+        return strDate2;
+    }
+
+    public int getIntRoomType() {
+        return intRoomType;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
+    }
+
+    public void setCheckInDate(Date checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public void setStrDate1(String strDate1) {
+        this.strDate1 = strDate1;
+    }
+
+    public void setCheckOutDate(Date checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    }
+
+    public void setStrDate2(String strDate2) {
+        this.strDate2 = strDate2;
+    }
+
+    public void setRoomType(RoomType roomType) {
+        this.roomType = roomType;
+    }
+
+    public void setIntRoomType(int intRoomType) {
+        this.intRoomType = intRoomType;
+    }
+
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public void setContactPersonName(String contactPersonName) {
+        this.contactPersonName = contactPersonName;
+    }
+
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
+    }
+
+    public void setContactEmail(String contactEmail) {
+        this.contactEmail = contactEmail;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "ReserveInputTableVO{" +
+                "userId=" + userId +
+                ", hotelId=" + hotelId +
+                ", checkInDate=" + checkInDate +
+                ", strDate1='" + strDate1 + '\'' +
+                ", checkOutDate=" + checkOutDate +
+                ", strDate2='" + strDate2 + '\'' +
+                ", roomType=" + roomType +
+                ", intRoomType=" + intRoomType +
+                ", roomNumber=" + roomNumber +
+                ", contactPersonName='" + contactPersonName + '\'' +
+                ", contactPhone='" + contactPhone + '\'' +
+                ", contactEmail='" + contactEmail + '\'' +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 }

@@ -81,7 +81,7 @@ public class ReserveTest {
 
         int totalPrice = 666;
         ReserveInputTableVO inputVO = new ReserveInputTableVO(userId, hotelId,
-                startDate, endDate, roomType,
+                start, end, 1,
                 roomNumber, contactPersonName, contactPhone, contactEmail, totalPrice);
 
         MyMessage myMessage = this.service.makeReservation(inputVO);
