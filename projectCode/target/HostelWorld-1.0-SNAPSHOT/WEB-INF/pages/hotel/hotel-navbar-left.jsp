@@ -39,7 +39,7 @@
           <!-- 导航图标的样式-->
           <i class="material-icons">timeline</i>
           <!--显示的文字-->
-          <p>发布计划</p>
+          <p>房间&计划</p>
         </a>
       </li>
 

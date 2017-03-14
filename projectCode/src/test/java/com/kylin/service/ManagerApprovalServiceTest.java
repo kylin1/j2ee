@@ -35,7 +35,7 @@ public class ManagerApprovalServiceTest {
 
     @Test
     public void testPassRequest(){
-        MyMessage myMessage = this.service.passRequest(1006);
+        MyMessage myMessage = this.service.passRequest(1024);
         System.out.println(myMessage);
     }
 

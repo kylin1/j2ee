@@ -41,7 +41,8 @@ public class HotelModifyServiceImpl extends ApprovalService implements HotelModi
 
         String name = openVO.getName();
         String location = openVO.getLocation();
-        HotelLevel hotelLevel = openVO.getHotelLevel();
+        int intLevel = openVO.getLevel();
+        HotelLevel hotelLevel = HotelLevel.getEnum(intLevel);
 
         HotelRequest hotelRequest = new HotelRequest();
         //基本信息
@@ -77,7 +78,8 @@ public class HotelModifyServiceImpl extends ApprovalService implements HotelModi
 
         String name = modifyVO.getName();
         String location = modifyVO.getLocation();
-        HotelLevel hotelLevel = modifyVO.getHotelLevel();
+        int intLevel = modifyVO.getLevel();
+        HotelLevel hotelLevel = HotelLevel.getEnum(intLevel);
         String phone = modifyVO.getPhone();
         String represent = modifyVO.getLegalRepresentative();
 

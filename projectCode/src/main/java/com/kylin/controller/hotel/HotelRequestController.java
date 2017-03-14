@@ -3,6 +3,7 @@ package com.kylin.controller.hotel;
 import com.kylin.controller.MyController;
 import com.kylin.service.HotelModifyService;
 import com.kylin.tools.myenum.RoomType;
+import com.kylin.vo.HotelModifyVO;
 import com.kylin.vo.HotelOpenVO;
 import com.kylin.vo.common.MyMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,16 @@ public class HotelRequestController extends MyController{
     private HotelModifyService modifyService;
 
     @RequestMapping(value = "request-open", method = RequestMethod.POST)
-    public ModelAndView openRequest(HttpServletRequest request,
-                                    @ModelAttribute("hotelOpenVO") HotelOpenVO hotelOpenVO) {
+    public ModelAndView openRequest(@ModelAttribute("hotelOpenVO") HotelOpenVO hotelOpenVO) {
+        System.out.println(hotelOpenVO);
         MyMessage myMessage = this.modifyService.openHotelRequest(hotelOpenVO);
+        return this.handleMessage(myMessage,"/hotel/request");
+    }
+
+    @RequestMapping(value = "request-modify", method = RequestMethod.POST)
+    public ModelAndView modifyRequest(@ModelAttribute("hotelOpenVO") HotelModifyVO modifyVO) {
+        System.out.println(modifyVO);
+        MyMessage myMessage = this.modifyService.modifyHotelRequest(modifyVO);
         return this.handleMessage(myMessage,"/hotel/request");
     }
 
@@ -46,7 +54,7 @@ public class HotelRequestController extends MyController{
 
         MyMessage myMessage = this.modifyService.addRoom(hotelId, roomType1, roomNumber, roomInfo);
 
-        return this.handleMessage(myMessage,"/hotel/request");
+        return this.handleMessage(myMessage,"/hotel/show-plan");
     }
 
 }

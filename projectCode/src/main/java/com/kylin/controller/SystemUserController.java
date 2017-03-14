@@ -1,7 +1,10 @@
 package com.kylin.controller;
 
 import com.kylin.model.Hotel;
+import com.kylin.model.SystemUser;
 import com.kylin.repository.HotelRepository;
+import com.kylin.repository.SystemUserRepository;
+import com.kylin.service.HotelStatusService;
 import com.kylin.service.MemberService;
 import com.kylin.service.SystemUserService;
 import com.kylin.tools.myenum.MyAuthority;
@@ -11,6 +14,7 @@ import com.kylin.vo.MemberInfoVO;
 import com.kylin.vo.common.MyMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,6 +35,10 @@ public class SystemUserController extends MyController{
     private MemberService memberService;
     @Autowired
     private HotelRepository hotelRepository;
+    @Autowired
+    private SystemUserRepository userRepository;
+    @Autowired
+    private HotelStatusService statusService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String login() {
@@ -40,6 +48,13 @@ public class SystemUserController extends MyController{
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register() {
         return "common/signup";
+    }
+
+    @RequestMapping(value = "/logout/{userId}", method = RequestMethod.GET)
+    public String logout(HttpServletRequest request,
+                         @PathVariable("userId") int userId) {
+        SystemUser systemUser = userRepository.findOne(userId);
+        return "redirect:/";
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
@@ -165,17 +180,17 @@ public class SystemUserController extends MyController{
         // 酒店不存在,还没有通过开店审批
         if(hotel != null){
             int hotelId = hotel.getId();
+            MyMessage myMessage = this.statusService.isHotelOpened(hotelId);
+            boolean isHotelOpen = myMessage.isSuccess();
+
             session.setAttribute("hotelId", hotelId);
             session.setAttribute("hotel", hotel);
-
-            // session增加酒店权限,表明已经通过开店申请
-            String hotelAuth = MyAuthority.hotelAuth;
-            session.setAttribute("hotelAuth", hotelAuth);
+            session.setAttribute(MyAuthority.hotelAuth, isHotelOpen);
 
             System.out.println("session set hotelId = " + hotelId);
             System.out.println("session set hotel = " + hotel.getName());
+            System.out.println("session set hotelAuth = " + isHotelOpen);
         }
     }
-
 
 }

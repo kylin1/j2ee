@@ -18,9 +18,21 @@ public class HotelModifyVO extends HotelOpenVO{
                 '}';
     }
 
+
+    public HotelModifyVO() {
+    }
+
     public HotelModifyVO(int hotelId, String name, String location, int level, String phone, String legalRepresentative) {
         super(hotelId, name, location, level);
         this.phone = phone;
+        this.legalRepresentative = legalRepresentative;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setLegalRepresentative(String legalRepresentative) {
         this.legalRepresentative = legalRepresentative;
     }
 

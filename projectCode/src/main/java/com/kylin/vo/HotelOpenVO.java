@@ -1,22 +1,10 @@
 package com.kylin.vo;
 
-import com.kylin.tools.myenum.HotelLevel;
-
 /**
  * Created by kylin on 10/03/2017.
  * All rights reserved.
  */
-public class HotelOpenVO{
-    @Override
-    public String toString() {
-        return "HotelOpenVO{" +
-                "hotelId=" + hotelId +
-                ", name='" + name + '\'' +
-                ", location='" + location + '\'' +
-                ", level=" + level +
-                ", hotelLevel=" + hotelLevel +
-                '}';
-    }
+public class HotelOpenVO {
 
     protected int hotelId;
 
@@ -25,7 +13,6 @@ public class HotelOpenVO{
     protected String location;
 
     protected int level;
-    protected HotelLevel hotelLevel;
 
     public HotelOpenVO() {
     }
@@ -35,7 +22,6 @@ public class HotelOpenVO{
         this.name = name;
         this.location = location;
         this.level = level;
-        this.hotelLevel = HotelLevel.getEnum(this.level);
     }
 
     public int getHotelId() {
@@ -71,11 +57,14 @@ public class HotelOpenVO{
         this.level = level;
     }
 
-    public HotelLevel getHotelLevel() {
-        return hotelLevel;
-    }
 
-    public void setHotelLevel(HotelLevel hotelLevel) {
-        this.hotelLevel = hotelLevel;
+    @Override
+    public String toString() {
+        return "HotelOpenVO{" +
+                "hotelId=" + hotelId +
+                ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", level=" + level +
+                '}';
     }
 }
