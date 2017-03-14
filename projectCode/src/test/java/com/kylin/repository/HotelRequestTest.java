@@ -28,7 +28,7 @@ public class HotelRequestTest {
 
     @Test
     public void testFindByUserIdAndStatus(){
-        List<HotelRequest> list = repository.findByUserIdAndStatus(500,1);
+        List<HotelRequest> list = repository.findByHotelIdAndStatus(14,0);
         list.forEach(System.out::println);
     }
 }

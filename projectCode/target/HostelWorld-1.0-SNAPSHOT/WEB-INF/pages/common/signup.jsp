@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="<%=request.getContextPath() %>/assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
-  <title>客栈注册-Hostel World</title>
+  <title>Sign up-Hostel World</title>
 
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
 
@@ -34,7 +34,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="request.jsp">Land Page</a>
+      <a class="navbar-brand" href="search.html">Land Page</a>
     </div>
 
     <div class="collapse navbar-collapse" id="navigation-example">
@@ -66,7 +66,8 @@
       <div class="row">
         <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
           <div class="card card-signup">
-            <form class="form" method="" action="">
+            <%--sign up form--%>
+            <form class="form" action="${pageContext.request.contextPath}/register" method="post">
               <div class="header header-primary text-center">
                 <h4>Sign Up</h4>
                 <div class="social-line">
@@ -87,19 +88,34 @@
 										<span class="input-group-addon">
 											<i class="material-icons">email</i>
 										</span>
-                  <input type="text" class="form-control" placeholder="客栈名称">
+                  <input name="account" type="text" class="form-control" placeholder="Account...">
                 </div>
 
                 <div class="input-group">
 										<span class="input-group-addon">
 											<i class="material-icons">lock_outline</i>
 										</span>
-                  <input type="password" placeholder="位置信息" class="form-control"/>
+                  <input name="password" type="password" placeholder="Password..." class="form-control"/>
+                </div>
+
+                <div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">search</i>
+										</span>
+                  <label class="form-group label-floating">类型
+                    <select class="selectpicker" name="type">
+                      <option value="0">会员</option>
+                      <option value="1">酒店</option>
+                      <option value="2">经理</option>
+                    </select>
+                  </label>
                 </div>
 
               </div>
               <div class="footer text-center">
-                <a href="dashboard.jsp" class="btn btn-simple btn-primary btn-lg">Get Started</a>
+                <button type="submit" class="btn btn-primary">
+                  Sign up
+                </button>
               </div>
             </form>
           </div>

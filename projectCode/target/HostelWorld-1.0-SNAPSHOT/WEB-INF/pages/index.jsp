@@ -34,7 +34,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../guest/search.html">返回主页</a>
+      <a class="navbar-brand" href="${pageContext.request.contextPath}/register">注册</a>
     </div>
 
     <div class="collapse navbar-collapse" id="navigation-example">
@@ -102,7 +102,7 @@
               </div>
 
               <div class="footer text-center">
-                <button type="submit" class="btn btn-simple btn-primary btn-lg">提交</button>
+                <button type="submit" class="btn btn-simple btn-primary btn-lg">登录</button>
               </div>
 
             </form:form>

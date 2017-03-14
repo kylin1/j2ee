@@ -10,7 +10,7 @@ public class HotelOpenVO{
     @Override
     public String toString() {
         return "HotelOpenVO{" +
-                "userId=" + userId +
+                "hotelId=" + hotelId +
                 ", name='" + name + '\'' +
                 ", location='" + location + '\'' +
                 ", level=" + level +
@@ -18,7 +18,7 @@ public class HotelOpenVO{
                 '}';
     }
 
-    protected int userId;
+    protected int hotelId;
 
     protected String name;
 
@@ -30,16 +30,20 @@ public class HotelOpenVO{
     public HotelOpenVO() {
     }
 
-    public HotelOpenVO(int userId, String name, String location, int level) {
-        this.userId = userId;
+    public HotelOpenVO(int hotelId, String name, String location, int level) {
+        this.hotelId = hotelId;
         this.name = name;
         this.location = location;
         this.level = level;
         this.hotelLevel = HotelLevel.getEnum(this.level);
     }
 
-    public int getUserId() {
-        return userId;
+    public int getHotelId() {
+        return hotelId;
+    }
+
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
     }
 
     public String getName() {
@@ -50,9 +54,6 @@ public class HotelOpenVO{
         return location;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 
     public void setName(String name) {
         this.name = name;

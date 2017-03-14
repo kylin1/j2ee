@@ -1,6 +1,7 @@
 package com.kylin.service;
 
 import com.kylin.vo.RequestVO;
+import com.kylin.vo.common.MyMessage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,8 @@ public class ManagerApprovalServiceTest {
 
     @Test
     public void testPassRequest(){
-        this.service.passRequest(13);
+        MyMessage myMessage = this.service.passRequest(1006);
+        System.out.println(myMessage);
     }
 
 }

@@ -15,7 +15,9 @@ public interface HotelRequestRepository extends JpaRepository<HotelRequest,Integ
 
     List<HotelRequest> findByStatus(int status);
 
-    List<HotelRequest> findByUserIdAndStatus(int userId, int status);
+    List<HotelRequest> findByHotelIdAndStatus(int hotelId,int status);
+
+    List<HotelRequest> findByHotelIdAndStatusAndType(int hotelId,int status,int type);
 
     @Query("select h.name from HotelRequest h where h.id = :id")
     String findNameById(@Param(value = "id") int id);

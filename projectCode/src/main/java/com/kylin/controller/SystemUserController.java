@@ -4,7 +4,6 @@ import com.kylin.model.Hotel;
 import com.kylin.repository.HotelRepository;
 import com.kylin.service.MemberService;
 import com.kylin.service.SystemUserService;
-import com.kylin.tools.MyResponse;
 import com.kylin.tools.myenum.MyAuthority;
 import com.kylin.tools.myenum.SystemUserType;
 import com.kylin.vo.LoginResultVO;
@@ -24,7 +23,7 @@ import javax.servlet.http.HttpSession;
  * All rights reserved.
  */
 @Controller
-public class SystemUserController {
+public class SystemUserController extends MyController{
 
     @Autowired
     private SystemUserService systemUserService;
@@ -34,8 +33,13 @@ public class SystemUserController {
     private HotelRepository hotelRepository;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index() {
+    public String login() {
         return "index";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String register() {
+        return "common/signup";
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
@@ -63,7 +67,7 @@ public class SystemUserController {
             // 返回错误提示信息
         } else {
             String message = resultVO.getDisplayMessage();
-            modelAndView.addObject("message", message);
+            modelAndView.addObject("error", message);
         }
 
         // 返回结果
@@ -71,18 +75,24 @@ public class SystemUserController {
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public String register(HttpServletRequest request) {
+    public ModelAndView register(HttpServletRequest request) {
         String account = request.getParameter("account");
         String password = request.getParameter("password");
         int type = Integer.parseInt(request.getParameter("type"));
         SystemUserType userType = SystemUserType.getType(type);
 
+        // 注册用户 以及对应的实体类
         MyMessage myMessage = this.systemUserService.signUp(account, password, userType);
-        if (myMessage.isSuccess()) {
-            return "index";
-        } else {
-            return MyResponse.failure("注册失败");
-        }
+        int userId = (int) myMessage.getData();
+
+        // 注册之后的界面
+        String successPage = this.getLadingPageOfUser(userType);
+        String errorPage = "common/signup";
+
+        // 设置新用户信息
+        this.setSession(request,userId,userType);
+
+        return this.handleMessage(myMessage,successPage,errorPage);
     }
 
     /**

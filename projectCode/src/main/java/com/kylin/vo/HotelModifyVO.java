@@ -18,8 +18,8 @@ public class HotelModifyVO extends HotelOpenVO{
                 '}';
     }
 
-    public HotelModifyVO(int userId, String name, String location, int level, String phone, String legalRepresentative) {
-        super(userId, name, location, level);
+    public HotelModifyVO(int hotelId, String name, String location, int level, String phone, String legalRepresentative) {
+        super(hotelId, name, location, level);
         this.phone = phone;
         this.legalRepresentative = legalRepresentative;
     }

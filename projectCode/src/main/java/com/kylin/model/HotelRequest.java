@@ -32,6 +32,9 @@ public class HotelRequest {
     // 申请的状况，是否被通过
     private int status;
 
+    // 申请对应的真实酒店
+    private int hotelId;
+
     @Id
     @GeneratedValue
     @Column(name = "id")public int getId() {
@@ -87,16 +90,6 @@ public class HotelRequest {
         this.representative = representative;
     }
 
-    @Column(name = "userId")
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-
     @Column(name = "type")
     public int getType() {
         return type;
@@ -119,6 +112,15 @@ public class HotelRequest {
         return "修改后的酒店信息为：" + "名称：" + name + "地点：" + location + "类别:" + HotelLevel.getEnum(this.type).getType();
     }
 
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
+    }
+
+    @Column(name = "hotelId")
+    public int getHotelId() {
+        return hotelId;
+    }
+
     @Override
     public String toString() {
         return "HotelRequest{" +
@@ -131,6 +133,7 @@ public class HotelRequest {
                 ", representative='" + representative + '\'' +
                 ", type=" + type +
                 ", status=" + status +
+                ", hotelId=" + hotelId +
                 '}';
     }
 }

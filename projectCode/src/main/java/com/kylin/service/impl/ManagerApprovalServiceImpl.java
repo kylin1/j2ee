@@ -53,11 +53,15 @@ public class ManagerApprovalServiceImpl extends ApprovalService implements Manag
     public MyMessage passRequest(int requestId) {
         // 修改缓存表为通过
         HotelRequest cache = this.requestRepository.findOne(requestId);
+        if(cache.getStatus() != RequestStatus.Waiting.ordinal()){
+            return new MyMessage(false,"请求的状态不是等待! requestId = "+requestId);
+        }
+
         cache.setStatus(RequestStatus.Passed.ordinal());
         this.requestRepository.save(cache);
 
         // 将数据写入真正的表
-        int hotelId = cache.getId();
+        int hotelId = cache.getHotelId();
         Hotel oldHotel = this.hotelRepository.findOne(hotelId);
 
         // 酒店已经存在，修改信息
@@ -65,29 +69,29 @@ public class ManagerApprovalServiceImpl extends ApprovalService implements Manag
             this.copyHotel(oldHotel,cache);
             this.hotelRepository.save(oldHotel);
         }else {
-            // 酒店不存在，新建酒店
-            Hotel newHotel = new Hotel();
-            this.copyHotel(newHotel,cache);
-            this.hotelRepository.save(newHotel);
+            // 酒店不存在
+            return new MyMessage(false,"酒店信息不存在! hotelId = "+hotelId);
         }
         return new MyMessage(true);
     }
 
     private void copyHotel(Hotel newHotel, HotelRequest cache) {
-        newHotel.setId(cache.getId());
         newHotel.setName(cache.getName());
         newHotel.setLocation(cache.getLocation());
         newHotel.setLevel(cache.getLevel());
-        newHotel.setUserId(cache.getUserId());
         newHotel.setPhone(cache.getPhone());
         newHotel.setRepresentative(cache.getRepresentative());
     }
 
-
     @Override
     public MyMessage denyRequest(int requestId) {
-        // 修改缓存表为不通过
         HotelRequest cache = this.requestRepository.findOne(requestId);
+
+        if(cache.getStatus() != RequestStatus.Waiting.ordinal()){
+            return new MyMessage(false,"请求的状态不是等待! requestId = "+requestId);
+        }
+
+        // 修改缓存表为不通过
         cache.setStatus(RequestStatus.Denied.ordinal());
         this.requestRepository.save(cache);
         return new MyMessage(true);

@@ -49,4 +49,15 @@ public class SystemUserRepositoryTest {
         System.out.println(hotel.getName());
     }
 
+    @Test
+    public void testNew(){
+        SystemUser systemUser = new SystemUser();
+        systemUser.setAccount("123");
+        systemUser.setPassword("123");
+        systemUser.setType(1);
+        this.repository.save(systemUser);
+
+        int systemUserId = systemUser.getId();
+        System.out.println("sign up new systemUserId = "+systemUserId);
+    }
 }
