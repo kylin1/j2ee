@@ -131,4 +131,12 @@ public class ManagerStatisticServiceImpl implements ManagerStatisticService {
         ProfitChartVO chartVO = new ProfitChartVO(data);
         return chartVO;
     }
+
+    private void addEmptyData(Date start, Date end){
+        // TODO 补充没有数据的天数
+        List<Date> list = DateHelper.getBetweenDates(start,end);
+        for (Date date:list){
+
+        }
+    }
 }

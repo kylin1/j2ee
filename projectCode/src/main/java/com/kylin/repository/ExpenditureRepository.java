@@ -15,7 +15,7 @@ import java.util.List;
 public interface ExpenditureRepository extends JpaRepository<Expenditure, Integer> {
 
     @Query("select h from Expenditure h where " +
-            " h.date between :start and :endDate")
+            " h.date between :start and :endDate order by h.date asc")
     List<Expenditure> findByDate(@Param("start") Date start,
                                  @Param("endDate") Date endDate);
 }

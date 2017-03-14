@@ -15,7 +15,7 @@ import java.util.List;
 public interface PaymentRepository extends JpaRepository<Payment,Integer> {
 
     @Query("select h from Payment h where " +
-            " h.time between :start and :endDate")
+            " h.time between :start and :endDate order by h.time asc")
     List<Payment> findByDate(@Param("start") Date start,
                              @Param("endDate") Date endDate);
 

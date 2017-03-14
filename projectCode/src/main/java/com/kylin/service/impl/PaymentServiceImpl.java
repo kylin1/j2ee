@@ -42,7 +42,6 @@ public class PaymentServiceImpl implements PaymentService {
         return this.getPayment(settled);
     }
 
-    // TODO 缓存机制
     private List<PaymentVO> getPayment(int isSettled) {
         List<PaymentVO> result = new ArrayList<>();
 

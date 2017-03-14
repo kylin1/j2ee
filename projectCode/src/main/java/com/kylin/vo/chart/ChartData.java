@@ -18,13 +18,14 @@ public class ChartData {
 
     public ChartData(List<Expenditure> outcomeList, Date start, Date end, int useless) {
         this.XYList = new ArrayList<>();
+        // 添加已有的所有数据
         for (Expenditure expenditure : outcomeList) {
             Date x = expenditure.getDate();
             int y = expenditure.getPrice();
             MyChartXYItem xyItem = new MyChartXYItem(x, y);
             this.XYList.add(xyItem);
         }
-        // TODO 补充没有数据的天数
+
     }
 
     public ChartData(List<Payment> incomeList, Date start, Date end) {

@@ -46,6 +46,7 @@ public class HotelPlanVO {
     }
 
     private void init2() {
+        this.strType = this.roomType.getType();
         this.startDate = DateHelper.NOW;
         this.endDate = DateHelper.NOW;
     }

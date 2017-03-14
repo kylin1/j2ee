@@ -59,7 +59,7 @@ public class HotelManageServiceTest {
     @Test
     public void testGetPlan(){
         List<HotelPlanVO> planVOS = this.service.getHotelPlan(hotelId);
-
+        planVOS.forEach(System.out::println);
     }
 
     @Test

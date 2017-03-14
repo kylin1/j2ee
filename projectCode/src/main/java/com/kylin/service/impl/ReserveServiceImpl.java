@@ -122,7 +122,6 @@ public class ReserveServiceImpl implements ReserveService{
         RoomType roomType = inputVO.getRoomType();
         int roomNumber = inputVO.getRoomNumber();
 
-        // TODO 缓存技术
         // 找到当前酒店所有在指定日期/指定类型的,空闲的房间,例如有10个
         List<HotelRemainRoom> remainRooms = this.emptyRoomSearch(hotel.getId(),
                 DateHelper.getDateString(checkIn), DateHelper.getDateString(checkOut), roomType);
@@ -196,7 +195,6 @@ public class ReserveServiceImpl implements ReserveService{
         //将每种房间的信息返回
         roomResult.addAll(typeAndNumber.values());
 
-        // TODO lowestPerNightPrice has bug
         return new SearchHotelItemVO(checkInDate, checkOutDate, hotel.getId(),
                 hotel.getName(), HotelLevel.getEnum(hotel.getLevel()), hotel.getLocation(),
                 lowestPerNightPrice, roomResult);
