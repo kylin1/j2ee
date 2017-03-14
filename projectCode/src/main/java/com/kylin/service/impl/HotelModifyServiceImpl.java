@@ -152,7 +152,6 @@ public class HotelModifyServiceImpl extends ApprovalService implements HotelModi
     }
 
     private List<RequestVO> getRequestByHotelAndStatus(int hotelId, int status) {
-        System.out.println(this.hotelRepository == null);
         List<HotelRequest> requests = this.cacheRepository.findByHotelIdAndStatus(hotelId, status);
         return this.getRequestVOList(requests);
     }

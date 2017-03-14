@@ -31,14 +31,14 @@ public class HotelRequestController extends MyController{
     public ModelAndView openRequest(@ModelAttribute("hotelOpenVO") HotelOpenVO hotelOpenVO) {
         System.out.println(hotelOpenVO);
         MyMessage myMessage = this.modifyService.openHotelRequest(hotelOpenVO);
-        return this.handleMessage(myMessage,"/hotel/request");
+        return this.handleMessage(myMessage,"redirect:/hotel/request","/hotel/request");
     }
 
     @RequestMapping(value = "request-modify", method = RequestMethod.POST)
     public ModelAndView modifyRequest(@ModelAttribute("hotelOpenVO") HotelModifyVO modifyVO) {
         System.out.println(modifyVO);
         MyMessage myMessage = this.modifyService.modifyHotelRequest(modifyVO);
-        return this.handleMessage(myMessage,"/hotel/request");
+        return this.handleMessage(myMessage,"redirect:/hotel/request","/hotel/request");
     }
 
     @RequestMapping(value = "add-room", method = RequestMethod.POST)

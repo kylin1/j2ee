@@ -1,7 +1,9 @@
 package com.kylin.controller.hotel;
 
 import com.kylin.service.HotelManageService;
+import com.kylin.service.HotelModifyService;
 import com.kylin.vo.HotelPlanVO;
+import com.kylin.vo.RequestVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,8 @@ public class HotelNavigationController {
 
     @Autowired
     private HotelManageService manageService;
+    @Autowired
+    private HotelModifyService modifyService;
 
     @RequestMapping(value = "room-search", method = RequestMethod.GET)
     public ModelAndView roomSearch() {
@@ -46,6 +50,7 @@ public class HotelNavigationController {
         modelAndView.addObject("planVOS",planVOS);
         return modelAndView;
     }
+
     @RequestMapping(value = "statistic", method = RequestMethod.GET)
     public ModelAndView statistic() {
         ModelAndView modelAndView = new ModelAndView("hotel/statistic");
@@ -53,8 +58,17 @@ public class HotelNavigationController {
     }
 
     @RequestMapping(value = "request", method = RequestMethod.GET)
-    public ModelAndView request() {
+    public ModelAndView request(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("hotel/request");
+        HttpSession session = request.getSession();
+        int hotelId = (int) session.getAttribute("hotelId");
+        List<RequestVO> deniedList = modifyService.getDeniedRequest(hotelId);
+        List<RequestVO> passedList = modifyService.getPassedRequest(hotelId);
+        List<RequestVO> waitingList = modifyService.getWaitingRequest(hotelId);
+
+        modelAndView.addObject("deniedList",deniedList);
+        modelAndView.addObject("passedList",passedList);
+        modelAndView.addObject("waitingList",waitingList);
         return modelAndView;
     }
 

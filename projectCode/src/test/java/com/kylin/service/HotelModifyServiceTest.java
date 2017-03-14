@@ -58,7 +58,19 @@ public class HotelModifyServiceTest {
 
     @Test
     public void testGetWaitingRequest() {
-        List<RequestVO> requestVOS = this.service.getWaitingRequest(targetHotelId);
+        List<RequestVO> requestVOS = this.service.getWaitingRequest(1);
+        requestVOS.forEach(System.out::println);
+    }
+
+    @Test
+    public void testGetDeniedRequest() {
+        List<RequestVO> requestVOS = this.service.getDeniedRequest(1);
+        requestVOS.forEach(System.out::println);
+    }
+
+    @Test
+    public void testGetPassRequest() {
+        List<RequestVO> requestVOS = this.service.getPassedRequest(1);
         requestVOS.forEach(System.out::println);
     }
 }

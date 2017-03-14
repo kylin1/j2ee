@@ -107,35 +107,26 @@
                 </div>
 
                 <div class="card-content table-responsive">
-                  <table class="table">
-                    <thead class="text-primary">
-                    <th>类别</th>
-                    <th>主要内容</th>
-                    <th>提交时间</th>
-                    <th>操作</th>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>修改客栈信息</td>
-                      <td>新增空闲房间</td>
-                      <td>2017年02月13日10:00:59</td>
-                      <td><a href="#">详情</a></td>
-                    </tr>
-                    <tr>
-                      <td>修改客栈信息</td>
-                      <td>新增空闲房间</td>
-                      <td>2017年02月13日10:00:59</td>
-                      <td><a href="#">详情</a></td>
-                    </tr>
-                    <tr>
-                      <td>修改客栈信息</td>
-                      <td>新增空闲房间</td>
-                      <td>2017年02月13日10:00:59</td>
-                      <td><a href="#">详情</a></td>
-                    </tr>
-                    </tbody>
-                  </table>
-
+                  <c:if test="${!empty waitingList}">
+                    <table class="table">
+                      <thead class="text-primary">
+                      <th>类别</th>
+                      <th>主要内容</th>
+                      <th>提交时间</th>
+                      <th>操作</th>
+                      </thead>
+                      <tbody>
+                      <c:forEach items="${waitingList}" var="one">
+                        <tr>
+                          <td>${one.strType}</td>
+                          <td>${one.mainContent}</td>
+                          <td>${one.strTime}</td>
+                          <td><a href="#">详情</a></td>
+                        </tr>
+                      </c:forEach>
+                      </tbody>
+                    </table>
+                  </c:if>
                 </div>
               </div>
             </div>
@@ -154,23 +145,26 @@
                 </div>
 
                 <div class="card-content table-responsive">
-                  <table class="table">
-                    <thead class="text-primary">
-                    <th>类别</th>
-                    <th>主要内容</th>
-                    <th>提交时间</th>
-                    <th>操作</th>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>开店申请</td>
-                      <td>申请加入Hostel World</td>
-                      <td>2017年02月13日10:00:59</td>
-                      <td><a href="#">详情</a></td>
-                    </tr>
-
-                    </tbody>
-                  </table>
+                  <c:if test="${!empty passedList}">
+                    <table class="table">
+                      <thead class="text-primary">
+                      <th>类别</th>
+                      <th>主要内容</th>
+                      <th>提交时间</th>
+                      <th>操作</th>
+                      </thead>
+                      <tbody>
+                      <c:forEach items="${passedList}" var="one">
+                        <tr>
+                          <td>${one.strType}</td>
+                          <td>${one.mainContent}</td>
+                          <td>${one.strTime}</td>
+                          <td><a href="#">详情</a></td>
+                        </tr>
+                      </c:forEach>
+                      </tbody>
+                    </table>
+                  </c:if>
 
                 </div>
               </div>
@@ -190,24 +184,26 @@
                 </div>
 
                 <div class="card-content table-responsive">
-                  <table class="table">
-                    <thead class="text-primary">
-                    <th>类别</th>
-                    <th>主要内容</th>
-                    <th>提交时间</th>
-                    <th>操作</th>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>开店申请</td>
-                      <td>申请加入Hostel World</td>
-                      <td>2017年02月13日10:00:59</td>
-                      <td><a href="#">详情</a></td>
-                    </tr>
-
-                    </tbody>
-                  </table>
-
+                  <c:if test="${!empty deniedList}">
+                    <table class="table">
+                      <thead class="text-primary">
+                      <th>类别</th>
+                      <th>主要内容</th>
+                      <th>提交时间</th>
+                      <th>操作</th>
+                      </thead>
+                      <tbody>
+                      <c:forEach items="${deniedList}" var="one">
+                        <tr>
+                          <td>${one.strType}</td>
+                          <td>${one.mainContent}</td>
+                          <td>${one.strTime}</td>
+                          <td><a href="#">详情</a></td>
+                        </tr>
+                      </c:forEach>
+                      </tbody>
+                    </table>
+                  </c:if>
                 </div>
               </div>
             </div>
