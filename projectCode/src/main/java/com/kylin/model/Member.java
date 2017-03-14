@@ -147,4 +147,23 @@ public class Member {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", status=" + status +
+                ", bankCard='" + bankCard + '\'' +
+                ", activatedTime=" + activatedTime +
+                ", expireTime=" + expireTime +
+                ", consume=" + consume +
+                ", balance=" + balance +
+                ", level=" + level +
+                ", score=" + score +
+                ", userId=" + userId +
+                '}';
+    }
 }

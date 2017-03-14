@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="ch-ZN">
@@ -22,6 +23,9 @@
     <!--2.内容-->
     <div class="content">
       <div class="container-fluid">
+
+        <%@include file="../common/error-display.jsp"%>
+
         <!--开店申请-->
         <section>
           <h2>开店申请</h2>
@@ -33,45 +37,47 @@
                   <p class="category"></p>
                 </div>
                 <div class="card-content">
-                  <form>
+                  <%--开店申请表格--%>
+                  <form action="${pageContext.request.contextPath}/hotel/request-open" method="post">
+
+                    <input type="hidden" name="userId" value="${userId}">
+
                     <!--基本信息-->
                     <div class="row">
-
-                      <div class="col-md-3 dropdown">
-                        <a href="#" class="btn btn-simple dropdown-toggle" data-toggle="dropdown">
-                          酒店级别
-                          <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                          <li><a href="#">五星级</a></li>
-                          <li><a href="#">四星级</a></li>
-                          <li><a href="#">三星级</a></li>
-                          <li><a href="#">快捷连锁</a></li>
-                        </ul>
-                      </div>
-
                       <div class="col-md-2">
                         <div class="form-group label-floating">
                           <label class="control-label">酒店名称</label>
-                          <input type="text" class="form-control">
+                          <input name="name" type="text" class="form-control">
                         </div>
+                      </div>
+
+                      <div class="col-md-3 dropdown">
+                        <label class="form-group label-floating">级别
+                          <select class="selectpicker" name="level">
+                            <option value="0">快捷连锁酒店</option>
+                            <option value="1">一星级酒店</option>
+                            <option value="2">二星级酒店</option>
+                            <option value="3">三星级酒店</option>
+                            <option value="4">四星级酒店</option>
+                            <option value="5">五星级酒店</option>
+                          </select>
+                        </label>
                       </div>
 
                       <div class="col-md-6">
                         <div class="form-group label-floating">
                           <label class="control-label">地址</label>
-                          <input type="text" class="form-control">
+                          <input name="location" type="text" class="form-control">
                         </div>
                       </div>
-
                     </div>
-
 
                     <button type="submit" class="btn btn-primary pull-left">
                       提交申请
                     </button>
                     <div class="clearfix"></div>
                   </form>
+
                 </div>
               </div>
             </div>
@@ -87,50 +93,40 @@
                   <p class="category"></p>
                 </div>
                 <div class="card-content">
-                  <form>
 
+                  <form action="${pageContext.request.contextPath}/hotel/add-room" method="post">
                     <!--添加房间-->
                     <div class="row">
-
-
                       <div class="col-md-3 dropdown">
-                        <a href="#" class="btn btn-simple dropdown-toggle" data-toggle="dropdown">
-                          房间类型
-                          <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                          <li><a href="#">标准间</a></li>
-                          <li><a href="#">单人间</a></li>
-                          <li><a href="#">套房</a></li>
-                        </ul>
+                        <label class="form-group label-floating">类型
+                          <select class="selectpicker" name="roomType">
+                            <option value="0">单人间</option>
+                            <option value="1">标准间</option>
+                            <option value="2">套房</option>
+                          </select>
+                        </label>
                       </div>
 
                       <div class="col-md-2">
                         <div class="form-group label-floating">
                           <label class="control-label">房间号</label>
-                          <input type="text" class="form-control">
+                          <input name="roomNumber" type="text" class="form-control">
                         </div>
                       </div>
 
                       <div class="col-md-4">
                         <div class="form-group label-floating">
                           <label class="control-label">信息</label>
-                          <input type="text" class="form-control">
+                          <input name="roomInfo" type="text" class="form-control">
                         </div>
                       </div>
-                      <div class="col-md-1" style="padding-top: 40px;">
-                        <a href="#" id="add-room-icon2">
-                          <i class="material-icons">add_circle_outline</i>
-                        </a>
-                      </div>
                     </div>
-
-
                     <button type="submit" class="btn btn-primary pull-left">
-                      提交申请
+                      确认添加
                     </button>
                     <div class="clearfix"></div>
                   </form>
+
                 </div>
               </div>
             </div>

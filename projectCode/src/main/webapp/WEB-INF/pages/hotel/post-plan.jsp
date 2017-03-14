@@ -24,6 +24,8 @@
     <div class="content">
       <div class="container-fluid">
 
+        <%@include file="../common/error-display.jsp"%>
+
         <!--发布计划-->
         <div class="row">
           <div class="col-md-8">
@@ -34,11 +36,6 @@
               </div>
               <div class="card-content">
 
-                <c:if test="${!empty error}">
-                  <div class="alert alert-warning" role="alert">
-                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>${error}
-                  </div>
-                </c:if>
 
                 <form action="${pageContext.request.contextPath}/hotel/new-plan" method="post">
 

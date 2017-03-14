@@ -33,4 +33,12 @@ public class LoginResultVO extends MyMessage{
     public SystemUserType getUserType() {
         return userType;
     }
+
+    @Override
+    public String toString() {
+        return "LoginResultVO{" +
+                "userID=" + userID +
+                ", userType=" + userType +
+                '}';
+    }
 }

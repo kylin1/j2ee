@@ -1,7 +1,5 @@
 package com.kylin.vo;
 
-import com.kylin.tools.myenum.HotelLevel;
-
 /**
  * Created by kylin on 10/03/2017.
  * All rights reserved.
@@ -12,9 +10,16 @@ public class HotelModifyVO extends HotelOpenVO{
 
     private String legalRepresentative;
 
-    public HotelModifyVO(int hotelId, String name, String location, HotelLevel type,
-                         String phone, String legalRepresentative) {
-        super(hotelId, name, location, type);
+    @Override
+    public String toString() {
+        return "HotelModifyVO{" +
+                "phone='" + phone + '\'' +
+                ", legalRepresentative='" + legalRepresentative + '\'' +
+                '}';
+    }
+
+    public HotelModifyVO(int userId, String name, String location, int level, String phone, String legalRepresentative) {
+        super(userId, name, location, level);
         this.phone = phone;
         this.legalRepresentative = legalRepresentative;
     }

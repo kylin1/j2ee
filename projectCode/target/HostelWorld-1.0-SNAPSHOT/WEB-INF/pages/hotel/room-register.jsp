@@ -23,6 +23,8 @@
     <!--登记一个房间的入住人信息-->
     <div class="content">
       <div class="container-fluid">
+        <%@include file="../common/error-display.jsp"%>
+
         <div class="row">
           <div class="col-md-8">
             <div class="card">

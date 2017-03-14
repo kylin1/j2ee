@@ -77,4 +77,15 @@ public class HotelRoomStatus {
         this.status = status;
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "HotelRoomStatus{" +
+                "id=" + id +
+                ", hotelRoomId=" + hotelRoomId +
+                ", date=" + date +
+                ", status=" + status +
+                ", price=" + price +
+                '}';
+    }
 }

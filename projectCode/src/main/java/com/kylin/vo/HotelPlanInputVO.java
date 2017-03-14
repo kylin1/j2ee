@@ -109,6 +109,7 @@ public class HotelPlanInputVO {
     public String toString() {
         return "HotelPlanInputVO{" +
                 "hotelId=" + hotelId +
+                ", room='" + room + '\'' +
                 ", hotelRoomId=" + hotelRoomId +
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +

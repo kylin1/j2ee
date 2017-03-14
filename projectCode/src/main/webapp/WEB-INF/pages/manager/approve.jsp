@@ -24,6 +24,8 @@
     <!--2.内容-->
     <div class="content">
       <div class="container-fluid">
+        <%@include file="../common/error-display.jsp"%>
+
         <!--新的申请-->
         <section>
           <h2>新的申请</h2>

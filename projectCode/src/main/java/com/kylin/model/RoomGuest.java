@@ -74,4 +74,16 @@ public class RoomGuest {
     public void setIdNum(String idNum) {
         this.idNum = idNum;
     }
+
+    @Override
+    public String toString() {
+        return "RoomGuest{" +
+                "id=" + id +
+                ", orderId=" + orderId +
+                ", date=" + date +
+                ", roomId=" + roomId +
+                ", name='" + name + '\'' +
+                ", idNum='" + idNum + '\'' +
+                '}';
+    }
 }

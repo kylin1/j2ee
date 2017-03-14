@@ -87,4 +87,18 @@ public class HotelPlanVO {
     public String getDate2() {
         return date2;
     }
+
+    @Override
+    public String toString() {
+        return "HotelPlanVO{" +
+                "roomId=" + roomId +
+                ", room='" + room + '\'' +
+                ", roomType=" + roomType +
+                ", strType='" + strType + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", date1='" + date1 + '\'' +
+                ", date2='" + date2 + '\'' +
+                '}';
+    }
 }

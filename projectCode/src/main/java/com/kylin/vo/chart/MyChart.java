@@ -30,4 +30,12 @@ public class MyChart {
     public int getCharLineNumber() {
         return charLineNumber;
     }
+
+    @Override
+    public String toString() {
+        return "MyChart{" +
+                "chartData=" + chartData +
+                ", charLineNumber=" + charLineNumber +
+                '}';
+    }
 }

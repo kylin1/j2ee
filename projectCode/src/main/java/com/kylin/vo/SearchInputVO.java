@@ -62,4 +62,15 @@ public class SearchInputVO {
     public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
     }
+
+    @Override
+    public String toString() {
+        return "SearchInputVO{" +
+                "location='" + location + '\'' +
+                ", fromDate='" + fromDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", roomTypeInt=" + roomTypeInt +
+                ", roomNumber=" + roomNumber +
+                '}';
+    }
 }

@@ -31,4 +31,13 @@ public class HotelRoomInputVO {
     public String getInfo() {
         return info;
     }
+
+    @Override
+    public String toString() {
+        return "HotelRoomInputVO{" +
+                "roomNumber='" + roomNumber + '\'' +
+                ", roomType=" + roomType +
+                ", info='" + info + '\'' +
+                '}';
+    }
 }

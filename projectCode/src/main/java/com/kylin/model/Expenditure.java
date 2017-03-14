@@ -56,4 +56,14 @@ public class Expenditure {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Expenditure{" +
+                "id=" + id +
+                ", hotelByHotelId=" + hotelByHotelId +
+                ", date=" + date +
+                ", price=" + price +
+                '}';
+    }
 }

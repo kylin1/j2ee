@@ -27,6 +27,7 @@
     <!--2.内容-->
     <div class="content">
       <div class="container-fluid container-sharing" style="margin: 3em 0 5em 4em;">
+        <%@include file="../common/error-display.jsp"%>
 
         <div class="row">
           <div class="col-md-8">

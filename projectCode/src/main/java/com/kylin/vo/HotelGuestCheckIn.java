@@ -23,4 +23,12 @@ public class HotelGuestCheckIn {
     public String getIDNum() {
         return IDNum;
     }
+
+    @Override
+    public String toString() {
+        return "HotelGuestCheckIn{" +
+                "name='" + name + '\'' +
+                ", IDNum='" + IDNum + '\'' +
+                '}';
+    }
 }

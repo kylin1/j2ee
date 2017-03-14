@@ -34,7 +34,7 @@ public class HotelModifyServiceTest {
         System.out.println("saved id = " + data);
 
         int userId = data;
-        HotelOpenVO openVO = new HotelOpenVO(userId, "新酒店", "上海新世界", HotelLevel.ChainHotel);
+        HotelOpenVO openVO = new HotelOpenVO(userId, "新酒店", "上海新世界", HotelLevel.ChainHotel.ordinal());
         MyMessage myMessage = this.service.openHotelRequest(openVO);
         System.out.println(myMessage);
         int hotelId = (int) myMessage.getData();

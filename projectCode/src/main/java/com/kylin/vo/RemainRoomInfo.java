@@ -44,5 +44,14 @@ public class RemainRoomInfo {
         if(price < this.pricePerNight)
             this.pricePerNight = price;
     }
+
+    @Override
+    public String toString() {
+        return "RemainRoomInfo{" +
+                "roomType=" + roomType +
+                ", remainNumber=" + remainNumber +
+                ", pricePerNight=" + pricePerNight +
+                '}';
+    }
 }
 

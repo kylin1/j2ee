@@ -45,4 +45,15 @@ public class MemberUpdateTableVO {
     public String getBankCard() {
         return bankCard;
     }
+
+    @Override
+    public String toString() {
+        return "MemberUpdateTableVO{" +
+                "memberId=" + memberId +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", bankCard='" + bankCard + '\'' +
+                '}';
+    }
 }

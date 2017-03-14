@@ -23,6 +23,8 @@
     <!--2.内容-->
     <div class="content">
       <div class="container-fluid">
+        <%@include file="../common/error-display.jsp"%>
+
         <!--查询会员信息-->
         <section>
           <div class="row">

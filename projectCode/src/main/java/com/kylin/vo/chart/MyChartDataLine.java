@@ -54,4 +54,15 @@ public class MyChartDataLine {
     public int getUpBond() {
         return upBond;
     }
+
+    @Override
+    public String toString() {
+        return "MyChartDataLine{" +
+                "chartXYItemList=" + chartXYItemList +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", lowBond=" + lowBond +
+                ", upBond=" + upBond +
+                '}';
+    }
 }

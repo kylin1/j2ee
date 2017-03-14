@@ -66,4 +66,15 @@ public class HotelRoom {
     public void setInformation(String information) {
         this.information = information;
     }
+
+    @Override
+    public String toString() {
+        return "HotelRoom{" +
+                "id=" + id +
+                ", roomNumber='" + roomNumber + '\'' +
+                ", hotelId=" + hotelId +
+                ", type=" + type +
+                ", information='" + information + '\'' +
+                '}';
+    }
 }

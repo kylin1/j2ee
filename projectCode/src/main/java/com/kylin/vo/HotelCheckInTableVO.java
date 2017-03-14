@@ -52,4 +52,15 @@ public class HotelCheckInTableVO {
     public PaymentType getPaymentType() {
         return paymentType;
     }
+
+    @Override
+    public String toString() {
+        return "HotelCheckInTableVO{" +
+                "hotelId=" + hotelId +
+                ", orderId=" + orderId +
+                ", hotelRoomCheckInList=" + hotelRoomCheckInList +
+                ", isMember=" + isMember +
+                ", paymentType=" + paymentType +
+                '}';
+    }
 }

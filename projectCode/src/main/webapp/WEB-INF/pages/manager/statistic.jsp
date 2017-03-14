@@ -22,6 +22,8 @@
     <!--2.内容-->
     <div class="content">
       <div class="container-fluid">
+        <%@include file="../common/error-display.jsp"%>
+
         <!--各店入住情况-->
         <section>
           <h2>各店入住情况</h2>

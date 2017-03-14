@@ -93,6 +93,18 @@ public class RequestVO {
         return strTime;
     }
 
+    public String getStrType() {
+        return strType;
+    }
+
+    public String getStrStatus() {
+        return strStatus;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "RequestVO{" +
@@ -108,17 +120,5 @@ public class RequestVO {
                 ", createdTime=" + createdTime +
                 ", strTime='" + strTime + '\'' +
                 '}';
-    }
-
-    public String getStrType() {
-        return strType;
-    }
-
-    public String getStrStatus() {
-        return strStatus;
-    }
-
-    public int getId() {
-        return id;
     }
 }

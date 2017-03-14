@@ -39,6 +39,10 @@ public class HotelRoomStatusVO {
 
     @Override
     public String toString() {
-        return "date="+date+"roomNumber="+roomNumber+"checkedInNumber="+checkedInNumber;
+        return "HotelRoomStatusVO{" +
+                "date=" + date +
+                ", roomNumber='" + roomNumber + '\'' +
+                ", checkedInNumber=" + checkedInNumber +
+                '}';
     }
 }

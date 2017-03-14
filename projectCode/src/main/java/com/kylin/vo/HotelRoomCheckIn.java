@@ -27,4 +27,12 @@ public class HotelRoomCheckIn {
     public List<HotelGuestCheckIn> getGuestList() {
         return guestList;
     }
+
+    @Override
+    public String toString() {
+        return "HotelRoomCheckIn{" +
+                "roomId=" + roomId +
+                ", guestList=" + guestList +
+                '}';
+    }
 }

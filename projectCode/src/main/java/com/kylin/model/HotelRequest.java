@@ -121,6 +121,16 @@ public class HotelRequest {
 
     @Override
     public String toString() {
-        return this.readDetail();
+        return "HotelRequest{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", level=" + level +
+                ", userId=" + userId +
+                ", phone='" + phone + '\'' +
+                ", representative='" + representative + '\'' +
+                ", type=" + type +
+                ", status=" + status +
+                '}';
     }
 }

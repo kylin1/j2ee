@@ -49,4 +49,15 @@ public class SearchMemberVO {
     public int getPrice() {
         return price;
     }
+
+    @Override
+    public String toString() {
+        return "SearchMemberVO{" +
+                "orderTime=" + orderTime +
+                ", hotelName='" + hotelName + '\'' +
+                ", roomType=" + roomType +
+                ", roomNumber=" + roomNumber +
+                ", price=" + price +
+                '}';
+    }
 }

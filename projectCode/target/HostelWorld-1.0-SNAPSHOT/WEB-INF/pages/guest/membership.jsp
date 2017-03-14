@@ -20,6 +20,7 @@
     <!--2.内容-->
     <div class="content">
       <div class="container-fluid">
+        <%@include file="../common/error-display.jsp"%>
 
         <!--第一部分:个人信息-->
         <div class="row">

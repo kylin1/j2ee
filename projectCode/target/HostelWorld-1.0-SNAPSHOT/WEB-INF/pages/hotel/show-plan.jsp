@@ -23,6 +23,8 @@
     <!--2.内容-->
     <div class="content">
       <div class="container-fluid">
+        <%@include file="../common/error-display.jsp"%>
+
         <!--当前已经发布的计划-->
         <div class="card">
           <div class="card-header" data-background-color="purple">

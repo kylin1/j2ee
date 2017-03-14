@@ -23,6 +23,8 @@
     <!--2.内容-->
     <div class="content">
       <div class="container-fluid">
+        <%@include file="../common/error-display.jsp"%>
+
         <section>
           <h2>等待结算</h2>
           <div class="row">

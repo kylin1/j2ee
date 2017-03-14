@@ -1,5 +1,6 @@
 package com.kylin.controller.hotel;
 
+import com.kylin.controller.MyController;
 import com.kylin.service.HotelManageService;
 import com.kylin.tools.DateHelper;
 import com.kylin.vo.HotelPlanInputVO;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.text.ParseException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by kylin on 13/03/2017.
@@ -22,7 +25,7 @@ import java.text.ParseException;
  */
 @Controller
 @RequestMapping("hotel")
-public class HotelPlanController {
+public class HotelPlanController extends MyController {
 
     @Autowired
     private HotelManageService manageService;
@@ -36,41 +39,39 @@ public class HotelPlanController {
 
         // 返回到界面
         ModelAndView modelAndView = new ModelAndView("/hotel/post-plan");
-        modelAndView.addObject("hotelRoomId",roomId);
+        modelAndView.addObject("hotelRoomId", roomId);
 
         String oldPlanEndDate = date2;
 
         try {
             // 新计划的开始日期,默认设置为旧的计划的下一天
             Date dateOldPlanEnd = DateHelper.getDate(oldPlanEndDate);
-            Date newPlanStartDate = DateHelper.addDate(dateOldPlanEnd,1);
+            Date newPlanStartDate = DateHelper.addDate(dateOldPlanEnd, 1);
             String newPlanDate = DateHelper.getDateString(newPlanStartDate);
-            modelAndView.addObject("newPlanDate",newPlanDate);
+            modelAndView.addObject("newPlanDate", newPlanDate);
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        modelAndView.addObject("room",room);
+        modelAndView.addObject("room", room);
 
         return modelAndView;
     }
 
     @RequestMapping(value = "new-plan", method = RequestMethod.POST)
     public ModelAndView makePlan(HttpServletRequest request,
-                                 @ModelAttribute("hotelPlanInputVO")HotelPlanInputVO hotelPlanInputVO) {
-        ModelAndView modelAndView;
+                                 @ModelAttribute("hotelPlanInputVO") HotelPlanInputVO hotelPlanInputVO) {
         System.out.println(hotelPlanInputVO);
 
         MyMessage myMessage = this.manageService.makePlan(hotelPlanInputVO);
 
-        if(myMessage.isSuccess()){
-            modelAndView = new ModelAndView("redirect:/hotel/plan");
-        }else {
-            modelAndView = new ModelAndView("/hotel/post-plan");
-            modelAndView.addObject("error",myMessage.getDisplayMessage());
-            modelAndView.addObject("hotelRoomId",hotelPlanInputVO.getHotelRoomId());
-            modelAndView.addObject("room",hotelPlanInputVO.getRoom());
-        }
+        Map<String, Object> errorObjects = new HashMap<>();
+        errorObjects.put("hotelRoomId", hotelPlanInputVO.getHotelRoomId());
+        errorObjects.put("room", hotelPlanInputVO.getRoom());
+
+        //处理返回结果
+        ModelAndView modelAndView = this.handleMessage(myMessage,
+                "redirect:/hotel/plan", "/hotel/post-plan",null,errorObjects);
 
         return modelAndView;
     }

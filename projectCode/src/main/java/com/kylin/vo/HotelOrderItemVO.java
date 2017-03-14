@@ -67,4 +67,17 @@ public class HotelOrderItemVO {
     public String getContactPhone() {
         return contactPhone;
     }
+
+    @Override
+    public String toString() {
+        return "HotelOrderItemVO{" +
+                "orderTime=" + orderTime +
+                ", roomType=" + roomType +
+                ", roomNumber=" + roomNumber +
+                ", checkInDate=" + checkInDate +
+                ", checkOutDate=" + checkOutDate +
+                ", contactPersonName='" + contactPersonName + '\'' +
+                ", contactPhone='" + contactPhone + '\'' +
+                '}';
+    }
 }

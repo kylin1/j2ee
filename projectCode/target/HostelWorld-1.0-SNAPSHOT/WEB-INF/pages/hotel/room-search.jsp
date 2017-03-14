@@ -23,6 +23,7 @@
     <!--2.内容-->
     <div class="content">
       <div class="container-fluid">
+        <%@include file="../common/error-display.jsp"%>
 
         <!--酒店输入日期,房间类型:查找合适房间列表-->
         <div class="row">

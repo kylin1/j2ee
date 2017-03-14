@@ -26,4 +26,12 @@ public class MyChartXYItem {
     public int getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        return "MyChartXYItem{" +
+                "date=" + date +
+                ", value=" + value +
+                '}';
+    }
 }

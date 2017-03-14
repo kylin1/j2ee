@@ -22,6 +22,7 @@
     <!--2.内容-->
     <div class="content">
       <div class="container-fluid">
+        <%@include file="../common/error-display.jsp"%>
 
         <!--recent order-->
         <div class="row">

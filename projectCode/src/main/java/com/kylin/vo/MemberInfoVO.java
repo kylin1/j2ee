@@ -139,4 +139,37 @@ public class MemberInfoVO {
     public String getBankCard() {
         return bankCard;
     }
+
+    /**
+     * 账户现在是否是激活的状态
+     * 过期时间在当前时间之后
+     *
+     * @return
+     */
+    public boolean isActivating(){
+        return this.expireTime.after(new Date());
+    }
+
+    @Override
+    public String toString() {
+        return "MemberInfoVO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", bankCard='" + bankCard + '\'' +
+                ", email='" + email + '\'' +
+                ", status=" + status +
+                ", strStatus='" + strStatus + '\'' +
+                ", intStatus=" + intStatus +
+                ", activatedTime=" + activatedTime +
+                ", strActivatedTime='" + strActivatedTime + '\'' +
+                ", expireTime=" + expireTime +
+                ", strExpireTime='" + strExpireTime + '\'' +
+                ", totalConsume=" + totalConsume +
+                ", memberCardRemain=" + memberCardRemain +
+                ", level=" + level +
+                ", strLevel='" + strLevel + '\'' +
+                ", memberScore=" + memberScore +
+                '}';
+    }
 }

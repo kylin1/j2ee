@@ -1,11 +1,14 @@
 package com.kylin.service.impl;
 
 import com.kylin.model.HotelRequest;
+import com.kylin.model.HotelRoom;
 import com.kylin.repository.HotelRequestRepository;
 import com.kylin.repository.HotelRepository;
+import com.kylin.repository.HotelRoomRepository;
 import com.kylin.service.HotelModifyService;
 import com.kylin.tools.myenum.HotelLevel;
 import com.kylin.tools.myenum.RequestStatus;
+import com.kylin.tools.myenum.RoomType;
 import com.kylin.vo.HotelModifyVO;
 import com.kylin.vo.HotelOpenVO;
 import com.kylin.vo.RequestVO;
@@ -26,6 +29,8 @@ public class HotelModifyServiceImpl extends ApprovalService implements HotelModi
     private HotelRequestRepository cacheRepository;
     @Autowired
     private HotelRepository hotelRepository;
+    @Autowired
+    private HotelRoomRepository roomRepository;
 
 
     @Override
@@ -33,8 +38,7 @@ public class HotelModifyServiceImpl extends ApprovalService implements HotelModi
         int userId = openVO.getUserId();
         String name = openVO.getName();
         String location = openVO.getLocation();
-        HotelLevel type = openVO.getType();
-
+        HotelLevel type = openVO.getHotelLevel();
 
         HotelRequest hotelRequest = new HotelRequest();
         hotelRequest.setName(name);
@@ -55,7 +59,7 @@ public class HotelModifyServiceImpl extends ApprovalService implements HotelModi
         int userId = modifyVO.getUserId();
         String name = modifyVO.getName();
         String location = modifyVO.getLocation();
-        HotelLevel type = modifyVO.getType();
+        HotelLevel type = modifyVO.getHotelLevel();
         String phone = modifyVO.getPhone();
         String represent = modifyVO.getLegalRepresentative();
 
@@ -73,6 +77,25 @@ public class HotelModifyServiceImpl extends ApprovalService implements HotelModi
 
         int hotelId = hotelRequest.getId();
         return new MyMessage(true,hotelId);
+    }
+
+    @Override
+    public MyMessage addRoom(int hotelId, RoomType roomType, String roomNumber, String roomInfo) {
+        HotelRoom oldRoom = this.roomRepository.findByHotelIdAndRoomNumber(hotelId,roomNumber);
+        // 房间已经存在
+        if(oldRoom != null){
+            return new MyMessage(false,"房间号 "+roomNumber+" 已经存在!");
+        }
+        // 房间不存在,新建房间
+        HotelRoom room = new HotelRoom();
+        room.setHotelId(hotelId);
+        room.setRoomNumber(roomNumber);
+        room.setType(roomType.ordinal());
+        room.setInformation(roomInfo);
+
+        this.roomRepository.save(room);
+
+        return new MyMessage(true);
     }
 
     @Override

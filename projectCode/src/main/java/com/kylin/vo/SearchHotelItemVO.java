@@ -97,4 +97,21 @@ public class SearchHotelItemVO {
     public String getStrHotelLevel() {
         return strHotelLevel;
     }
+
+    @Override
+    public String toString() {
+        return "SearchHotelItemVO{" +
+                "checkInDate=" + checkInDate +
+                ", date1='" + date1 + '\'' +
+                ", checkOutDate=" + checkOutDate +
+                ", date2='" + date2 + '\'' +
+                ", hotelId=" + hotelId +
+                ", hotelName='" + hotelName + '\'' +
+                ", hotelLevel=" + hotelLevel +
+                ", strHotelLevel='" + strHotelLevel + '\'' +
+                ", hotelAddress='" + hotelAddress + '\'' +
+                ", lowestPerNightPrice=" + lowestPerNightPrice +
+                ", remainRoomNumber=" + remainRoomNumber +
+                '}';
+    }
 }

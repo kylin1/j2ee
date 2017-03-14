@@ -86,4 +86,17 @@ public class Hotel {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        return "Hotel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", level=" + level +
+                ", userId=" + userId +
+                ", phone='" + phone + '\'' +
+                ", representative='" + representative + '\'' +
+                '}';
+    }
 }

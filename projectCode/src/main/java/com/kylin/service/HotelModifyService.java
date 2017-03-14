@@ -1,5 +1,6 @@
 package com.kylin.service;
 
+import com.kylin.tools.myenum.RoomType;
 import com.kylin.vo.HotelModifyVO;
 import com.kylin.vo.HotelOpenVO;
 import com.kylin.vo.RequestVO;
@@ -34,6 +35,13 @@ public interface HotelModifyService {
      */
     MyMessage modifyHotelRequest(HotelModifyVO modifyVO);
 
+
+    /**
+     * 添加房间
+     *
+     * @return
+     */
+    MyMessage addRoom(int hotelId, RoomType roomType, String roomNumber, String roomInfo);
 
     /**
      * 获取没有审批的信息

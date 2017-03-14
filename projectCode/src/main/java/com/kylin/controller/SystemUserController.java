@@ -5,6 +5,7 @@ import com.kylin.repository.HotelRepository;
 import com.kylin.service.MemberService;
 import com.kylin.service.SystemUserService;
 import com.kylin.tools.MyResponse;
+import com.kylin.tools.myenum.MyAuthority;
 import com.kylin.tools.myenum.SystemUserType;
 import com.kylin.vo.LoginResultVO;
 import com.kylin.vo.MemberInfoVO;
@@ -109,26 +110,62 @@ public class SystemUserController {
      * @param userType
      */
     private void setSession(HttpServletRequest request, int userID, SystemUserType userType) {
+        // 得到一个用户信息
         HttpSession session = request.getSession();
         session.setAttribute("userID", userID);
         System.out.println("session set userID = " + userID);
 
+        // 客人
         if (userType == SystemUserType.Guest) {
             MemberInfoVO memberInfoVO = memberService.getMemberInfoByUserId(userID);
-            session.setAttribute("memberInfo", memberInfoVO);
-            System.out.println("session set memberInfo = " + memberInfoVO.getName());
+            this.setUpMember(request,memberInfoVO);
 
+            //酒店
         } else if (userType == SystemUserType.Hotel) {
-            int hotelId = hotelRepository.findIdByUserId(userID);
-            Hotel hotel = hotelRepository.findOne(hotelId);
-            session.setAttribute("hotelId", hotelId);
-            session.setAttribute("hotel", hotel);
-            System.out.println("session set hotelId = " + hotelId);
-            System.out.println("session set hotel = " + hotel.getName());
+            Hotel hotel = hotelRepository.findByUserId(userID);
+            this.setUpHotel(request,hotel);
 
+            //经理
         } else if (userType == SystemUserType.Manager) {
-            System.out.println("session set manager ");
+            this.setUpManager(request,userID);
         }
     }
+
+    private void setUpManager(HttpServletRequest request, int userID) {
+
+    }
+
+    private void setUpMember(HttpServletRequest request, MemberInfoVO memberInfoVO) {
+        HttpSession session = request.getSession();
+        session.setAttribute("memberInfo", memberInfoVO);
+        System.out.println("session set memberInfo = " + memberInfoVO.getName());
+
+        // 如果用户是激活的
+        if(memberInfoVO.isActivating()){
+            // 设置权限代表用户已经激活
+            String memberAuth = MyAuthority.memberAuth;
+            session.setAttribute("memberAuth",memberAuth);
+        }
+
+    }
+
+    private void setUpHotel(HttpServletRequest request,Hotel hotel) {
+        HttpSession session = request.getSession();
+
+        // 酒店不存在,还没有通过开店审批
+        if(hotel != null){
+            int hotelId = hotel.getId();
+            session.setAttribute("hotelId", hotelId);
+            session.setAttribute("hotel", hotel);
+
+            // session增加酒店权限,表明已经通过开店申请
+            String hotelAuth = MyAuthority.hotelAuth;
+            session.setAttribute("hotelAuth", hotelAuth);
+
+            System.out.println("session set hotelId = " + hotelId);
+            System.out.println("session set hotel = " + hotel.getName());
+        }
+    }
+
 
 }

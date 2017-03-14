@@ -167,4 +167,25 @@ public class MemberOrder {
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
     }
+
+    @Override
+    public String toString() {
+        return "MemberOrder{" +
+                "id=" + id +
+                ", memberId=" + memberId +
+                ", hotelId=" + hotelId +
+                ", orderTime=" + orderTime +
+                ", checkIn=" + checkIn +
+                ", checkOut=" + checkOut +
+                ", roomType=" + roomType +
+                ", roomNumber=" + roomNumber +
+                ", price=" + price +
+                ", contactName='" + contactName + '\'' +
+                ", contactPhone='" + contactPhone + '\'' +
+                ", contactEmail='" + contactEmail + '\'' +
+                ", status=" + status +
+                ", isMember=" + isMember +
+                ", isCash=" + isCash +
+                '}';
+    }
 }

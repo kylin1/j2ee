@@ -74,4 +74,16 @@ public class Payment {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "id=" + id +
+                ", hotelId=" + hotelId +
+                ", memberId=" + memberId +
+                ", time=" + time +
+                ", price=" + price +
+                ", status=" + status +
+                '}';
+    }
 }

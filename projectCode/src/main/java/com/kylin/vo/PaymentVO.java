@@ -81,4 +81,18 @@ public class PaymentVO {
     public String getStrTime() {
         return strTime;
     }
+
+    @Override
+    public String toString() {
+        return "PaymentVO{" +
+                "id=" + id +
+                ", hotelId=" + hotelId +
+                ", hotelName='" + hotelName + '\'' +
+                ", memberName='" + memberName + '\'' +
+                ", payTime=" + payTime +
+                ", strTime='" + strTime + '\'' +
+                ", price=" + price +
+                ", isSettled=" + isSettled +
+                '}';
+    }
 }

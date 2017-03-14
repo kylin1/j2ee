@@ -26,6 +26,7 @@
     <!--2.内容-->
     <div class="content">
       <div class="container-fluid container-sharing" style="margin: 3em 0 5em 4em;">
+        <%@include file="../common/error-display.jsp"%>
 
         <!--业务介绍行-->
         <div class="row" style="margin: 0 10em 5em 0;">

@@ -118,10 +118,15 @@ public class MemberOrderVO {
         return "MemberOrderVO{" +
                 "hotelName='" + hotelName + '\'' +
                 ", orderDate=" + orderDate +
+                ", stringOrderDate='" + stringOrderDate + '\'' +
+                ", stringCustomers='" + stringCustomers + '\'' +
                 ", customers=" + customers +
                 ", checkInDate=" + checkInDate +
+                ", stringCheckInDate='" + stringCheckInDate + '\'' +
                 ", checkOutDate=" + checkOutDate +
+                ", stringCheckOutDate='" + stringCheckOutDate + '\'' +
                 ", totalPrice=" + totalPrice +
+                ", stringStatus='" + stringStatus + '\'' +
                 ", orderStatus=" + orderStatus +
                 '}';
     }

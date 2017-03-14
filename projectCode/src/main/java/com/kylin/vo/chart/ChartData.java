@@ -45,4 +45,11 @@ public class ChartData {
     public List<MyChartXYItem> getXYList() {
         return XYList;
     }
+
+    @Override
+    public String toString() {
+        return "ChartData{" +
+                "XYList=" + XYList +
+                '}';
+    }
 }

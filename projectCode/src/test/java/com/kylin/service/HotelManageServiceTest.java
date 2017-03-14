@@ -59,11 +59,7 @@ public class HotelManageServiceTest {
     @Test
     public void testGetPlan(){
         List<HotelPlanVO> planVOS = this.service.getHotelPlan(hotelId);
-        for (HotelPlanVO v : planVOS) {
-            System.out.println(v.getRoom());
-            System.out.println(v.getStartDate());
-            System.out.println(v.getEndDate());
-        }
+
     }
 
     @Test

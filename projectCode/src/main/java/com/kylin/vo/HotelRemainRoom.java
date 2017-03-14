@@ -67,4 +67,17 @@ public class HotelRemainRoom {
     public String getStrStatus() {
         return strStatus;
     }
+
+    @Override
+    public String toString() {
+        return "HotelRemainRoom{" +
+                "roomId=" + roomId +
+                ", room='" + room + '\'' +
+                ", type=" + type +
+                ", strType='" + strType + '\'' +
+                ", status=" + status +
+                ", strStatus='" + strStatus + '\'' +
+                ", information='" + information + '\'' +
+                '}';
+    }
 }
