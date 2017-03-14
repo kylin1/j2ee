@@ -30,10 +30,10 @@
           <div class="row">
             <div class="col-md-5">
               <div class="card card-signup">
-                <form class="form" method="" action="">
+                <form class="form" method="post" action="/my-manager/search-member">
                   <div class="row">
                     <div class="header header-primary text-center">
-                      <h4>请输入会员姓名/账号进行查询</h4>
+                      <h4>请输入会员姓名进行查询</h4>
                     </div>
                   </div>
 
@@ -44,14 +44,16 @@
 										<span class="input-group-addon">
 											<i class="material-icons">email</i>
 										</span>
-                          <input type="text" class="form-control" placeholder="会员姓名/账号...">
+                          <input name="input" type="text" class="form-control" placeholder="会员姓名...">
                         </div>
                       </div>
                     </div>
                   </div>
 
                   <div class="footer text-center">
-                    <a href="#pablo" class="btn btn-simple btn-primary btn-lg">搜索</a>
+                    <button type="submit" class="btn btn-primary" style="margin-top: 1.7em">
+                      search
+                    </button>
                   </div>
                 </form>
               </div>
@@ -60,49 +62,45 @@
         </section>
 
         <!--会员预订/消费情况-->
-        <section>
-          <h2>搜索结果</h2>
-          <div class="row">
-            <div class="col-md-10">
-              <div class="card">
-                <div class="card-header" data-background-color="purple">
-                  <h4 class="title">会员预订/消费情况</h4>
-                </div>
+        <c:if test="${!empty searchResult}">
+          <section>
+            <h2>搜索结果</h2>
+            <div class="row">
+              <div class="col-md-10">
+                <div class="card">
+                  <div class="card-header" data-background-color="purple">
+                    <h4 class="title">会员预订/消费情况</h4>
+                  </div>
 
-                <div class="card-content table-responsive">
-                  <table class="table">
-                    <thead class="text-primary">
-                    <th>日期</th>
-                    <th>客栈</th>
-                    <th>房间</th>
-                    <th>金额</th>
-                    <th>操作</th>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>2017年02月13日</td>
-                      <td>上海半岛酒店</td>
-                      <td>标准间*2</td>
-                      <td>￥3360</td>
-                      <td><a href="#">详情</a></td>
-                    </tr>
-                    <tr>
-                      <td>2017年02月13日</td>
-                      <td>上海半岛酒店</td>
-                      <td>标准间*2</td>
-                      <td>￥3360</td>
-                      <td><a href="#">详情</a></td>
-                    </tr>
+                  <div class="card-content table-responsive">
+                    <table class="table">
+                      <thead class="text-primary">
+                      <th>日期</th>
+                      <th>客栈</th>
+                      <th>房间</th>
+                      <th>金额</th>
+                      <th>操作</th>
+                      </thead>
+                      <tbody>
+                      <c:forEach items="${searchResult}" var="oneOrder">
+                        <tr>
+                          <td>${oneOrder.date}</td>
+                          <td>${oneOrder.hotelName}</td>
+                          <td>${oneOrder.strType}*${oneOrder.roomNumber}</td>
+                          <td>￥${oneOrder.price}</td>
+                          <td><a href="#">详情</a></td>
+                        </tr>
+                      </c:forEach>
+                      </tbody>
+                    </table>
 
-                    </tbody>
-                  </table>
-
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-        </section>
+          </section>
+        </c:if>
       </div>
     </div>
 

@@ -1,5 +1,6 @@
 package com.kylin.service;
 
+import com.kylin.tools.myexception.NotFoundException;
 import com.kylin.vo.MemberInfoVO;
 import com.kylin.vo.MemberOrderVO;
 import com.kylin.vo.SearchMemberVO;
@@ -37,12 +38,9 @@ public class MemberServiceTest {
     }
 
     @Test
-    public void testManagerSearch(){
+    public void testManagerSearch() throws NotFoundException {
         List<SearchMemberVO> g =  this.memberService.getOrderHistory("kylin");
-        for (SearchMemberVO vo : g){
-            System.out.println(vo.getHotelName());
-            System.out.println(vo.getOrderTime());
-        }
+        g.forEach(System.out::println);
     }
 
     @Test

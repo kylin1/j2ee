@@ -1,5 +1,6 @@
 package com.kylin.vo;
 
+import com.kylin.tools.DateHelper;
 import com.kylin.tools.myenum.RoomType;
 
 import java.util.Date;
@@ -13,10 +14,12 @@ import java.util.Date;
 public class SearchMemberVO {
 
     private Date orderTime;
+    private String date;
 
     private String hotelName;
 
     private RoomType roomType;
+    private String strType;
 
     private int roomNumber;
 
@@ -28,6 +31,16 @@ public class SearchMemberVO {
         this.roomType = roomType;
         this.roomNumber = roomNumber;
         this.price = price;
+        this.date = DateHelper.getDateString(orderTime);
+        this.strType = roomType.getType();
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getStrType() {
+        return strType;
     }
 
     public Date getOrderTime() {

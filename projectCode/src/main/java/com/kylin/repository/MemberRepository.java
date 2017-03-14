@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 /**
  * Created by kylin on 18/02/2017.
  * All rights reserved.
@@ -16,5 +18,6 @@ public interface MemberRepository extends JpaRepository<Member,Integer> {
 
     Member findByUserId(int userId);
 
-    Member findByName(String name);
+    List<Member> findByNameIgnoreCaseContaining(String name);
+
 }

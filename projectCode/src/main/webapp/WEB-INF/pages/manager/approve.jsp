@@ -100,7 +100,7 @@
                           <td>${done.strTime}</td>
                           <td>${done.strStatus}</td>
                           <td>
-                            <a href="/my-manager/approve/show/${done.id}" type="button" class="btn btn-sm btn-success">详情</a>
+                            <a href="/my-manager/approve/show/${done.id}" type="button" class="btn btn-sm btn-info">详情</a>
                           </td>
                         </tr>
                       </c:forEach>

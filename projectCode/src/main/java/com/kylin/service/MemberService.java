@@ -1,5 +1,6 @@
 package com.kylin.service;
 
+import com.kylin.tools.myexception.NotFoundException;
 import com.kylin.vo.*;
 import com.kylin.vo.common.MyMessage;
 
@@ -36,7 +37,7 @@ public interface MemberService {
      * @param member
      * @return
      */
-    List<SearchMemberVO> getOrderHistory(String member);
+    List<SearchMemberVO> getOrderHistory(String member) throws NotFoundException;
 
     /**
      * 会员充值

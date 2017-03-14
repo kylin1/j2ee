@@ -87,7 +87,6 @@
                 <button type="submit" class="btn btn-primary pull-left" style="margin-top: 1.7em">
                   search
                 </button>
-
               </div>
             </div>
           </form>

@@ -12,6 +12,7 @@ import com.kylin.tools.myenum.MemberLevel;
 import com.kylin.tools.myenum.MemberOrderStatus;
 import com.kylin.tools.myenum.MemberStatus;
 import com.kylin.tools.myenum.RoomType;
+import com.kylin.tools.myexception.NotFoundException;
 import com.kylin.vo.MemberInfoVO;
 import com.kylin.vo.MemberOrderVO;
 import com.kylin.vo.MemberUpdateTableVO;
@@ -105,18 +106,23 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<SearchMemberVO> getOrderHistory(String member) {
+    public List<SearchMemberVO> getOrderHistory(String member) throws NotFoundException {
         List<SearchMemberVO> result = new ArrayList<>();
 
         // 姓名/账号
-        Member targetMember = this.repository.findByName(member);
-        int memberId = targetMember.getId();
+        Member targetMember = this.searchMember(member);
 
+        if(targetMember == null){
+            throw new NotFoundException("输入的会员姓名/账号不存在!");
+        }
+
+        // 找到用户
+        int memberId = targetMember.getId();
         List<MemberOrder> memberOrders = orderRepository.findByMemberId(memberId);
         // every order
         for (MemberOrder order : memberOrders) {
             // basic info
-            int hotelId = order.getId();
+            int hotelId = order.getHotelId();
             String hotelName = hotelRepository.findNameById(hotelId);
             Date orderDate = order.getOrderTime();
             RoomType roomType = RoomType.getEnum(order.getRoomType());
@@ -128,6 +134,16 @@ public class MemberServiceImpl implements MemberService {
             result.add(vo);
         }
         return result;
+    }
+
+    private Member searchMember(String member) {
+        List<Member> targetMember = this.repository.findByNameIgnoreCaseContaining(member);
+
+        if(!targetMember.isEmpty()){
+            return targetMember.get(0);
+        }
+
+        return null;
     }
 
     @Override
