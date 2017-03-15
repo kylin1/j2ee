@@ -129,7 +129,7 @@
                     </div>
                   </c:if>
 
-                  <input type="hidden" name="userId" value="${reserveInput.userId}">
+                  <input type="hidden" name="memberId" value="${reserveInput.memberId}">
                   <input type="hidden" name="hotelId" value="${reserveInput.hotelId}">
                   <input type="hidden" name="strDate1" value="${reserveInput.strDate1}">
                   <input type="hidden" name="strDate2" value="${reserveInput.strDate2}">

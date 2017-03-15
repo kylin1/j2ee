@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class ReserveInputTableVO {
 
-    private int userId;
+    private int memberId;
 
     private int hotelId;
 
@@ -41,10 +41,10 @@ public class ReserveInputTableVO {
     public ReserveInputTableVO() {
     }
 
-    public ReserveInputTableVO(int userId, int hotelId, String strDate1, String strDate2,
+    public ReserveInputTableVO(int memberId, int hotelId, String strDate1, String strDate2,
                                int intRoomType, int roomNumber,
                                String contactPersonName, String contactPhone, String contactEmail, int totalPrice) {
-        this.userId = userId;
+        this.memberId = memberId;
         this.hotelId = hotelId;
         this.strDate1 = strDate1;
         this.strDate2 = strDate2;
@@ -57,8 +57,8 @@ public class ReserveInputTableVO {
     }
 
 
-    public int getUserId() {
-        return userId;
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
     }
 
     public int getHotelId() {
@@ -95,10 +95,6 @@ public class ReserveInputTableVO {
 
     public int getIntRoomType() {
         return intRoomType;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public void setHotelId(int hotelId) {
@@ -140,7 +136,7 @@ public class ReserveInputTableVO {
     @Override
     public String toString() {
         return "ReserveInputTableVO{" +
-                "userId=" + userId +
+                "memberId=" + memberId +
                 ", hotelId=" + hotelId +
                 ", strDate1='" + strDate1 + '\'' +
                 ", strDate2='" + strDate2 + '\'' +
@@ -160,6 +156,10 @@ public class ReserveInputTableVO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public int getMemberId() {
+        return memberId;
     }
 
     public Date getCheckOutDate() {

@@ -1,6 +1,7 @@
 package com.kylin.controller.guest;
 
 import com.kylin.controller.MyController;
+import com.kylin.repository.HotelRepository;
 import com.kylin.service.ReserveService;
 import com.kylin.tools.DateHelper;
 import com.kylin.tools.myenum.MemberLevel;
@@ -20,7 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by kylin on 11/03/2017.
@@ -32,6 +35,8 @@ public class GuestReserveController extends MyController {
 
     @Autowired
     private ReserveService reserveService;
+    @Autowired
+    private HotelRepository hotelRepository;
 
     @RequestMapping(value = "search", method = RequestMethod.POST)
     public ModelAndView searchHotel(HttpServletRequest request,
@@ -70,20 +75,19 @@ public class GuestReserveController extends MyController {
         int perPrice = Integer.parseInt(request.getParameter("perPrice"));
         int daysNumber = DateHelper.getDaysNumber(fromDate, endDate);
 
-        HttpSession session = request.getSession();
-        int userId = (int) session.getAttribute("userID");
         MemberInfoVO memberInfoVO = this.getLoginMember(request);
         MemberLevel level = memberInfoVO.getLevel();
+        int memberId = memberInfoVO.getId();
 
         // 计算总价格
         int price = perPrice * roomNumber * daysNumber;
 
         //折扣信息
-        int discount = reserveService.getDiscount(price,level);
+        int discount = reserveService.getDiscount(price, level);
         // 实际价格为 总价格-折扣价格
         int actualPrice = price - discount;
 
-        ReserveInputTableVO reserveInput = new ReserveInputTableVO(userId, hotelId, fromDate, endDate,
+        ReserveInputTableVO reserveInput = new ReserveInputTableVO(memberId, hotelId, fromDate, endDate,
                 roomTypeInt, roomNumber, "", "", "", actualPrice);
         System.out.println("selectHotel, reserveInput = " + reserveInput.toString());
 
@@ -100,7 +104,16 @@ public class GuestReserveController extends MyController {
     public ModelAndView reserveHotel(@ModelAttribute("reserveInputTableVO") ReserveInputTableVO reserveInputTableVO) {
         System.out.println("reserve, reserveInputTableVO = " + reserveInputTableVO);
         MyMessage myMessage = this.reserveService.makeReservation(reserveInputTableVO);
-        return this.handleMessage(myMessage, "redirect:/guest/orders", "guest/reserve");
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("reserveInput", reserveInputTableVO);
+        int hotelId = reserveInputTableVO.getHotelId();
+        String hotelName = hotelRepository.findNameById(hotelId);
+        map.put("hotelName", hotelName);
+        String strType = reserveInputTableVO.getRoomType().getType();
+        map.put("strType", strType);
+
+        return this.handleMessage(myMessage, "redirect:/guest/orders", "guest/reserve", map, map);
     }
 
 }

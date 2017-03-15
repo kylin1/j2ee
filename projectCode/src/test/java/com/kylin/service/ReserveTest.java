@@ -80,7 +80,7 @@ public class ReserveTest {
         String contactEmail = "email";
 
         int totalPrice = 666;
-        ReserveInputTableVO inputVO = new ReserveInputTableVO(userId, hotelId,
+        ReserveInputTableVO inputVO = new ReserveInputTableVO(1, hotelId,
                 start, end, 1,
                 roomNumber, contactPersonName, contactPhone, contactEmail, totalPrice);
 

@@ -118,6 +118,12 @@ public class ReserveServiceImpl implements ReserveService {
 
     @Override
     public MyMessage makeReservation(ReserveInputTableVO inputVO) {
+        // 检查会员卡的余额是否足够,如果够则减去
+        MyMessage myMessage = this.checkMemberBalance(inputVO);
+        if (!myMessage.isSuccess()) {
+            return myMessage;
+        }
+
         Hotel hotel = this.hotelRepository.findOne(inputVO.getHotelId());
 
         // get input info
@@ -164,6 +170,24 @@ public class ReserveServiceImpl implements ReserveService {
         // 保存用户订单信息
         this.saveOrder(inputVO, hotel, strRoomList);
 
+        return new MyMessage(true);
+    }
+
+    private MyMessage checkMemberBalance(ReserveInputTableVO inputVO) {
+        int memberId = inputVO.getMemberId();
+        Member member = memberRepository.findOne(memberId);
+
+        int currentBalance = member.getBalance();
+        int price = inputVO.getTotalPrice();
+
+        if (currentBalance < price) {
+            return new MyMessage(false, "会员卡余额不足, 当前余额:" + currentBalance + ", 需支付金额:" + price);
+        } else {
+            // 新的会员卡余额 = 旧的 - 支付金额
+            int newBalance = currentBalance - price;
+            member.setBalance(newBalance);
+            memberRepository.save(member);
+        }
         return new MyMessage(true);
     }
 
@@ -225,8 +249,9 @@ public class ReserveServiceImpl implements ReserveService {
      */
     private void saveOrder(ReserveInputTableVO inputVO, Hotel hotel, String strRoomList) {
         MemberOrder memberOrder = new MemberOrder();
-        int userId = inputVO.getUserId();
-        Member member = this.memberRepository.findByUserId(userId);
+
+        int memberId = inputVO.getMemberId();
+        Member member = this.memberRepository.findOne(memberId);
 
         memberOrder.setMemberId(member.getId());
         memberOrder.setHotelId(hotel.getId());
