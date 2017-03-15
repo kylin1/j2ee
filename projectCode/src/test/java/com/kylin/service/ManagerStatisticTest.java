@@ -1,12 +1,10 @@
 package com.kylin.service;
 
-import com.kylin.model.Expenditure;
 import com.kylin.model.Payment;
-import com.kylin.repository.ExpenditureRepository;
 import com.kylin.repository.PaymentRepository;
 import com.kylin.tools.DateHelper;
 import com.kylin.vo.ManagerHotelStatusVO;
-import com.kylin.vo.chart.InOutcomeChartVO;
+import com.kylin.vo.chart.IncomeChartVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +27,6 @@ public class ManagerStatisticTest {
     private ManagerStatisticService service;
     @Autowired
     private PaymentRepository paymentRepository;
-    @Autowired
-    private ExpenditureRepository expenditureRepository;
 
     @Test
     public void test(){
@@ -42,7 +38,7 @@ public class ManagerStatisticTest {
 
     @Test
     public void testChart(){
-        InOutcomeChartVO chartVO = this.service.getIncomeOutcomeVO(
+        IncomeChartVO chartVO = this.service.getIncomeVO(
                 DateHelper.START,new Date());
     }
 
@@ -50,11 +46,6 @@ public class ManagerStatisticTest {
     public void testChart2() throws ParseException {
         List<Payment> incomeList = this.paymentRepository.findByDate(DateHelper.START,new Date());
         System.out.println(incomeList.size());
-
-        List<Expenditure> list2 = this.expenditureRepository.findByDate(
-                DateHelper.getDate("2017-01-01"),DateHelper.getDate("2017-06-01"));
-        System.out.println(list2.size());
-
     }
 
 

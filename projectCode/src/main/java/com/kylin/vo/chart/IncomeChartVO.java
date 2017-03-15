@@ -8,9 +8,9 @@ import java.util.List;
  * <p>
  * 收入/支出折线图
  */
-public class InOutcomeChartVO extends MyChart {
+public class IncomeChartVO extends MyChart {
 
-    public InOutcomeChartVO(List<MyChartDataLine> chartData) {
+    public IncomeChartVO(List<MyChartDataLine> chartData) {
         super(chartData);
     }
 

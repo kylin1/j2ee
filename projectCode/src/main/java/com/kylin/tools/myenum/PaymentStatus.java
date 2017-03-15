@@ -6,7 +6,7 @@ package com.kylin.tools.myenum;
  */
 public enum PaymentStatus {
 
-    PayedToHotel("已经付款(未结算)"),
+    NotSettled("已经付款(未结算)"),
     SettledBack("已经结算");
 
     private String stringStatus;

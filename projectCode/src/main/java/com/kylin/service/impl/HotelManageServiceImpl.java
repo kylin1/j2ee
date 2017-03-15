@@ -302,13 +302,21 @@ public class HotelManageServiceImpl implements HotelManageService {
     }
 
     // 入住登记: 修改登记信息 4个方法
+
+    /**
+     * 记录付款信息,等待经理审批
+     *
+     * @param hotelId
+     * @param memberId
+     * @param price
+     */
     private void makePayment(int hotelId, int memberId, int price) {
         Payment payment = new Payment();
         payment.setMemberId(memberId);
         payment.setHotelId(hotelId);
         payment.setPrice(price);
 
-        payment.setStatus(PaymentStatus.PayedToHotel.ordinal());
+        payment.setStatus(PaymentStatus.NotSettled.ordinal());
         payment.setTime(new Date());
 
         this.paymentRepository.save(payment);

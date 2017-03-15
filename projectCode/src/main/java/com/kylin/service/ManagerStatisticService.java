@@ -1,8 +1,7 @@
 package com.kylin.service;
 
 import com.kylin.vo.ManagerHotelStatusVO;
-import com.kylin.vo.chart.InOutcomeChartVO;
-import com.kylin.vo.chart.ProfitChartVO;
+import com.kylin.vo.chart.IncomeChartVO;
 
 import java.util.Date;
 import java.util.List;
@@ -25,13 +24,6 @@ public interface ManagerStatisticService {
      *
      * @return
      */
-    InOutcomeChartVO getIncomeOutcomeVO(Date start, Date end);
-
-    /**
-     * 利润柱状图
-     *
-     * @return
-     */
-    ProfitChartVO getProfitVO(Date start,Date end);
+    IncomeChartVO getIncomeVO(Date start, Date end);
 
 }

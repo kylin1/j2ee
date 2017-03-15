@@ -7,6 +7,7 @@ import com.kylin.repository.HotelRepository;
 import com.kylin.repository.MemberRepository;
 import com.kylin.repository.PaymentRepository;
 import com.kylin.service.PaymentService;
+import com.kylin.tools.myenum.PaymentStatus;
 import com.kylin.vo.PaymentVO;
 import com.kylin.vo.common.MyMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,8 +79,18 @@ public class PaymentServiceImpl implements PaymentService {
             return new MyMessage(false, "Payment已经被处理过，id=" + paymentId);
         }
         //设置为已经处理
-        payment.setStatus(1);
+        payment.setStatus(PaymentStatus.SettledBack.ordinal());
         this.repository.save(payment);
+
+        //将款项打给酒店
+        int price = payment.getPrice();
+        int hotelId = payment.getHotelId();
+        Hotel hotel = this.hotelRepository.findOne(hotelId);
+        int oldIncome = hotel.getIncome();
+        int newIncome = oldIncome + price;
+        hotel.setIncome(newIncome);
+        this.hotelRepository.save(hotel);
+
         return new MyMessage(true);
     }
 }

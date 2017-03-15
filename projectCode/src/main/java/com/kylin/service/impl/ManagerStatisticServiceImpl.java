@@ -30,8 +30,6 @@ public class ManagerStatisticServiceImpl implements ManagerStatisticService {
     @Autowired
     private HotelRoomRepository roomRepository;
     @Autowired
-    private ExpenditureRepository expenditureRepository;
-    @Autowired
     private PaymentRepository paymentRepository;
 
 
@@ -95,40 +93,20 @@ public class ManagerStatisticServiceImpl implements ManagerStatisticService {
     }
 
     @Override
-    public InOutcomeChartVO getIncomeOutcomeVO(Date start, Date end) {
+    public IncomeChartVO getIncomeVO(Date start, Date end) {
         // 获取数据库数据
-        List<Expenditure> outcomeList = this.expenditureRepository.findByDate(start, end);
         List<Payment> incomeList = this.paymentRepository.findByDate(start, end);
 
-        ChartData inputData1 = new ChartData(outcomeList, start, end, 1);
         ChartData inputData2 = new ChartData(incomeList, start, end);
 
         // 创造两条数据线
-        MyChartDataLine outcomeData = new MyChartDataLine(inputData1.getXYList());
         MyChartDataLine incomeData = new MyChartDataLine(inputData2.getXYList());
 
         // 两条数据线新建图表所有数据
         List<MyChartDataLine> data = new ArrayList<>();
-        data.add(outcomeData);
         data.add(incomeData);
         // 返回结果
-        InOutcomeChartVO chartVO = new InOutcomeChartVO(data);
-        return chartVO;
-    }
-
-
-    @Override
-    public ProfitChartVO getProfitVO(Date start, Date end) {
-        List<Expenditure> outcomeList = this.expenditureRepository.findAll();
-        List<Payment> incomeList = this.paymentRepository.findAll();
-
-        ChartData inputData = new ChartData(incomeList, outcomeList, start, end);
-        MyChartDataLine incomeData = new MyChartDataLine(inputData.getXYList());
-
-        List<MyChartDataLine> data = new ArrayList<>();
-        data.add(incomeData);
-
-        ProfitChartVO chartVO = new ProfitChartVO(data);
+        IncomeChartVO chartVO = new IncomeChartVO(data);
         return chartVO;
     }
 
