@@ -4,10 +4,7 @@ import com.kylin.model.*;
 import com.kylin.repository.*;
 import com.kylin.service.ReserveService;
 import com.kylin.tools.DateHelper;
-import com.kylin.tools.myenum.HotelLevel;
-import com.kylin.tools.myenum.MemberOrderStatus;
-import com.kylin.tools.myenum.RoomStatus;
-import com.kylin.tools.myenum.RoomType;
+import com.kylin.tools.myenum.*;
 import com.kylin.vo.HotelRemainRoom;
 import com.kylin.vo.RemainRoomInfo;
 import com.kylin.vo.ReserveInputTableVO;
@@ -75,6 +72,15 @@ public class ReserveServiceImpl implements ReserveService {
         }
 
         return result;
+    }
+
+    @Override
+    public int getDiscount(int price, MemberLevel level) {
+        // 折扣掉的数目
+        double discountPercent[] = {0, 0.05, 0.2, 0.4};
+        int levelInt = level.ordinal();
+        int discount = (int) (price * discountPercent[levelInt]);
+        return discount;
     }
 
 

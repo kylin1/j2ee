@@ -27,7 +27,7 @@
     <!--2.内容-->
     <div class="content">
       <div class="container-fluid container-sharing" style="margin: 3em 0 5em 4em;">
-        <%@include file="../common/error-display.jsp"%>
+        <%@include file="../common/error-display.jsp" %>
 
         <div class="row">
           <div class="col-md-8">
@@ -113,19 +113,29 @@
                   </div>
 
                   <div class="row">
-                    <label class="col-md-1 control-label">金额</label>
+                    <label class="col-md-1 control-label">总金额</label>
                     <div class="col-md-6">
                       <h4>${reserveInput.totalPrice}</h4>
                     </div>
                   </div>
 
-                    <input type="hidden" name="userId" value="${reserveInput.userId}">
-                    <input type="hidden" name="hotelId" value="${reserveInput.hotelId}">
-                    <input type="hidden" name="strDate1" value="${reserveInput.strDate1}">
-                    <input type="hidden" name="strDate2" value="${reserveInput.strDate2}">
-                    <input type="hidden" name="intRoomType" value="${reserveInput.intRoomType}">
-                    <input type="hidden" name="roomNumber" value="${reserveInput.roomNumber}">
-                    <input type="hidden" name="totalPrice" value="${reserveInput.totalPrice}">
+                  <%--折扣信息--%>
+                  <c:if test="${!empty discount}">
+                    <div class="row">
+                      <label class="col-md-1 control-label">已经折扣</label>
+                      <div class="col-md-6">
+                        <h4 class="text-success card-text">${discount}</h4>
+                      </div>
+                    </div>
+                  </c:if>
+
+                  <input type="hidden" name="userId" value="${reserveInput.userId}">
+                  <input type="hidden" name="hotelId" value="${reserveInput.hotelId}">
+                  <input type="hidden" name="strDate1" value="${reserveInput.strDate1}">
+                  <input type="hidden" name="strDate2" value="${reserveInput.strDate2}">
+                  <input type="hidden" name="intRoomType" value="${reserveInput.intRoomType}">
+                  <input type="hidden" name="roomNumber" value="${reserveInput.roomNumber}">
+                  <input type="hidden" name="totalPrice" value="${reserveInput.totalPrice}">
 
 
                   <button type="submit" class="btn btn-primary pull-left">

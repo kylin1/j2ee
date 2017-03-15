@@ -3,6 +3,7 @@ package com.kylin.controller.guest;
 import com.kylin.controller.MyController;
 import com.kylin.service.ReserveService;
 import com.kylin.tools.DateHelper;
+import com.kylin.tools.myenum.MemberLevel;
 import com.kylin.tools.myenum.MemberStatus;
 import com.kylin.tools.myenum.RoomType;
 import com.kylin.vo.MemberInfoVO;
@@ -41,19 +42,10 @@ public class GuestReserveController extends MyController {
         HttpSession session = request.getSession();
         MemberInfoVO memberInfoVO = (MemberInfoVO) session.getAttribute("memberInfo");
         MemberStatus status = memberInfoVO.getStatus();
-        //没有激活
-        if (status == MemberStatus.NeverActivated) {
-            modelAndView = new ModelAndView("guest/activate-warning");
-            modelAndView.addObject("error", "您还没有激活, 请充值1000元激活会员资格!");
-            return modelAndView;
-        } else if (status == MemberStatus.Stopped) {
-            modelAndView = new ModelAndView("guest/activate-warning");
-            modelAndView.addObject("error", "您的会员资格已经取消,请联系管理员!");
-            return modelAndView;
-        } else if (status == MemberStatus.Expired) {
-            modelAndView = new ModelAndView("guest/activate-warning");
-            modelAndView.addObject("error", "您的会员资格已经过期,请充值任意金额再次激活!");
-            return modelAndView;
+
+        //没有激活,返回错误界面
+        if (status != MemberStatus.Activated) {
+            return this.handleMemberNotActivated(status);
         }
 
         List<SearchHotelItemVO> result = this.reserveService.search(searchInputVO.getLocation(), searchInputVO.getFromDate(),
@@ -80,16 +72,26 @@ public class GuestReserveController extends MyController {
 
         HttpSession session = request.getSession();
         int userId = (int) session.getAttribute("userID");
+        MemberInfoVO memberInfoVO = this.getLoginMember(request);
+        MemberLevel level = memberInfoVO.getLevel();
 
         // 计算总价格
         int price = perPrice * roomNumber * daysNumber;
 
+        //折扣信息
+        int discount = reserveService.getDiscount(price,level);
+        // 实际价格为 总价格-折扣价格
+        int actualPrice = price - discount;
+
         ReserveInputTableVO reserveInput = new ReserveInputTableVO(userId, hotelId, fromDate, endDate,
-                roomTypeInt, roomNumber, "", "", "", price);
+                roomTypeInt, roomNumber, "", "", "", actualPrice);
         System.out.println("selectHotel, reserveInput = " + reserveInput.toString());
+
         modelAndView.addObject("reserveInput", reserveInput);
         modelAndView.addObject("hotelName", hotelName);
         modelAndView.addObject("strType", strType);
+        modelAndView.addObject("discount", discount);
+
         return modelAndView;
     }
 

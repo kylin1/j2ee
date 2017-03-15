@@ -3,6 +3,7 @@ package com.kylin.controller;
 import com.kylin.model.Hotel;
 import com.kylin.service.HotelStatusService;
 import com.kylin.service.MemberService;
+import com.kylin.tools.myenum.MemberStatus;
 import com.kylin.tools.myenum.MyAuthority;
 import com.kylin.vo.MemberInfoVO;
 import com.kylin.vo.common.MyMessage;
@@ -24,11 +25,17 @@ public class MyController {
     @Autowired
     private HotelStatusService statusService;
 
-    protected void refreshMemberInfo(HttpServletRequest request, int memberID){
+    protected MemberInfoVO getLoginMember(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        MemberInfoVO memberInfoVO = (MemberInfoVO) session.getAttribute("memberInfo");
+        return memberInfoVO;
+    }
+
+    protected void refreshMemberInfo(HttpServletRequest request, int memberID) {
         // 重新查询用户信息
         MemberInfoVO memberInfoVO = memberService.getMemberInfo(memberID);
         // 刷新session
-        this.setUpMember(request,memberInfoVO);
+        this.setUpMember(request, memberInfoVO);
     }
 
 
@@ -38,11 +45,11 @@ public class MyController {
         System.out.println("session set memberInfo = " + memberInfoVO);
     }
 
-    protected void setUpHotel(HttpServletRequest request,Hotel hotel) {
+    protected void setUpHotel(HttpServletRequest request, Hotel hotel) {
         HttpSession session = request.getSession();
 
         // 酒店不存在,还没有通过开店审批
-        if(hotel != null){
+        if (hotel != null) {
             int hotelId = hotel.getId();
             MyMessage myMessage = this.statusService.isHotelOpened(hotelId);
             boolean isHotelOpen = myMessage.isSuccess();
@@ -76,7 +83,7 @@ public class MyController {
             modelAndView.addObject("error", myMessage.getDisplayMessage());
         }
         // 都返回相同的数据到界面
-        this.addDataToMV(object,modelAndView);
+        this.addDataToMV(object, modelAndView);
         return modelAndView;
     }
 
@@ -119,5 +126,21 @@ public class MyController {
         for (Map.Entry<String, Object> entry : inputMap.entrySet()) {
             modelAndView.addObject(entry.getKey(), entry.getValue());
         }
+    }
+
+    public ModelAndView handleMemberNotActivated(MemberStatus status) {
+        ModelAndView modelAndView = new ModelAndView("guest/activate-warning");
+
+        if (status == MemberStatus.NeverActivated) {
+            modelAndView.addObject("error", "您还没有激活, 请充值1000元激活会员资格!");
+            return modelAndView;
+        } else if (status == MemberStatus.Stopped) {
+            modelAndView.addObject("error", "您的会员资格已经取消,请联系管理员!");
+            return modelAndView;
+        } else if (status == MemberStatus.Expired) {
+            modelAndView.addObject("error", "您的会员资格已经过期,请充值任意金额再次激活!");
+            return modelAndView;
+        } else
+            return modelAndView;
     }
 }

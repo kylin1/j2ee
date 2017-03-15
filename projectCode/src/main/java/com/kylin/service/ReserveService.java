@@ -1,5 +1,6 @@
 package com.kylin.service;
 
+import com.kylin.tools.myenum.MemberLevel;
 import com.kylin.tools.myenum.RoomType;
 import com.kylin.vo.HotelRemainRoom;
 import com.kylin.vo.ReserveInputTableVO;
@@ -48,4 +49,12 @@ public interface ReserveService {
     List<HotelRemainRoom> emptyRoomSearch(int hotelId, String fromDate, String endDate, RoomType roomType);
 
 
+    /**
+     * 根据订单总价格 和 用户等级计算折扣
+     *
+     * @param price
+     * @param level
+     * @return
+     */
+    int getDiscount(int price, MemberLevel level);
 }
