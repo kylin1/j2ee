@@ -36,17 +36,6 @@ public class MyController {
         HttpSession session = request.getSession();
         session.setAttribute("memberInfo", memberInfoVO);
         System.out.println("session set memberInfo = " + memberInfoVO);
-
-        // 如果用户是激活的
-        if(memberInfoVO.isActivating()){
-            // 设置权限代表用户已经激活
-            session.setAttribute("memberAuth",true);
-            System.out.println("session set memberAuth = " + true);
-        }else {
-            session.setAttribute("memberAuth",false);
-            System.out.println("session set memberAuth = " + false);
-        }
-
     }
 
     protected void setUpHotel(HttpServletRequest request,Hotel hotel) {

@@ -3,7 +3,9 @@ package com.kylin.controller.guest;
 import com.kylin.controller.MyController;
 import com.kylin.service.ReserveService;
 import com.kylin.tools.DateHelper;
+import com.kylin.tools.myenum.MemberStatus;
 import com.kylin.tools.myenum.RoomType;
+import com.kylin.vo.MemberInfoVO;
 import com.kylin.vo.ReserveInputTableVO;
 import com.kylin.vo.SearchHotelItemVO;
 import com.kylin.vo.SearchInputVO;
@@ -37,11 +39,20 @@ public class GuestReserveController extends MyController {
 
         //检查用户是否已经激活
         HttpSession session = request.getSession();
-        boolean auth = (boolean) session.getAttribute("memberAuth");
+        MemberInfoVO memberInfoVO = (MemberInfoVO) session.getAttribute("memberInfo");
+        MemberStatus status = memberInfoVO.getStatus();
         //没有激活
-        if(!auth){
+        if (status == MemberStatus.NeverActivated) {
             modelAndView = new ModelAndView("guest/activate-warning");
-            modelAndView.addObject("error","请充值1000元激活会员资格!");
+            modelAndView.addObject("error", "您还没有激活, 请充值1000元激活会员资格!");
+            return modelAndView;
+        } else if (status == MemberStatus.Stopped) {
+            modelAndView = new ModelAndView("guest/activate-warning");
+            modelAndView.addObject("error", "您的会员资格已经取消,请联系管理员!");
+            return modelAndView;
+        } else if (status == MemberStatus.Expired) {
+            modelAndView = new ModelAndView("guest/activate-warning");
+            modelAndView.addObject("error", "您的会员资格已经过期,请充值任意金额再次激活!");
             return modelAndView;
         }
 

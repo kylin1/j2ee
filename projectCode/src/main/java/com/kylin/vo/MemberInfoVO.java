@@ -26,6 +26,7 @@ public class MemberInfoVO {
 
     // activate info
     private String strStatus;
+    private MemberStatus status;
 
     private Date activatedTime;
     private String strActivatedTime;
@@ -61,6 +62,7 @@ public class MemberInfoVO {
         this.level = level;
         this.memberScore = memberScore;
         this.init();
+
     }
 
     public String getCarNumber() {
@@ -70,9 +72,10 @@ public class MemberInfoVO {
     private void init() {
         this.strActivatedTime = DateHelper.getDateString(this.activatedTime);
         this.strExpireTime = DateHelper.getDateString(this.expireTime);
-
         this.strLevel = level.getStringLevel();
+        this.status = MemberStatus.getEnum(this.strStatus);
     }
+
 
     public String getName() {
         return name;
@@ -163,5 +166,9 @@ public class MemberInfoVO {
                 ", strLevel='" + strLevel + '\'' +
                 ", memberScore=" + memberScore +
                 '}';
+    }
+
+    public MemberStatus getStatus() {
+        return status;
     }
 }
