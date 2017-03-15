@@ -101,9 +101,11 @@ public class GuestReserveController extends MyController {
 
 
     @RequestMapping(value = "reserve", method = RequestMethod.POST)
-    public ModelAndView reserveHotel(@ModelAttribute("reserveInputTableVO") ReserveInputTableVO reserveInputTableVO) {
+    public ModelAndView reserveHotel(HttpServletRequest request, @ModelAttribute("reserveInputTableVO") ReserveInputTableVO reserveInputTableVO) {
         System.out.println("reserve, reserveInputTableVO = " + reserveInputTableVO);
         MyMessage myMessage = this.reserveService.makeReservation(reserveInputTableVO);
+        //如果预定成功需要更新余额
+        this.refreshMemberInfo(request, reserveInputTableVO.getMemberId());
 
         Map<String, Object> map = new HashMap<>();
         map.put("reserveInput", reserveInputTableVO);

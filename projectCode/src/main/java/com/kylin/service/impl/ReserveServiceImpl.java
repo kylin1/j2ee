@@ -118,8 +118,8 @@ public class ReserveServiceImpl implements ReserveService {
 
     @Override
     public MyMessage makeReservation(ReserveInputTableVO inputVO) {
-        // 检查会员卡的余额是否足够,如果够则减去
-        MyMessage myMessage = this.checkMemberBalance(inputVO);
+        // 检查会员卡的余额是否足够,如果够则减去,并且增加消费总额,用户等级
+        MyMessage myMessage = this.processBalanceAndLevel(inputVO);
         if (!myMessage.isSuccess()) {
             return myMessage;
         }
@@ -173,7 +173,7 @@ public class ReserveServiceImpl implements ReserveService {
         return new MyMessage(true);
     }
 
-    private MyMessage checkMemberBalance(ReserveInputTableVO inputVO) {
+    private MyMessage processBalanceAndLevel(ReserveInputTableVO inputVO) {
         int memberId = inputVO.getMemberId();
         Member member = memberRepository.findOne(memberId);
 
@@ -186,9 +186,27 @@ public class ReserveServiceImpl implements ReserveService {
             // 新的会员卡余额 = 旧的 - 支付金额
             int newBalance = currentBalance - price;
             member.setBalance(newBalance);
-            memberRepository.save(member);
+
+            // 增加总消费额
+            int oldConsume = member.getConsume();
+            int newConsume = oldConsume + price;
+            member.setConsume(newConsume);
+
+            // 修改用户等级
+            MemberLevel level = this.getLevelByConsume(newConsume);
+            member.setLevel(level.ordinal());
         }
+        memberRepository.save(member);
         return new MyMessage(true);
+    }
+
+    private MemberLevel getLevelByConsume(int newConsume) {
+        if (newConsume > 1000) {
+            return MemberLevel.High;
+        } else if (newConsume > 500) {
+            return MemberLevel.Middle;
+        }
+        return null;
     }
 
 
