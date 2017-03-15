@@ -32,6 +32,18 @@
               </div>
               <div class="card-content">
                 <form>
+
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label class="control-label">会员卡识别码</label>
+                    </div>
+
+                    <div class="col-md-4">
+                      <p class="card-text">${memberInfo.carNumber}</p>
+                    </div>
+                  </div>
+
+
                   <div class="row">
                     <div class="col-md-2">
                       <label class="control-label">账号</label>
@@ -99,13 +111,13 @@
 
                   <div class="row">
                     <div class="col-md-3">
-                      <a type="button" href="${pageContext.request.contextPath}/guest/top-up/${memberInfo.id}" class="btn btn-primary pull-left">
+                      <a type="button" href="${pageContext.request.contextPath}/guest/pocket" class="btn btn-primary pull-left">
                         会员充值
                       </a>
                     </div>
 
                     <div class="col-md-3">
-                      <a type="button" href="${pageContext.request.contextPath}/guest/cancel/${memberInfo.id}" class="btn btn-danger pull-left">
+                      <a type="button" href="${pageContext.request.contextPath}/guest/cancel-member" class="btn btn-danger pull-left">
                         取消资格
                       </a>
                     </div>

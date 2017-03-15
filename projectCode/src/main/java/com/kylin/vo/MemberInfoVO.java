@@ -2,7 +2,6 @@ package com.kylin.vo;
 
 import com.kylin.tools.DateHelper;
 import com.kylin.tools.myenum.MemberLevel;
-import com.kylin.tools.myenum.MemberStatus;
 
 import java.util.Date;
 
@@ -15,6 +14,8 @@ import java.util.Date;
  */
 public class MemberInfoVO {
 
+    private String carNumber;
+
     // id and account
     private int id;
     private String name;
@@ -23,9 +24,7 @@ public class MemberInfoVO {
     private String email;
 
     // activate info
-    private MemberStatus status;
     private String strStatus;
-    private int intStatus;
 
     private Date activatedTime;
     private String strActivatedTime;
@@ -46,13 +45,14 @@ public class MemberInfoVO {
     // 积分
     private int memberScore;
 
-    public MemberInfoVO(int id,String name,String phone,String bankCard,String email, MemberStatus status, Date activatedTime, Date expireTime, int totalConsume, int memberCardRemain, MemberLevel level, int memberScore) {
+    public MemberInfoVO(String carNumber,int id,String name,String phone,String bankCard,String email, String status, Date activatedTime, Date expireTime, int totalConsume, int memberCardRemain, MemberLevel level, int memberScore) {
+        this.carNumber = carNumber;
+        this.strStatus = status;
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.bankCard = bankCard;
-        this.status = status;
         this.activatedTime = activatedTime;
         this.expireTime = expireTime;
         this.totalConsume = totalConsume;
@@ -62,12 +62,13 @@ public class MemberInfoVO {
         this.init();
     }
 
+    public String getCarNumber() {
+        return carNumber;
+    }
+
     private void init() {
         this.strActivatedTime = DateHelper.getDateString(this.activatedTime);
         this.strExpireTime = DateHelper.getDateString(this.expireTime);
-
-        this.intStatus = status.getStatus();
-        this.strStatus = status.getStringStatus();
 
         this.strLevel = level.getStringLevel();
     }
@@ -78,10 +79,6 @@ public class MemberInfoVO {
 
     public int getId() {
         return id;
-    }
-
-    public MemberStatus getStatus() {
-        return status;
     }
 
     public Date getActivatedTime() {
@@ -110,10 +107,6 @@ public class MemberInfoVO {
 
     public String getStrStatus() {
         return strStatus;
-    }
-
-    public int getIntStatus() {
-        return intStatus;
     }
 
     public String getEmail() {
@@ -158,9 +151,7 @@ public class MemberInfoVO {
                 ", phone='" + phone + '\'' +
                 ", bankCard='" + bankCard + '\'' +
                 ", email='" + email + '\'' +
-                ", status=" + status +
                 ", strStatus='" + strStatus + '\'' +
-                ", intStatus=" + intStatus +
                 ", activatedTime=" + activatedTime +
                 ", strActivatedTime='" + strActivatedTime + '\'' +
                 ", expireTime=" + expireTime +

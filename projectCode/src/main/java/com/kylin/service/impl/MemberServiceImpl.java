@@ -8,6 +8,7 @@ import com.kylin.repository.OrderRepository;
 import com.kylin.repository.RoomGuestRepository;
 import com.kylin.service.MemberService;
 import com.kylin.tools.DateHelper;
+import com.kylin.tools.NumberHelper;
 import com.kylin.tools.myenum.MemberLevel;
 import com.kylin.tools.myenum.MemberOrderStatus;
 import com.kylin.tools.myenum.MemberStatus;
@@ -49,6 +50,8 @@ public class MemberServiceImpl implements MemberService {
         Member entity = this.repository.findOne(memberId);
         // get enums
         MemberStatus memberStatus = MemberStatus.getEnum(entity.getStatus());
+        String strStatus = memberStatus.getStringStatus();
+
         MemberLevel memberLevel = MemberLevel.getEnum(entity.getLevel());
 
         Date expireTime = entity.getExpireTime();
@@ -62,8 +65,10 @@ public class MemberServiceImpl implements MemberService {
             this.repository.save(entity);
         }
 
-        MemberInfoVO memberInfoVO = new MemberInfoVO(memberId, entity.getName(),
-                entity.getPhone(), entity.getBankCard(), entity.getEmail(),memberStatus,
+        String carNumber = NumberHelper.getSevenNumber(memberId);
+
+        MemberInfoVO memberInfoVO = new MemberInfoVO(carNumber,memberId, entity.getName(),
+                entity.getPhone(), entity.getBankCard(), entity.getEmail(),strStatus,
                 entity.getActivatedTime(), entity.getExpireTime(),
                 entity.getConsume(), entity.getBalance(), memberLevel, entity.getScore());
 
@@ -200,5 +205,13 @@ public class MemberServiceImpl implements MemberService {
 
         this.repository.save(member);
         return new MyMessage(true, "用户信息更新成功");
+    }
+
+    @Override
+    public void cancelMember(int memberId) {
+        Member member = this.repository.findOne(memberId);
+        member.setStatus(MemberStatus.Stopped.getStatus());
+        member.setExpireTime(new Date());
+        this.repository.save(member);
     }
 }

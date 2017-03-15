@@ -1,8 +1,16 @@
 package com.kylin.controller;
 
+import com.kylin.model.Hotel;
+import com.kylin.service.HotelStatusService;
+import com.kylin.service.MemberService;
+import com.kylin.tools.myenum.MyAuthority;
+import com.kylin.vo.MemberInfoVO;
 import com.kylin.vo.common.MyMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
@@ -10,6 +18,57 @@ import java.util.Map;
  * All rights reserved.
  */
 public class MyController {
+
+    @Autowired
+    private MemberService memberService;
+    @Autowired
+    private HotelStatusService statusService;
+
+    protected void refreshMemberInfo(HttpServletRequest request, int memberID){
+        // 重新查询用户信息
+        MemberInfoVO memberInfoVO = memberService.getMemberInfo(memberID);
+        // 刷新session
+        this.setUpMember(request,memberInfoVO);
+    }
+
+
+    protected void setUpMember(HttpServletRequest request, MemberInfoVO memberInfoVO) {
+        HttpSession session = request.getSession();
+        session.setAttribute("memberInfo", memberInfoVO);
+        System.out.println("session set memberInfo = " + memberInfoVO.getName());
+
+        // 如果用户是激活的
+        if(memberInfoVO.isActivating()){
+            // 设置权限代表用户已经激活
+            String memberAuth = MyAuthority.memberAuth;
+            session.setAttribute("memberAuth",memberAuth);
+        }
+
+    }
+
+    protected void setUpHotel(HttpServletRequest request,Hotel hotel) {
+        HttpSession session = request.getSession();
+
+        // 酒店不存在,还没有通过开店审批
+        if(hotel != null){
+            int hotelId = hotel.getId();
+            MyMessage myMessage = this.statusService.isHotelOpened(hotelId);
+            boolean isHotelOpen = myMessage.isSuccess();
+
+            session.setAttribute("hotelId", hotelId);
+            session.setAttribute("hotel", hotel);
+            session.setAttribute(MyAuthority.hotelAuth, isHotelOpen);
+
+            System.out.println("session set hotelId = " + hotelId);
+            System.out.println("session set hotel = " + hotel.getName());
+            System.out.println("session set hotelAuth = " + isHotelOpen);
+        }
+    }
+
+
+    protected void setUpManager(HttpServletRequest request, int userID) {
+
+    }
 
     protected ModelAndView handleMessage(MyMessage myMessage, String page) {
         ModelAndView modelAndView = new ModelAndView(page);

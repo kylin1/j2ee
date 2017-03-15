@@ -22,7 +22,7 @@
 
       <li>
         <a href="${pageContext.request.contextPath}/guest/search">
-          <i class="material-icons">today</i>
+          <i class="material-icons">search</i>
           <p>Search</p>
         </a>
       </li>

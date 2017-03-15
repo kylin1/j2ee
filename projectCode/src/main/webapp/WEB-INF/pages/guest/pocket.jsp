@@ -32,7 +32,7 @@
               </div>
 
               <div class="card-content">
-                <form action="guest/top-up" method="POST">
+                <form action="${pageContext.request.contextPath}/guest/top-up" method="post">
 
                   <div class="row">
                     <div class="col-sm-3">

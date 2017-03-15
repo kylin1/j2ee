@@ -1,6 +1,8 @@
 package com.kylin.controller.guest;
 
+import com.kylin.controller.MyController;
 import com.kylin.service.MemberService;
+import com.kylin.vo.MemberInfoVO;
 import com.kylin.vo.common.MyMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,27 +19,26 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping("guest")
-public class GuestPocketController {
+public class GuestPocketController extends MyController {
 
     @Autowired
     private MemberService memberService;
 
-    @RequestMapping(value = "top-up",method = RequestMethod.POST)
-    public ModelAndView topUp(HttpServletRequest request){
-        ModelAndView result = new ModelAndView("guest/pocket");
+    @RequestMapping(value = "top-up", method = RequestMethod.POST)
+    public ModelAndView topUp(HttpServletRequest request) {
 
         int money = Integer.parseInt(request.getParameter("money"));
         int score = Integer.parseInt(request.getParameter("score"));
 
         HttpSession session = request.getSession();
-        int memberId = (int) session.getAttribute("memberId");
+        MemberInfoVO memberInfoVO = (MemberInfoVO) session.getAttribute("memberInfo");
+        System.out.println("top-up, money = " + money + " , score = " + score);
 
-        MyMessage myMessage = this.memberService.topUp(memberId,money,score);
-        if(myMessage.isSuccess()){
-            result.addObject("info","充值成功");
-        }else {
-            result.addObject("info",myMessage.getDisplayMessage());
-        }
-        return result;
+        int memberId = memberInfoVO.getId();
+        MyMessage myMessage = this.memberService.topUp(memberId, money, score);
+
+        this.refreshMemberInfo(request, memberId);
+
+        return this.handleMessage(myMessage, "redirect:/guest/pocket");
     }
 }

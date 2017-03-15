@@ -4,10 +4,8 @@ import com.kylin.model.Hotel;
 import com.kylin.model.SystemUser;
 import com.kylin.repository.HotelRepository;
 import com.kylin.repository.SystemUserRepository;
-import com.kylin.service.HotelStatusService;
 import com.kylin.service.MemberService;
 import com.kylin.service.SystemUserService;
-import com.kylin.tools.myenum.MyAuthority;
 import com.kylin.tools.myenum.SystemUserType;
 import com.kylin.vo.LoginResultVO;
 import com.kylin.vo.MemberInfoVO;
@@ -37,8 +35,7 @@ public class SystemUserController extends MyController{
     private HotelRepository hotelRepository;
     @Autowired
     private SystemUserRepository userRepository;
-    @Autowired
-    private HotelStatusService statusService;
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String login() {
@@ -157,41 +154,5 @@ public class SystemUserController extends MyController{
         }
     }
 
-    private void setUpManager(HttpServletRequest request, int userID) {
-
-    }
-
-    private void setUpMember(HttpServletRequest request, MemberInfoVO memberInfoVO) {
-        HttpSession session = request.getSession();
-        session.setAttribute("memberInfo", memberInfoVO);
-        System.out.println("session set memberInfo = " + memberInfoVO.getName());
-
-        // 如果用户是激活的
-        if(memberInfoVO.isActivating()){
-            // 设置权限代表用户已经激活
-            String memberAuth = MyAuthority.memberAuth;
-            session.setAttribute("memberAuth",memberAuth);
-        }
-
-    }
-
-    private void setUpHotel(HttpServletRequest request,Hotel hotel) {
-        HttpSession session = request.getSession();
-
-        // 酒店不存在,还没有通过开店审批
-        if(hotel != null){
-            int hotelId = hotel.getId();
-            MyMessage myMessage = this.statusService.isHotelOpened(hotelId);
-            boolean isHotelOpen = myMessage.isSuccess();
-
-            session.setAttribute("hotelId", hotelId);
-            session.setAttribute("hotel", hotel);
-            session.setAttribute(MyAuthority.hotelAuth, isHotelOpen);
-
-            System.out.println("session set hotelId = " + hotelId);
-            System.out.println("session set hotel = " + hotel.getName());
-            System.out.println("session set hotelAuth = " + isHotelOpen);
-        }
-    }
 
 }

@@ -6,10 +6,10 @@ package com.kylin.tools.myenum;
  */
 public enum MemberLevel {
 
-    High("高级会员"),
-    Middle("中级会员"),
+    None("未激活会员"),
     Low("低级会员"),
-    None("未激活会员");
+    Middle("中级会员"),
+    High("高级会员");
 
     private String stringLevel;
 

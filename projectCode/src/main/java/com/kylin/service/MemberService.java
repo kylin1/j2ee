@@ -56,4 +56,5 @@ public interface MemberService {
      */
     MyMessage updateInfo(MemberUpdateTableVO updateVO);
 
+    void cancelMember(int memberId);
 }
