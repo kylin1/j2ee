@@ -123,7 +123,7 @@ public class HotelManageServiceImpl implements HotelManageService {
         int orderId = input.getOrderId();
         List<HotelRoomCheckIn> hotelRoomCheckInList = input.getHotelRoomCheckInList();
         boolean isMember = input.isMember();
-        PaymentType paymentType = input.getPaymentType();
+        PaymentType paymentType = PaymentType.getEnum(input.getIntPaymentType());
 
         // 查找对应的用户订单
         MemberOrder order = orderRepository.findOne(orderId);
@@ -158,29 +158,47 @@ public class HotelManageServiceImpl implements HotelManageService {
         List<HotelRoomCheckIn> hotelRoomCheckInList = new ArrayList<>();
         int hotelId = checkInTableVO.getHotelId();
 
-        String[] guests = checkInTableVO.getGuests();
-        String[] cards = checkInTableVO.getCards();
-        int index = 0;
+        // 一个人的信息
+        String roomNum = checkInTableVO.getRoomNumber();
+        String guest1 = checkInTableVO.getGuest1();
+        String card1 = checkInTableVO.getCard1();
 
-        for (String roomNum : checkInTableVO.getRoomNumbers()) {
-            HotelRoom hotelRoom = this.hotelRoomRepository.findByHotelIdAndRoomNumber(hotelId,roomNum);
-            // 输入的房间编号例如420不存在
-            if (hotelRoom == null) {
-                return new MyMessage(false, "房间号 : " + roomNum + "不存在");
-                //房间存在
-            } else {
-                int roomId = hotelRoom.getId();
-                //获取这个房间内所有的住客
-                List<HotelGuestCheckIn> guestList = new ArrayList<>();
-                guestList.add(new HotelGuestCheckIn(guests[index], cards[index]));
-                index++;
-                guestList.add(new HotelGuestCheckIn(guests[index], cards[index]));
-                index++;
+        HotelRoom hotelRoom = this.hotelRoomRepository.findByHotelIdAndRoomNumber(hotelId, roomNum);
+        RoomType roomType = RoomType.getEnum(hotelRoom.getType());
 
-                //新建并添加一个房间的入住情况
-                HotelRoomCheckIn hotelRoomCheckIn = new HotelRoomCheckIn(roomId, guestList);
-                hotelRoomCheckInList.add(hotelRoomCheckIn);
+        //单人间只能入住一个人
+        if(roomType == RoomType.SingleRoom){
+            String guest2 = checkInTableVO.getGuest2();
+            String card2 = checkInTableVO.getCard2();
+            if(guest2 != null && guest2.length() > 0){
+                return new MyMessage(false,"单人间只能入住一个人!");
             }
+            if(card2 != null && card2.length() > 0){
+                return new MyMessage(false,"单人间只能入住一个人!");
+            }
+        }
+
+        // 输入的房间编号例如420不存在
+        if (hotelRoom == null) {
+            return new MyMessage(false, "房间号 : " + roomNum + "不存在");
+            //房间存在
+        } else {
+            int roomId = hotelRoom.getId();
+            //获取这个房间内所有的住客
+            List<HotelGuestCheckIn> guestList = new ArrayList<>();
+            guestList.add(new HotelGuestCheckIn(guest1, card1));
+
+            // 如果不是单人间
+            if (roomType != RoomType.SingleRoom) {
+                String guest2 = checkInTableVO.getGuest2();
+                String card2 = checkInTableVO.getCard2();
+                // 再增加一个房客
+                guestList.add(new HotelGuestCheckIn(guest2, card2));
+            }
+
+            //新建并添加一个房间的入住情况
+            HotelRoomCheckIn hotelRoomCheckIn = new HotelRoomCheckIn(roomId, guestList);
+            hotelRoomCheckInList.add(hotelRoomCheckIn);
         }
         checkInTableVO.setHotelRoomCheckInList(hotelRoomCheckInList);
         return new MyMessage(true);

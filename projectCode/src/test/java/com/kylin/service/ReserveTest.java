@@ -89,4 +89,11 @@ public class ReserveTest {
         System.out.println(myMessage.getDisplayMessage());
     }
 
+    @Test
+    public void testCancelReservation(){
+        int orderId = 1066;
+        MyMessage myMessage = this.service.cancelReservation(orderId);
+        System.out.println(myMessage);
+    }
+
 }

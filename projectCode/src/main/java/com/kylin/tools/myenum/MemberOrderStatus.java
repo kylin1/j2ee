@@ -8,7 +8,8 @@ public enum MemberOrderStatus {
 
     Canceled("已取消"),
     Reserved("预定但未入住"),
-    CheckedIn("已入住");
+    CheckedIn("已入住"),
+    CheckedOut("已退房");
 
 
     private String stringStatus;

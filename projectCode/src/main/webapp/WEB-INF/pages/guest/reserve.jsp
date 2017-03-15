@@ -81,13 +81,6 @@
                       <h6>${strType}</h6>
                     </div>
 
-                    <div class="col-md-1">
-                      <label class="control-label">数目</label>
-                    </div>
-
-                    <div class="col-md-1">
-                      <h6>${reserveInput.roomNumber}</h6>
-                    </div>
                   </div>
 
                   <!--名称行-->
@@ -130,6 +123,7 @@
                   </c:if>
 
                   <input type="hidden" name="memberId" value="${reserveInput.memberId}">
+                  <input type="hidden" name="roomNumber" value="1">
                   <input type="hidden" name="hotelId" value="${reserveInput.hotelId}">
                   <input type="hidden" name="strDate1" value="${reserveInput.strDate1}">
                   <input type="hidden" name="strDate2" value="${reserveInput.strDate2}">

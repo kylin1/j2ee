@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class MemberOrderVO {
 
+    private int orderId;
+
     // hotel
     private String hotelName;
 
@@ -36,8 +38,9 @@ public class MemberOrderVO {
     private String stringStatus;
     private MemberOrderStatus orderStatus;
 
-    public MemberOrderVO(String hotelName, Date orderDate, List<String> customers,
+    public MemberOrderVO(int orderId,String hotelName, Date orderDate, List<String> customers,
                          Date checkInDate, Date checkOutDate, int totalPrice, MemberOrderStatus orderStatus) {
+        this.orderId = orderId;
         this.hotelName = hotelName;
         this.orderDate = orderDate;
         this.checkInDate = checkInDate;
@@ -54,6 +57,10 @@ public class MemberOrderVO {
         this.stringOrderDate = DateHelper.getDateString(orderDate);
         this.stringCheckInDate = DateHelper.getDateString(checkInDate);
         this.stringCheckOutDate = DateHelper.getDateString(checkOutDate);
+    }
+
+    public int getOrderId() {
+        return orderId;
     }
 
     public String getHotelName() {

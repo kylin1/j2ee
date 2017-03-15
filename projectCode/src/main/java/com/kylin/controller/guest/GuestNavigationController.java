@@ -42,8 +42,11 @@ public class GuestNavigationController {
         MemberInfoVO member = (MemberInfoVO) session.getAttribute("memberInfo");
         int memberId = member.getId();
 
-        List<MemberOrderVO> orderVOList = this.memberService.getOrderList(memberId);
+        List<MemberOrderVO> doneOrderVOList = this.memberService.getDoneOrderList(memberId);
+        List<MemberOrderVO> orderVOList = this.memberService.getCurrentOrderList(memberId);
+
         ModelAndView result = new ModelAndView("guest/order");
+        result.addObject("doneOrderVOList", doneOrderVOList);
         result.addObject("orderVOList", orderVOList);
         return result;
     }

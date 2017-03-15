@@ -153,8 +153,8 @@ public class ReserveServiceImpl implements ReserveService {
             }
 
             // 得到这个房间的信息
-            List<HotelRoomStatus> roomStatusList = this.roomStatusRepository.findByRoomAndDateAndStatus
-                    (roomId, checkIn, checkOut, roomState);
+            List<HotelRoomStatus> roomStatusList = this.roomStatusRepository.
+                    findByRoomAndDateAndStatus(roomId, checkIn, checkOut, roomState);
 
             // 更新每一天房间的状态为被预定,防止被别人重复预定
             int targetState = RoomStatus.Reserved.ordinal();
@@ -171,6 +171,83 @@ public class ReserveServiceImpl implements ReserveService {
         this.saveOrder(inputVO, hotel, strRoomList);
 
         return new MyMessage(true);
+    }
+
+    @Override
+    public MyMessage cancelReservation(int orderId) {
+        MemberOrder order = this.orderRepository.findOne(orderId);
+        MemberOrderStatus orderStatus = MemberOrderStatus.getEnum(order.getStatus());
+        if (orderStatus != MemberOrderStatus.Reserved) {
+            return new MyMessage(false, "只有预定但没有入住的订单才能取消, 当前订单状态为 " + orderStatus.getStringStatus());
+        }
+
+        // 取回余额
+        this.unProcessBalanceAndLevel(order);
+        // 重新设置房间为空闲
+        this.returnReservedRoom(order);
+        // 设置订单状态为取消
+        order.setStatus(MemberOrderStatus.Canceled.ordinal());
+        this.orderRepository.save(order);
+
+        return new MyMessage(true);
+    }
+
+    private void returnReservedRoom(MemberOrder order) {
+        String reservedRoomString = order.getReservedRoomString();
+        String[] roomNumbers = reservedRoomString.split(",");
+        // 订单的基本信息
+        int hotelId = order.getHotelId();
+        Date checkIn = order.getCheckIn();
+        Date checkOut = order.getCheckOut();
+
+        for (String roomNumber : roomNumbers) {
+            // 找到预定的一个房间
+            HotelRoom hotelRoom = this.hotelRoomRepository.
+                    findByHotelIdAndRoomNumber(hotelId, roomNumber);
+            int hotelRoomId = hotelRoom.getId();
+
+            // 被预定的房间,在两个日期之间的信息
+            List<HotelRoomStatus> roomStatusList = this.roomStatusRepository.
+                    findByRoomAndDate(hotelRoomId, checkIn, checkOut);
+
+            // 将它们重新设置为可以预定
+            int targetState = RoomStatus.Empty.ordinal();
+            for (HotelRoomStatus roomStatus : roomStatusList) {
+                roomStatus.setStatus(targetState);
+                this.roomStatusRepository.save(roomStatus);
+            }
+        }
+    }
+
+    private void unProcessBalanceAndLevel(MemberOrder order) {
+        // 订单信息
+        int memberId = order.getMemberId();
+        int price = order.getPrice();
+
+        // 会员数据
+        Member member = memberRepository.findOne(memberId);
+
+        // 增加会员卡余额
+        int oldBalance = member.getBalance();
+        int newBalance = oldBalance + price;
+        member.setBalance(newBalance);
+
+        // 减去消费额
+        int oldConsume = member.getConsume();
+        int newConsume = oldConsume - price;
+        member.setConsume(newConsume);
+
+        // 减去积分
+        int oldScore = member.getScore();
+        int newScore = oldScore - price;
+        member.setScore(newScore);
+
+        // 修改用户等级
+        MemberLevel level = this.getLevelByConsume(newConsume);
+        member.setLevel(level.ordinal());
+
+        // 回滚用户数据
+        memberRepository.save(member);
     }
 
     private MyMessage processBalanceAndLevel(ReserveInputTableVO inputVO) {
@@ -192,6 +269,11 @@ public class ReserveServiceImpl implements ReserveService {
             int newConsume = oldConsume + price;
             member.setConsume(newConsume);
 
+            // 增加积分
+            int oldScore = member.getScore();
+            int newScore = oldScore + price;
+            member.setScore(newScore);
+
             // 修改用户等级
             MemberLevel level = this.getLevelByConsume(newConsume);
             member.setLevel(level.ordinal());
@@ -205,8 +287,8 @@ public class ReserveServiceImpl implements ReserveService {
             return MemberLevel.High;
         } else if (newConsume > 500) {
             return MemberLevel.Middle;
-        }
-        return null;
+        } else
+            return MemberLevel.Low;
     }
 
 

@@ -74,7 +74,7 @@ public class HotelRegisterController extends MyController {
         }
         System.out.println("after init : " + checkInTableVO);
         MyMessage myMessage = this.hotelManageService.customCheckIn(checkInTableVO);
-        return this.handleMessage(myMessage, "redirect:hotel/room-register",object);
+        return this.handleMessage(myMessage, "redirect:/hotel/customer-register",object);
     }
 
 }

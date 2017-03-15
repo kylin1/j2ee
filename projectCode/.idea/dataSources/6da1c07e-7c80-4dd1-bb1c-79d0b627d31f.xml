@@ -45,9 +45,9 @@
     </column>
     <column id="31" parent="17" name="balance">
       <Position>3</Position>
-      <DataType>int(255)|0</DataType>
+      <DataType>decimal(20,10)|0</DataType>
       <NotNull>1</NotNull>
-      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+      <DefaultExpression>&apos;0.0000000000&apos;</DefaultExpression>
     </column>
     <key id="32" parent="17" name="PRIMARY">
       <ColNames>id

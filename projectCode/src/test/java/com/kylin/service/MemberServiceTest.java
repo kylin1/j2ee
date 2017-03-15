@@ -32,8 +32,14 @@ public class MemberServiceTest {
     }
 
     @Test
-    public void testOrderList(){
-        List<MemberOrderVO> memberOrderVOS = this.memberService.getOrderList(1);
+    public void testCurrentOrderList(){
+        List<MemberOrderVO> memberOrderVOS = this.memberService.getCurrentOrderList(1);
+        memberOrderVOS.forEach(System.out::println);
+    }
+
+    @Test
+    public void testDoneOrderList(){
+        List<MemberOrderVO> memberOrderVOS = this.memberService.getDoneOrderList(1);
         memberOrderVOS.forEach(System.out::println);
     }
 

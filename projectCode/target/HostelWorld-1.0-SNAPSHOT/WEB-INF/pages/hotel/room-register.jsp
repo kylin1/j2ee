@@ -91,58 +91,35 @@
                   <!--订单号-->
                   <div class="row">
                     <div class="input-group">
-                      <div class="col-md-6">
+                      <div class="col-md-3">
                         <input type="text" value="${checkInVO.orderId}" name="orderId" class="form-control"
                                placeholder="订单号">
                       </div>
-                    </div>
-                  </div>
 
-                  <div class="row">
-                    <div class="input-group">
                       <div class="col-md-3">
-                        <input type="text" value="${checkInVO.roomNumbers[0]}" name="roomNumbers" class="form-control"
+                        <input type="text" value="${checkInVO.roomNumber}" name="roomNumber" class="form-control"
                                placeholder="房间号">
-                      </div>
-                      <div class="col-md-2">
-                        <input type="text" value="${checkInVO.guests[0]}" name="guests" class="form-control"
-                               placeholder="房客1">
-                      </div>
-                      <div class="col-md-2">
-                        <input type="text" value="${checkInVO.cards[0]}" name="cards" class="form-control"
-                               placeholder="身份证">
-                      </div>
-                      <div class="col-md-2">
-                        <input type="text" value="${checkInVO.guests[1]}" name="guests" class="form-control"
-                               placeholder="房客2">
-                      </div>
-                      <div class="col-md-2">
-                        <input type="text" value="${checkInVO.cards[1]}" name="cards" class="form-control"
-                               placeholder="身份证">
                       </div>
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="input-group">
-                      <div class="col-md-3">
-                        <input type="text" value="${checkInVO.roomNumbers[1]}" name="roomNumbers" class="form-control"
-                               placeholder="房间号">
-                      </div>
+
                       <div class="col-md-2">
-                        <input type="text" value="${checkInVO.guests[2]}" name="guests" class="form-control"
+                        <input type="text" value="${checkInVO.guest1}" name="guest1" class="form-control"
                                placeholder="房客1">
                       </div>
                       <div class="col-md-2">
-                        <input type="text" value="${checkInVO.cards[2]}" name="cards" class="form-control"
+                        <input type="text" value="${checkInVO.card1}" name="card1" class="form-control"
                                placeholder="身份证">
                       </div>
                       <div class="col-md-2">
-                        <input type="text" value="${checkInVO.guests[3]}" name="guests" class="form-control"
+                        <input type="text" value="${checkInVO.guest2}" name="guest2" class="form-control"
                                placeholder="房客2">
                       </div>
                       <div class="col-md-2">
-                        <input type="text" value="${checkInVO.cards[3]}" name="cards" class="form-control"
+                        <input type="text" value="${checkInVO.card2}" name="card2" class="form-control"
                                placeholder="身份证">
                       </div>
                     </div>

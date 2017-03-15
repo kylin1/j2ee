@@ -29,7 +29,15 @@ public interface MemberService {
      * @param memberId
      * @return
      */
-    List<MemberOrderVO> getOrderList(int memberId);
+    List<MemberOrderVO> getCurrentOrderList(int memberId);
+
+    /**
+     * 获取用户的订单历史
+     *
+     * @param memberId
+     * @return
+     */
+    List<MemberOrderVO> getDoneOrderList(int memberId);
 
     /**
      * 输入会员姓名/账号进行查询

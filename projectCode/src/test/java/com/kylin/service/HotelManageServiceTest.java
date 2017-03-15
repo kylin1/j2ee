@@ -80,7 +80,6 @@ public class HotelManageServiceTest {
         HotelRoomCheckIn hotelRoomCheckIn2 = new HotelRoomCheckIn(roomId2, guestCheckIns2);
 
         list.add(hotelRoomCheckIn1);
-        list.add(hotelRoomCheckIn2);
 
 
         //添加入住信息

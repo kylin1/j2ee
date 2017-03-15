@@ -39,6 +39,14 @@ public interface ReserveService {
     MyMessage makeReservation(ReserveInputTableVO reserveInputTableVO);
 
     /**
+     * 取消一个预定信息
+     *
+     * @param orderId
+     * @return
+     */
+    MyMessage cancelReservation(int orderId);
+
+    /**
      * 酒店管理人员搜索空闲房间，给客户分配
      *
      * @param fromDate

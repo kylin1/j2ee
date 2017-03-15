@@ -1,8 +1,5 @@
 package com.kylin.vo;
 
-import com.kylin.tools.myenum.PaymentType;
-
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,9 +14,11 @@ public class HotelCheckInTableVO {
 
     private int orderId;
 
-    private String[] roomNumbers = new String[2];
-    private String[] guests = new String[4];
-    private String[] cards = new String[4];
+    private String roomNumber;
+    private String guest1;
+    private String guest2;
+    private String card1;
+    private String card2;
 
     // 是否会员
     private boolean isMember;
@@ -34,56 +33,80 @@ public class HotelCheckInTableVO {
     public HotelCheckInTableVO() {
     }
 
+    @Override
+    public String toString() {
+        return "HotelCheckInTableVO{" +
+                "hotelId=" + hotelId +
+                ", orderId=" + orderId +
+                ", roomNumber='" + roomNumber + '\'' +
+                ", guest1='" + guest1 + '\'' +
+                ", guest2='" + guest2 + '\'' +
+                ", card1='" + card1 + '\'' +
+                ", card2='" + card2 + '\'' +
+                ", isMember=" + isMember +
+                ", intPaymentType=" + intPaymentType +
+                ", hotelRoomCheckInList=" + hotelRoomCheckInList +
+                '}';
+    }
+
     public int getHotelId() {
         return hotelId;
-    }
-
-    public int getOrderId() {
-        return orderId;
-    }
-
-    public List<HotelRoomCheckIn> getHotelRoomCheckInList() {
-        return hotelRoomCheckInList;
-    }
-
-    public boolean isMember() {
-        return isMember;
-    }
-
-    public PaymentType getPaymentType() {
-        return PaymentType.getEnum(this.intPaymentType);
     }
 
     public void setHotelId(int hotelId) {
         this.hotelId = hotelId;
     }
 
+    public int getOrderId() {
+        return orderId;
+    }
+
     public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
-    public String[] getRoomNumbers() {
-        return roomNumbers;
+    public String getRoomNumber() {
+        return roomNumber;
     }
 
-    public void setRoomNumbers(String[] roomNumbers) {
-        this.roomNumbers = roomNumbers;
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
-    public String[] getGuests() {
-        return guests;
+    public String getGuest1() {
+        return guest1;
     }
 
-    public void setGuests(String[] guests) {
-        this.guests = guests;
+    public void setGuest1(String guest1) {
+        this.guest1 = guest1;
     }
 
-    public String[] getCards() {
-        return cards;
+    public String getGuest2() {
+        return guest2;
     }
 
-    public void setCards(String[] cards) {
-        this.cards = cards;
+    public void setGuest2(String guest2) {
+        this.guest2 = guest2;
+    }
+
+    public String getCard1() {
+        return card1;
+    }
+
+    public void setCard1(String card1) {
+        this.card1 = card1;
+    }
+
+    public String getCard2() {
+        return card2;
+    }
+
+    public void setCard2(String card2) {
+        this.card2 = card2;
+    }
+
+    public boolean isMember() {
+        return isMember;
     }
 
     public void setMember(boolean member) {
@@ -98,22 +121,11 @@ public class HotelCheckInTableVO {
         this.intPaymentType = intPaymentType;
     }
 
+    public List<HotelRoomCheckIn> getHotelRoomCheckInList() {
+        return hotelRoomCheckInList;
+    }
+
     public void setHotelRoomCheckInList(List<HotelRoomCheckIn> hotelRoomCheckInList) {
         this.hotelRoomCheckInList = hotelRoomCheckInList;
     }
-
-    @Override
-    public String toString() {
-        return "HotelCheckInTableVO{" +
-                "hotelId=" + hotelId +
-                ", orderId=" + orderId +
-                ", roomNumbers=" + Arrays.toString(roomNumbers) +
-                ", guests=" + Arrays.toString(guests) +
-                ", cards=" + Arrays.toString(cards) +
-                ", isMember=" + isMember +
-                ", intPaymentType=" + intPaymentType +
-                ", hotelRoomCheckInList=" + hotelRoomCheckInList +
-                '}';
-    }
-
 }

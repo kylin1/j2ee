@@ -57,14 +57,14 @@ public class MemberServiceImpl implements MemberService {
 
         Date expireTime = entity.getExpireTime();
         Date now = new Date();
-        Date yearAgo = DateHelper.addDate(now,-365);
+        Date yearAgo = DateHelper.addDate(now, -365);
 
         // 有效期一年到期,过期时间 < 现在时间
         if (memberStatus == MemberStatus.Activated && expireTime.before(now)) {
             memberStatus = MemberStatus.Expired;
 
             // 如果过期了一年,则停止 : 过期的时间是现在时间的一年之前
-        } else if(memberStatus == MemberStatus.Expired && expireTime.before(yearAgo)){
+        } else if (memberStatus == MemberStatus.Expired && expireTime.before(yearAgo)) {
             memberStatus = MemberStatus.Stopped;
         }
 
@@ -90,9 +90,38 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<MemberOrderVO> getOrderList(int memberId) {
+    public List<MemberOrderVO> getCurrentOrderList(int memberId) {
         List<MemberOrderVO> result = new ArrayList<>();
-        List<MemberOrder> memberOrders = orderRepository.findByMemberId(memberId);
+        // 当前订单包括预定的没入住的, 和已经入住的
+        List<MemberOrderVO> reserved = this.getOrderList(memberId, MemberOrderStatus.Reserved);
+        List<MemberOrderVO> checkedIn = this.getOrderList(memberId, MemberOrderStatus.CheckedIn);
+        result.addAll(reserved);
+        result.addAll(checkedIn);
+        return result;
+    }
+
+    @Override
+    public List<MemberOrderVO> getDoneOrderList(int memberId) {
+        List<MemberOrderVO> result = new ArrayList<>();
+        // 结束的订单包括 取消的, 已经离开点的
+        List<MemberOrderVO> canceled = this.getOrderList(memberId, MemberOrderStatus.Canceled);
+        List<MemberOrderVO> checkedOut = this.getOrderList(memberId, MemberOrderStatus.CheckedOut);
+        result.addAll(canceled);
+        result.addAll(checkedOut);
+        return result;
+    }
+
+    /**
+     * 获取用户指定状态的订单信息
+     *
+     * @param memberId    用户
+     * @param orderStatus 订单状态
+     * @return
+     */
+    public List<MemberOrderVO> getOrderList(int memberId, MemberOrderStatus orderStatus) {
+        List<MemberOrderVO> result = new ArrayList<>();
+        int statusInt = orderStatus.ordinal();
+        List<MemberOrder> memberOrders = orderRepository.findByMemberIdAndStatus(memberId, statusInt);
 
         // every order
         for (MemberOrder order : memberOrders) {
@@ -100,7 +129,6 @@ public class MemberServiceImpl implements MemberService {
             int hotelId = order.getHotelId();
             String hotelName = hotelRepository.findNameById(hotelId);
             int totalPrice = order.getPrice();
-            MemberOrderStatus orderStatus = MemberOrderStatus.getEnum(order.getStatus());
 
             // date
             Date orderDate = order.getOrderTime();
@@ -110,7 +138,7 @@ public class MemberServiceImpl implements MemberService {
             // 出行人
             List<String> customers = roomGuestRepository.findNameByOrderId(order.getId());
 
-            MemberOrderVO vo = new MemberOrderVO(hotelName, orderDate, customers, checkInDate, checkOutDate,
+            MemberOrderVO vo = new MemberOrderVO(order.getId(), hotelName, orderDate, customers, checkInDate, checkOutDate,
                     totalPrice, orderStatus);
             result.add(vo);
         }
