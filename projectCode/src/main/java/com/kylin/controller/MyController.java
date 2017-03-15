@@ -35,13 +35,16 @@ public class MyController {
     protected void setUpMember(HttpServletRequest request, MemberInfoVO memberInfoVO) {
         HttpSession session = request.getSession();
         session.setAttribute("memberInfo", memberInfoVO);
-        System.out.println("session set memberInfo = " + memberInfoVO.getName());
+        System.out.println("session set memberInfo = " + memberInfoVO);
 
         // 如果用户是激活的
         if(memberInfoVO.isActivating()){
             // 设置权限代表用户已经激活
-            String memberAuth = MyAuthority.memberAuth;
-            session.setAttribute("memberAuth",memberAuth);
+            session.setAttribute("memberAuth",true);
+            System.out.println("session set memberAuth = " + true);
+        }else {
+            session.setAttribute("memberAuth",false);
+            System.out.println("session set memberAuth = " + false);
         }
 
     }
@@ -60,7 +63,7 @@ public class MyController {
             session.setAttribute(MyAuthority.hotelAuth, isHotelOpen);
 
             System.out.println("session set hotelId = " + hotelId);
-            System.out.println("session set hotel = " + hotel.getName());
+            System.out.println("session set hotel = " + hotel);
             System.out.println("session set hotelAuth = " + isHotelOpen);
         }
     }

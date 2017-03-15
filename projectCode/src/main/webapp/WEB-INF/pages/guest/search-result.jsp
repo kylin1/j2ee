@@ -40,7 +40,7 @@
           <div class="col-md-10">
             <div class="card">
               <div class="card-header" data-background-color="purple">
-                <h4 class="title">198 家酒店:${searchInputVO.location},${searchInputVO.fromDate}至${searchInputVO.endDate}</h4>
+                <h4 class="title">${searchInputVO.location}, ${searchInputVO.fromDate}至${searchInputVO.endDate}, 找到 ${searchResult.size()} 家酒店 </h4>
                 <p class="category"></p>
               </div>
 

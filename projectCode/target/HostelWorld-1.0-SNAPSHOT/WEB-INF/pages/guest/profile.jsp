@@ -31,56 +31,44 @@
                 <p class="category"></p>
               </div>
               <div class="card-content">
-                <form>
+                <form action="${pageContext.request.contextPath}/guest/update" method="post">
                   <!--名称行-->
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group label-floating">
                         <label class="control-label">姓名</label>
-                        <input type="text" value="${memberInfo.name}" class="form-control">
+                        <input name="name" type="text" value="${memberInfo.name}" class="form-control">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group label-floating">
                         <label class="control-label">手机</label>
-                        <input type="text" value="${memberInfo.phone}" class="form-control">
+                        <input name="phone" type="email" value="${memberInfo.phone}" class="form-control">
                       </div>
                     </div>
                   </div>
 
-
-                  <!--性别行-->
+                  <!--邮箱-->
                   <div class="row">
-                    <label class="col-sm-1 control-label">性别</label>
-
-                    <div class="col-sm-1">
-                      <div class="radio">
-                        <label>
-                          <input type="radio" name="optionsRadios">
-                          男
-                        </label>
-                      </div>
-                    </div>
-
-                    <div class="col-sm-1">
-                      <div class="radio">
-                        <label>
-                          <input type="radio" name="optionsRadios">
-                          女
-                        </label>
+                    <div class="col-md-4">
+                      <div class="form-group label-floating">
+                        <label class="control-label">email</label>
+                        <input name="email" type="text" value="${memberInfo.email}" class="form-control">
                       </div>
                     </div>
                   </div>
 
-                  <!--名称行-->
+                  <!--银行卡-->
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group label-floating">
                         <label class="control-label">银行卡</label>
-                        <input type="text" value="${memberInfo.bankCard}" class="form-control">
+                        <input name="bankCard" type="text" value="${memberInfo.bankCard}" class="form-control">
                       </div>
                     </div>
                   </div>
+
+                  <input type="hidden" name="memberId" value="${memberInfo.id}">
 
                   <button type="submit" class="btn btn-primary pull-left">
                     保存

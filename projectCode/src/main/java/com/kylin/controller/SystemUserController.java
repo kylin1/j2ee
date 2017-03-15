@@ -96,14 +96,16 @@ public class SystemUserController extends MyController{
 
         // 注册用户 以及对应的实体类
         MyMessage myMessage = this.systemUserService.signUp(account, password, userType);
-        int userId = (int) myMessage.getData();
 
         // 注册之后的界面
         String successPage = this.getLadingPageOfUser(userType);
         String errorPage = "common/signup";
 
-        // 设置新用户信息
-        this.setSession(request,userId,userType);
+        if(myMessage.isSuccess()){
+            int userId = (int) myMessage.getData();
+            // 设置新用户信息
+            this.setSession(request,userId,userType);
+        }
 
         return this.handleMessage(myMessage,successPage,errorPage);
     }

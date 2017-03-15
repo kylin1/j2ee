@@ -31,12 +31,22 @@ public class GuestReserveController extends MyController {
     private ReserveService reserveService;
 
     @RequestMapping(value = "search", method = RequestMethod.POST)
-    public ModelAndView searchHotel(@ModelAttribute("SearchInputVO") SearchInputVO searchInputVO) {
+    public ModelAndView searchHotel(HttpServletRequest request,
+                                    @ModelAttribute("SearchInputVO") SearchInputVO searchInputVO) {
+        ModelAndView modelAndView = new ModelAndView("guest/search-result");
+
+        //检查用户是否已经激活
+        HttpSession session = request.getSession();
+        boolean auth = (boolean) session.getAttribute("memberAuth");
+        //没有激活
+        if(!auth){
+            modelAndView = new ModelAndView("guest/activate-warning");
+            modelAndView.addObject("error","请充值1000元激活会员资格!");
+            return modelAndView;
+        }
 
         List<SearchHotelItemVO> result = this.reserveService.search(searchInputVO.getLocation(), searchInputVO.getFromDate(),
                 searchInputVO.getEndDate(), searchInputVO.getRoomTypeInt(), searchInputVO.getRoomNumber());
-
-        ModelAndView modelAndView = new ModelAndView("guest/search-result");
         modelAndView.addObject("searchResult", result);
         modelAndView.addObject("searchInputVO", searchInputVO);
 

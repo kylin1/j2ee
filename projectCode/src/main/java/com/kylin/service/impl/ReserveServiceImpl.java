@@ -24,7 +24,7 @@ import java.util.*;
  * All rights reserved.
  */
 @Service
-public class ReserveServiceImpl implements ReserveService{
+public class ReserveServiceImpl implements ReserveService {
 
     @Autowired
     private HotelRepository hotelRepository;
@@ -124,9 +124,9 @@ public class ReserveServiceImpl implements ReserveService{
         List<HotelRemainRoom> remainRooms = this.emptyRoomSearch(hotel.getId(),
                 DateHelper.getDateString(checkIn), DateHelper.getDateString(checkOut), roomType);
         int remainRoomNum = remainRooms.size();
-        if(remainRoomNum < roomNumber)
-            return new MyMessage(false,hotel+"在"+checkIn+" 到 "+checkOut+"之间没有足够的空闲房间," +
-                    "酒店只有"+remainRoomNum+"间空房");
+        if (remainRoomNum < roomNumber)
+            return new MyMessage(false, hotel + "在" + checkIn + " 到 " + checkOut + "之间没有足够的空闲房间," +
+                    "酒店只有" + remainRoomNum + "间空房");
 
         StringBuilder stringBuilder = new StringBuilder();
         // 取出用户要求数量的房间数目,例如用户只要两个
@@ -136,7 +136,9 @@ public class ReserveServiceImpl implements ReserveService{
             int roomState = RoomStatus.Empty.ordinal();
             String roomNo = remainRoom.getRoom();
             stringBuilder.append(roomNo);
-            stringBuilder.append(", ");
+            if (i != roomNumber - 1) {
+                stringBuilder.append(",");
+            }
 
             // 得到这个房间的信息
             List<HotelRoomStatus> roomStatusList = this.roomStatusRepository.findByRoomAndDateAndStatus
@@ -154,7 +156,7 @@ public class ReserveServiceImpl implements ReserveService{
         String strRoomList = stringBuilder.toString();
 
         // 保存用户订单信息
-        this.saveOrder(inputVO, hotel,strRoomList);
+        this.saveOrder(inputVO, hotel, strRoomList);
 
         return new MyMessage(true);
     }
@@ -195,7 +197,7 @@ public class ReserveServiceImpl implements ReserveService{
             oldInfo.calculatePrice(price);
 
             //修改房间最低单价
-            if(price < lowestPerNightPrice){
+            if (price < lowestPerNightPrice) {
                 lowestPerNightPrice = price;
             }
         }
@@ -207,9 +209,11 @@ public class ReserveServiceImpl implements ReserveService{
                 hotel.getName(), HotelLevel.getEnum(hotel.getLevel()), hotel.getLocation(),
                 lowestPerNightPrice, roomResult);
     }
+
     /**
      * 保存用户的输入订单信息
-     *  @param inputVO
+     *
+     * @param inputVO
      * @param hotel
      * @param strRoomList
      */

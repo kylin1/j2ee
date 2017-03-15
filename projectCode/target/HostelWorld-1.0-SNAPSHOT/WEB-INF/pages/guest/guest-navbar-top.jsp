@@ -37,16 +37,8 @@
         </li>
 
         <li>
-          <a href="#">
-            <i class="material-icons">account_circle</i>
-            Dashboard
-          </a>
-        </li>
-
-        <li>
-          <a href="#">
-            <i class="material-icons">settings</i>
-            Settings
+          <a href="/logout/${userID}">
+            <i class="material-icons">account_circle</i>logout
           </a>
         </li>
       </ul>

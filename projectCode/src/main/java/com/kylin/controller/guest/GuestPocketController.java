@@ -39,6 +39,6 @@ public class GuestPocketController extends MyController {
 
         this.refreshMemberInfo(request, memberId);
 
-        return this.handleMessage(myMessage, "redirect:/guest/pocket");
+        return this.handleMessage(myMessage, "redirect:/guest/pocket","guest/pocket");
     }
 }

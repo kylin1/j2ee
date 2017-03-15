@@ -45,7 +45,8 @@ public class MemberServiceTest {
 
     @Test
     public void testTopUp(){
-        MyMessage myMessage = this.memberService.topUp(1,100,2200);
+        MyMessage myMessage = this.memberService.topUp(1055,
+                1001,0);
         System.out.println(myMessage.isSuccess());
         System.out.println(myMessage.getDisplayMessage());
     }

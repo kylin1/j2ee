@@ -2,6 +2,7 @@ package com.kylin.vo;
 
 import com.kylin.tools.DateHelper;
 import com.kylin.tools.myenum.MemberLevel;
+import com.kylin.tools.myenum.MemberStatus;
 
 import java.util.Date;
 
@@ -140,7 +141,7 @@ public class MemberInfoVO {
      * @return
      */
     public boolean isActivating(){
-        return this.expireTime.after(new Date());
+        return this.strStatus.equals(MemberStatus.Activated.getStrStatus());
     }
 
     @Override

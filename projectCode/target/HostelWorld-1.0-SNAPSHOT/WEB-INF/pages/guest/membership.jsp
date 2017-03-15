@@ -46,7 +46,7 @@
 
                   <div class="row">
                     <div class="col-md-2">
-                      <label class="control-label">账号</label>
+                      <label class="control-label">姓名</label>
                     </div>
 
                     <div class="col-md-4">

@@ -94,7 +94,7 @@ public class SystemUserServiceImpl implements SystemUserService {
             member.setName(this.emptyString);
             member.setPhone(this.emptyString);
             member.setEmail(this.emptyString);
-            member.setStatus(MemberStatus.NeverActivated.getStatus());
+            member.setStatus(MemberStatus.NeverActivated.ordinal());
 
             member.setBankCard(this.emptyString);
             member.setActivatedTime(this.initDate);
