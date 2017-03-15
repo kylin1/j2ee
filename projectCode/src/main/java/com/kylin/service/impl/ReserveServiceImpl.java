@@ -112,9 +112,7 @@ public class ReserveServiceImpl implements ReserveService{
 
     @Override
     public MyMessage makeReservation(ReserveInputTableVO inputVO) {
-        // 保存用户订单信息
         Hotel hotel = this.hotelRepository.findOne(inputVO.getHotelId());
-        this.saveOrder(inputVO, hotel);
 
         // get input info
         Date checkIn = inputVO.getCheckInDate();
@@ -130,11 +128,15 @@ public class ReserveServiceImpl implements ReserveService{
             return new MyMessage(false,hotel+"在"+checkIn+" 到 "+checkOut+"之间没有足够的空闲房间," +
                     "酒店只有"+remainRoomNum+"间空房");
 
+        StringBuilder stringBuilder = new StringBuilder();
         // 取出用户要求数量的房间数目,例如用户只要两个
         for (int i = 0; i < roomNumber; i++) {
             HotelRemainRoom remainRoom = remainRooms.get(i);
             int roomId = remainRoom.getRoomId();
             int roomState = RoomStatus.Empty.ordinal();
+            String roomNo = remainRoom.getRoom();
+            stringBuilder.append(roomNo);
+            stringBuilder.append(", ");
 
             // 得到这个房间的信息
             List<HotelRoomStatus> roomStatusList = this.roomStatusRepository.findByRoomAndDateAndStatus
@@ -147,6 +149,12 @@ public class ReserveServiceImpl implements ReserveService{
                 this.roomStatusRepository.save(roomStatus);
             }
         }
+
+        // 获取为这个订单分配的房间列表
+        String strRoomList = stringBuilder.toString();
+
+        // 保存用户订单信息
+        this.saveOrder(inputVO, hotel,strRoomList);
 
         return new MyMessage(true);
     }
@@ -201,11 +209,11 @@ public class ReserveServiceImpl implements ReserveService{
     }
     /**
      * 保存用户的输入订单信息
-     *
-     * @param inputVO
+     *  @param inputVO
      * @param hotel
+     * @param strRoomList
      */
-    private void saveOrder(ReserveInputTableVO inputVO, Hotel hotel) {
+    private void saveOrder(ReserveInputTableVO inputVO, Hotel hotel, String strRoomList) {
         MemberOrder memberOrder = new MemberOrder();
         int userId = inputVO.getUserId();
         Member member = this.memberRepository.findByUserId(userId);
@@ -233,6 +241,9 @@ public class ReserveServiceImpl implements ReserveService{
         memberOrder.setContactEmail(inputVO.getContactEmail());
 
         memberOrder.setStatus(MemberOrderStatus.Reserved.ordinal());
+
+        memberOrder.setReservedRoomString(strRoomList);
+
         //保存
         this.orderRepository.save(memberOrder);
     }

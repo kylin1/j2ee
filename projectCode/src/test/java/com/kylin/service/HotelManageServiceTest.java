@@ -1,7 +1,6 @@
 package com.kylin.service;
 
 import com.kylin.tools.DateHelper;
-import com.kylin.tools.myenum.PaymentType;
 import com.kylin.tools.myenum.RoomType;
 import com.kylin.vo.*;
 import com.kylin.vo.common.MyMessage;
@@ -85,7 +84,9 @@ public class HotelManageServiceTest {
 
 
         //添加入住信息
-        HotelCheckInTableVO vo = new HotelCheckInTableVO(hotelId, orderId, list, true, PaymentType.Cash);
+        HotelCheckInTableVO vo = new HotelCheckInTableVO();
+        vo.setHotelRoomCheckInList(list);
+
         MyMessage myMessage = this.service.customCheckIn(vo);
         System.out.println(myMessage.isSuccess());
         System.out.println(myMessage.getDisplayMessage());

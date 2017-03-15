@@ -19,6 +19,16 @@ public class MyController {
         return modelAndView;
     }
 
+    protected ModelAndView handleMessage(MyMessage myMessage, String page, Map<String, Object> object) {
+        ModelAndView modelAndView = new ModelAndView(page);
+        if (!myMessage.isSuccess()) {
+            modelAndView.addObject("error", myMessage.getDisplayMessage());
+        }
+        // 都返回相同的数据到界面
+        this.addDataToMV(object,modelAndView);
+        return modelAndView;
+    }
+
     protected ModelAndView handleMessage(MyMessage myMessage, String successPage, String errorPage) {
         ModelAndView modelAndView;
         // 处理成功

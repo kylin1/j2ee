@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="ch-ZN">
@@ -83,7 +84,17 @@
                   </a>
                 </div>
               </div>
-              <div class="content">
+              <div class="content" align="middle">
+
+                <c:if test="${!empty error}">
+                  <div class="input-group">
+                    <div class="row">
+                      <div class="alert alert-warning" role="alert">
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>${error}
+                      </div>
+                    </div>
+                  </div>
+                </c:if>
 
                 <div class="input-group">
 										<span class="input-group-addon">
@@ -113,7 +124,7 @@
       </div>
     </div>
 
-    <%@include file="common/footer.jsp"%>
+    <%@include file="common/footer.jsp" %>
 
   </div>
 </div>

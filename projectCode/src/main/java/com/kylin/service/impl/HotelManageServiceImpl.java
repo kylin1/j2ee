@@ -84,7 +84,7 @@ public class HotelManageServiceImpl implements HotelManageService {
         int hotelRoomId = hotelPlanInputVO.getHotelRoomId();
         HotelRoom hotelRoom = this.hotelRoomRepository.findOne(hotelRoomId);
         if (hotelRoom == null)
-            return new MyMessage(false,"酒店房间不存在, hotelRoomId = " + hotelRoomId);
+            return new MyMessage(false, "酒店房间不存在, hotelRoomId = " + hotelRoomId);
 
         // get room plan info
         Date checkInDate = hotelPlanInputVO.getCheckInDate();
@@ -99,7 +99,7 @@ public class HotelManageServiceImpl implements HotelManageService {
             HotelRoomStatus latestPlan = list.get(0);
             Date latestDate = latestPlan.getDate();
             if (!checkInDate.after(latestDate)) {
-                return new MyMessage(false,"计划冲突！已有的计划结束日期:" + DateHelper.getDateString(latestDate) + "" +
+                return new MyMessage(false, "计划冲突！已有的计划结束日期:" + DateHelper.getDateString(latestDate) + "" +
                         "输入的计划开始日期:" + DateHelper.getDateString(checkInDate));
             }
         } // 当前没有计划
@@ -153,6 +153,39 @@ public class HotelManageServiceImpl implements HotelManageService {
         return new MyMessage(true);
     }
 
+    @Override
+    public MyMessage initCheckInTableVO(HotelCheckInTableVO checkInTableVO) {
+        List<HotelRoomCheckIn> hotelRoomCheckInList = new ArrayList<>();
+        int hotelId = checkInTableVO.getHotelId();
+
+        String[] guests = checkInTableVO.getGuests();
+        String[] cards = checkInTableVO.getCards();
+        int index = 0;
+
+        for (String roomNum : checkInTableVO.getRoomNumbers()) {
+            HotelRoom hotelRoom = this.hotelRoomRepository.findByHotelIdAndRoomNumber(hotelId,roomNum);
+            // 输入的房间编号例如420不存在
+            if (hotelRoom == null) {
+                return new MyMessage(false, "房间号 : " + roomNum + "不存在");
+                //房间存在
+            } else {
+                int roomId = hotelRoom.getId();
+                //获取这个房间内所有的住客
+                List<HotelGuestCheckIn> guestList = new ArrayList<>();
+                guestList.add(new HotelGuestCheckIn(guests[index], cards[index]));
+                index++;
+                guestList.add(new HotelGuestCheckIn(guests[index], cards[index]));
+                index++;
+
+                //新建并添加一个房间的入住情况
+                HotelRoomCheckIn hotelRoomCheckIn = new HotelRoomCheckIn(roomId, guestList);
+                hotelRoomCheckInList.add(hotelRoomCheckIn);
+            }
+        }
+        checkInTableVO.setHotelRoomCheckInList(hotelRoomCheckInList);
+        return new MyMessage(true);
+    }
+
     // 入住登记: 登记信息检查 3 个方法
     private MyMessage checkInCheck(int hotelId, MemberOrder order, List<HotelRoomCheckIn> hotelRoomCheckInList) {
 
@@ -187,7 +220,8 @@ public class HotelManageServiceImpl implements HotelManageService {
     private MyMessage hotelRoomCheck(int hotelId, List<HotelRoomCheckIn> hotelRoomCheckInList) {
         for (HotelRoomCheckIn roomCheckIn : hotelRoomCheckInList) {
             // every room info
-            final HotelRoom room = this.roomRepository.findOne(roomCheckIn.getRoomId());
+            int roomId = roomCheckIn.getRoomId();
+            final HotelRoom room = this.roomRepository.findOne(roomId);
 
             // hotel id info
             if (room.getHotelId() != hotelId)
@@ -228,7 +262,7 @@ public class HotelManageServiceImpl implements HotelManageService {
             if (statusList.size() != orderDayNumber)
                 return new MyMessage(false, "房间 roomId=" + roomId +
                         " 在日期 " + DateHelper.getDateString(checkIn) +
-                        " 到日期 " + DateHelper.getDateString(checkOut) + " 没有已预定但未入住的");
+                        " 到日期 " + DateHelper.getDateString(checkOut) + " 没有已预定, 但未入住的记录");
         }
 
         return new MyMessage(true);

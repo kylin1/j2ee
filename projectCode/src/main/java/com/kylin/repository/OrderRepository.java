@@ -14,4 +14,6 @@ public interface OrderRepository extends JpaRepository<MemberOrder,Integer> {
     List<MemberOrder> findByMemberId(int memberId);
 
     List<MemberOrder> findByHotelId(int hotelId);
+
+    List<MemberOrder> findByHotelIdAndStatus(int hotelId, int status);
 }

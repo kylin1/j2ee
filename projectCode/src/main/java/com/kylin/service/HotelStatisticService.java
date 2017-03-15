@@ -18,7 +18,7 @@ public interface HotelStatisticService {
      * @param hotelId
      * @return
      */
-    List<HotelOrderItemVO> getOrderList(int hotelId);
+    List<HotelOrderItemVO> getReservedOrderList(int hotelId);
 
     /**
      * 每日每房间入住情况与房客信息

@@ -19,14 +19,11 @@ public class ReserveInputTableVO {
     private int hotelId;
 
     // date info
-    private Date checkInDate;
     private String strDate1;
 
-    private Date checkOutDate;
     private String strDate2;
 
     // room info
-    private RoomType roomType;
     private int intRoomType;
 
     private int roomNumber;
@@ -57,18 +54,8 @@ public class ReserveInputTableVO {
         this.contactPhone = contactPhone;
         this.contactEmail = contactEmail;
         this.totalPrice = totalPrice;
-        this.init();
     }
 
-    public void init() {
-        try {
-            this.checkInDate = DateHelper.getDate(this.strDate1);
-            this.checkOutDate = DateHelper.getDate(this.strDate2);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        this.roomType = RoomType.getEnum(this.intRoomType);
-    }
 
     public int getUserId() {
         return userId;
@@ -76,18 +63,6 @@ public class ReserveInputTableVO {
 
     public int getHotelId() {
         return hotelId;
-    }
-
-    public Date getCheckInDate() {
-        return checkInDate;
-    }
-
-    public Date getCheckOutDate() {
-        return checkOutDate;
-    }
-
-    public RoomType getRoomType() {
-        return roomType;
     }
 
     public int getRoomNumber() {
@@ -130,24 +105,12 @@ public class ReserveInputTableVO {
         this.hotelId = hotelId;
     }
 
-    public void setCheckInDate(Date checkInDate) {
-        this.checkInDate = checkInDate;
-    }
-
     public void setStrDate1(String strDate1) {
         this.strDate1 = strDate1;
     }
 
-    public void setCheckOutDate(Date checkOutDate) {
-        this.checkOutDate = checkOutDate;
-    }
-
     public void setStrDate2(String strDate2) {
         this.strDate2 = strDate2;
-    }
-
-    public void setRoomType(RoomType roomType) {
-        this.roomType = roomType;
     }
 
     public void setIntRoomType(int intRoomType) {
@@ -179,11 +142,8 @@ public class ReserveInputTableVO {
         return "ReserveInputTableVO{" +
                 "userId=" + userId +
                 ", hotelId=" + hotelId +
-                ", checkInDate=" + checkInDate +
                 ", strDate1='" + strDate1 + '\'' +
-                ", checkOutDate=" + checkOutDate +
                 ", strDate2='" + strDate2 + '\'' +
-                ", roomType=" + roomType +
                 ", intRoomType=" + intRoomType +
                 ", roomNumber=" + roomNumber +
                 ", contactPersonName='" + contactPersonName + '\'' +
@@ -191,5 +151,27 @@ public class ReserveInputTableVO {
                 ", contactEmail='" + contactEmail + '\'' +
                 ", totalPrice=" + totalPrice +
                 '}';
+    }
+
+    public Date getCheckInDate() {
+        try {
+            return DateHelper.getDate(this.strDate1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Date getCheckOutDate() {
+        try {
+            return DateHelper.getDate(this.strDate2);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public RoomType getRoomType() {
+        return RoomType.getEnum(this.intRoomType);
     }
 }

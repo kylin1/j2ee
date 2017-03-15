@@ -30,6 +30,7 @@ public class MemberOrder {
     private int status;
     private Integer isMember;
     private Integer isCash;
+    private String reservedRoomString;
 
     @Id
     @GeneratedValue
@@ -168,6 +169,11 @@ public class MemberOrder {
         this.contactEmail = contactEmail;
     }
 
+    @Column(name = "reservedRoomString")
+    public void setReservedRoomString(String reservedRoomString) {
+        this.reservedRoomString = reservedRoomString;
+    }
+
     @Override
     public String toString() {
         return "MemberOrder{" +
@@ -187,5 +193,9 @@ public class MemberOrder {
                 ", isMember=" + isMember +
                 ", isCash=" + isCash +
                 '}';
+    }
+
+    public String getReservedRoomString() {
+        return reservedRoomString;
     }
 }

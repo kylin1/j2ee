@@ -2,6 +2,7 @@ package com.kylin.vo;
 
 import com.kylin.tools.myenum.PaymentType;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -16,21 +17,21 @@ public class HotelCheckInTableVO {
 
     private int orderId;
 
-    // 房间入住人信息
-    private List<HotelRoomCheckIn> hotelRoomCheckInList;
+    private String[] roomNumbers = new String[2];
+    private String[] guests = new String[4];
+    private String[] cards = new String[4];
 
     // 是否会员
     private boolean isMember;
 
     // 付款方式
-    private PaymentType paymentType;
+    private int intPaymentType;
 
-    public HotelCheckInTableVO(int hotelId, int orderId, List<HotelRoomCheckIn> hotelRoomCheckInList, boolean isMember, PaymentType paymentType) {
-        this.hotelId = hotelId;
-        this.orderId = orderId;
-        this.hotelRoomCheckInList = hotelRoomCheckInList;
-        this.isMember = isMember;
-        this.paymentType = paymentType;
+
+    // 房间入住人信息
+    private List<HotelRoomCheckIn> hotelRoomCheckInList;
+
+    public HotelCheckInTableVO() {
     }
 
     public int getHotelId() {
@@ -50,7 +51,55 @@ public class HotelCheckInTableVO {
     }
 
     public PaymentType getPaymentType() {
-        return paymentType;
+        return PaymentType.getEnum(this.intPaymentType);
+    }
+
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public String[] getRoomNumbers() {
+        return roomNumbers;
+    }
+
+    public void setRoomNumbers(String[] roomNumbers) {
+        this.roomNumbers = roomNumbers;
+    }
+
+    public String[] getGuests() {
+        return guests;
+    }
+
+    public void setGuests(String[] guests) {
+        this.guests = guests;
+    }
+
+    public String[] getCards() {
+        return cards;
+    }
+
+    public void setCards(String[] cards) {
+        this.cards = cards;
+    }
+
+    public void setMember(boolean member) {
+        isMember = member;
+    }
+
+    public int getIntPaymentType() {
+        return intPaymentType;
+    }
+
+    public void setIntPaymentType(int intPaymentType) {
+        this.intPaymentType = intPaymentType;
+    }
+
+    public void setHotelRoomCheckInList(List<HotelRoomCheckIn> hotelRoomCheckInList) {
+        this.hotelRoomCheckInList = hotelRoomCheckInList;
     }
 
     @Override
@@ -58,9 +107,13 @@ public class HotelCheckInTableVO {
         return "HotelCheckInTableVO{" +
                 "hotelId=" + hotelId +
                 ", orderId=" + orderId +
-                ", hotelRoomCheckInList=" + hotelRoomCheckInList +
+                ", roomNumbers=" + Arrays.toString(roomNumbers) +
+                ", guests=" + Arrays.toString(guests) +
+                ", cards=" + Arrays.toString(cards) +
                 ", isMember=" + isMember +
-                ", paymentType=" + paymentType +
+                ", intPaymentType=" + intPaymentType +
+                ", hotelRoomCheckInList=" + hotelRoomCheckInList +
                 '}';
     }
+
 }

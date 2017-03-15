@@ -27,4 +27,8 @@ public enum PaymentType {
         }
         return null;
     }
+
+    public static PaymentType getEnum(int input) {
+        return PaymentType.values()[input];
+    }
 }

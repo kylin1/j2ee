@@ -43,7 +43,7 @@ public class SystemUserServiceImpl implements SystemUserService {
         SystemUser user = repository.findByAccount(account);
         //查询不到用户
         if(user == null){
-            return new LoginResultVO(false,"用户不存在");
+            return new LoginResultVO(false,"用户不存在!");
         }
 
         // 查询到了用户,下面检查类型
@@ -56,7 +56,7 @@ public class SystemUserServiceImpl implements SystemUserService {
 
         //密码错误
         } else {
-            return new LoginResultVO(false,"密码错误");
+            return new LoginResultVO(false,"密码错误!");
         }
     }
 

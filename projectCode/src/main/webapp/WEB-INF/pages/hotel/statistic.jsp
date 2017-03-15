@@ -22,62 +22,9 @@
     <!--2.内容-->
     <div class="content">
       <div class="container-fluid">
-        <%@include file="../common/error-display.jsp"%>
+        <%@include file="../common/error-display.jsp" %>
 
-        <!--预订-->
-        <section>
-          <h2>预订信息</h2>
-          <div class="row">
-            <div class="col-md-10">
-              <div class="card">
-                <div class="card-header" data-background-color="purple">
-                  <h4 class="title">预订信息</h4>
-                  <p class="category">已预订未入住的房客订单</p>
-                </div>
 
-                <div class="card-content table-responsive">
-                  <table class="table">
-                    <thead class="text-primary">
-                    <th>下单时间</th>
-                    <th>房间信息</th>
-                    <th>入住</th>
-                    <th>离店</th>
-                    <th>联系人</th>
-                    <th>联系电话</th>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>2017年02月13日10:00:59</td>
-                      <td>标准间*2</td>
-                      <td>2017年02月13日</td>
-                      <td>2017年02月15日</td>
-                      <td>一只麟</td>
-                      <td>18795853969</td>
-                    </tr>
-                    <tr>
-                      <td>2017年02月13日10:00:59</td>
-                      <td>标准间*2</td>
-                      <td>2017年02月13日</td>
-                      <td>2017年02月15日</td>
-                      <td>一只麟</td>
-                      <td>18795853969</td>
-                    </tr>
-                    <tr>
-                      <td>2017年02月13日10:00:59</td>
-                      <td>标准间*2</td>
-                      <td>2017年02月13日</td>
-                      <td>2017年02月15日</td>
-                      <td>一只麟</td>
-                      <td>18795853969</td>
-                    </tr>
-                    </tbody>
-                  </table>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
 
         <!--入住-->
         <section>

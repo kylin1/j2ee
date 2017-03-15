@@ -82,6 +82,7 @@ public class SystemUserController extends MyController{
             // 返回错误提示信息
         } else {
             String message = resultVO.getDisplayMessage();
+            modelAndView = new ModelAndView("index");
             modelAndView.addObject("error", message);
         }
 

@@ -46,7 +46,6 @@
                     <div class="col-md-6">
                       <h4>${hotelName}</h4>
                     </div>
-
                   </div>
 
                   <!--time-->
@@ -59,7 +58,6 @@
                       <div class="form-group label-floating">
                         <h6>${reserveInput.strDate1}</h6>
                       </div>
-
                     </div>
 
                     <div class="col-md-1">

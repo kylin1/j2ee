@@ -10,6 +10,7 @@ import com.kylin.repository.PaymentRepository;
 import com.kylin.repository.RoomGuestRepository;
 import com.kylin.service.HotelStatisticService;
 import com.kylin.tools.DateHelper;
+import com.kylin.tools.myenum.MemberOrderStatus;
 import com.kylin.tools.myenum.RoomType;
 import com.kylin.vo.HotelOrderItemVO;
 import com.kylin.vo.HotelRoomStatusVO;
@@ -41,14 +42,21 @@ public class HotelStatisticServiceImpl implements HotelStatisticService {
 
 
     @Override
-    public List<HotelOrderItemVO> getOrderList(int hotelId) {
+    //  一个酒店已预订未入住的房客订单
+    public List<HotelOrderItemVO> getReservedOrderList(int hotelId) {
+        // 订单预定未入住
+        int reservedOrderStatus = MemberOrderStatus.Reserved.ordinal();
+
         List<HotelOrderItemVO> result = new ArrayList<>();
 
-        List<MemberOrder> orders = this.orderRepository.findByHotelId(hotelId);
+        List<MemberOrder> orders = this.orderRepository.findByHotelIdAndStatus(hotelId, reservedOrderStatus);
+
+        // 对于酒店的每一个预定, 但是还没有入住的订单
         for (MemberOrder order : orders) {
             RoomType roomType = RoomType.getEnum(order.getRoomType());
-            HotelOrderItemVO vo = new HotelOrderItemVO(order.getOrderTime(), roomType, order.getRoomNumber(),
-                    order.getCheckIn(), order.getCheckOut(), order.getContactName(), order.getContactPhone());
+            String reservedRoomString = order.getReservedRoomString();
+            HotelOrderItemVO vo = new HotelOrderItemVO(order.getId(), order.getOrderTime(), roomType, order.getRoomNumber(),
+                    reservedRoomString, order.getCheckIn(), order.getCheckOut(), order.getContactName(), order.getContactPhone());
             result.add(vo);
         }
         return result;

@@ -41,4 +41,5 @@ public interface HotelManageService {
     MyMessage customCheckIn(HotelCheckInTableVO hotelCheckInTableVO) ;
 
 
+    MyMessage initCheckInTableVO(HotelCheckInTableVO checkInTableVO);
 }

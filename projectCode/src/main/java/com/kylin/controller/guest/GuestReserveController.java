@@ -1,5 +1,6 @@
 package com.kylin.controller.guest;
 
+import com.kylin.controller.MyController;
 import com.kylin.service.ReserveService;
 import com.kylin.tools.DateHelper;
 import com.kylin.tools.myenum.RoomType;
@@ -24,7 +25,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("guest")
-public class GuestReserveController {
+public class GuestReserveController extends MyController {
 
     @Autowired
     private ReserveService reserveService;
@@ -54,7 +55,7 @@ public class GuestReserveController {
         String strType = RoomType.getEnum(roomTypeInt).getType();
         int roomNumber = Integer.parseInt(request.getParameter("roomNumber"));
         int perPrice = Integer.parseInt(request.getParameter("perPrice"));
-        int daysNumber = DateHelper.getDaysNumber(fromDate,endDate);
+        int daysNumber = DateHelper.getDaysNumber(fromDate, endDate);
 
         HttpSession session = request.getSession();
         int userId = (int) session.getAttribute("userID");
@@ -64,7 +65,7 @@ public class GuestReserveController {
 
         ReserveInputTableVO reserveInput = new ReserveInputTableVO(userId, hotelId, fromDate, endDate,
                 roomTypeInt, roomNumber, "", "", "", price);
-
+        System.out.println("selectHotel, reserveInput = " + reserveInput.toString());
         modelAndView.addObject("reserveInput", reserveInput);
         modelAndView.addObject("hotelName", hotelName);
         modelAndView.addObject("strType", strType);
@@ -74,17 +75,9 @@ public class GuestReserveController {
 
     @RequestMapping(value = "reserve", method = RequestMethod.POST)
     public ModelAndView reserveHotel(@ModelAttribute("reserveInputTableVO") ReserveInputTableVO reserveInputTableVO) {
-        reserveInputTableVO.init();
-        System.out.println(reserveInputTableVO);
-
+        System.out.println("reserve, reserveInputTableVO = " + reserveInputTableVO);
         MyMessage myMessage = this.reserveService.makeReservation(reserveInputTableVO);
-        if (myMessage.isSuccess()) {
-            return new ModelAndView("redirect:/guest/orders");
-        } else {
-            ModelAndView result = new ModelAndView("guest/reserve");
-            result.addObject("error", myMessage.getDisplayMessage());
-            return result;
-        }
+        return this.handleMessage(myMessage, "redirect:/guest/orders", "guest/reserve");
     }
 
 }

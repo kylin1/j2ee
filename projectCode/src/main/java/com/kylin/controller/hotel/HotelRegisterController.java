@@ -1,11 +1,15 @@
 package com.kylin.controller.hotel;
 
+import com.kylin.controller.MyController;
 import com.kylin.service.HotelManageService;
 import com.kylin.service.ReserveService;
 import com.kylin.tools.myenum.RoomType;
+import com.kylin.vo.HotelCheckInTableVO;
 import com.kylin.vo.HotelRemainRoom;
+import com.kylin.vo.common.MyMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by kylin on 12/03/2017.
@@ -21,12 +27,13 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("hotel")
-public class HotelRegisterController {
+public class HotelRegisterController extends MyController {
 
     @Autowired
     private ReserveService reserveService;
     @Autowired
     private HotelManageService hotelManageService;
+
 
     @RequestMapping(value = "search-room", method = RequestMethod.POST)
     public ModelAndView searchRoom(HttpServletRequest request) {
@@ -55,17 +62,19 @@ public class HotelRegisterController {
     }
 
     @RequestMapping(value = "register-room", method = RequestMethod.POST)
-    public ModelAndView registerRoom(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView("hotel/room-register");
+    public ModelAndView registerRoom(HttpServletRequest request,
+                                     @ModelAttribute("checkInTableVO") HotelCheckInTableVO checkInTableVO) {
+        Map<String, Object> object = new HashMap<>();
+        object.put("checkInVO",checkInTableVO);
 
-//        HotelCheckInTableVO checkInTableVO = new HotelCheckInTableVO();
-//
-//        MyMessage myMessage = this.hotelManageService.customCheckIn(checkInTableVO);
-//
-//        if (!myMessage.isSuccess()) {
-//            modelAndView.addObject("error", myMessage.getDisplayMessage());
-//        }
-        return modelAndView;
+        System.out.println("before init : " + checkInTableVO);
+        MyMessage myMessage1 = hotelManageService.initCheckInTableVO(checkInTableVO);
+        if(!myMessage1.isSuccess()){
+            return new ModelAndView("hotel/room-register","error",myMessage1.getDisplayMessage());
+        }
+        System.out.println("after init : " + checkInTableVO);
+        MyMessage myMessage = this.hotelManageService.customCheckIn(checkInTableVO);
+        return this.handleMessage(myMessage, "redirect:hotel/room-register",object);
     }
 
 }

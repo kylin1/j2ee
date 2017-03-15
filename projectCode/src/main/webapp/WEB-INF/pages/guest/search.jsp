@@ -26,7 +26,7 @@
     <!--2.内容-->
     <div class="content">
       <div class="container-fluid container-sharing" style="margin: 3em 0 5em 4em;">
-        <%@include file="../common/error-display.jsp"%>
+        <%@include file="../common/error-display.jsp" %>
 
         <!--业务介绍行-->
         <div class="row" style="margin: 0 10em 5em 0;">
@@ -51,14 +51,16 @@
                   <div class="col-sm-6">
                     <div class="form-group label-floating">
                       <label class="control-label">check in</label>
-                      <input value="2017-04-01" type="text" name="fromDate" id="dpd1" data-date-format="yyyy-mm-dd" class="form-control">
+                      <input value="2017-04-01" type="text" name="fromDate" id="dpd1" data-date-format="yyyy-mm-dd"
+                             class="form-control">
                     </div>
                   </div>
 
                   <div class="col-sm-6">
                     <div class="form-group label-floating">
                       <label class="control-label">check out</label>
-                      <input value="2017-04-03" type="text" name="endDate" id="dpd2" data-date-format="yyyy-mm-dd" class="form-control">
+                      <input value="2017-04-03" type="text" name="endDate" id="dpd2" data-date-format="yyyy-mm-dd"
+                             class="form-control">
                     </div>
                   </div>
 
@@ -71,15 +73,24 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="form-group label-floating">
-                  <label class="control-label">roomTypeInt</label>
-                  <input value="1" name="roomTypeInt" type="text" class="form-control">
+                  <label class="form-group label-floating">类型
+                    <select class="selectpicker" name="roomTypeInt">
+                      <option value="0">单人间</option>
+                      <option value="1">标准间</option>
+                      <option value="2">套房</option>
+                    </select>
+                  </label>
                 </div>
               </div>
 
               <div class="col-md-3">
                 <div class="form-group label-floating">
-                  <label class="control-label">roomNumber</label>
-                  <input value="2" name="roomNumber" type="text" class="form-control">
+                  <label class="form-group label-floating">数目
+                    <select class="selectpicker" name="roomNumber">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                    </select>
+                  </label>
                 </div>
               </div>
 
