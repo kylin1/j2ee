@@ -3,6 +3,7 @@ package com.kylin.service;
 import com.kylin.tools.myenum.MemberLevel;
 import com.kylin.tools.myenum.RoomType;
 import com.kylin.vo.HotelRemainRoom;
+import com.kylin.vo.NonMemberCheckInVO;
 import com.kylin.vo.ReserveInputTableVO;
 import com.kylin.vo.SearchHotelItemVO;
 import com.kylin.vo.common.MyMessage;
@@ -65,4 +66,6 @@ public interface ReserveService {
      * @return
      */
     int getDiscount(int price, MemberLevel level);
+
+    MyMessage reserveNonMember(NonMemberCheckInVO nonMemberCheckInVO);
 }

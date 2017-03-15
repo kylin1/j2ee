@@ -5,10 +5,7 @@ import com.kylin.repository.*;
 import com.kylin.service.ReserveService;
 import com.kylin.tools.DateHelper;
 import com.kylin.tools.myenum.*;
-import com.kylin.vo.HotelRemainRoom;
-import com.kylin.vo.RemainRoomInfo;
-import com.kylin.vo.ReserveInputTableVO;
-import com.kylin.vo.SearchHotelItemVO;
+import com.kylin.vo.*;
 import com.kylin.vo.common.MyMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +31,10 @@ public class ReserveServiceImpl implements ReserveService {
     @Autowired
     private MemberRepository memberRepository;
 
+
+    @Autowired
+    private HotelManageServiceImpl manageService;
+
     @Override
     // 此方法找到,一个酒店的,指定房间类型,在起点-终点日期内为空闲的所有空余信息
     public List<HotelRemainRoom> emptyRoomSearch(int hotelId, String fromDate, String endDate, RoomType roomType) {
@@ -57,10 +58,12 @@ public class ReserveServiceImpl implements ReserveService {
 
                     // 房间必须在所有这些天数里面,包含起点终点,都是空闲的
                     if (roomStatusList.size() == dayNumber) {
+                        //价格以第一天的价格为准
+                        int price = roomStatusList.get(0).getPrice();
                         //发现一个符合要求的房间
                         HotelRemainRoom remainRoom = new HotelRemainRoom(room.getId(),
                                 room.getRoomNumber(), RoomType.getEnum(room.getType()),
-                                RoomStatus.Empty, room.getInformation());
+                                RoomStatus.Empty, room.getInformation(), price);
                         result.add(remainRoom);
                     }
                 }
@@ -81,6 +84,41 @@ public class ReserveServiceImpl implements ReserveService {
         int levelInt = level.ordinal();
         int discount = (int) (price * discountPercent[levelInt]);
         return discount;
+    }
+
+    @Override
+    public MyMessage reserveNonMember(NonMemberCheckInVO nonMemberCheckInVO) {
+        System.out.println("before init : nonMemberCheckInVO = " + nonMemberCheckInVO);
+        this.manageService.initCheckInTableVO(nonMemberCheckInVO);
+        System.out.println("after init : nonMemberCheckInVO = " + nonMemberCheckInVO);
+
+        // 新增订单
+        MemberOrder newOrder = new MemberOrder();
+        this.saveOrder(nonMemberCheckInVO, newOrder);
+
+        return new MyMessage(true);
+    }
+
+    private void saveOrder(NonMemberCheckInVO nonMemberCheckInVO, MemberOrder newOrder) {
+        newOrder.setStatus(MemberOrderStatus.CheckedIn.ordinal());
+        newOrder.setHotelId(nonMemberCheckInVO.getHotelId());
+        newOrder.setReservedRoomString(nonMemberCheckInVO.getRoomNumber());
+        try {
+            newOrder.setCheckIn(DateHelper.getDate(nonMemberCheckInVO.getStartDate()));
+            newOrder.setCheckOut(DateHelper.getDate(nonMemberCheckInVO.getEndDate()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        newOrder.setContactName("");
+        newOrder.setContactPhone("");
+        newOrder.setContactEmail("");
+
+        newOrder.setRoomNumber(1);
+        newOrder.setIsCash(0);
+        newOrder.setIsMember(0);
+        newOrder.setOrderTime(new Date());
+        newOrder.setRoomType(nonMemberCheckInVO.getIntPaymentType());
+        this.orderRepository.save(newOrder);
     }
 
 

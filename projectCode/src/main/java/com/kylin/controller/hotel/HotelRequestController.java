@@ -54,7 +54,7 @@ public class HotelRequestController extends MyController{
 
         MyMessage myMessage = this.modifyService.addRoom(hotelId, roomType1, roomNumber, roomInfo);
 
-        return this.handleMessage(myMessage,"/hotel/show-plan");
+        return this.handleMessage(myMessage,"redirect:/hotel/plan","hotel/error");
     }
 
 }

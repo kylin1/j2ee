@@ -37,8 +37,8 @@ public class HotelPlanController extends MyController {
         String date2 = request.getParameter("date2");
         String room = request.getParameter("room");
 
-        // 返回到界面
-        ModelAndView modelAndView = new ModelAndView("/hotel/post-plan");
+        // 返回到界面 /hotel/post-plan.jsp
+        ModelAndView modelAndView = new ModelAndView("hotel/post-plan");
         modelAndView.addObject("hotelRoomId", roomId);
 
         String oldPlanEndDate = date2;
@@ -52,6 +52,9 @@ public class HotelPlanController extends MyController {
 
         } catch (ParseException e) {
             e.printStackTrace();
+            Date today = new Date();
+            String newPlanDate = DateHelper.getDateString(today);
+            modelAndView.addObject("newPlanDate", newPlanDate);
         }
         modelAndView.addObject("room", room);
 

@@ -132,7 +132,7 @@
                     <div class="col-sm-2">
                       <div class="radio">
                         <label>
-                          <input type="radio" value="1" name="isMember">
+                          <input type="radio" value="1" name="isMember" checked>
                           是
                         </label>
                       </div>
@@ -155,7 +155,7 @@
                     <div class="col-sm-2">
                       <div class="radio">
                         <label>
-                          <input type="radio" value="0" name="intPaymentType">
+                          <input type="radio" value="0" name="intPaymentType" checked>
                           会员卡
                         </label>
                       </div>

@@ -12,6 +12,16 @@
   <input type="hidden" name="hotelId" value="${hotelId}">
 
   <div class="row">
+    <div class="col-md-2">
+      <label class="control-label">酒店识别码</label>
+    </div>
+
+    <div class="col-md-4">
+      <p class="card-text">${hotelIdentity}</p>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="col-md-3 dropdown">
       <label class="form-group label-floating">级别
         <select class="selectpicker" name="level">

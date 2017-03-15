@@ -112,6 +112,7 @@
                     <td>${plan.strType}</td>
                     <td>${plan.date1}</td>
                     <td>${plan.date2}</td>
+                    <%--延长计划的按钮--%>
                     <td><a href="/hotel/plan/${plan.roomId}?room=${plan.room}&date1=${plan.date1}&date2=${plan.date2}">发布计划</a>
                     </td>
                   </tr>

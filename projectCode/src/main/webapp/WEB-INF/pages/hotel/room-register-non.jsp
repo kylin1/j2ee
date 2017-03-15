@@ -25,52 +25,6 @@
       <div class="container-fluid">
         <%@include file="../common/error-display.jsp" %>
 
-        <!--预订-->
-        <section>
-          <h2>预订信息</h2>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header" data-background-color="purple">
-                  <h4 class="title">预订信息</h4>
-                  <p class="category">已预订未入住的房客订单</p>
-                </div>
-
-                <div class="card-content table-responsive">
-                  <table class="table">
-                    <thead class="text-primary">
-                    <th>订单号</th>
-                    <th>下单时间</th>
-                    <th>房间信息</th>
-                    <th>分配房间号</th>
-                    <th>入住</th>
-                    <th>离店</th>
-                    <th>联系人</th>
-                    <th>联系电话</th>
-                    </thead>
-                    <c:if test="${!empty reservedList}">
-                      <tbody>
-                      <c:forEach items="${reservedList}" var="reservedOrder">
-                        <tr>
-                          <td>${reservedOrder.orderId}</td>
-                          <td>${reservedOrder.orderTime}</td>
-                          <td>${reservedOrder.strType}*${reservedOrder.roomNumber}</td>
-                          <td>${reservedOrder.hotelRoomNumbers}</td>
-                          <td>${reservedOrder.date1}</td>
-                          <td>${reservedOrder.date2}</td>
-                          <td>${reservedOrder.contactPersonName}</td>
-                          <td>${reservedOrder.contactPhone}</td>
-                        </tr>
-                      </c:forEach>
-                      </tbody>
-                    </c:if>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <div class="row">
           <div class="col-md-8">
             <div class="card">
@@ -79,7 +33,7 @@
                 <p class="category"></p>
               </div>
               <div class="card-content">
-                <form action="${pageContext.request.contextPath}/hotel/register-room" method="post">
+                <form action="${pageContext.request.contextPath}/hotel/register-room-non" method="post">
                   <!--名称行-->
                   <div class="row">
                     <label class="col-md-1 control-label">酒店</label>
@@ -88,18 +42,26 @@
                     </div>
                   </div>
 
-                  <!--订单号-->
                   <div class="row">
-                    <div class="input-group">
-                      <div class="col-md-3">
-                        <input type="text" value="${checkInVO.orderId}" name="orderId" class="form-control"
-                               placeholder="订单号">
-                      </div>
+                    <label class="col-md-1 control-label">房间号</label>
+                    <div class="col-md-6">
+                      <h4>${roomNumber}</h4>
+                    </div>
+                  </div>
 
-                      <div class="col-md-3">
-                        <input type="text" value="${checkInVO.roomNumber}" name="roomNumber" class="form-control"
-                               placeholder="房间号">
-                      </div>
+                  <%--日期--%>
+                  <div class="row">
+                    <label class="col-md-1 control-label">日期</label>
+                    <div class="col-md-6">
+                      <h4>${startDate} 至 ${endDate}</h4>
+                    </div>
+                  </div>
+
+                  <%--总价--%>
+                  <div class="row">
+                    <label class="col-md-1 control-label">总价</label>
+                    <div class="col-md-6">
+                      <h4>${totalPrice}</h4>
                     </div>
                   </div>
 
@@ -107,19 +69,19 @@
                     <div class="input-group">
 
                       <div class="col-md-2">
-                        <input type="text" value="${checkInVO.guest1}" name="guest1" class="form-control"
+                        <input type="text" name="guest1" class="form-control"
                                placeholder="房客1">
                       </div>
                       <div class="col-md-2">
-                        <input type="text" value="${checkInVO.card1}" name="card1" class="form-control"
+                        <input type="text" name="card1" class="form-control"
                                placeholder="身份证">
                       </div>
                       <div class="col-md-2">
-                        <input type="text" value="${checkInVO.guest2}" name="guest2" class="form-control"
+                        <input type="text" name="guest2" class="form-control"
                                placeholder="房客2">
                       </div>
                       <div class="col-md-2">
-                        <input type="text" value="${checkInVO.card2}" name="card2" class="form-control"
+                        <input type="text" name="card2" class="form-control"
                                placeholder="身份证">
                       </div>
                     </div>
@@ -132,7 +94,7 @@
                     <div class="col-sm-2">
                       <div class="radio">
                         <label>
-                          <input type="radio" value="1" name="isMember" checked>
+                          <input type="radio" value="1" name="isMember">
                           是
                         </label>
                       </div>
@@ -141,7 +103,7 @@
                     <div class="col-sm-2">
                       <div class="radio">
                         <label>
-                          <input type="radio" value="0" name="isMember">
+                          <input type="radio" value="0" name="isMember" checked>
                           否
                         </label>
                       </div>
@@ -155,7 +117,7 @@
                     <div class="col-sm-2">
                       <div class="radio">
                         <label>
-                          <input type="radio" value="0" name="intPaymentType" checked>
+                          <input type="radio" value="0" name="intPaymentType">
                           会员卡
                         </label>
                       </div>
@@ -164,14 +126,18 @@
                     <div class="col-sm-3">
                       <div class="radio">
                         <label>
-                          <input type="radio" value="1" name="intPaymentType">
+                          <input type="radio" value="1" name="intPaymentType" checked>
                           现金结账
                         </label>
                       </div>
                     </div>
                   </div>
 
+                  <input type="hidden" name="roomNumber" value="${roomNumber}">
+                  <input type="hidden" name="orderId" value="1">
                   <input type="hidden" name="hotelId" value="${hotelId}">
+                  <input type="hidden" name="endDate" value="${endDate}">
+                  <input type="hidden" name="startDate" value="${startDate}">
 
                   <button type="submit" class="btn btn-primary pull-left">
                     确定

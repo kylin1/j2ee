@@ -3,9 +3,11 @@ package com.kylin.controller.hotel;
 import com.kylin.controller.MyController;
 import com.kylin.service.HotelManageService;
 import com.kylin.service.ReserveService;
+import com.kylin.tools.DateHelper;
 import com.kylin.tools.myenum.RoomType;
 import com.kylin.vo.HotelCheckInTableVO;
 import com.kylin.vo.HotelRemainRoom;
+import com.kylin.vo.NonMemberCheckInVO;
 import com.kylin.vo.common.MyMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,14 +52,39 @@ public class HotelRegisterController extends MyController {
         // 获取酒店剩余房间信息
         List<HotelRemainRoom> remainRoomList = this.reserveService.emptyRoomSearch(hotelId, startDate, endDate, realType);
         modelAndView.addObject("remainRoomList", remainRoomList);
+        modelAndView.addObject("startDate", startDate);
+        modelAndView.addObject("endDate", endDate);
+
+        if(remainRoomList.isEmpty()){
+            modelAndView.addObject("error", "没有找到符合条件的空房信息!");
+        }
 
         return modelAndView;
     }
 
+    // 非会员入住:在搜索界面下面选择房间进行入住操作
     @RequestMapping(value = "select-room/{roomId}", method = RequestMethod.GET)
     public ModelAndView selectRoom(HttpServletRequest request, @PathVariable("roomId") int roomId) {
-        ModelAndView modelAndView = new ModelAndView("hotel/room-register");
+        ModelAndView modelAndView = new ModelAndView("hotel/room-register-non");
+        String roomNumber = request.getParameter("room");
+        String roomType = request.getParameter("roomType");
+        String startDate = request.getParameter("startDate");
+        String endDate = request.getParameter("endDate");
 
+        // 单价
+        int price = Integer.parseInt(request.getParameter("price"));
+
+        modelAndView.addObject("roomNumber",roomNumber);
+        modelAndView.addObject("roomType",roomType);
+        modelAndView.addObject("startDate",startDate);
+        modelAndView.addObject("endDate",endDate);
+
+        // 计算总价
+        int days = DateHelper.getDaysNumber(startDate,endDate);
+        int totalPrice = price * days;
+        modelAndView.addObject("totalPrice",totalPrice);
+
+        // 跳转到为非会员登记的界面
         return modelAndView;
     }
 
@@ -75,6 +102,16 @@ public class HotelRegisterController extends MyController {
         System.out.println("after init : " + checkInTableVO);
         MyMessage myMessage = this.hotelManageService.customCheckIn(checkInTableVO);
         return this.handleMessage(myMessage, "redirect:/hotel/customer-register",object);
+    }
+
+    @RequestMapping(value = "register-room-non", method = RequestMethod.POST)
+    public ModelAndView registerRoomNonMem(HttpServletRequest request,
+                                     @ModelAttribute("nonMemberCheckInVO") NonMemberCheckInVO nonMemberCheckInVO) {
+        System.out.println(nonMemberCheckInVO);
+
+        MyMessage myMessage = this.reserveService.reserveNonMember(nonMemberCheckInVO);
+
+        return this.handleMessage(myMessage,"hotel/room-register-non");
     }
 
 }

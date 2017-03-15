@@ -24,6 +24,8 @@ public class Hotel {
 
     private String representative;
 
+    private int income;
+
     @Id
     @Column(name = "id")public int getId() {
         return id;
@@ -87,6 +89,15 @@ public class Hotel {
         this.userId = userId;
     }
 
+    @Column(name = "income")
+    public int getIncome() {
+        return income;
+    }
+
+    public void setIncome(int income) {
+        this.income = income;
+    }
+
     @Override
     public String toString() {
         return "Hotel{" +
@@ -97,6 +108,7 @@ public class Hotel {
                 ", userId=" + userId +
                 ", phone='" + phone + '\'' +
                 ", representative='" + representative + '\'' +
+                ", income='" + income + '\'' +
                 '}';
     }
 }

@@ -2,10 +2,7 @@ package com.kylin.service;
 
 import com.kylin.tools.DateHelper;
 import com.kylin.tools.myenum.RoomType;
-import com.kylin.vo.HotelRemainRoom;
-import com.kylin.vo.RemainRoomInfo;
-import com.kylin.vo.ReserveInputTableVO;
-import com.kylin.vo.SearchHotelItemVO;
+import com.kylin.vo.*;
 import com.kylin.vo.common.MyMessage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -96,4 +93,28 @@ public class ReserveTest {
         System.out.println(myMessage);
     }
 
+    @Test
+    public void testNonMember(){
+        String roomNumber = "102";
+        int orderId = 3;
+        int hotelId = 23;
+
+        NonMemberCheckInVO nonMemberCheckInVO = new NonMemberCheckInVO();
+        nonMemberCheckInVO.setStartDate("2017-03-15");
+        nonMemberCheckInVO.setEndDate("2017-03-18");
+        nonMemberCheckInVO.setCard1("3203221");
+//        nonMemberCheckInVO.setCard2("3203222");
+        nonMemberCheckInVO.setGuest1("kylin1");
+//        nonMemberCheckInVO.setGuest2("kylin2");
+
+        nonMemberCheckInVO.setMember(false);
+        nonMemberCheckInVO.setIntPaymentType(1);
+
+        nonMemberCheckInVO.setRoomNumber(roomNumber);
+        nonMemberCheckInVO.setOrderId(orderId);
+        nonMemberCheckInVO.setHotelId(hotelId);
+
+        MyMessage myMessage = this.service.reserveNonMember(nonMemberCheckInVO);
+        System.out.println(myMessage);
+    }
 }

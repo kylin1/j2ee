@@ -26,13 +26,53 @@ public class HotelRemainRoom {
     // 房间其他信息
     private String information;
 
-    public HotelRemainRoom(int roomId, String room, RoomType type, RoomStatus status, String information) {
+    private int price;
+
+    public HotelRemainRoom(int roomId, String room, RoomType type, RoomStatus status,
+                           String information,int price) {
         this.roomId = roomId;
         this.room = room;
         this.type = type;
         this.status = status;
         this.information = information;
+        this.price = price;
         this.init();
+    }
+
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
+
+    public void setType(RoomType type) {
+        this.type = type;
+    }
+
+    public void setStrType(String strType) {
+        this.strType = strType;
+    }
+
+    public void setStatus(RoomStatus status) {
+        this.status = status;
+    }
+
+    public void setStrStatus(String strStatus) {
+        this.strStatus = strStatus;
+    }
+
+    public void setInformation(String information) {
+        this.information = information;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     private void init() {

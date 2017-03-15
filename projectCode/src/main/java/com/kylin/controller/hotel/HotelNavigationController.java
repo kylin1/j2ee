@@ -43,6 +43,11 @@ public class HotelNavigationController {
 
         HttpSession session = request.getSession();
         int hotelId = (int) session.getAttribute("hotelId");
+        boolean hotelAuth = (boolean) session.getAttribute("hotelAuth");
+        // 酒店还没有通过开店申请
+        if (!hotelAuth) {
+            return new ModelAndView("hotel/error", "error", "请提交开店申请,再进行酒店管理操作!");
+        }
 
         // 预订信息:已预订未入住的房客订单
         List<HotelOrderItemVO> list = statisticService.getReservedOrderList(hotelId);
@@ -58,6 +63,11 @@ public class HotelNavigationController {
 
         HttpSession session = request.getSession();
         int hotelId = (int) session.getAttribute("hotelId");
+        boolean hotelAuth = (boolean) session.getAttribute("hotelAuth");
+        // 酒店还没有通过开店申请
+        if (!hotelAuth) {
+            return new ModelAndView("hotel/error", "error", "请提交开店申请,再进行酒店管理操作!");
+        }
 
         List<HotelPlanVO> planVOS = this.manageService.getHotelPlan(hotelId);
         modelAndView.addObject("planVOS", planVOS);
@@ -67,7 +77,12 @@ public class HotelNavigationController {
     @RequestMapping(value = "statistic", method = RequestMethod.GET)
     public ModelAndView statistic(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("hotel/statistic");
-
+        HttpSession session = request.getSession();
+        boolean hotelAuth = (boolean) session.getAttribute("hotelAuth");
+        // 酒店还没有通过开店申请
+        if (!hotelAuth) {
+            return new ModelAndView("hotel/error", "error", "请提交开店申请,再进行酒店管理操作!");
+        }
         return modelAndView;
     }
 
@@ -76,6 +91,7 @@ public class HotelNavigationController {
         ModelAndView modelAndView = new ModelAndView("hotel/request");
         HttpSession session = request.getSession();
         int hotelId = (int) session.getAttribute("hotelId");
+
         List<RequestVO> deniedList = modifyService.getDeniedRequest(hotelId);
         List<RequestVO> passedList = modifyService.getPassedRequest(hotelId);
         List<RequestVO> waitingList = modifyService.getWaitingRequest(hotelId);

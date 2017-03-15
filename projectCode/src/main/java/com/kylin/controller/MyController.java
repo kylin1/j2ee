@@ -3,8 +3,8 @@ package com.kylin.controller;
 import com.kylin.model.Hotel;
 import com.kylin.service.HotelStatusService;
 import com.kylin.service.MemberService;
+import com.kylin.tools.NumberHelper;
 import com.kylin.tools.myenum.MemberStatus;
-import com.kylin.tools.myenum.MyAuthority;
 import com.kylin.vo.MemberInfoVO;
 import com.kylin.vo.common.MyMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,9 +56,14 @@ public class MyController {
 
             session.setAttribute("hotelId", hotelId);
             session.setAttribute("hotel", hotel);
-            session.setAttribute(MyAuthority.hotelAuth, isHotelOpen);
+            session.setAttribute("hotelAuth", isHotelOpen);
+
+            // 七位酒店识别码
+            String hotelIdentity = NumberHelper.getSevenNumber(hotelId);
+            session.setAttribute("hotelIdentity", hotelIdentity);
 
             System.out.println("session set hotelId = " + hotelId);
+            System.out.println("session set hotelIdentity = " + hotelIdentity);
             System.out.println("session set hotel = " + hotel);
             System.out.println("session set hotelAuth = " + isHotelOpen);
         }

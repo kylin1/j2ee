@@ -23,7 +23,6 @@
     <!--2.内容-->
     <div class="content">
       <div class="container-fluid">
-        <%@include file="../common/error-display.jsp"%>
 
         <!--酒店输入日期,房间类型:查找合适房间列表-->
         <div class="row">
@@ -44,7 +43,7 @@
 
                     <div class="col-sm-3">
                       <div class="form-group label-floating">
-                        <input name="startDate" type="text" value="2017-04-01" id="dpd1" data-date-format="yyyy-mm-dd"
+                        <input name="startDate" type="text" value="${startDate}" id="dpd1" data-date-format="yyyy-mm-dd"
                                class="form-control">
                       </div>
                     </div>
@@ -55,7 +54,7 @@
 
                     <div class="col-sm-3">
                       <div class="form-group label-floating">
-                        <input name="endDate" type="text" value="2017-04-03" id="dpd2" data-date-format="yyyy-mm-dd"
+                        <input name="endDate" type="text" value="${endDate}" id="dpd2" data-date-format="yyyy-mm-dd"
                                class="form-control">
                       </div>
                     </div>
@@ -83,15 +82,7 @@
         </div>
 
         <%--搜索结果为空--%>
-        <c:if test="${empty remainRoomList}">
-          <div class="row">
-            <div class="col-md-8">
-              <div class="alert alert-warning" role="alert">
-                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>没有找到符合条件的空房信息
-              </div>
-            </div>
-          </div>
-        </c:if>
+        <%@include file="../common/error-display.jsp"%>
 
         <!--合适房间列表:在列表中点击一个房间进行预订-->
         <c:if test="${!empty remainRoomList}">
@@ -109,6 +100,7 @@
                     <th>房间号</th>
                     <th>类型</th>
                     <th>状态</th>
+                    <th>价格</th>
                     <th>其他信息</th>
                     <th>操作</th>
                     </thead>
@@ -118,9 +110,10 @@
                         <td>${room.room}</td>
                         <td>${room.strType}</td>
                         <td>${room.strStatus}</td>
+                        <td>${room.price}</td>
                         <td>${room.information}</td>
                           <%--选择房间进行入住操作--%>
-                        <td><a href="${pageContext.request.contextPath}/hotel/select-room/${room.roomId}">入住</a></td>
+                        <td><a href="${pageContext.request.contextPath}/hotel/select-room/${room.roomId}?startDate=${startDate}&endDate=${endDate}&room=${room.room}&roomType=${room.strType}&price=${room.price}">入住</a></td>
                       </tr>
                     </c:forEach>
                     </tbody>
