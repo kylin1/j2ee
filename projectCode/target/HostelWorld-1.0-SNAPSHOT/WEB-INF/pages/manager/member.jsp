@@ -30,7 +30,7 @@
           <div class="row">
             <div class="col-md-5">
               <div class="card card-signup">
-                <form class="form" method="post" action="/my-manager/search-member">
+                <form class="form" method="post" action="${pageContext.request.contextPath}/my-manager/search-member">
                   <div class="row">
                     <div class="header header-primary text-center">
                       <h4>请输入会员姓名进行查询</h4>
@@ -75,6 +75,7 @@
                   <div class="card-content table-responsive">
                     <table class="table">
                       <thead class="text-primary">
+                      <th>会员姓名</th>
                       <th>日期</th>
                       <th>客栈</th>
                       <th>房间</th>
@@ -84,6 +85,7 @@
                       <tbody>
                       <c:forEach items="${searchResult}" var="oneOrder">
                         <tr>
+                          <td>${oneOrder.memberName}</td>
                           <td>${oneOrder.date}</td>
                           <td>${oneOrder.hotelName}</td>
                           <td>${oneOrder.strType}*${oneOrder.roomNumber}</td>

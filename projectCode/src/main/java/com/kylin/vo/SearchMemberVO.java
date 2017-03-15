@@ -13,6 +13,8 @@ import java.util.Date;
  */
 public class SearchMemberVO {
 
+    private String memberName;
+
     private Date orderTime;
     private String date;
 
@@ -25,7 +27,8 @@ public class SearchMemberVO {
 
     private int price;
 
-    public SearchMemberVO(Date orderTime, String hotelName, RoomType roomType, int roomNumber, int price) {
+    public SearchMemberVO(String memberName,Date orderTime, String hotelName, RoomType roomType, int roomNumber, int price) {
+        this.memberName = memberName;
         this.orderTime = orderTime;
         this.hotelName = hotelName;
         this.roomType = roomType;
@@ -33,6 +36,10 @@ public class SearchMemberVO {
         this.price = price;
         this.date = DateHelper.getDateString(orderTime);
         this.strType = roomType.getType();
+    }
+
+    public String getMemberName() {
+        return memberName;
     }
 
     public String getDate() {
@@ -67,6 +74,7 @@ public class SearchMemberVO {
     public String toString() {
         return "SearchMemberVO{" +
                 "orderTime=" + orderTime +
+                ", memberName='" + memberName + '\'' +
                 ", hotelName='" + hotelName + '\'' +
                 ", roomType=" + roomType +
                 ", roomNumber=" + roomNumber +

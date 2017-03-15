@@ -150,41 +150,39 @@ public class MemberServiceImpl implements MemberService {
     public List<SearchMemberVO> getOrderHistory(String member) throws NotFoundException {
         List<SearchMemberVO> result = new ArrayList<>();
 
-        // 姓名/账号
-        Member targetMember = this.searchMember(member);
-
-        if (targetMember == null) {
-            throw new NotFoundException("输入的会员姓名/账号不存在!");
+        //查询到的所有用户
+        List<Member> targetMembers = this.searchMember(member);
+        if (targetMembers.isEmpty()) {
+            throw new NotFoundException("输入的会员姓名不存在!");
         }
 
         // 找到用户
-        int memberId = targetMember.getId();
-        List<MemberOrder> memberOrders = orderRepository.findByMemberId(memberId);
-        // every order
-        for (MemberOrder order : memberOrders) {
-            // basic info
-            int hotelId = order.getHotelId();
-            String hotelName = hotelRepository.findNameById(hotelId);
-            Date orderDate = order.getOrderTime();
-            RoomType roomType = RoomType.getEnum(order.getRoomType());
-            int number = order.getRoomNumber();
-            int price = order.getPrice();
+        for (Member targetMember : targetMembers) {
+            // 对于每一个用户
+            int memberId = targetMember.getId();
+            List<MemberOrder> memberOrders = orderRepository.findByMemberId(memberId);
+            // every order
+            for (MemberOrder order : memberOrders) {
+                // basic info
+                int hotelId = order.getHotelId();
+                String hotelName = hotelRepository.findNameById(hotelId);
+                Date orderDate = order.getOrderTime();
+                RoomType roomType = RoomType.getEnum(order.getRoomType());
+                int number = order.getRoomNumber();
+                int price = order.getPrice();
 
-            // add to result
-            SearchMemberVO vo = new SearchMemberVO(orderDate, hotelName, roomType, number, price);
-            result.add(vo);
+                // add to result
+                SearchMemberVO vo = new SearchMemberVO(targetMember.getName(), orderDate, hotelName,
+                        roomType, number, price);
+                result.add(vo);
+            }
         }
+
         return result;
     }
 
-    private Member searchMember(String member) {
-        List<Member> targetMember = this.repository.findByNameIgnoreCaseContaining(member);
-
-        if (!targetMember.isEmpty()) {
-            return targetMember.get(0);
-        }
-
-        return null;
+    private List<Member> searchMember(String member) {
+        return this.repository.findByNameIgnoreCaseContaining(member);
     }
 
     @Override

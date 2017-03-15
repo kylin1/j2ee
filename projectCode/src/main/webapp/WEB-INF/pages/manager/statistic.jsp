@@ -80,7 +80,7 @@
                 <div class="card-content">
                   <div class="row">
                     <div class="col-sm-4">
-                      <h4 class="title">收入/支出折线图</h4>
+                      <h4 class="title">收入折线图</h4>
                     </div>
                     <div class="col-sm-8">
                       <ul class="nav navbar-nav navbar-right">
@@ -96,30 +96,6 @@
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-md-8">
-              <div class="card">
-                <div class="card-header card-chart" data-background-color="orange">
-                  <div class="ct-chart" id="stepsLineChart"></div>
-                </div>
-                <div class="card-content">
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <h4 class="title">利润柱状图</h4>
-                    </div>
-                    <div class="col-sm-8">
-                      <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#" style="padding-top: 5px;padding-bottom: 5px;">日</a></li>
-                        <li><a href="#" style="padding-top: 5px;padding-bottom: 5px;">周</a></li>
-                        <li><a href="#" style="padding-top: 5px;padding-bottom: 5px;">月</a></li>
-                      </ul>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
         </section>
       </div>
     </div>

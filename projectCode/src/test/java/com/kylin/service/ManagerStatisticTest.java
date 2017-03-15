@@ -31,9 +31,7 @@ public class ManagerStatisticTest {
     @Test
     public void test(){
         List<ManagerHotelStatusVO> statusVOList = this.service.getHotelRoomStatus();
-        for(ManagerHotelStatusVO vo:statusVOList){
-            System.out.println(vo);
-        }
+        statusVOList.forEach(System.out::println);
     }
 
     @Test

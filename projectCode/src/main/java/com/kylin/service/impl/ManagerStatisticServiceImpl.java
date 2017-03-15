@@ -32,7 +32,6 @@ public class ManagerStatisticServiceImpl implements ManagerStatisticService {
     @Autowired
     private PaymentRepository paymentRepository;
 
-
     private Date start = DateHelper.START;
     private Date end = DateHelper.END;
 

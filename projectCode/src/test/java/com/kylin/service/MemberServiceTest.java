@@ -45,7 +45,7 @@ public class MemberServiceTest {
 
     @Test
     public void testManagerSearch() throws NotFoundException {
-        List<SearchMemberVO> g =  this.memberService.getOrderHistory("kylin");
+        List<SearchMemberVO> g =  this.memberService.getOrderHistory("暂");
         g.forEach(System.out::println);
     }
 
