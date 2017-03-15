@@ -14,9 +14,8 @@ import com.kylin.tools.myenum.MemberOrderStatus;
 import com.kylin.tools.myenum.RoomType;
 import com.kylin.vo.HotelOrderItemVO;
 import com.kylin.vo.HotelRoomStatusVO;
-import com.kylin.vo.chart.ChartData;
 import com.kylin.vo.chart.HotelIncomeChartVO;
-import com.kylin.vo.chart.MyChartDataLine;
+import com.kylin.vo.chart.MyChart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -97,19 +96,10 @@ public class HotelStatisticServiceImpl implements HotelStatisticService {
     }
 
     @Override
-    public HotelIncomeChartVO getIncomeInfo(int hotelId) {
+    public HotelIncomeChartVO getIncomeInfo(int hotelId, Date startDate, Date endDate) {
         List<Payment> payments = this.paymentRepository.findByHotelId(hotelId);
-
-        Date endDate = DateHelper.NOW;
-        Date startDate = DateHelper.MONTH_AGO;
-
-        ChartData inputData = new ChartData(payments, startDate, endDate);
-        MyChartDataLine incomeData = new MyChartDataLine(inputData.getXYList());
-
-        List<MyChartDataLine> data = new ArrayList<>();
-        data.add(incomeData);
-
-        HotelIncomeChartVO chartVO = new HotelIncomeChartVO(data);
-        return chartVO;
+        return MyChart.getChartVO(payments,startDate,endDate);
     }
+
+
 }

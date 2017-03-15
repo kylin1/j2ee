@@ -33,7 +33,7 @@ public class ManagerStatisticServiceImpl implements ManagerStatisticService {
     private PaymentRepository paymentRepository;
 
     private Date start = DateHelper.START;
-    private Date end = DateHelper.END;
+    private Date end = DateHelper.TOMORROW;
 
     @Override
     public List<ManagerHotelStatusVO> getHotelRoomStatus() {
@@ -92,28 +92,9 @@ public class ManagerStatisticServiceImpl implements ManagerStatisticService {
     }
 
     @Override
-    public IncomeChartVO getIncomeVO(Date start, Date end) {
-        // 获取数据库数据
+    public HotelIncomeChartVO getPaymentChartVO(Date start, Date end) {
+        // 获取数据库数据,时间升序
         List<Payment> incomeList = this.paymentRepository.findByDate(start, end);
-
-        ChartData inputData2 = new ChartData(incomeList, start, end);
-
-        // 创造两条数据线
-        MyChartDataLine incomeData = new MyChartDataLine(inputData2.getXYList());
-
-        // 两条数据线新建图表所有数据
-        List<MyChartDataLine> data = new ArrayList<>();
-        data.add(incomeData);
-        // 返回结果
-        IncomeChartVO chartVO = new IncomeChartVO(data);
-        return chartVO;
-    }
-
-    private void addEmptyData(Date start, Date end){
-        // TODO 补充没有数据的天数
-        List<Date> list = DateHelper.getBetweenDates(start,end);
-        for (Date date:list){
-
-        }
+        return MyChart.getChartVO(incomeList,start,end);
     }
 }

@@ -3,8 +3,9 @@ package com.kylin.service;
 import com.kylin.model.Payment;
 import com.kylin.repository.PaymentRepository;
 import com.kylin.tools.DateHelper;
+import com.kylin.tools.MyResponse;
 import com.kylin.vo.ManagerHotelStatusVO;
-import com.kylin.vo.chart.IncomeChartVO;
+import com.kylin.vo.chart.HotelIncomeChartVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,10 @@ public class ManagerStatisticTest {
     @Autowired
     private PaymentRepository paymentRepository;
 
+
+    private Date start = DateHelper.START;
+    private Date end = DateHelper.END;
+
     @Test
     public void test(){
         List<ManagerHotelStatusVO> statusVOList = this.service.getHotelRoomStatus();
@@ -35,9 +40,12 @@ public class ManagerStatisticTest {
     }
 
     @Test
-    public void testChart(){
-        IncomeChartVO chartVO = this.service.getIncomeVO(
-                DateHelper.START,new Date());
+    public void testChart() throws ParseException {
+        HotelIncomeChartVO chartVO = this.service.getPaymentChartVO(start,end);
+        System.out.println(chartVO);
+
+        String json = MyResponse.toJson(chartVO);
+        System.out.println(json);
     }
 
     @Test

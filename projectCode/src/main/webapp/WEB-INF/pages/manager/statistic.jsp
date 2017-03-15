@@ -22,7 +22,7 @@
     <!--2.内容-->
     <div class="content">
       <div class="container-fluid">
-        <%@include file="../common/error-display.jsp"%>
+        <%@include file="../common/error-display.jsp" %>
 
         <!--各店入住情况-->
         <section>
@@ -75,7 +75,7 @@
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header card-chart" data-background-color="orange">
-                  <div class="ct-chart" id="heartRateChart"></div>
+                  <div class="ct-chart" id="managerPaymentChart"></div>
                 </div>
                 <div class="card-content">
                   <div class="row">
@@ -110,13 +110,22 @@
 <%--js--%>
 <%@include file="../common/js-file.jsp" %>
 
-<script src="<%=request.getContextPath() %>/assets/js/sport.js"></script>
+<script src="<%=request.getContextPath() %>/assets/js/my-chart.js"></script>
 
 <!--使用JS绘制图表-->
 <script>
+    function drawChart() {
+        // data from
+        var data = ${data};
+        var lowBond = ${lowBond};
+        var upBond = ${upBond};
+        DrawChart.createLineChart('managerPaymentChart', data, upBond, lowBond, "元")
+    }
+</script>
+
+<script>
     $(document).ready(function () {
-        // Javascript method's body can be found in assets/js/demos.js
-        sport.initSportsCharts();
+        drawChart();
     });
 </script>
 </html>

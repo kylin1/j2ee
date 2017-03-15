@@ -76,7 +76,7 @@
                     <table class="table">
                       <thead class="text-primary">
                       <th>会员姓名</th>
-                      <th>日期</th>
+                      <th>下单日期</th>
                       <th>客栈</th>
                       <th>房间</th>
                       <th>金额</th>

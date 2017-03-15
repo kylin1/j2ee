@@ -1,9 +1,10 @@
 package com.kylin.service;
 
-import com.kylin.vo.chart.HotelIncomeChartVO;
 import com.kylin.vo.HotelOrderItemVO;
 import com.kylin.vo.HotelRoomStatusVO;
+import com.kylin.vo.chart.HotelIncomeChartVO;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,5 +35,5 @@ public interface HotelStatisticService {
      * @param hotelId
      * @return
      */
-    HotelIncomeChartVO getIncomeInfo(int hotelId);
+    HotelIncomeChartVO getIncomeInfo(int hotelId, Date startDate, Date endDate);
 }

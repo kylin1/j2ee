@@ -1,5 +1,9 @@
 package com.kylin.vo.chart;
 
+import com.kylin.model.Payment;
+
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,5 +41,20 @@ public class MyChart {
                 "chartData=" + chartData +
                 ", charLineNumber=" + charLineNumber +
                 '}';
+    }
+
+    public static HotelIncomeChartVO getChartVO(List<Payment> payments, Date startDate, Date endDate) {
+        ChartData inputData = new ChartData(payments, startDate, endDate);
+        int lowest = (int) (inputData.getLowest() * 0.8);
+        int highest = (int) (inputData.getHighest() * 1.2);
+
+        MyChartDataLine incomeData = new MyChartDataLine(inputData.getXYList(), startDate, endDate,
+                lowest, highest);
+
+        List<MyChartDataLine> data = new ArrayList<>();
+        data.add(incomeData);
+
+        HotelIncomeChartVO chartVO = new HotelIncomeChartVO(data);
+        return chartVO;
     }
 }

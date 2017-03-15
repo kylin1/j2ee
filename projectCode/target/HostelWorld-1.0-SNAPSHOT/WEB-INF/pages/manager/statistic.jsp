@@ -22,7 +22,7 @@
     <!--2.内容-->
     <div class="content">
       <div class="container-fluid">
-        <%@include file="../common/error-display.jsp"%>
+        <%@include file="../common/error-display.jsp" %>
 
         <!--各店入住情况-->
         <section>
@@ -75,12 +75,12 @@
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header card-chart" data-background-color="orange">
-                  <div class="ct-chart" id="heartRateChart"></div>
+                  <div class="ct-chart" id="managerPaymentChart"></div>
                 </div>
                 <div class="card-content">
                   <div class="row">
                     <div class="col-sm-4">
-                      <h4 class="title">收入/支出折线图</h4>
+                      <h4 class="title">收入折线图</h4>
                     </div>
                     <div class="col-sm-8">
                       <ul class="nav navbar-nav navbar-right">
@@ -96,30 +96,6 @@
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-md-8">
-              <div class="card">
-                <div class="card-header card-chart" data-background-color="orange">
-                  <div class="ct-chart" id="stepsLineChart"></div>
-                </div>
-                <div class="card-content">
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <h4 class="title">利润柱状图</h4>
-                    </div>
-                    <div class="col-sm-8">
-                      <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#" style="padding-top: 5px;padding-bottom: 5px;">日</a></li>
-                        <li><a href="#" style="padding-top: 5px;padding-bottom: 5px;">周</a></li>
-                        <li><a href="#" style="padding-top: 5px;padding-bottom: 5px;">月</a></li>
-                      </ul>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
         </section>
       </div>
     </div>
@@ -134,13 +110,22 @@
 <%--js--%>
 <%@include file="../common/js-file.jsp" %>
 
-<script src="<%=request.getContextPath() %>/assets/js/sport.js"></script>
+<script src="<%=request.getContextPath() %>/assets/js/my-chart.js"></script>
 
 <!--使用JS绘制图表-->
 <script>
+    function drawChart() {
+        // data from
+        var data = ${data};
+        var lowBond = ${lowBond};
+        var upBond = ${upBond};
+        DrawChart.createLineChart('managerPaymentChart', data, upBond, lowBond, "元")
+    }
+</script>
+
+<script>
     $(document).ready(function () {
-        // Javascript method's body can be found in assets/js/demos.js
-        sport.initSportsCharts();
+        drawChart();
     });
 </script>
 </html>

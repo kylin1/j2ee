@@ -21,22 +21,24 @@ public class DateHelper {
     public static Date END;
 
     public static Date NOW;
+    public static Date TOMORROW;
     public static Date WEEK_AGO;
+    public static Date TWO_WEEK_AGO;
     public static Date MONTH_AGO;
 
     static {
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            START = DateHelper.getDate("2017-04-01");
-            END = DateHelper.getDate("2017-04-03");
-            NOW = new Date();
-            NOW = DateHelper.setTimeToZero(NOW);
-            WEEK_AGO = DateHelper.addDate(NOW, -7);
-            MONTH_AGO = DateHelper.addDate(NOW, -30);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        NOW = new Date();
+        NOW = DateHelper.setTimeToZero(NOW);
+
+        TOMORROW = DateHelper.addDate(NOW, 1);
+        WEEK_AGO = DateHelper.addDate(NOW, -7);
+        TWO_WEEK_AGO = DateHelper.addDate(NOW, -14);
+        MONTH_AGO = DateHelper.addDate(NOW, -30);
+
+        END = NOW;
+        START = TWO_WEEK_AGO;
     }
 
     public static String getDateString(Date date) {
@@ -74,6 +76,17 @@ public class DateHelper {
         }
         result.add(endDate);
         return result;
+    }
+
+    public static List<String> getBetweenDatesString(Date startDate, Date endDate) {
+        List<String> strings = new ArrayList<>();
+        List<Date> list = DateHelper.getBetweenDates(startDate, endDate);
+
+        for (Date date : list) {
+            String strDate = DateHelper.getDateString(date);
+            strings.add(strDate);
+        }
+        return strings;
     }
 
     /**

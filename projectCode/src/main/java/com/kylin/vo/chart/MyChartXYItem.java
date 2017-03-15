@@ -1,7 +1,5 @@
 package com.kylin.vo.chart;
 
-import java.util.Date;
-
 /**
  * Created by kylin on 22/02/2017.
  * All rights reserved.
@@ -9,17 +7,17 @@ import java.util.Date;
 public class MyChartXYItem {
 
     // x:date
-    private Date date;
+    private String date;
 
     // y:value
     private int value;
 
-    public MyChartXYItem(Date date, int value) {
+    public MyChartXYItem(String date, int value) {
         this.date = date;
         this.value = value;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 

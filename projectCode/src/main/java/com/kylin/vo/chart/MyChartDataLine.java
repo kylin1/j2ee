@@ -22,10 +22,6 @@ public class MyChartDataLine {
 
     private int upBond;
 
-    public MyChartDataLine(List<MyChartXYItem> chartXYItemList) {
-        this.chartXYItemList = chartXYItemList;
-    }
-
     public MyChartDataLine(List<MyChartXYItem> chartXYItemList, Date startDate, Date endDate, int lowBond, int upBond) {
         this.chartXYItemList = chartXYItemList;
         this.startDate = startDate;
