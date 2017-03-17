@@ -36,11 +36,11 @@ public class ManagerStatisticServiceImpl implements ManagerStatisticService {
     private Date end = DateHelper.TOMORROW;
 
     @Override
-    public List<ManagerHotelStatusVO> getHotelRoomStatus() {
+    public List<ManagerHotelStatusVO> getHotelRoomStatus(Date date) {
+        String strDate = DateHelper.getDateString(date);
+
         List<ManagerHotelStatusVO> result = new ArrayList<>();
         List<Hotel> hotelList = this.hotelRepository.findAll();
-
-        List<Date> dateList = DateHelper.getBetweenDates(start, end);
 
         // 所有酒店
         for (Hotel hotel : hotelList) {
@@ -49,44 +49,47 @@ public class ManagerStatisticServiceImpl implements ManagerStatisticService {
 
             Map<String, Integer> emptyMap = new ConcurrentHashMap<>();
             Map<String, Integer> busyMap = new ConcurrentHashMap<>();
-            for (Date oneDay : dateList) {
-                String strDate = DateHelper.getDateString(oneDay);
-                emptyMap.put(strDate, 0);
-                busyMap.put(strDate, 0);
-            }
+            Map<String, Integer> notAvailMap = new ConcurrentHashMap<>();
+
+            emptyMap.put(strDate,0);
+            busyMap.put(strDate,0);
+            notAvailMap.put(strDate,0);
 
             // 一个酒店，酒店里面所有房间
             List<HotelRoom> hotelRoomList = this.roomRepository.findByHotelId(hotelId);
             for (HotelRoom room : hotelRoomList) {
-                // 一个房间，房间这一周的信息
+                // 一个房间，房间这天的信息
                 int roomId = room.getId();
-                List<HotelRoomStatus> roomStatusList = roomStatusRepository.
-                        findByRoomAndDate(roomId, this.start, this.end);
+                HotelRoomStatus hotelRoomStatus = roomStatusRepository.
+                        findByRoomAndDate(roomId, date);
+                RoomStatus status;
 
-                // 所有房间
-                for (HotelRoomStatus hotelRoomStatus : roomStatusList) {
-                    Date date = hotelRoomStatus.getDate();
-                    String strDate = DateHelper.getDateString(date);
-                    RoomStatus status = RoomStatus.getEnum(hotelRoomStatus.getStatus());
+                // 如果这个房间这一天没有计划
+                if (hotelRoomStatus == null) {
+                    status = RoomStatus.NO_PLAN;
+                } else {
+                    //这个房间有计划
+                    status = RoomStatus.getEnum(hotelRoomStatus.getStatus());
+                }
+
+                //没有计划,不可用
+                if (status == RoomStatus.NO_PLAN || status == RoomStatus.NotAvailable) {
+                    int value = notAvailMap.get(strDate);
+                    notAvailMap.put(strDate, ++value);
                     // 空闲
-                    if (status == RoomStatus.Empty) {
-                        int value = emptyMap.get(strDate);
-                        emptyMap.put(strDate, ++value);
-                        //不是空闲
-                    } else {
-                        int value = busyMap.get(strDate);
-                        busyMap.put(strDate, ++value);
-                    }
+                } else if (status == RoomStatus.Empty) {
+                    int value = emptyMap.get(strDate);
+                    emptyMap.put(strDate, ++value);
+                    //不是空闲
+                } else {
+                    int value = busyMap.get(strDate);
+                    busyMap.put(strDate, ++value);
                 }
             }
-
-            // 按照每一天汇总
-            for (Date oneDay : dateList) {
-                String strDate = DateHelper.getDateString(oneDay);
-                ManagerHotelStatusVO vo = new ManagerHotelStatusVO(oneDay, hotelName,
-                        emptyMap.get(strDate), busyMap.get(strDate));
-                result.add(vo);
-            }
+            // 添加一个酒店
+            ManagerHotelStatusVO vo = new ManagerHotelStatusVO(date, hotelName,
+                    emptyMap.get(strDate), busyMap.get(strDate), notAvailMap.get(strDate));
+            result.add(vo);
         }
         return result;
     }
@@ -95,6 +98,6 @@ public class ManagerStatisticServiceImpl implements ManagerStatisticService {
     public HotelIncomeChartVO getPaymentChartVO(Date start, Date end) {
         // 获取数据库数据,时间升序
         List<Payment> incomeList = this.paymentRepository.findByDate(start, end);
-        return MyChart.getChartVO(incomeList,start,end);
+        return MyChart.getChartVO(incomeList, start, end);
     }
 }

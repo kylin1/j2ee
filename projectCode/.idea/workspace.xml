@@ -3,22 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="014b9210-6c6a-45f7-990d-01edac59a696" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../project/document/数据库设计.pages" afterPath="$PROJECT_DIR$/../project/document/数据库设计.pages" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/6da1c07e-7c80-4dd1-bb1c-79d0b627d31f.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/6da1c07e-7c80-4dd1-bb1c-79d0b627d31f.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/kylin/controller/MyController.java" afterPath="$PROJECT_DIR$/src/main/java/com/kylin/controller/MyController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/kylin/controller/SystemUserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/kylin/controller/SystemUserController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/kylin/controller/hotel/HotelNavigationController.java" afterPath="$PROJECT_DIR$/src/main/java/com/kylin/controller/hotel/HotelNavigationController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/kylin/controller/manager/ManagerNavigationController.java" afterPath="$PROJECT_DIR$/src/main/java/com/kylin/controller/manager/ManagerNavigationController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/kylin/repository/HotelRoomStatusRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/kylin/repository/HotelRoomStatusRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/kylin/service/HotelStatisticService.java" afterPath="$PROJECT_DIR$/src/main/java/com/kylin/service/HotelStatisticService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/kylin/service/impl/HotelStatisticServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/kylin/service/impl/HotelStatisticServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/kylin/tools/myenum/RoomStatus.java" afterPath="$PROJECT_DIR$/src/main/java/com/kylin/tools/myenum/RoomStatus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/kylin/vo/HotelRoomStatusVO.java" afterPath="$PROJECT_DIR$/src/main/java/com/kylin/vo/HotelRoomStatusVO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/guest/pocket.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/guest/pocket.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/guest/profile.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/guest/profile.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/hotel/statistic.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/hotel/statistic.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/kylin/service/HotelStatisticServiceTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/kylin/service/HotelStatisticServiceTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/kylin/service/ManagerStatisticService.java" afterPath="$PROJECT_DIR$/src/main/java/com/kylin/service/ManagerStatisticService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/kylin/service/impl/ManagerStatisticServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/kylin/service/impl/ManagerStatisticServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/kylin/vo/ManagerHotelStatusVO.java" afterPath="$PROJECT_DIR$/src/main/java/com/kylin/vo/ManagerHotelStatusVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/manager/statistic.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/manager/statistic.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/kylin/service/ManagerStatisticTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/kylin/service/ManagerStatisticTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -58,23 +51,45 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="HotelNavigationController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/controller/hotel/HotelNavigationController.java">
+      <file leaf-file-name="statistic.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/manager/statistic.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="108" column="30" lean-forward="false" selection-start-line="108" selection-start-column="30" selection-end-line="108" selection-end-column="30" />
+            <state relative-caret-position="314">
+              <caret line="54" column="50" lean-forward="false" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ManagerHotelStatusVO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/vo/ManagerHotelStatusVO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="28" column="89" lean-forward="false" selection-start-line="28" selection-start-column="89" selection-end-line="28" selection-end-column="89" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1148#1149#0" expanded="true" />
+                <element signature="e#1179#1180#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/controller/MyController.java">
+      <file leaf-file-name="ManagerStatisticServiceImpl.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/service/impl/ManagerStatisticServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="52" column="25" lean-forward="false" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
+            <state relative-caret-position="170">
+              <caret line="55" column="23" lean-forward="false" selection-start-line="55" selection-start-column="23" selection-end-line="55" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ManagerStatisticTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/kylin/service/ManagerStatisticTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="37" column="63" lean-forward="false" selection-start-line="37" selection-start-column="63" selection-end-line="37" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -165,7 +180,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/kylin/vo/HotelCheckInTableVO.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/guest/reserve.jsp" />
         <option value="$PROJECT_DIR$/src/test/java/com/kylin/service/HotelManageServiceTest.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/hotel/hotel-form.jsp" />
@@ -190,32 +204,33 @@
         <option value="$PROJECT_DIR$/src/test/java/com/kylin/service/MemberServiceTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/kylin/vo/SearchMemberVO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/kylin/service/impl/MemberServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/manager/member.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/kylin/vo/chart/MyChartXYItem.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/kylin/vo/chart/ChartData.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/kylin/vo/chart/MyChartDataLine.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/kylin/vo/chart/MyChart.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/kylin/service/ManagerStatisticService.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/kylin/service/ManagerStatisticTest.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/manager/statistic.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/kylin/tools/MyResponse.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/kylin/tools/DateHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/kylin/service/impl/ManagerStatisticServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/kylin/util/JsonTest.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/assets/js/my-chart.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/kylin/controller/SystemUserController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/guest/pocket.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/guest/profile.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/kylin/controller/manager/ManagerNavigationController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/kylin/controller/MyController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/kylin/service/HotelStatisticService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/kylin/vo/HotelRoomStatusVO.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/kylin/service/HotelStatisticServiceTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/kylin/repository/HotelRoomStatusRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/kylin/service/impl/HotelStatisticServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/kylin/tools/myenum/RoomStatus.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/hotel/statistic.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/kylin/controller/hotel/HotelNavigationController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/manager/member.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/kylin/service/ManagerStatisticService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/kylin/controller/manager/ManagerNavigationController.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/kylin/service/ManagerStatisticTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/kylin/repository/HotelRoomStatusRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/kylin/vo/ManagerHotelStatusVO.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/manager/statistic.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/kylin/service/impl/ManagerStatisticServiceImpl.java" />
       </list>
     </option>
   </component>
@@ -753,7 +768,7 @@
       <recent name="com.kylin.vo.myenum" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.HotelStatisticServiceTest.test">
+  <component name="RunManager" selected="JUnit.ManagerStatisticTest.test">
     <configuration default="false" name="ManagerStatisticTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -1348,11 +1363,11 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.HotelStatisticServiceTest.test" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.HotelStatisticServiceTest.testChart" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.JsonTest.test" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.ManagerStatisticTest.testChart" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.ManagerStatisticTest.test" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.ManagerStatisticTest.test" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.HotelStatisticServiceTest.test" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.HotelStatisticServiceTest.testChart" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.JsonTest.test" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.ManagerStatisticTest.testChart" />
       </list>
     </recent_temporary>
   </component>
@@ -1408,7 +1423,7 @@
       <workItem from="1489540605955" duration="17236000" />
       <workItem from="1489562009829" duration="17421000" />
       <workItem from="1489660978546" duration="3991000" />
-      <workItem from="1489717830268" duration="2645000" />
+      <workItem from="1489717830268" duration="3784000" />
     </task>
     <servers />
   </component>
@@ -1431,21 +1446,21 @@
     <history-entry file="HotelStatisticServiceTest_testChart - 2017.03.17 at 10h 46m 08s.xml">
       <configuration name="HotelStatisticServiceTest.testChart" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="JsonTest_test - 2017.03.15 at 21h 12m 32s.xml">
-      <configuration name="JsonTest.test" configurationId="JUnit" />
+    <history-entry file="ManagerStatisticTest_test - 2017.03.17 at 11h 25m 12s.xml">
+      <configuration name="ManagerStatisticTest.test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="JsonTest_test - 2017.03.15 at 21h 14m 04s.xml">
-      <configuration name="JsonTest.test" configurationId="JUnit" />
+    <history-entry file="ManagerStatisticTest_test - 2017.03.17 at 11h 28m 10s.xml">
+      <configuration name="ManagerStatisticTest.test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagerStatisticTest_testChart - 2017.03.15 at 20h 31m 10s.xml">
-      <configuration name="ManagerStatisticTest.testChart" configurationId="JUnit" />
+    <history-entry file="ManagerStatisticTest_test - 2017.03.17 at 11h 32m 13s.xml">
+      <configuration name="ManagerStatisticTest.test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagerStatisticTest_testChart - 2017.03.15 at 20h 38m 07s.xml">
-      <configuration name="ManagerStatisticTest.testChart" configurationId="JUnit" />
+    <history-entry file="ManagerStatisticTest_test - 2017.03.17 at 11h 33m 03s.xml">
+      <configuration name="ManagerStatisticTest.test" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="234189000" />
+    <option name="totallyTimeSpent" value="235328000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1580,25 +1595,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/manager/member.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="81" column="25" lean-forward="true" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/controller/manager/ManagerSearchController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
           <caret line="28" column="62" lean-forward="true" selection-start-line="28" selection-start-column="62" selection-end-line="28" selection-end-column="62" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/vo/ManagerHotelStatusVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1618,13 +1619,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/vo/chart/PaymentChartVO.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/vo/chart/ChartData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/vo/chart/MyChartXYItem.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -1655,13 +1649,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/kylin/service/ManagerStatisticTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="33" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/assets/js/sport.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1683">
@@ -1669,35 +1656,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/service/ManagerStatisticService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="26" column="23" lean-forward="false" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/repository/PaymentRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="18" column="18" lean-forward="false" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/service/impl/ManagerStatisticServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="97" column="0" lean-forward="false" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/vo/chart/MyChart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="40" column="41" lean-forward="false" selection-start-line="40" selection-start-column="41" selection-end-line="40" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1818,24 +1780,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/controller/manager/ManagerNavigationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="25" column="61" lean-forward="false" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="61" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/manager/statistic.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="112" column="0" lean-forward="false" selection-start-line="112" selection-start-column="0" selection-end-line="129" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/vo/chart/HotelIncomeChartVO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1904,14 +1848,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/tools/myenum/RoomStatus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="45" lean-forward="false" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://dbtable:/615d9d63/6da1c07e-7c80-4dd1-bb1c-79d0b627d31f/j2eeProject.hotel_room">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1938,22 +1874,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/service/impl/HotelStatisticServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="76" column="37" lean-forward="false" selection-start-line="76" selection-start-column="37" selection-end-line="76" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/repository/HotelRoomStatusRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="43" column="61" lean-forward="false" selection-start-line="43" selection-start-column="61" selection-end-line="43" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/kylin/service/HotelStatisticServiceTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="213">
@@ -1962,26 +1882,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/service/HotelStatisticService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="29" column="4" lean-forward="false" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/hotel/statistic.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
           <caret line="39" column="30" lean-forward="true" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/controller/MyController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="52" column="25" lean-forward="false" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -2007,13 +1911,131 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/vo/chart/MyChart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="45" column="41" lean-forward="false" selection-start-line="45" selection-start-column="41" selection-end-line="45" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/vo/chart/ChartData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="42" column="21" lean-forward="false" selection-start-line="42" selection-start-column="12" selection-end-line="42" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/service/impl/HotelStatisticServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="113" column="27" lean-forward="true" selection-start-line="113" selection-start-column="27" selection-end-line="113" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/service/HotelStatisticService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="37" column="23" lean-forward="false" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/controller/MyController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="160" column="32" lean-forward="false" selection-start-line="160" selection-start-column="32" selection-end-line="160" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/manager/member.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-345">
+          <caret line="71" column="38" lean-forward="true" selection-start-line="71" selection-start-column="38" selection-end-line="71" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/controller/hotel/HotelNavigationController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="108" column="30" lean-forward="false" selection-start-line="108" selection-start-column="30" selection-end-line="108" selection-end-column="30" />
+        <state relative-caret-position="204">
+          <caret line="100" column="42" lean-forward="false" selection-start-line="100" selection-start-column="42" selection-end-line="100" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/repository/HotelRoomStatusRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="32" column="4" lean-forward="false" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/tools/myenum/RoomStatus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="16" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/service/ManagerStatisticService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="19" column="39" lean-forward="false" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/controller/manager/ManagerNavigationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="71" column="67" lean-forward="false" selection-start-line="71" selection-start-column="67" selection-end-line="71" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/vo/ManagerHotelStatusVO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="28" column="89" lean-forward="false" selection-start-line="28" selection-start-column="89" selection-end-line="28" selection-end-column="89" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1148#1149#0" expanded="true" />
+            <element signature="e#1179#1180#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/manager/statistic.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="54" column="50" lean-forward="false" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/kylin/service/ManagerStatisticTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="37" column="63" lean-forward="false" selection-start-line="37" selection-start-column="63" selection-end-line="37" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/kylin/service/impl/ManagerStatisticServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="55" column="23" lean-forward="false" selection-start-line="55" selection-start-column="23" selection-end-line="55" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>

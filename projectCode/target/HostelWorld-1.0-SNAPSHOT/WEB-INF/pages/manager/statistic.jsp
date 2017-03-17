@@ -31,37 +31,34 @@
             <div class="col-md-10">
               <div class="card">
                 <div class="card-header" data-background-color="purple">
-                  <h4 class="title">会员预订/消费情况</h4>
+                  <h4 class="title">本日各店入住情况</h4>
                 </div>
 
                 <div class="card-content table-responsive">
-                  <table class="table">
-                    <thead class="text-primary">
-                    <th>日期</th>
-                    <th>客栈</th>
-                    <th>空闲房间</th>
-                    <th>已入住/预定房间</th>
-                    <th>操作</th>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>2017年02月13日</td>
-                      <td>上海半岛酒店</td>
-                      <td>30</td>
-                      <td>60</td>
-                      <td><a href="#">详情</a></td>
-                    </tr>
-                    <tr>
-                      <td>2017年02月13日</td>
-                      <td>上海半岛酒店</td>
-                      <td>30</td>
-                      <td>60</td>
-                      <td><a href="#">详情</a></td>
-                    </tr>
-
-                    </tbody>
-                  </table>
-
+                  <c:if test="${!empty list}">
+                    <table class="table">
+                      <thead class="text-primary">
+                      <th>日期</th>
+                      <th>客栈</th>
+                      <th>已入住/已预定房间</th>
+                      <th>空闲房间</th>
+                      <th>不可用房间</th>
+                      <th>操作</th>
+                      </thead>
+                      <tbody>
+                      <c:forEach items="${list}" var="hotelInfo">
+                        <tr>
+                          <td>${hotelInfo.strDate}</td>
+                          <td>${hotelInfo.hotelName}</td>
+                          <td>${hotelInfo.busyRoom}</td>
+                          <td>${hotelInfo.emptyRoom}</td>
+                          <td>${hotelInfo.notAvail}</td>
+                          <td><a href="#">详情</a></td>
+                        </tr>
+                      </c:forEach>
+                      </tbody>
+                    </table>
+                  </c:if>
                 </div>
               </div>
             </div>

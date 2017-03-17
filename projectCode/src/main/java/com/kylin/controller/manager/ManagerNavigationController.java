@@ -5,6 +5,7 @@ import com.kylin.service.ManagerApprovalService;
 import com.kylin.service.ManagerStatisticService;
 import com.kylin.service.PaymentService;
 import com.kylin.tools.DateHelper;
+import com.kylin.vo.ManagerHotelStatusVO;
 import com.kylin.vo.PaymentVO;
 import com.kylin.vo.RequestVO;
 import com.kylin.vo.chart.HotelIncomeChartVO;
@@ -33,7 +34,8 @@ public class ManagerNavigationController extends MyController{
     private ManagerStatisticService statisticService;
 
     private Date start = DateHelper.START;
-    private Date end = DateHelper.TOMORROW;
+    private Date today = DateHelper.NOW;
+    private Date tomorrow = DateHelper.TOMORROW;
 
     @RequestMapping(value = "approve", method = RequestMethod.GET)
     public ModelAndView approve() {
@@ -64,7 +66,11 @@ public class ManagerNavigationController extends MyController{
     @RequestMapping(value = "statistic", method = RequestMethod.GET)
     public ModelAndView statistic() {
         ModelAndView modelAndView = new ModelAndView("manager/statistic");
-        HotelIncomeChartVO paymentChartVO = statisticService.getPaymentChartVO(start,end);
+        HotelIncomeChartVO paymentChartVO = statisticService.getPaymentChartVO(start, tomorrow);
+
+        //获取今天所有酒店入住情况
+        List<ManagerHotelStatusVO> list = this.statisticService.getHotelRoomStatus(today);
+        modelAndView.addObject("list",list);
 
         return this.handleChart(paymentChartVO,modelAndView);
     }

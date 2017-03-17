@@ -39,7 +39,7 @@ public class HotelNavigationController  extends MyController {
     private HotelStatisticService statisticService;
 
     private Date start = DateHelper.START;
-    private Date end = DateHelper.END;
+    private Date end = DateHelper.TOMORROW;
 
     @Autowired
     private HotelRepository hotelRepository;

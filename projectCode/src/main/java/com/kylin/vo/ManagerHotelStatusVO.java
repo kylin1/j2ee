@@ -1,5 +1,7 @@
 package com.kylin.vo;
 
+import com.kylin.tools.DateHelper;
+
 import java.util.Date;
 
 /**
@@ -11,6 +13,7 @@ import java.util.Date;
 public class ManagerHotelStatusVO {
 
     private Date date;
+    private String strDate;
 
     private String hotelName;
 
@@ -20,11 +23,32 @@ public class ManagerHotelStatusVO {
     //已入住/预定房间
     private int busyRoom;
 
-    public ManagerHotelStatusVO(Date date, String hotelName, int emptyRoom, int busyRoom) {
+    //没有计划的房间
+    private int notAvail;
+
+    public ManagerHotelStatusVO(Date date, String hotelName, int emptyRoom, int busyRoom, int notAvail) {
         this.date = date;
+        this.strDate = DateHelper.getDateString(date);
         this.hotelName = hotelName;
         this.emptyRoom = emptyRoom;
         this.busyRoom = busyRoom;
+        this.notAvail = notAvail;
+    }
+
+    @Override
+    public String toString() {
+        return "ManagerHotelStatusVO{" +
+                "date=" + date +
+                ", strDate='" + strDate + '\'' +
+                ", hotelName='" + hotelName + '\'' +
+                ", emptyRoom=" + emptyRoom +
+                ", busyRoom=" + busyRoom +
+                ", notAvail=" + notAvail +
+                '}';
+    }
+
+    public int getNotAvail() {
+        return notAvail;
     }
 
     public Date getDate() {
@@ -43,13 +67,8 @@ public class ManagerHotelStatusVO {
         return busyRoom;
     }
 
-    @Override
-    public String toString() {
-        return "ManagerHotelStatusVO{" +
-                "date=" + date +
-                ", hotelName='" + hotelName + '\'' +
-                ", emptyRoom=" + emptyRoom +
-                ", busyRoom=" + busyRoom +
-                '}';
+    public String getStrDate() {
+        return strDate;
     }
+
 }

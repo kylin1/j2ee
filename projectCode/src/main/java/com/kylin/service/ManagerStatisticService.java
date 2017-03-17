@@ -17,7 +17,7 @@ public interface ManagerStatisticService {
      *
      * @return
      */
-    List<ManagerHotelStatusVO> getHotelRoomStatus();
+    List<ManagerHotelStatusVO> getHotelRoomStatus(Date date);
 
     /**
      * 每日业务总收入折线图
