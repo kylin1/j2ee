@@ -24,8 +24,6 @@
       <div class="container-fluid">
         <%@include file="../common/error-display.jsp" %>
 
-
-
         <!--入住-->
         <section>
           <h2>入住信息</h2>
@@ -34,40 +32,32 @@
               <div class="card">
                 <div class="card-header" data-background-color="purple">
                   <h4 class="title">房间入住信息</h4>
-                  <p class="category">每日每房间入住情况与房客信息</p>
+                  <p class="category">本日每房间入住情况与房客信息</p>
                 </div>
 
                 <div class="card-content table-responsive">
-                  <table class="table">
-                    <thead class="text-primary">
-                    <th>日期</th>
-                    <th>房间号</th>
-                    <th>入住人数</th>
-                    <th>操作</th>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>2017年02月13日</td>
-                      <td>8401</td>
-                      <td>2</td>
-                      <td><a href="#">详情</a></td>
-                    </tr>
-                    <tr>
-                      <td>2017年02月13日</td>
-                      <td>8401</td>
-                      <td>2</td>
-                      <td><a href="#">详情</a></td>
-                    </tr>
-                    <tr>
-                      <td>2017年02月13日</td>
-                      <td>8401</td>
-                      <td>2</td>
-                      <td><a href="#">详情</a></td>
-                    </tr>
-
-                    </tbody>
-                  </table>
-
+                  <c:if test="${!empty roomStatusVOS}">
+                    <table class="table">
+                      <thead class="text-primary">
+                      <th>日期</th>
+                      <th>房间号</th>
+                      <th>状态</th>
+                      <th>已入住人数</th>
+                      <th>操作</th>
+                      </thead>
+                      <tbody>
+                      <c:forEach items="${roomStatusVOS}" var="status">
+                        <tr>
+                          <td>${status.strDate}</td>
+                          <td>${status.roomNumber}</td>
+                          <td>${status.strStatus}</td>
+                          <td>${status.checkedInNumber}</td>
+                          <td><a href="#">详情</a></td>
+                        </tr>
+                      </c:forEach>
+                      </tbody>
+                    </table>
+                  </c:if>
                 </div>
               </div>
             </div>
@@ -81,17 +71,15 @@
             <div class="col-md-10">
               <div class="card">
                 <div class="card-header card-chart" data-background-color="red">
-                  <div class="ct-chart" id="heartRateChart"></div>
+                  <div class="ct-chart" id="hotelIncomeChart"></div>
                 </div>
                 <div class="card-content">
-
                   <div class="row">
-                    <div class="col-sm-4">
-                      <h4 class="title">每日收入</h4>
+                    <div class="col-sm-12">
+                      <h4 class="title">每日收入折线图, 本酒店总收入:${hotel.income}</h4>
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -109,14 +97,22 @@
 
 <%@include file="../common/js-file.jsp" %>
 
-<script src="<%=request.getContextPath() %>/assets/js/sport.js"></script>
+<script src="<%=request.getContextPath() %>/assets/js/my-chart.js"></script>
 
 <!--使用JS绘制图表-->
 <script>
-    $(document).ready(function () {
-        // Javascript method's body can be found in assets/js/demos.js
-        sport.initSportsCharts();
-    });
+  function drawChart() {
+    // data from
+    var data = ${data};
+    var lowBond = ${lowBond};
+    var upBond = ${upBond};
+    DrawChart.createLineChart('hotelIncomeChart', data, upBond, lowBond, "元")
+  }
 </script>
 
+<script>
+  $(document).ready(function () {
+    drawChart();
+  });
+</script>
 </html>

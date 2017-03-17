@@ -27,7 +27,7 @@ public interface HotelStatisticService {
      * @param hotelId
      * @return
      */
-    List<HotelRoomStatusVO> getRoomStatus(int hotelId);
+    List<HotelRoomStatusVO> getRoomStatus(int hotelId, Date date);
 
     /**
      * 酒店每日收入图表

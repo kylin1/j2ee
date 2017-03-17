@@ -1,15 +1,13 @@
 package com.kylin.controller.manager;
 
+import com.kylin.controller.MyController;
 import com.kylin.service.ManagerApprovalService;
 import com.kylin.service.ManagerStatisticService;
 import com.kylin.service.PaymentService;
 import com.kylin.tools.DateHelper;
-import com.kylin.tools.MyResponse;
 import com.kylin.vo.PaymentVO;
 import com.kylin.vo.RequestVO;
 import com.kylin.vo.chart.HotelIncomeChartVO;
-import com.kylin.vo.chart.MyChartDataLine;
-import com.kylin.vo.chart.MyChartXYItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +23,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("my-manager")
-public class ManagerNavigationController {
+public class ManagerNavigationController extends MyController{
 
     @Autowired
     private ManagerApprovalService approvalService;
@@ -68,19 +66,9 @@ public class ManagerNavigationController {
         ModelAndView modelAndView = new ModelAndView("manager/statistic");
         HotelIncomeChartVO paymentChartVO = statisticService.getPaymentChartVO(start,end);
 
-        List<MyChartDataLine> chartDataLines  = paymentChartVO.getChartData();
-        MyChartDataLine chartDataLine = chartDataLines.get(0);
-        List<MyChartXYItem> chartXYItemList = chartDataLine.getChartXYItemList();
-        chartXYItemList.remove(chartXYItemList.size()-1);
-
-        int lowBond = chartDataLine.getLowBond();
-        int upBond = chartDataLine.getUpBond();
-        String data = MyResponse.getChartData(chartXYItemList);
-
-        modelAndView.addObject("data",data);
-        modelAndView.addObject("lowBond",lowBond);
-        modelAndView.addObject("upBond",upBond);
-        return modelAndView;
+        return this.handleChart(paymentChartVO,modelAndView);
     }
+
+
 
 }

@@ -9,7 +9,7 @@ public enum RoomStatus {
     Empty("空闲"),
     Reserved("预定但未入住"),
     CheckedIn("已入住"),
-    NotAvailable("不可用:装修/审批");
+    NotAvailable("不可用:装修/审批"), NO_PLAN("未发布计划");
 
     private String stringStatus;
 

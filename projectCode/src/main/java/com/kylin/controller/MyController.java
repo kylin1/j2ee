@@ -3,15 +3,20 @@ package com.kylin.controller;
 import com.kylin.model.Hotel;
 import com.kylin.service.HotelStatusService;
 import com.kylin.service.MemberService;
+import com.kylin.tools.MyResponse;
 import com.kylin.tools.NumberHelper;
 import com.kylin.tools.myenum.MemberStatus;
 import com.kylin.vo.MemberInfoVO;
+import com.kylin.vo.chart.HotelIncomeChartVO;
+import com.kylin.vo.chart.MyChartDataLine;
+import com.kylin.vo.chart.MyChartXYItem;
 import com.kylin.vo.common.MyMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -147,5 +152,21 @@ public class MyController {
             return modelAndView;
         } else
             return modelAndView;
+    }
+
+    protected ModelAndView handleChart(HotelIncomeChartVO paymentChartVO, ModelAndView modelAndView) {
+        List<MyChartDataLine> chartDataLines  = paymentChartVO.getChartData();
+        MyChartDataLine chartDataLine = chartDataLines.get(0);
+        List<MyChartXYItem> chartXYItemList = chartDataLine.getChartXYItemList();
+        chartXYItemList.remove(chartXYItemList.size()-1);
+
+        int lowBond = chartDataLine.getLowBond();
+        int upBond = chartDataLine.getUpBond();
+        String data = MyResponse.getChartData(chartXYItemList);
+
+        modelAndView.addObject("data",data);
+        modelAndView.addObject("lowBond",lowBond);
+        modelAndView.addObject("upBond",upBond);
+        return modelAndView;
     }
 }

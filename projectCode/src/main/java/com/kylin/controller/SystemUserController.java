@@ -31,11 +31,6 @@ public class SystemUserController extends MyController{
     private SystemUserService systemUserService;
     @Autowired
     private MemberService memberService;
-    @Autowired
-    private HotelRepository hotelRepository;
-    @Autowired
-    private SystemUserRepository userRepository;
-
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String login() {
@@ -53,6 +48,11 @@ public class SystemUserController extends MyController{
         SystemUser systemUser = userRepository.findOne(userId);
         return "redirect:/";
     }
+
+    @Autowired
+    private HotelRepository hotelRepository;
+    @Autowired
+    private SystemUserRepository userRepository;
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public ModelAndView login(HttpServletRequest request) {

@@ -61,7 +61,7 @@
                     </div>
 
                     <div class="col-sm-3">
-                      <input type="text" name="money" pattern="[0-9]">
+                      <input name="money" type="number" pattern="[0-9]*">
                     </div>
                   </div>
 
@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="col-sm-3">
-                      <input type="text" name="score" pattern="[0-9]">
+                      <input name="score" type="number" pattern="[0-9]*">
                     </div>
                   </div>
 
