@@ -56,9 +56,9 @@
                   </div>
 
 
-                  <input type="hidden" name="hotelId" value="${hotelId}">
-                  <input type="hidden" name="hotelRoomId" value="${hotelRoomId}">
-                  <input type="hidden" name="room" value="${room}">
+                  <input required="required" type="hidden" name="hotelId" value="${hotelId}">
+                  <input required="required" type="hidden" name="hotelRoomId" value="${hotelRoomId}">
+                  <input required="required" type="hidden" name="room" value="${room}">
 
                   <!--time-->
                   <div class="row">
@@ -68,7 +68,7 @@
 
                     <div class="col-sm-3">
                       <div class="form-group label-floating">
-                        <input name="startDate" value="${newPlanDate}" type="text" id="dpd1" data-date-format="yyyy-mm-dd" class="form-control">
+                        <input required="required" name="startDate" value="${newPlanDate}" type="text" id="dpd1" data-date-format="yyyy-mm-dd" class="form-control">
                       </div>
                     </div>
 
@@ -78,13 +78,13 @@
 
                     <div class="col-sm-3">
                       <div class="form-group label-floating">
-                        <input name="endDate" type="text" id="dpd2" data-date-format="yyyy-mm-dd" class="form-control">
+                        <input required="required" name="endDate" type="text" id="dpd2" data-date-format="yyyy-mm-dd" class="form-control">
                       </div>
                     </div>
 
                     <label class="col-md-2 control-label">单价(每间每晚)</label>
                     <div class="col-md-2">
-                      <input name="price" type="text" class="form-control">
+                      <input required="required" name="price" type="text" class="form-control">
                     </div>
                   </div>
 

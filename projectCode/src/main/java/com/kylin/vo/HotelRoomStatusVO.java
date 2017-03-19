@@ -23,15 +23,16 @@ public class HotelRoomStatusVO {
     private String strStatus;
 
     //已入住人数
-    private int checkedInNumber;
+    private String roomType;
 
-    public HotelRoomStatusVO(Date date, String roomNumber, RoomStatus status, int checkedInNumber) {
+    public HotelRoomStatusVO(Date date, String roomNumber, RoomStatus status,String roomType) {
         this.date = date;
         this.strDate = DateHelper.getDateString(date);
         this.roomNumber = roomNumber;
         this.strStatus = status.getType();
-        this.checkedInNumber = checkedInNumber;
+        this.roomType = roomType;
     }
+
 
     @Override
     public String toString() {
@@ -40,7 +41,7 @@ public class HotelRoomStatusVO {
                 ", strDate='" + strDate + '\'' +
                 ", roomNumber='" + roomNumber + '\'' +
                 ", strStatus='" + strStatus + '\'' +
-                ", checkedInNumber=" + checkedInNumber +
+                ", roomType=" + roomType +
                 '}';
     }
 
@@ -60,7 +61,7 @@ public class HotelRoomStatusVO {
         return strStatus;
     }
 
-    public int getCheckedInNumber() {
-        return checkedInNumber;
+    public String getRoomType() {
+        return roomType;
     }
 }

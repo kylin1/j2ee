@@ -99,14 +99,14 @@
 										<span class="input-group-addon">
 											<i class="material-icons">email</i>
 										</span>
-                  <input name="account" type="text" class="form-control" placeholder="Account...">
+                  <input required="required" name="account" type="text" class="form-control" placeholder="Account...">
                 </div>
 
                 <div class="input-group">
 										<span class="input-group-addon">
 											<i class="material-icons">lock_outline</i>
 										</span>
-                  <input name="password" type="password" placeholder="Password..." class="form-control"/>
+                  <input required="required" name="password" type="password" placeholder="Password..." class="form-control"/>
                 </div>
 
                 <div class="input-group">

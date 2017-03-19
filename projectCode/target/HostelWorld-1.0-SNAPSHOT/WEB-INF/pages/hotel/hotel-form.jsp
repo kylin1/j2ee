@@ -9,7 +9,7 @@
 
 <!--基本信息-->
 <section>
-  <input type="hidden" name="hotelId" value="${hotelId}">
+  <input required="required" type="hidden" name="hotelId" value="${hotelId}">
 
   <div class="row">
     <div class="col-md-2">
@@ -38,14 +38,14 @@
     <div class="col-md-2">
       <div class="form-group label-floating">
         <label class="control-label">酒店名称</label>
-        <input name="name" value="${hotel.name}" type="text" class="form-control">
+        <input required="required" name="name" value="${hotel.name}" type="text" class="form-control">
       </div>
     </div>
 
     <div class="col-md-6">
       <div class="form-group label-floating">
         <label class="control-label">地址</label>
-        <input name="location" value="${hotel.location}" type="text" class="form-control">
+        <input required="required" name="location" value="${hotel.location}" type="text" class="form-control">
       </div>
     </div>
   </div>

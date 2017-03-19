@@ -53,14 +53,14 @@
                       <div class="col-md-2">
                         <div class="form-group label-floating">
                           <label class="control-label">房间号</label>
-                          <input name="roomNumber" type="text" class="form-control">
+                          <input required="required" name="roomNumber" type="text" class="form-control">
                         </div>
                       </div>
 
                       <div class="col-md-4">
                         <div class="form-group label-floating">
                           <label class="control-label">信息</label>
-                          <input name="roomInfo" type="text" class="form-control">
+                          <input required="required" name="roomInfo" type="text" class="form-control">
                         </div>
                       </div>
                     </div>

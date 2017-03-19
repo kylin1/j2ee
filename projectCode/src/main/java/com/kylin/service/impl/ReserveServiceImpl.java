@@ -87,42 +87,6 @@ public class ReserveServiceImpl implements ReserveService {
     }
 
     @Override
-    public MyMessage reserveNonMember(NonMemberCheckInVO nonMemberCheckInVO) {
-        System.out.println("before init : nonMemberCheckInVO = " + nonMemberCheckInVO);
-        this.manageService.initCheckInTableVO(nonMemberCheckInVO);
-        System.out.println("after init : nonMemberCheckInVO = " + nonMemberCheckInVO);
-
-        // 新增订单
-        MemberOrder newOrder = new MemberOrder();
-        this.saveOrder(nonMemberCheckInVO, newOrder);
-
-        return new MyMessage(true);
-    }
-
-    private void saveOrder(NonMemberCheckInVO nonMemberCheckInVO, MemberOrder newOrder) {
-        newOrder.setStatus(MemberOrderStatus.CheckedIn.ordinal());
-        newOrder.setHotelId(nonMemberCheckInVO.getHotelId());
-        newOrder.setReservedRoomString(nonMemberCheckInVO.getRoomNumber());
-        try {
-            newOrder.setCheckIn(DateHelper.getDate(nonMemberCheckInVO.getStartDate()));
-            newOrder.setCheckOut(DateHelper.getDate(nonMemberCheckInVO.getEndDate()));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        newOrder.setContactName("");
-        newOrder.setContactPhone("");
-        newOrder.setContactEmail("");
-
-        newOrder.setRoomNumber(1);
-        newOrder.setIsCash(0);
-        newOrder.setIsMember(0);
-        newOrder.setOrderTime(new Date());
-        newOrder.setRoomType(nonMemberCheckInVO.getIntPaymentType());
-        this.orderRepository.save(newOrder);
-    }
-
-
-    @Override
     public List<SearchHotelItemVO> search(String location, String fromDate, String endDate,
                                           int roomTypeInt, int roomNumber) {
         List<SearchHotelItemVO> result = new ArrayList<>();
@@ -420,6 +384,5 @@ public class ReserveServiceImpl implements ReserveService {
         //保存
         this.orderRepository.save(memberOrder);
     }
-
 }
 

@@ -43,7 +43,7 @@
 
                     <div class="col-sm-3">
                       <div class="form-group label-floating">
-                        <input name="startDate" type="text" value="${startDate}" id="dpd1" data-date-format="yyyy-mm-dd"
+                        <input required="required" name="startDate" type="text" value="${startDate}" id="dpd1" data-date-format="yyyy-mm-dd"
                                class="form-control">
                       </div>
                     </div>
@@ -54,12 +54,12 @@
 
                     <div class="col-sm-3">
                       <div class="form-group label-floating">
-                        <input name="endDate" type="text" value="${endDate}" id="dpd2" data-date-format="yyyy-mm-dd"
+                        <input required="required" name="endDate" type="text" value="${endDate}" id="dpd2" data-date-format="yyyy-mm-dd"
                                class="form-control">
                       </div>
                     </div>
 
-                    <div class="col-md-3 dropdown">
+                    <div class="col-md-2 dropdown">
                       <label class="form-group label-floating">类型
                         <select name="roomType">
                           <option value="0">单人间</option>
@@ -69,12 +69,14 @@
                       </label>
                     </div>
 
-                  </div>
+                    <div class="col-sm-2">
+                      <button type="submit" class="btn btn-primary pull-left">
+                        确定
+                      </button>
+                      <div class="clearfix"></div>
+                    </div>
 
-                  <button type="submit" class="btn btn-primary pull-left">
-                    确定
-                  </button>
-                  <div class="clearfix"></div>
+                  </div>
                 </form>
               </div>
             </div>
@@ -82,7 +84,7 @@
         </div>
 
         <%--搜索结果为空--%>
-        <%@include file="../common/error-display.jsp"%>
+        <%@include file="../common/error-display.jsp" %>
 
         <!--合适房间列表:在列表中点击一个房间进行预订-->
         <c:if test="${!empty remainRoomList}">
@@ -113,7 +115,9 @@
                         <td>${room.price}</td>
                         <td>${room.information}</td>
                           <%--选择房间进行入住操作--%>
-                        <td><a href="${pageContext.request.contextPath}/hotel/select-room/${room.roomId}?startDate=${startDate}&endDate=${endDate}&room=${room.room}&roomType=${room.strType}&price=${room.price}">入住</a></td>
+                        <td><a
+                            href="${pageContext.request.contextPath}/hotel/select-room/${room.roomId}?startDate=${startDate}&endDate=${endDate}&room=${room.room}&roomType=${room.strType}&price=${room.price}">入住</a>
+                        </td>
                       </tr>
                     </c:forEach>
                     </tbody>
@@ -138,28 +142,28 @@
 <%@include file="../common/js-file.jsp" %>
 
 <script>
-    var nowTemp = new Date();
-    var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+  var nowTemp = new Date();
+  var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 
-    var checkin = $('#dpd1').datepicker({
-        onRender: function (date) {
-            return date.valueOf() < now.valueOf() ? 'disabled' : '';
-        }
-    }).on('changeDate', function (ev) {
-        if (ev.date.valueOf() > checkout.date.valueOf()) {
-            var newDate = new Date(ev.date)
-            newDate.setDate(newDate.getDate() + 1);
-            checkout.setValue(newDate);
-        }
-        checkin.hide();
-        $('#dpd2')[0].focus();
-    }).data('datepicker');
-    var checkout = $('#dpd2').datepicker({
-        onRender: function (date) {
-            return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-        }
-    }).on('changeDate', function (ev) {
-        checkout.hide();
-    }).data('datepicker');
+  var checkin = $('#dpd1').datepicker({
+    onRender: function (date) {
+      return date.valueOf() < now.valueOf() ? 'disabled' : '';
+    }
+  }).on('changeDate', function (ev) {
+    if (ev.date.valueOf() > checkout.date.valueOf()) {
+      var newDate = new Date(ev.date)
+      newDate.setDate(newDate.getDate() + 1);
+      checkout.setValue(newDate);
+    }
+    checkin.hide();
+    $('#dpd2')[0].focus();
+  }).data('datepicker');
+  var checkout = $('#dpd2').datepicker({
+    onRender: function (date) {
+      return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+    }
+  }).on('changeDate', function (ev) {
+    checkout.hide();
+  }).data('datepicker');
 </script>
 </html>

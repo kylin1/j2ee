@@ -69,11 +69,11 @@
                     <div class="input-group">
 
                       <div class="col-md-2">
-                        <input type="text" name="guest1" class="form-control"
+                        <input required="required" type="text" name="guest1" class="form-control"
                                placeholder="房客1">
                       </div>
                       <div class="col-md-2">
-                        <input type="text" name="card1" class="form-control"
+                        <input required="required" type="number" pattern="[0-9]*" name="card1" class="form-control"
                                placeholder="身份证">
                       </div>
                       <div class="col-md-2">
@@ -81,7 +81,7 @@
                                placeholder="房客2">
                       </div>
                       <div class="col-md-2">
-                        <input type="text" name="card2" class="form-control"
+                        <input type="number" pattern="[0-9]*" name="card2" class="form-control"
                                placeholder="身份证">
                       </div>
                     </div>
@@ -94,7 +94,7 @@
                     <div class="col-sm-2">
                       <div class="radio">
                         <label>
-                          <input type="radio" value="1" name="isMember">
+                          <input required="required" type="radio" value="1" name="isMember">
                           是
                         </label>
                       </div>
@@ -103,7 +103,7 @@
                     <div class="col-sm-2">
                       <div class="radio">
                         <label>
-                          <input type="radio" value="0" name="isMember" checked>
+                          <input required="required" type="radio" value="0" name="isMember" checked>
                           否
                         </label>
                       </div>
@@ -117,7 +117,7 @@
                     <div class="col-sm-2">
                       <div class="radio">
                         <label>
-                          <input type="radio" value="0" name="intPaymentType">
+                          <input required="required" type="radio" value="0" name="intPaymentType">
                           会员卡
                         </label>
                       </div>
@@ -126,18 +126,19 @@
                     <div class="col-sm-3">
                       <div class="radio">
                         <label>
-                          <input type="radio" value="1" name="intPaymentType" checked>
+                          <input required="required" type="radio" value="1" name="intPaymentType" checked>
                           现金结账
                         </label>
                       </div>
                     </div>
                   </div>
 
-                  <input type="hidden" name="roomNumber" value="${roomNumber}">
-                  <input type="hidden" name="orderId" value="1">
-                  <input type="hidden" name="hotelId" value="${hotelId}">
-                  <input type="hidden" name="endDate" value="${endDate}">
-                  <input type="hidden" name="startDate" value="${startDate}">
+                  <input required="required" type="hidden" name="roomNumber" value="${roomNumber}">
+                  <input required="required" type="hidden" name="orderId" value="1">
+                  <input required="required" type="hidden" name="hotelId" value="${hotelId}">
+                  <input required="required" type="hidden" name="endDate" value="${endDate}">
+                  <input required="required" type="hidden" name="startDate" value="${startDate}">
+                  <input required="required" type="hidden" name="price" value="${totalPrice}">
 
                   <button type="submit" class="btn btn-primary pull-left">
                     确定

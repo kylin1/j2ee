@@ -44,7 +44,7 @@
 										<span class="input-group-addon">
 											<i class="material-icons">email</i>
 										</span>
-                          <input name="input" type="text" class="form-control" placeholder="会员姓名...">
+                          <input required="required" name="input" type="text" class="form-control" placeholder="会员姓名...">
                         </div>
                       </div>
                     </div>

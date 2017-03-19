@@ -250,14 +250,14 @@ $btn-border-radius-small:        $border-radius-small !default;
 //
 //##
 
-//** `<input>` background color
+//** `<input required="required">` background color
 $input-bg:                       #fff !default;
-//** `<input disabled>` background color
+//** `<input required="required" disabled>` background color
 $input-bg-disabled:              $gray-lighter !default;
 
-//** Text color for `<input>`s
+//** Text color for `<input required="required">`s
 $input-color:                    $gray !default;
-//** `<input>` border color
+//** `<input required="required">` border color
 $input-border:                   #ccc !default;
 
 // TODO: Rename `$input-border-radius` to `$input-border-radius-base` in v4

@@ -39,7 +39,8 @@ public class HotelNavigationController  extends MyController {
     private HotelStatisticService statisticService;
 
     private Date start = DateHelper.START;
-    private Date end = DateHelper.TOMORROW;
+    private Date today = DateHelper.NOW;
+    private Date tomorrow = DateHelper.TOMORROW;
 
     @Autowired
     private HotelRepository hotelRepository;
@@ -47,6 +48,8 @@ public class HotelNavigationController  extends MyController {
     @RequestMapping(value = "room-search", method = RequestMethod.GET)
     public ModelAndView roomSearch() {
         ModelAndView modelAndView = new ModelAndView("hotel/room-search");
+        modelAndView.addObject("startDate",DateHelper.getDateString(today));
+        modelAndView.addObject("endDate",DateHelper.getDateString(tomorrow));
         return modelAndView;
     }
 
@@ -99,10 +102,10 @@ public class HotelNavigationController  extends MyController {
         }
         // get statistic info
         int hotelId = (int) session.getAttribute("hotelId");
-        HotelIncomeChartVO incomeChartVO = statisticService.getIncomeInfo(hotelId,this.start,this.end);
+        HotelIncomeChartVO incomeChartVO = statisticService.getIncomeInfo(hotelId,this.start,this.tomorrow);
 
         // hotel room check in info of today
-        List<HotelRoomStatusVO> roomStatusVOS = statisticService.getRoomStatus(hotelId,this.end);
+        List<HotelRoomStatusVO> roomStatusVOS = statisticService.getRoomStatus(hotelId,this.tomorrow);
         modelAndView.addObject("roomStatusVOS",roomStatusVOS);
 
         Hotel hotel = this.hotelRepository.findOne(hotelId);

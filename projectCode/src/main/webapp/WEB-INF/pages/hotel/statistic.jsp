@@ -41,8 +41,8 @@
                       <thead class="text-primary">
                       <th>日期</th>
                       <th>房间号</th>
+                      <th>类型</th>
                       <th>状态</th>
-                      <th>已入住人数</th>
                       <th>操作</th>
                       </thead>
                       <tbody>
@@ -50,8 +50,8 @@
                         <tr>
                           <td>${status.strDate}</td>
                           <td>${status.roomNumber}</td>
+                          <td>${status.roomType}</td>
                           <td>${status.strStatus}</td>
-                          <td>${status.checkedInNumber}</td>
                           <td><a href="#">详情</a></td>
                         </tr>
                       </c:forEach>

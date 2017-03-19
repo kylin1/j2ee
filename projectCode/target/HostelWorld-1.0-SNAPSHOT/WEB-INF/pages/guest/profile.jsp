@@ -37,13 +37,13 @@
                     <div class="col-md-4">
                       <div class="form-group label-floating">
                         <label class="control-label">姓名</label>
-                        <input name="name" type="text" value="${memberInfo.name}" class="form-control">
+                        <input required="required" name="name" type="text" value="${memberInfo.name}" class="form-control">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group label-floating">
                         <label class="control-label">手机</label>
-                        <input name="phone" type="number" pattern="[0-9]*" value="${memberInfo.phone}" class="form-control">
+                        <input required="required" name="phone" type="number" pattern="[0-9]*" value="${memberInfo.phone}" class="form-control">
                       </div>
                     </div>
                   </div>
@@ -53,7 +53,7 @@
                     <div class="col-md-4">
                       <div class="form-group label-floating">
                         <label class="control-label">email</label>
-                        <input name="email" type="email" value="${memberInfo.email}" class="form-control">
+                        <input required="required" name="email" type="email" value="${memberInfo.email}" class="form-control">
                       </div>
                     </div>
                   </div>
@@ -63,12 +63,12 @@
                     <div class="col-md-4">
                       <div class="form-group label-floating">
                         <label class="control-label">银行卡</label>
-                        <input name="bankCard" type="number" pattern="[0-9]*" value="${memberInfo.bankCard}" class="form-control">
+                        <input required="required" name="bankCard" type="number" pattern="[0-9]*" value="${memberInfo.bankCard}" class="form-control">
                       </div>
                     </div>
                   </div>
 
-                  <input type="hidden" name="memberId" value="${memberInfo.id}">
+                  <input required="required" type="hidden" name="memberId" value="${memberInfo.id}">
 
                   <button type="submit" class="btn btn-primary pull-left">
                     保存

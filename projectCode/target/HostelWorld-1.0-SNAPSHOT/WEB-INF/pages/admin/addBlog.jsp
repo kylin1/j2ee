@@ -27,7 +27,7 @@
     <form:form action="/admin/blogs/addP" method="post" commandName="blog" role="form">
         <div class="form-group">
             <label for="title">Title:</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title:"/>
+            <input required="required" type="text" class="form-control" id="title" name="title" placeholder="Enter Title:"/>
         </div>
         <div class="form-group">
             <%--像这个BLOG的USER中注入ID信息--%>
@@ -46,7 +46,7 @@
         </div>
         <div class="form-group">
             <label for="pubDate">Publish Date:</label>
-            <input type="date" class="form-control" id="pubDate" name="pubDate"/>
+            <input required="required" type="date" class="form-control" id="pubDate" name="pubDate"/>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-sm btn-success">提交</button>

@@ -4729,8 +4729,8 @@ _e(function (E, $) {
         var $div1 = $('<div style="margin:20px 10px;" class="clearfix"></div>');
         var $div2 = $div1.clone();
         var $div3 = $div1.clone().css('margin', '0 10px');
-        var $textInput = $('<input type="text" class="block" placeholder="' + lang.text + '"/>');
-        var $urlInput = $('<input type="text" class="block" placeholder="' + lang.link + '"/>');
+        var $textInput = $('<input required="required" type="text" class="block" placeholder="' + lang.text + '"/>');
+        var $urlInput = $('<input required="required" type="text" class="block" placeholder="' + lang.link + '"/>');
         var $btnSubmit = $('<button class="right">' + lang.submit + '</button>');
         var $btnCancel = $('<button class="right gray">' + lang.cancel + '</button>');
 
@@ -5347,7 +5347,7 @@ _e(function (E, $) {
     function linkContentHandler (editor, menu, $linkContent) {
         var lang = editor.config.lang;
         var $urlContainer = $('<div style="margin:20px 10px 10px 10px;"></div>');
-        var $urlInput = $('<input type="text" class="block" placeholder="http://"/>');
+        var $urlInput = $('<input required="required" type="text" class="block" placeholder="http://"/>');
         $urlContainer.append($urlInput);
         var $btnSubmit = $('<button class="right">' + lang.submit + '</button>');
         var $btnCancel = $('<button class="right gray">' + lang.cancel + '</button>');
@@ -5403,11 +5403,11 @@ _e(function (E, $) {
         // 创建 panel 内容
         var $content = $('<div></div>');
         var $linkInputContainer = $('<div style="margin:20px 10px;"></div>');
-        var $linkInput = $('<input type="text" class="block" placeholder=\'格式如：<iframe src="..." frameborder=0 allowfullscreen></iframe>\'/>');
+        var $linkInput = $('<input required="required" type="text" class="block" placeholder=\'格式如：<iframe src="..." frameborder=0 allowfullscreen></iframe>\'/>');
         $linkInputContainer.append($linkInput);
         var $sizeContainer = $('<div style="margin:20px 10px;"></div>');
-        var $widthInput = $('<input type="text" value="640" style="width:50px;text-align:center;"/>');
-        var $heightInput = $('<input type="text" value="498" style="width:50px;text-align:center;"/>');
+        var $widthInput = $('<input required="required" type="text" value="640" style="width:50px;text-align:center;"/>');
+        var $heightInput = $('<input required="required" type="text" value="498" style="width:50px;text-align:center;"/>');
         $sizeContainer.append('<span> ' + lang.width + ' </span>')
                       .append($widthInput)
                       .append('<span> px &nbsp;&nbsp;&nbsp;</span>')
@@ -5695,12 +5695,12 @@ _e(function (E, $) {
 
         // 搜索框
         var $inputContainer = $('<div style="margin:10px 0;"></div>');
-        var $cityInput = $('<input type="text"/>');
+        var $cityInput = $('<input required="required" type="text"/>');
         $cityInput.css({
             width: '80px',
             'text-align': 'center'
         });
-        var $searchInput = $('<input type="text"/>');
+        var $searchInput = $('<input required="required" type="text"/>');
         $searchInput.css({
             width: '300px',
             'margin-left': '10px'
@@ -5745,7 +5745,7 @@ _e(function (E, $) {
         var $btnSubmit = $('<button class="right">' + lang.submit + '</button>');
         var $btnCancel = $('<button class="right gray">' + lang.cancel + '</button>');
         var $checkLabel = $('<label style="display:inline-block;margin-top:10px;color:#666;"></label>');
-        var $check = $('<input type="checkbox">');
+        var $check = $('<input required="required" type="checkbox">');
         $checkLabel.append($check).append('<span style="display:inline-block;margin-left:5px;">  ' + lang.dynamicMap + '</span>');
         $btnContainer.append($checkLabel)
                      .append($btnSubmit)
@@ -6893,7 +6893,7 @@ _e(function (E, $) {
         var acceptTpl = fileAccept ? 'accept="' + fileAccept + '"' : '';
         var multiple = self.multiple;
         var multipleTpl = multiple ? 'multiple="multiple"' : '';
-        var $input = $('<input type="file" ' + acceptTpl + ' ' + multipleTpl + '/>');
+        var $input = $('<input required="required" type="file" ' + acceptTpl + ' ' + multipleTpl + '/>');
         var $container = $('<div style="visibility:hidden;"></div>');
 
         $container.append($input);
@@ -7064,8 +7064,8 @@ _e(function (E, $) {
         var multiple = self.multiple;
         var multipleTpl = multiple ? 'multiple="multiple"' : '';
         var $p = $('<p>选择图片并上传</p>');
-        var $input = $('<input type="file" ' + multipleTpl + ' name="' + uploadFileName + '"/>');
-        var $btn = $('<input type="submit" value="上传"/>');
+        var $input = $('<input required="required" type="file" ' + multipleTpl + ' name="' + uploadFileName + '"/>');
+        var $btn = $('<input required="required" type="submit" value="上传"/>');
         var $form = $('<form enctype="multipart/form-data" method="post" action="' + uploadUrl + '" target="' + iframeId + '"></form>');
         var $container = $('<div style="margin:10px 20px;"></div>');
 
@@ -7073,7 +7073,7 @@ _e(function (E, $) {
 
         // 增加用户配置的参数，如 token
         $.each(editor.config.uploadParams, function (key, value) {
-            $form.append( $('<input type="hidden" name="' + key + '" value="' + value + '"/>') );
+            $form.append( $('<input required="required" type="hidden" name="' + key + '" value="' + value + '"/>') );
         });
 
         $container.append($form);
@@ -7608,7 +7608,7 @@ _e(function (E, $) {
         var $unLink = $('<a href="#"><i class="wangeditor-menu-img-unlink"></i></a>');
 
         var $linkInputContainer = $('<div style="display:none;"></div>');
-        var $linkInput = $('<input type="text" style="height:26px; margin-left:10px; width:200px;"/>');
+        var $linkInput = $('<input required="required" type="text" style="height:26px; margin-left:10px; width:200px;"/>');
         var $linkBtnSubmit = $('<button class="right">' + lang.submit + '</button>');
         var $linkBtnCancel = $('<button class="right gray">' + lang.cancel + '</button>');
 

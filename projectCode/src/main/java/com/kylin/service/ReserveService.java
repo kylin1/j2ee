@@ -67,5 +67,4 @@ public interface ReserveService {
      */
     int getDiscount(int price, MemberLevel level);
 
-    MyMessage reserveNonMember(NonMemberCheckInVO nonMemberCheckInVO);
 }

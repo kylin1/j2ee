@@ -15,6 +15,7 @@ import com.kylin.tools.myenum.PaymentStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -115,6 +116,7 @@ public class HotelManageServiceImpl implements HotelManageService {
         return new MyMessage(true);
     }
 
+
     // 入住登记开始
     @Override
     public MyMessage customCheckIn(final HotelCheckInTableVO input) {
@@ -135,8 +137,9 @@ public class HotelManageServiceImpl implements HotelManageService {
 
         // 检查通过,更新各项数据 每个房间信息
         for (HotelRoomCheckIn roomCheckIn : hotelRoomCheckInList) {
-            // 1.更新每个房间状态为入住
-            this.updateRoomStatus(order, roomCheckIn);
+            // 1.更新每个房间状态为入住,原来的状态是空闲
+            int reservedState = RoomStatus.Reserved.ordinal();
+            this.updateRoomStatus(order, roomCheckIn,reservedState);
 
             // 2.新增每个房间里面的 每个房客信息列表
             for (HotelGuestCheckIn guestCheckIn : roomCheckIn.getGuestList()) {
@@ -146,6 +149,43 @@ public class HotelManageServiceImpl implements HotelManageService {
 
         // 3.更新订单信息为已经入住
         this.updateOrder(order, isMember, paymentType);
+
+        // 4.记录付款信息
+        this.makePayment(hotelId, order.getMemberId(), order.getPrice());
+
+        return new MyMessage(true);
+    }
+
+    @Override
+    public MyMessage reserveNonMember(NonMemberCheckInVO input) {
+        System.out.println("before init : nonMemberCheckInVO = " + input);
+        // 检查输入信息
+        MyMessage myMessage = this.initCheckInTableVO(input);
+        if (!myMessage.isSuccess()) {
+            return myMessage;
+        }
+        System.out.println("after init : nonMemberCheckInVO = " + input);
+
+        // 通过检查，新增订单
+        int hotelId = input.getHotelId();
+        List<HotelRoomCheckIn> hotelRoomCheckInList = input.getHotelRoomCheckInList();
+
+        // 1.新增一个非会员订单信息
+        MemberOrder order = new MemberOrder();
+        this.saveOrder(input, order);
+        System.out.println("nonCustomCheckIn order = " + order);
+
+        // 检查通过,更新各项数据 每个房间信息
+        for (HotelRoomCheckIn roomCheckIn : hotelRoomCheckInList) {
+            // 2.更新每个房间状态为入住,原来的状态为已经预定
+            int emptyState = RoomStatus.Empty.ordinal();
+            this.updateRoomStatus(order, roomCheckIn,emptyState);
+
+            // 3.新增每个房间里面的 每个房客信息列表
+            for (HotelGuestCheckIn guestCheckIn : roomCheckIn.getGuestList()) {
+                this.registerGuest(guestCheckIn, order, roomCheckIn);
+            }
+        }
 
         // 4.记录付款信息
         this.makePayment(hotelId, order.getMemberId(), order.getPrice());
@@ -329,7 +369,7 @@ public class HotelManageServiceImpl implements HotelManageService {
      * @param roomCheckIn 房间入住信息
      * @throws BadInputException 如果入住的目标房间不是空闲的则报错误
      */
-    private void updateRoomStatus(MemberOrder order, HotelRoomCheckIn roomCheckIn) {
+    private void updateRoomStatus(MemberOrder order, HotelRoomCheckIn roomCheckIn, int oldStatus) {
         // order date
         Date checkIn = order.getCheckIn();
         Date checkOut = order.getCheckOut();
@@ -337,9 +377,8 @@ public class HotelManageServiceImpl implements HotelManageService {
         int roomId = roomCheckIn.getRoomId();
 
         // 得到这个目标房间在输入的日期,且状态是已预定但未入住的列表
-        int reservedState = RoomStatus.Reserved.ordinal();
         List<HotelRoomStatus> statusList = this.roomStatusRepository.findByRoomAndDateAndStatus(
-                roomId, checkIn, checkOut, reservedState);
+                roomId, checkIn, checkOut, oldStatus);
 
         // 更新每一个房间的状态为已经入住
         for (HotelRoomStatus roomStatus : statusList) {
@@ -393,5 +432,31 @@ public class HotelManageServiceImpl implements HotelManageService {
         order.setStatus(MemberOrderStatus.CheckedIn.ordinal());
 
         this.orderRepository.save(order);
+    }
+
+    private void saveOrder(NonMemberCheckInVO nonMemberCheckInVO, MemberOrder newOrder) {
+        newOrder.setHotelId(nonMemberCheckInVO.getHotelId());
+
+        try {
+            newOrder.setOrderTime(new Date());
+            newOrder.setCheckIn(DateHelper.getDate(nonMemberCheckInVO.getStartDate()));
+            newOrder.setCheckOut(DateHelper.getDate(nonMemberCheckInVO.getEndDate()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        newOrder.setRoomType(nonMemberCheckInVO.getIntPaymentType());
+        newOrder.setRoomNumber(1);
+        newOrder.setPrice(nonMemberCheckInVO.getPrice());
+
+        newOrder.setContactName(nonMemberCheckInVO.getGuest1());
+        newOrder.setContactPhone("");
+        newOrder.setContactEmail("");
+
+        newOrder.setStatus(MemberOrderStatus.CheckedIn.ordinal());
+        newOrder.setIsCash(0);
+        newOrder.setIsMember(0);
+        newOrder.setReservedRoomString(nonMemberCheckInVO.getRoomNumber());
+
+        this.orderRepository.save(newOrder);
     }
 }

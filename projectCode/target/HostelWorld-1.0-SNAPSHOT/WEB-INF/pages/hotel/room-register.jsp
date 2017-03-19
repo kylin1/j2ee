@@ -92,12 +92,12 @@
                   <div class="row">
                     <div class="input-group">
                       <div class="col-md-3">
-                        <input type="text" value="${checkInVO.orderId}" name="orderId" class="form-control"
+                        <input required="required" type="text" value="${checkInVO.orderId}" name="orderId" class="form-control"
                                placeholder="订单号">
                       </div>
 
                       <div class="col-md-3">
-                        <input type="text" value="${checkInVO.roomNumber}" name="roomNumber" class="form-control"
+                        <input required="required" type="text" value="${checkInVO.roomNumber}" name="roomNumber" class="form-control"
                                placeholder="房间号">
                       </div>
                     </div>
@@ -107,11 +107,11 @@
                     <div class="input-group">
 
                       <div class="col-md-2">
-                        <input type="text" value="${checkInVO.guest1}" name="guest1" class="form-control"
+                        <input required="required" type="text" value="${checkInVO.guest1}" name="guest1" class="form-control"
                                placeholder="房客1">
                       </div>
                       <div class="col-md-2">
-                        <input type="text" value="${checkInVO.card1}" name="card1" class="form-control"
+                        <input required="required" type="number" pattern="[0-9]*" value="${checkInVO.card1}" name="card1" class="form-control"
                                placeholder="身份证">
                       </div>
                       <div class="col-md-2">
@@ -119,7 +119,7 @@
                                placeholder="房客2">
                       </div>
                       <div class="col-md-2">
-                        <input type="text" value="${checkInVO.card2}" name="card2" class="form-control"
+                        <input type="number" pattern="[0-9]*" value="${checkInVO.card2}" name="card2" class="form-control"
                                placeholder="身份证">
                       </div>
                     </div>
@@ -132,7 +132,7 @@
                     <div class="col-sm-2">
                       <div class="radio">
                         <label>
-                          <input type="radio" value="1" name="isMember" checked>
+                          <input required="required" type="radio" value="1" name="isMember" checked>
                           是
                         </label>
                       </div>
@@ -141,7 +141,7 @@
                     <div class="col-sm-2">
                       <div class="radio">
                         <label>
-                          <input type="radio" value="0" name="isMember">
+                          <input required="required" type="radio" value="0" name="isMember">
                           否
                         </label>
                       </div>
@@ -155,7 +155,7 @@
                     <div class="col-sm-2">
                       <div class="radio">
                         <label>
-                          <input type="radio" value="0" name="intPaymentType" checked>
+                          <input required="required" type="radio" value="0" name="intPaymentType" checked>
                           会员卡
                         </label>
                       </div>
@@ -164,14 +164,14 @@
                     <div class="col-sm-3">
                       <div class="radio">
                         <label>
-                          <input type="radio" value="1" name="intPaymentType">
+                          <input required="required" type="radio" value="1" name="intPaymentType">
                           现金结账
                         </label>
                       </div>
                     </div>
                   </div>
 
-                  <input type="hidden" name="hotelId" value="${hotelId}">
+                  <input required="required" type="hidden" name="hotelId" value="${hotelId}">
 
                   <button type="submit" class="btn btn-primary pull-left">
                     确定

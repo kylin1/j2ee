@@ -28,7 +28,7 @@
     <form:form action="/admin/blogs/updateP" method="post" commandName="blogP" role="form">
         <div class="form-group">
             <label for="title">Title:</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title:" value="${blog.title}"/>
+            <input required="required" type="text" class="form-control" id="title" name="title" placeholder="Enter Title:" value="${blog.title}"/>
         </div>
         <div class="form-group">
             <%--根据博客里面包含的用户信息，显示指定的作者被选择--%>
@@ -53,11 +53,11 @@
         </div>
         <div class="form-group">
             <label for="pubDate">Publish Date:</label>
-            <input type="date" class="form-control" id="pubDate" name="pubDate"
+            <input required="required" type="date" class="form-control" id="pubDate" name="pubDate"
                    value="<fmt:formatDate value="${blog.pubDate }" pattern="yyyy-MM-dd"/>"/>
         </div>
         <!-- 把 memberId 一并写入 blogP 中 -->
-        <input type="hidden" id="memberId" name="memberId" value="${blog.memberId}"/>
+        <input required="required" type="hidden" id="memberId" name="memberId" value="${blog.memberId}"/>
         <div class="form-group">
             <button type="submit" class="btn btn-sm btn-success">提交</button>
         </div>

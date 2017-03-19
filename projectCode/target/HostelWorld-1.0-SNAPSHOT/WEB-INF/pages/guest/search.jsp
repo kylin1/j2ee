@@ -30,7 +30,7 @@
 
         <!--业务介绍行-->
         <div class="row" style="margin: 0 10em 5em 0;">
-          <h2>Airbnb Find unique homes, experiences, and local guides for your trip.</h2>
+          <h2>Hostel World find unique homes, experiences, and local guides for your trip.</h2>
         </div>
 
         <!-- 搜索信息 -->
@@ -39,76 +39,55 @@
 
             <%--地点时间--%>
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <div class="form-group label-floating">
                   <label class="control-label">where</label>
-                  <input value="上海" type="text" name="location" class="form-control">
+                  <input required="required" value="${city}" type="text" name="location" class="form-control">
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="row">
 
-                  <div class="col-sm-6">
-                    <div class="form-group label-floating">
-                      <label class="control-label">check in</label>
-                      <input value="2017-04-01" type="text" name="fromDate" id="dpd1" data-date-format="yyyy-mm-dd"
-                             class="form-control">
-                    </div>
-                  </div>
-
-                  <div class="col-sm-6">
-                    <div class="form-group label-floating">
-                      <label class="control-label">check out</label>
-                      <input value="2017-04-03" type="text" name="endDate" id="dpd2" data-date-format="yyyy-mm-dd"
-                             class="form-control">
-                    </div>
-                  </div>
-
-                </div>
-
-              </div>
-            </div>
-
-            <%--房间信息--%>
-            <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <div class="form-group label-floating">
-                  <label class="form-group label-floating">类型
-                    <select class="selectpicker" name="roomTypeInt">
-                      <option value="0">单人间</option>
-                      <option value="1">标准间</option>
-                      <option value="2">套房</option>
-                    </select>
-                  </label>
+                  <label class="control-label">check in</label>
+                  <input required="required" value="${today}" type="text" name="fromDate" id="dpd1" data-date-format="yyyy-mm-dd"
+                         class="form-control">
                 </div>
               </div>
 
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <div class="form-group label-floating">
-                  <label class="form-group label-floating">数目
-                    <select class="selectpicker" name="roomNumber">
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                    </select>
-                  </label>
+                  <label class="control-label">check out</label>
+                  <input required="required" value="${tomorrow}" type="text" name="endDate" id="dpd2" data-date-format="yyyy-mm-dd"
+                         class="form-control">
                 </div>
               </div>
 
-              <div class="col-md-offset-1 col-md-2">
-                <button type="submit" class="btn btn-primary pull-left" style="margin-top: 1.7em">
+              <div class="col-md-2">
+                <label class="form-group label-floating">类型
+                  <select class="selectpicker" name="roomTypeInt">
+                    <option value="0">单人间</option>
+                    <option value="1">标准间</option>
+                    <option value="2">套房</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="col-md-2">
+                <button type="submit" class="btn btn-primary pull-left">
                   search
                 </button>
               </div>
+
             </div>
-          </form>
         </div>
 
+        <input required="required" type="hidden" name="roomNumber" value="1">
       </div>
     </div>
-
-    <!--3.页脚-->
-    <%@include file="../common/footer.jsp" %>
   </div>
+
+  <!--3.页脚-->
+  <%@include file="../common/footer.jsp" %>
 </div>
 
 </body>
@@ -116,29 +95,29 @@
 <%@include file="../common/js-file.jsp" %>
 
 <script>
-    var nowTemp = new Date();
-    var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+  var nowTemp = new Date();
+  var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 
-    var checkin = $('#dpd1').datepicker({
-        onRender: function (date) {
-            return date.valueOf() < now.valueOf() ? 'disabled' : '';
-        }
-    }).on('changeDate', function (ev) {
-        if (ev.date.valueOf() > checkout.date.valueOf()) {
-            var newDate = new Date(ev.date)
-            newDate.setDate(newDate.getDate() + 1);
-            checkout.setValue(newDate);
-        }
-        checkin.hide();
-        $('#dpd2')[0].focus();
-    }).data('datepicker');
-    var checkout = $('#dpd2').datepicker({
-        onRender: function (date) {
-            return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-        }
-    }).on('changeDate', function (ev) {
-        checkout.hide();
-    }).data('datepicker');
+  var checkin = $('#dpd1').datepicker({
+    onRender: function (date) {
+      return date.valueOf() < now.valueOf() ? 'disabled' : '';
+    }
+  }).on('changeDate', function (ev) {
+    if (ev.date.valueOf() > checkout.date.valueOf()) {
+      var newDate = new Date(ev.date)
+      newDate.setDate(newDate.getDate() + 1);
+      checkout.setValue(newDate);
+    }
+    checkin.hide();
+    $('#dpd2')[0].focus();
+  }).data('datepicker');
+  var checkout = $('#dpd2').datepicker({
+    onRender: function (date) {
+      return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+    }
+  }).on('changeDate', function (ev) {
+    checkout.hide();
+  }).data('datepicker');
 </script>
 
 

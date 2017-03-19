@@ -70,14 +70,13 @@ public class HotelStatisticServiceImpl implements HotelStatisticService {
             // 一个房间的信息
             String roomNumber = room.getRoomNumber();
 
-            // 获取一个房间一天入住的人数
-            int remainNumber = this.getCheckedInNum(room, date);
-
             // 获取房间的状态
             RoomStatus status = this.getRoomStatusByDate(room, date);
 
+            String roomType = RoomType.getEnum(room.getType()).getType();
+
             // 添加每个房间一天的信息
-            HotelRoomStatusVO vo = new HotelRoomStatusVO(date, roomNumber, status, remainNumber);
+            HotelRoomStatusVO vo = new HotelRoomStatusVO(date, roomNumber, status, roomType);
             result.add(vo);
         }
 
@@ -94,19 +93,19 @@ public class HotelStatisticServiceImpl implements HotelStatisticService {
         return RoomStatus.getEnum(intStatus);
     }
 
-    /**
-     * 一个房间一天,入住的人数
-     *
-     * @param room
-     * @param oneDay
-     * @return
-     */
-    private int getCheckedInNum(HotelRoom room, Date oneDay) {
-        int roomId = room.getId();
-        List<RoomGuest> guests = this.guestRepository.findByRoomIdAndDate(roomId, oneDay);
-        int checkInPeople = guests.size();
-        return checkInPeople;
-    }
+//    /**
+//     * 一个房间一天,入住的人数
+//     *
+//     * @param room
+//     * @param oneDay
+//     * @return
+//     */
+//    private int getCheckedInNum(HotelRoom room, Date oneDay) {
+//        int roomId = room.getId();
+//        List<RoomGuest> guests = this.guestRepository.findByRoomIdAndDate(roomId, oneDay);
+//        int checkInPeople = guests.size();
+//        return checkInPeople;
+//    }
 
     @Override
     public HotelIncomeChartVO getIncomeInfo(int hotelId, Date startDate, Date endDate) {

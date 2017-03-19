@@ -34,7 +34,7 @@ public class GuestOrderController extends MyController{
         System.out.println("cancel orderId = " + orderId);
         MyMessage myMessage = this.service.cancelReservation(orderId);
         this.refreshMemberInfo(request,memberOrder.getMemberId());
-        return this.handleMessage(myMessage,"redirect:/guest/orders","guest/order");
+        return this.handleMessage(myMessage,"redirect:/guest/orders","guest/activate-warning");
     }
 
 }

@@ -109,7 +109,7 @@ public class HotelRegisterController extends MyController {
                                      @ModelAttribute("nonMemberCheckInVO") NonMemberCheckInVO nonMemberCheckInVO) {
         System.out.println(nonMemberCheckInVO);
 
-        MyMessage myMessage = this.reserveService.reserveNonMember(nonMemberCheckInVO);
+        MyMessage myMessage = this.hotelManageService.reserveNonMember(nonMemberCheckInVO);
 
         return this.handleMessage(myMessage,"hotel/room-register-non");
     }

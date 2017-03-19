@@ -3,6 +3,7 @@ package com.kylin.service;
 import com.kylin.vo.HotelCheckInTableVO;
 import com.kylin.vo.HotelPlanInputVO;
 import com.kylin.vo.HotelPlanVO;
+import com.kylin.vo.NonMemberCheckInVO;
 import com.kylin.vo.common.MyMessage;
 
 import java.util.List;
@@ -39,6 +40,9 @@ public interface HotelManageService {
      * @return
      */
     MyMessage customCheckIn(HotelCheckInTableVO hotelCheckInTableVO) ;
+
+
+    MyMessage reserveNonMember(NonMemberCheckInVO nonMemberCheckInVO);
 
 
     MyMessage initCheckInTableVO(HotelCheckInTableVO checkInTableVO);

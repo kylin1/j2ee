@@ -73,13 +73,13 @@
                       <div class="col-md-4">
                         <div class="form-group label-floating">
                           <label class="control-label">酒店电话</label>
-                          <input value="${hotel.phone}" name="phone" type="text" class="form-control">
+                          <input required="required" value="${hotel.phone}" name="phone" type="number" pattern="[0-9]*"class="form-control">
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group label-floating">
                           <label class="control-label">法人信息</label>
-                          <input value="${hotel.representative}" name="legalRepresentative" type="text" class="form-control">
+                          <input required="required" value="${hotel.representative}" name="legalRepresentative" type="text" class="form-control">
                         </div>
                       </div>
                     </div>

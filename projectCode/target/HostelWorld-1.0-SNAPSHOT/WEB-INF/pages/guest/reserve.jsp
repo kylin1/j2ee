@@ -50,7 +50,7 @@
 
                   <!--time-->
                   <div class="row">
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                       <label class="control-label">入住</label>
                     </div>
 
@@ -60,7 +60,7 @@
                       </div>
                     </div>
 
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                       <label class="control-label">离店</label>
                     </div>
 
@@ -73,11 +73,11 @@
 
                   <!--房间类型-->
                   <div class="row">
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                       <label class="control-label">类型</label>
                     </div>
 
-                    <div class="col-md-1">
+                    <div class="col-md-8">
                       <h6>${strType}</h6>
                     </div>
 
@@ -85,28 +85,29 @@
 
                   <!--名称行-->
                   <div class="row">
-                    <label class="col-md-1 control-label">联系人</label>
+                    <label class="col-md-2 control-label">联系人</label>
                     <div class="col-md-6">
-                      <input name="contactPersonName" value="${memberInfo.name}" type="text">
+                      <input required="required" name="contactPersonName" value="${memberInfo.name}" type="text">
                     </div>
                   </div>
 
                   <div class="row">
-                    <label class="col-md-1 control-label">电话</label>
+                    <label class="col-md-2 control-label">电话</label>
                     <div class="col-md-3">
-                      <input name="contactPhone" value="${memberInfo.phone}" type="text">
+                      <input required="required" name="contactPhone" value="${memberInfo.phone}" type="number"
+                             pattern="[0-9]*">
                     </div>
                   </div>
 
                   <div class="row">
-                    <label class="col-md-1 control-label">邮箱</label>
+                    <label class="col-md-2 control-label">邮箱</label>
                     <div class="col-md-3">
-                      <input name="contactEmail" value="${memberInfo.email}" type="text">
+                      <input required="required" name="contactEmail" value="${memberInfo.email}" type="email">
                     </div>
                   </div>
 
                   <div class="row">
-                    <label class="col-md-1 control-label">总金额</label>
+                    <label class="col-md-2 control-label">总金额</label>
                     <div class="col-md-6">
                       <h4>${reserveInput.totalPrice}</h4>
                     </div>
@@ -115,21 +116,21 @@
                   <%--折扣信息--%>
                   <c:if test="${!empty discount}">
                     <div class="row">
-                      <label class="col-md-1 control-label">已经折扣</label>
+                      <label class="col-md-2 control-label">已经折扣</label>
                       <div class="col-md-6">
                         <h4 class="text-success card-text">${discount}</h4>
                       </div>
                     </div>
                   </c:if>
 
-                  <input type="hidden" name="memberId" value="${reserveInput.memberId}">
-                  <input type="hidden" name="roomNumber" value="1">
-                  <input type="hidden" name="hotelId" value="${reserveInput.hotelId}">
-                  <input type="hidden" name="strDate1" value="${reserveInput.strDate1}">
-                  <input type="hidden" name="strDate2" value="${reserveInput.strDate2}">
-                  <input type="hidden" name="intRoomType" value="${reserveInput.intRoomType}">
-                  <input type="hidden" name="roomNumber" value="${reserveInput.roomNumber}">
-                  <input type="hidden" name="totalPrice" value="${reserveInput.totalPrice}">
+                  <input required="required" type="hidden" name="memberId" value="${reserveInput.memberId}">
+                  <input required="required" type="hidden" name="roomNumber" value="1">
+                  <input required="required" type="hidden" name="hotelId" value="${reserveInput.hotelId}">
+                  <input required="required" type="hidden" name="strDate1" value="${reserveInput.strDate1}">
+                  <input required="required" type="hidden" name="strDate2" value="${reserveInput.strDate2}">
+                  <input required="required" type="hidden" name="intRoomType" value="${reserveInput.intRoomType}">
+                  <input required="required" type="hidden" name="roomNumber" value="${reserveInput.roomNumber}">
+                  <input required="required" type="hidden" name="totalPrice" value="${reserveInput.totalPrice}">
 
 
                   <button type="submit" class="btn btn-primary pull-left">
@@ -156,29 +157,29 @@
 <%@include file="../common/js-file.jsp" %>
 
 <script>
-    var nowTemp = new Date();
-    var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+  var nowTemp = new Date();
+  var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 
-    var checkin = $('#dpd1').datepicker({
-        onRender: function (date) {
-            return date.valueOf() < now.valueOf() ? 'disabled' : '';
-        }
-    }).on('changeDate', function (ev) {
-        if (ev.date.valueOf() > checkout.date.valueOf()) {
-            var newDate = new Date(ev.date)
-            newDate.setDate(newDate.getDate() + 1);
-            checkout.setValue(newDate);
-        }
-        checkin.hide();
-        $('#dpd2')[0].focus();
-    }).data('datepicker');
-    var checkout = $('#dpd2').datepicker({
-        onRender: function (date) {
-            return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-        }
-    }).on('changeDate', function (ev) {
-        checkout.hide();
-    }).data('datepicker');
+  var checkin = $('#dpd1').datepicker({
+    onRender: function (date) {
+      return date.valueOf() < now.valueOf() ? 'disabled' : '';
+    }
+  }).on('changeDate', function (ev) {
+    if (ev.date.valueOf() > checkout.date.valueOf()) {
+      var newDate = new Date(ev.date)
+      newDate.setDate(newDate.getDate() + 1);
+      checkout.setValue(newDate);
+    }
+    checkin.hide();
+    $('#dpd2')[0].focus();
+  }).data('datepicker');
+  var checkout = $('#dpd2').datepicker({
+    onRender: function (date) {
+      return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+    }
+  }).on('changeDate', function (ev) {
+    checkout.hide();
+  }).data('datepicker');
 </script>
 
 

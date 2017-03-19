@@ -37,6 +37,9 @@ public class ReserveTest {
     @Autowired
     private ReserveService service;
 
+    @Autowired
+    private HotelManageService manageService;
+
     public ReserveTest() throws ParseException {
 
     }
@@ -95,26 +98,26 @@ public class ReserveTest {
 
     @Test
     public void testNonMember(){
-        String roomNumber = "102";
-        int orderId = 3;
-        int hotelId = 23;
+        String roomNumber = "101";
+        int orderId = 1;
+        int hotelId = 24;
 
         NonMemberCheckInVO nonMemberCheckInVO = new NonMemberCheckInVO();
-        nonMemberCheckInVO.setStartDate("2017-03-15");
-        nonMemberCheckInVO.setEndDate("2017-03-18");
-        nonMemberCheckInVO.setCard1("3203221");
-//        nonMemberCheckInVO.setCard2("3203222");
-        nonMemberCheckInVO.setGuest1("kylin1");
-//        nonMemberCheckInVO.setGuest2("kylin2");
+        nonMemberCheckInVO.setStartDate("2017-03-19");
+        nonMemberCheckInVO.setEndDate("2017-03-20");
+
+        nonMemberCheckInVO.setCard1("320322999");
+        nonMemberCheckInVO.setGuest1("kylin999");
 
         nonMemberCheckInVO.setMember(false);
         nonMemberCheckInVO.setIntPaymentType(1);
+        nonMemberCheckInVO.setPrice(999);
 
         nonMemberCheckInVO.setRoomNumber(roomNumber);
         nonMemberCheckInVO.setOrderId(orderId);
         nonMemberCheckInVO.setHotelId(hotelId);
 
-        MyMessage myMessage = this.service.reserveNonMember(nonMemberCheckInVO);
+        MyMessage myMessage = this.manageService.reserveNonMember(nonMemberCheckInVO);
         System.out.println(myMessage);
     }
 }
