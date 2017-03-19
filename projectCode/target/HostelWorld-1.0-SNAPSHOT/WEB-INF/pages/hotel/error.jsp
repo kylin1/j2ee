@@ -4,7 +4,7 @@
 <html lang="ch-ZN">
 
 <jsp:include page='../common/header-with-date.jsp'>
-  <jsp:param name="pageTitle" value="请提交开店申请!"/>
+  <jsp:param name="pageTitle" value="哎呀您的请求出了些问题~"/>
 </jsp:include>
 
 <body>

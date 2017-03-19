@@ -27,7 +27,7 @@ public class ApprovalService {
 
             int hotelTypeInt = hotelRequest.getType();
             RequestType type = RequestType.getEnum(hotelTypeInt);
-            String mainContent = hotelName + "正在申请" + type.getStringType();
+            String mainContent = type.getStringType();
             String detailedContent = hotelRequest.readDetail();
             int status = hotelRequest.getStatus();
             RequestStatus requestStatus = RequestStatus.getRequestStatus(status);

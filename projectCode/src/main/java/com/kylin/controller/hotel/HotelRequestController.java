@@ -28,7 +28,15 @@ public class HotelRequestController extends MyController{
     private HotelModifyService modifyService;
 
     @RequestMapping(value = "request-open", method = RequestMethod.POST)
-    public ModelAndView openRequest(@ModelAttribute("hotelOpenVO") HotelOpenVO hotelOpenVO) {
+    public ModelAndView openRequest(HttpServletRequest request,@ModelAttribute("hotelOpenVO") HotelOpenVO hotelOpenVO) {
+
+        HttpSession session = request.getSession();
+        boolean hotelAuth = (boolean) session.getAttribute("hotelAuth");
+        // 酒店已经通过开店申请
+        if (hotelAuth) {
+            return new ModelAndView("hotel/error", "error", "酒店已经通过了开店申请，请不要再次申请!");
+        }
+
         System.out.println(hotelOpenVO);
         MyMessage myMessage = this.modifyService.openHotelRequest(hotelOpenVO);
         return this.handleMessage(myMessage,"redirect:/hotel/request","/hotel/request");

@@ -1,6 +1,7 @@
 package com.kylin.model;
 
 import com.kylin.tools.myenum.HotelLevel;
+import com.kylin.tools.myenum.RequestType;
 
 import javax.persistence.*;
 
@@ -37,7 +38,8 @@ public class HotelRequest {
 
     @Id
     @GeneratedValue
-    @Column(name = "id")public int getId() {
+    @Column(name = "id")
+    public int getId() {
         return id;
     }
 
@@ -109,7 +111,14 @@ public class HotelRequest {
     }
 
     public String readDetail() {
-        return "修改后的酒店信息为：" + "名称：" + name + "地点：" + location + "类别:" + HotelLevel.getEnum(this.type).getType();
+        if (this.type == RequestType.OpenHotel.ordinal()) {
+            return "申请开店：酒店信息：名称：" + name + "地点：" + location + "类别:" + HotelLevel.getEnum(this.type).getType();
+        } else {
+            return "修改后的酒店信息为：名称：" + name + "地点：" + location +
+                    "类别:" + HotelLevel.getEnum(this.type).getType() +
+                    "电话: " + this.phone +
+                    "法人: " + this.representative;
+        }
     }
 
     public void setHotelId(int hotelId) {
