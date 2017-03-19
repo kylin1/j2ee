@@ -34,8 +34,9 @@ public class SystemUserServiceImpl implements SystemUserService {
     private MemberRepository memberRepository;
 
     private String emptyString = "暂未设置";
-    private Date initDate = DateHelper.addDate(new Date(),-365);
-    private int emptyInt = 0;
+    private Date yearAgo = DateHelper.addDate(new Date(),-365);
+    private Date today = DateHelper.NOW;
+    private Date yearAfter = DateHelper.addDate(new Date(),365);
 
     @Override
     public LoginResultVO login(String account, String password)  {
@@ -97,8 +98,9 @@ public class SystemUserServiceImpl implements SystemUserService {
             member.setStatus(MemberStatus.NeverActivated.ordinal());
 
             member.setBankCard(this.emptyString);
-            member.setActivatedTime(this.initDate);
-            member.setExpireTime(this.initDate);
+            // 从未激活
+            member.setActivatedTime(this.yearAgo);
+            member.setExpireTime(this.yearAgo);
 
             member.setConsume(0);
             member.setBalance(0);

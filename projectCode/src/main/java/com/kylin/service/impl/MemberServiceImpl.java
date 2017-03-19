@@ -59,8 +59,11 @@ public class MemberServiceImpl implements MemberService {
         Date now = new Date();
         Date yearAgo = DateHelper.addDate(now, -365);
 
-        // 有效期一年到期,过期时间 < 现在时间
-        if (memberStatus == MemberStatus.Activated && expireTime.before(now)) {
+        int balance = entity.getBalance();
+
+        // 有效期一年到期,过期时间 < 现在时间,费用不足
+        if (memberStatus == MemberStatus.Activated && expireTime.before(now)
+                && balance < 1000) {
             memberStatus = MemberStatus.Expired;
 
             // 如果过期了一年,则停止 : 过期的时间是现在时间的一年之前
@@ -198,21 +201,21 @@ public class MemberServiceImpl implements MemberService {
 
         final MemberStatus oldStatus = MemberStatus.getEnum(oldStatusInt);
 
-
         if (oldScore < score)
             return new MyMessage(false, "积分不足,无法抵用.");
 
         // 根据充值情况改变状态,如果从未激活,充值 > 1000一次激活
         if (oldStatus == MemberStatus.NeverActivated) {
             if (amount > 1000) {
-                this.recoverActivated(member);
+                this.newActivated(member);
                 //未激活会员 升级到 低级会员
                 System.out.println("member.setLevel");
                 member.setLevel(MemberLevel.Low.ordinal());
             }
-        } else if (oldStatus == MemberStatus.Expired) {
+
             // 费用不足被暂停, 一旦支付则恢复记录
-            this.recoverActivated(member);
+        } else if (oldStatus == MemberStatus.Expired) {
+            this.newActivated(member);
         }
 
         // 增加余额
@@ -231,15 +234,17 @@ public class MemberServiceImpl implements MemberService {
         return new MyMessage(true, "充值" + amount + "元成功,从银行卡扣除" + amountToTake + "元");
     }
 
-    private void recoverActivated(Member member) {
-
-        MemberStatus newStatus = MemberStatus.Activated;
-        //激活,有效期一年
-        final Date oldExpireTime = member.getExpireTime();
-        Date newExpireTime = DateHelper.addDate(oldExpireTime, 365);
-
+    private void newActivated(Member member) {
         //更新状态
+        MemberStatus newStatus = MemberStatus.Activated;
         member.setStatus(newStatus.ordinal());
+
+        // 激活的时间是现在
+        Date today = new Date();
+        member.setActivatedTime(today);
+
+        // 过期的时间是一年之后
+        Date newExpireTime = DateHelper.addDate(today, 365);
         member.setExpireTime(newExpireTime);
     }
 
