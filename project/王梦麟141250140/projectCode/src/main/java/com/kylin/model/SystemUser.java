@@ -1,0 +1,68 @@
+package com.kylin.model;
+
+import javax.persistence.*;
+
+/**
+ * Created by kylin on 17/02/2017.
+ * All rights reserved.
+ */
+@Entity
+@Table(name = "system_user")
+public class SystemUser {
+
+    private Integer id;
+
+    private String account;
+
+    private String password;
+
+    private int type;
+
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @Column(name = "account")
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    @Column(name = "password")
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Column(name = "type")
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "SystemUser{" +
+                "id=" + id +
+                ", account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                ", type=" + type +
+                '}';
+    }
+}
