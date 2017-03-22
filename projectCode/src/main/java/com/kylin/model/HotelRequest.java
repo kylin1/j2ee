@@ -112,12 +112,13 @@ public class HotelRequest {
 
     public String readDetail() {
         if (this.type == RequestType.OpenHotel.ordinal()) {
-            return "申请开店：酒店信息：名称：" + name + "地点：" + location + "类别:" + HotelLevel.getEnum(this.type).getType();
+            return "申请开店\n" +
+                    "酒店信息: 名称: " + name + " 地点: " + location + " 类别:" + HotelLevel.getEnum(this.level).getType();
         } else {
-            return "修改后的酒店信息为：名称：" + name + "地点：" + location +
-                    "类别:" + HotelLevel.getEnum(this.type).getType() +
-                    "电话: " + this.phone +
-                    "法人: " + this.representative;
+            return "修改后的酒店信息为: 名称: " + name + " 地点: " + location +
+                    " 类别:" + HotelLevel.getEnum(this.type).getType() +
+                    " 电话: " + this.phone +
+                    " 法人: " + this.representative;
         }
     }
 

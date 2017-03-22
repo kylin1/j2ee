@@ -8,9 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!-- Core JS Files -->
-<script src="<%=request.getContextPath() %>/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath() %>/assets/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath() %>/assets/js/material.min.js" type="text/javascript"></script>
+<script src="<%=request.getContextPath() %>/assets/js/jquery-3.1.0.min.js"></script>
+
+
+<script src="<%=request.getContextPath() %>/assets/js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath() %>/assets/js/material.min.js"></script>
 
 <!-- Charts Plugin -->
 <script src="<%=request.getContextPath() %>/assets/js/chartist.min.js"></script>
