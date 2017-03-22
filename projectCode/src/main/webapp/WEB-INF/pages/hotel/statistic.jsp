@@ -66,7 +66,7 @@
 
         <!--财务-->
         <section>
-          <h2>财务统计</h2>
+          <h2>财务统计: 每日所有收入(包括未结算)</h2>
           <div class="row">
             <div class="col-md-10">
               <div class="card">
@@ -76,7 +76,7 @@
                 <div class="card-content">
                   <div class="row">
                     <div class="col-sm-12">
-                      <h4 class="title">每日收入折线图, 本酒店总收入:${hotel.income}</h4>
+                      <h4 class="title">本酒店已结算的总收入:${hotel.income}</h4>
                     </div>
                   </div>
                 </div>

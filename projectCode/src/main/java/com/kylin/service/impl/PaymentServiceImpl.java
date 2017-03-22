@@ -57,8 +57,8 @@ public class PaymentServiceImpl implements PaymentService {
             Hotel hotel = hotelRepository.findOne(hotelId);
             Member member = memberRepository.findOne(memberId);
 
-            // 付款状态是 输入的状态
-            if (statusInt == isSettled) {
+            // 付款状态是 输入的状态,而且是会员卡支付，现金支付无需结算
+            if (statusInt == isSettled && member != null) {
                 PaymentVO vo = new PaymentVO(payment.getId(),hotelId, hotel.getName(), member.getName(),
                         payment.getTime(), payment.getPrice(), isSettled == this.settled);
                 result.add(vo);
